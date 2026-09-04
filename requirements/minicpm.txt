@@ -1,0 +1,12 @@
+# MiniCPM-V 4.5 application/model-stack profile tested on 2026-09-04.
+#
+# Create /home/tyc4d/venvs/lensguard-minicpm and install the CUDA 12.8 builds
+# of torch==2.10.0 and torchvision==0.25.0 from PyTorch's cu128 index first;
+# docs/phase2_5_local_vlm.md contains the exact commands. Keeping that index
+# choice explicit avoids silently installing a different CUDA runtime profile.
+-r local-vlm-runtime.txt
+
+accelerate==1.14.0
+nvidia-ml-py==13.610.43
+sentencepiece==0.2.2
+transformers==4.51.0

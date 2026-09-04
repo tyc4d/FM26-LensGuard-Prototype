@@ -28,6 +28,13 @@ from .gemini_phase2 import (
 )
 from .mock_phase2 import PHASE2_MOCK_MODEL, MockPhase2Provider
 from .mock_provider import MockAgentProvider, MockConsequenceProvider
+from .local import (
+    BaseLocalVLMProvider,
+    Gemma3Provider,
+    MiniCPMProvider,
+    Qwen3VLProvider,
+    create_local_provider,
+)
 
 __all__ = [
     "AGENT_PROMPT_VERSION",
@@ -38,12 +45,15 @@ __all__ = [
     "PHASE2_TWO_PASS_PROMPT_VERSION",
     "BaseAgentProvider",
     "BaseConsequenceProvider",
+    "BaseLocalVLMProvider",
     "GeminiAgentProvider",
     "GeminiConsequenceProvider",
     "GeminiPhase2Provider",
+    "Gemma3Provider",
     "MockAgentProvider",
     "MockConsequenceProvider",
     "MockPhase2Provider",
+    "MiniCPMProvider",
     "ProviderConfigurationError",
     "ProviderDependencyError",
     "ProviderError",
@@ -51,8 +61,10 @@ __all__ = [
     "ProviderResponseError",
     "ProviderUnavailableError",
     "RETRY_POLICY_VERSION",
+    "Qwen3VLProvider",
     "RetryConfig",
     "sanitized_consequence_input",
     "sanitized_phase2_action",
     "server_retry_delay_seconds",
+    "create_local_provider",
 ]

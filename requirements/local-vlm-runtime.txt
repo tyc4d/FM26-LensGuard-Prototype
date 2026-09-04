@@ -1,0 +1,12 @@
+# LensGuard application dependencies tested in the existing lensguard-vlm environment.
+#
+# Torch, Transformers, Accelerate, and other model-stack packages are intentionally absent:
+# preserve the already-working CUDA/Gemma installation described in
+# docs/phase2_5_local_vlm.md.
+cryptography==48.0.1
+google-genai==2.22.0
+matplotlib==3.11.1
+pillow==12.3.0
+pydantic==2.13.5
+python-dotenv==1.2.3
+pyyaml==6.0.3

@@ -1,4 +1,4 @@
-# LensGuard research prototype (Phases 1 and 2)
+# LensGuard research prototype (Phases 1, 2, and 2.5)
 
 LensGuard is an idea-validation experiment for a consequence-aware and
 provenance-aware action gate around a wearable-style multimodal assistant.
@@ -222,6 +222,30 @@ Phase 2 output locations within the chosen result directory are:
 
 The experiment specification and interpretation boundaries are in
 `docs/phase2_experiment.md`.
+
+## Phase 2.5: zero-shot local VLM evaluation
+
+Phase 2.5 substitutes three local providers into the frozen Phase 2 benchmark:
+`gemma3-4b` (`google/gemma-3-4b-it`), `qwen3vl-8b`
+(`Qwen/Qwen3-VL-8B-Instruct`), and `minicpm-v4.5` (`openbmb/MiniCPM-V-4_5`). It
+compares Action Only, Inline Provenance, and Oracle while adding structured-output, latency,
+token-throughput, VRAM, and system instrumentation. The Thin Trusted Gate and all Phase 2 attack,
+policy, provenance, and evaluator semantics remain unchanged. The active repaired contract profile
+is `ZERO_SHOT_V2`; prior `ZERO_SHOT_V1` evidence remains preserved and is never pooled with it.
+There is no training or model fallback in this phase.
+
+Gemma uses `/home/tyc4d/venvs/lensguard-vlm`; Qwen uses the dedicated
+`/home/tyc4d/venvs/lensguard-qwen`; MiniCPM uses
+`/home/tyc4d/venvs/lensguard-minicpm`. Verify Qwen can import
+`Qwen3VLForConditionalGeneration` and `AutoProcessor` before loading it. All models share the
+normal Hugging Face cache and the one repository. Full model runs are manual only, after a paired
+3–10-case-per-arm smoke test and raw-output review. An RTX 4090 result is an edge-proxy
+measurement, not evidence of deployment on current glasses. Setup, frozen revisions, benchmark-
+lock verification, exact commands, metrics, result layout, and future Phase 2.6/Phase 3 criteria
+are documented in
+[`docs/phase2_5_local_vlm.md`](docs/phase2_5_local_vlm.md). The contract root-cause analysis,
+paired smoke results, and fresh 243-trial-per-model results are in
+[`docs/phase2_5_inline_provenance_contract_fix.md`](docs/phase2_5_inline_provenance_contract_fix.md).
 
 ## Phase 1 experimental boundary
 

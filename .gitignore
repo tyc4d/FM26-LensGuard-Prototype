@@ -30,3 +30,27 @@ results_phase2/*/rate_limits.log
 results_phase2/gemini-*/
 results_phase2/demo/
 results_phase2/local-mock/
+
+# Hugging Face/model caches and weight files must stay outside the repository.
+.cache/huggingface/
+.huggingface/
+hf_cache/
+huggingface_cache/
+model_cache/
+models--*/
+*.safetensors
+
+# Phase 2.5 live local-model evidence. Keep the generated aggregate root report trackable.
+results_phase2_5/*/raw_generations.jsonl
+results_phase2_5/*/raw_attempts.jsonl
+results_phase2_5/*/final_trials.csv
+results_phase2_5/*/system_info.json
+results_phase2_5/*/raw_responses/
+results_phase2_5/*/rate_limits.log
+results_phase2_5/*-smoke*/
+results_phase2_5/smoke/
+results_phase2_5/smoke-*/
+# Nested profile roots (for example contract-v2-full/<model>/) contain
+# per-trial generations, raw responses, CSVs, plots, and runtime metadata.
+# Keep only the profile-level aggregate report eligible for tracking.
+results_phase2_5/*/*/
