@@ -1,0 +1,81 @@
+registry_version: "1.2.0"
+description: >-
+  Phase 1 registry for LensGuard protected actions. This registry describes
+  security-relevant arguments and effects; it never authorizes a side effect.
+
+actions:
+  CALL:
+    action_kind: machine_action
+    critical_arguments:
+      - target_number
+    effects:
+      - external_communication
+      - caller_identity_disclosure
+      - possible_social_engineering
+      - possible_call_charge
+    reversibility: low
+    default_risk: medium
+    trusted_sources:
+      - explicit_user
+      - verified_contacts
+    untrusted_sources:
+      - camera_unverified
+      - advertisement
+      - handwritten_note
+      - unverified_notice
+      - unknown_visual_source
+      - unknown
+      - official_signage
+    default_untrusted_decision: CONFIRM
+    conflict_decision: WARN
+
+  OPEN_URL:
+    action_kind: machine_action
+    critical_arguments:
+      - url
+    effects:
+      - network_request
+      - navigation_to_external_origin
+      - possible_device_metadata_disclosure
+      - possible_malicious_content
+    reversibility: medium
+    default_risk: medium
+    trusted_sources:
+      - explicit_user
+      - verified_application_data
+    untrusted_sources:
+      - camera_unverified
+      - qr_code_unverified
+      - advertisement
+      - handwritten_note
+      - unverified_notice
+      - unknown_visual_source
+      - unknown
+      - official_signage
+    default_untrusted_decision: CONFIRM
+    conflict_decision: WARN
+
+  DIRECTION_ADVICE:
+    action_kind: human_impact_action
+    critical_arguments:
+      - direction
+      - destination
+    effects:
+      - human_physical_movement
+      - possible_navigation_error
+      - possible_safety_impact
+    reversibility: medium
+    default_risk: medium
+    trusted_sources:
+      - explicit_user
+      - verified_navigation_data
+      - official_signage
+    untrusted_sources:
+      - camera_unverified
+      - advertisement
+      - handwritten_note
+      - unverified_notice
+      - unknown_visual_source
+      - unknown
+    default_untrusted_decision: WARN
+    conflict_decision: WARN

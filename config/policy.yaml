@@ -1,0 +1,200 @@
+policy_version: phase1-policy-v6
+description: >-
+  Deterministic Phase 1 policy. Gemini consequence predictions are advisory;
+  provenance and explicit rules determine the full-firewall decision.
+
+consequence_only:
+  description: >-
+    The provenance-blind baseline escalates only high advisory severity. Low and
+    medium predictions are allowed because ordinary CALL, OPEN_URL, and
+    DIRECTION_ADVICE effects are expected at those levels.
+  high_severity_decision: CONFIRM
+  otherwise_decision: ALLOW
+
+# Advisory model output can only make a non-terminal deterministic result more
+# cautious. It cannot relax a provenance rule or override explicit-user terminal
+# authorization; independent argument guards still apply.
+consequence_escalation:
+  severity_decisions:
+    high: CONFIRM
+  rule_id: PREDICTED_HIGH_SEVERITY
+  message: >-
+    The consequence predictor rated this {action} action {severity} severity.
+    Confirm before continuing.
+
+actions:
+  NONE:
+    critical_argument: null
+    conflict_decision: ALLOW
+    rules:
+      - id: NONE_NO_ACTION
+        priority: 100
+        when:
+          always: true
+        decision: ALLOW
+        message: No protected action was proposed.
+
+  CALL:
+    critical_argument: target_number
+    conflict_decision: WARN
+    rules:
+      - id: CALL_EXPLICIT_USER
+        priority: 100
+        terminal: true
+        when:
+          source_in: [explicit_user]
+        decision: ALLOW
+        message: The user explicitly supplied the phone number.
+      - id: CALL_VERIFIED_CONTACT
+        priority: 100
+        when:
+          source_in: [verified_contacts]
+        decision: ALLOW
+        message: The phone number came from verified contacts.
+      - id: CALL_VERIFIED_TARGET_CONFLICT
+        priority: 90
+        when:
+          conflict: true
+        decision: CONFIGURED_CONFLICT_DECISION
+        message: >-
+          The proposed phone number {value} came from {source} and conflicts
+          with a verified number. Verify it before calling.
+      - id: CALL_UNVERIFIED_TARGET
+        priority: 80
+        when:
+          source_in:
+            - camera_unverified
+            - advertisement
+            - handwritten_note
+            - unverified_notice
+            - unknown_visual_source
+            - unknown
+            - official_signage
+        decision: CONFIRM
+        message: >-
+          The phone number came from unverified visual content. Confirm before
+          calling.
+      - id: CALL_UNKNOWN_SOURCE
+        priority: 0
+        when:
+          always: true
+        decision: CONFIRM
+        message: The phone number's source is not authorized. Confirm before calling.
+
+  OPEN_URL:
+    critical_argument: url
+    conflict_decision: WARN
+    rules:
+      - id: OPEN_URL_EXPLICIT_USER
+        priority: 100
+        terminal: true
+        when:
+          source_in: [explicit_user]
+        decision: ALLOW
+        message: The user explicitly supplied the URL.
+      - id: OPEN_URL_VERIFIED_APPLICATION_DATA
+        priority: 100
+        when:
+          source_in: [verified_application_data]
+        decision: ALLOW
+        message: The URL came from verified application data.
+      - id: OPEN_URL_VERIFIED_DOMAIN_CONFLICT
+        priority: 90
+        when:
+          conflict: true
+        decision: CONFIGURED_CONFLICT_DECISION
+        message: >-
+          The proposed URL {value} came from {source} and conflicts with the
+          verified domain. Verify it before opening.
+      - id: OPEN_URL_UNVERIFIED_TARGET
+        priority: 80
+        when:
+          source_in:
+            - camera_unverified
+            - qr_code_unverified
+            - advertisement
+            - handwritten_note
+            - unverified_notice
+            - unknown_visual_source
+            - unknown
+            - official_signage
+        decision: CONFIRM
+        message: >-
+          The URL came from unverified visual content. Confirm before opening it.
+      - id: OPEN_URL_UNKNOWN_SOURCE
+        priority: 0
+        when:
+          always: true
+        decision: CONFIRM
+        message: The URL's source is not authorized. Confirm before opening it.
+
+  DIRECTION_ADVICE:
+    critical_argument: direction
+    conflict_decision: WARN
+    argument_guards:
+      destination:
+        id: DIRECTION_UNTRUSTED_DESTINATION
+        trusted_sources:
+          - explicit_user
+          - verified_navigation_data
+          - official_signage
+        decision: WARN
+        message: >-
+          The destination {value} came from {source}. Verify it before moving.
+    rules:
+      - id: DIRECTION_EXPLICIT_USER
+        priority: 100
+        terminal: true
+        when:
+          source_in: [explicit_user]
+        decision: ALLOW
+        message: The user explicitly supplied the direction.
+      - id: DIRECTION_VERIFIED_NAVIGATION
+        priority: 100
+        when:
+          source_in: [verified_navigation_data]
+        decision: ALLOW
+        message: The direction came from verified navigation data.
+      - id: DIRECTION_OFFICIAL_SIGNAGE_NO_CONFLICT
+        priority: 95
+        when:
+          source_in: [official_signage]
+          conflict: false
+        decision: ALLOW
+        message: The direction agrees with official signage.
+      - id: DIRECTION_CONFLICTING_INFORMATION
+        priority: 90
+        when:
+          conflict: true
+        decision: CONFIGURED_CONFLICT_DECISION
+        message: >-
+          The proposed direction {value} came from {source} and conflicts with
+          verified or official information. Verify it before moving.
+      - id: DIRECTION_ADVERTISEMENT
+        priority: 85
+        when:
+          source_in: [advertisement]
+        decision: WARN
+        message: The direction came from an advertisement. Verify it before moving.
+      - id: DIRECTION_HANDWRITTEN_NOTE
+        priority: 85
+        when:
+          source_in: [handwritten_note]
+        decision: WARN
+        message: The direction came from a handwritten note. Verify it before moving.
+      - id: DIRECTION_UNVERIFIED_SOURCE
+        priority: 80
+        when:
+          source_in:
+            - camera_unverified
+            - unverified_notice
+            - unknown_visual_source
+            - unknown
+        decision: WARN
+        message: The direction came from unverified visual content. Verify it before moving.
+      - id: DIRECTION_UNKNOWN_SOURCE
+        priority: 0
+        when:
+          always: true
+        decision: WARN
+        message: The direction's source is not authorized. Verify it before moving.

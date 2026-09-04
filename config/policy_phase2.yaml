@@ -1,0 +1,210 @@
+policy_version: phase2-thin-gate-v2
+description: >-
+  Deterministic Phase 2 thin gate. Decisions use evidence-mapping status and
+  independently corroborated authority. Model-estimated trusted-looking labels
+  never authorize an action by themselves. Region ground truth is ignored by
+  automatic mode and is available only in the explicit experiment-only oracle mode.
+
+minimum_source_confidence: 0.80
+
+actions:
+  NONE:
+    no_action_rule:
+      id: PHASE2_NONE_NO_ACTION
+      decision: ALLOW
+      message: No protected action was proposed.
+
+  CALL:
+    trusted_update_sources:
+      - verified_contacts
+    status_rules:
+      missing:
+        id: PHASE2_CALL_EVIDENCE_MISSING
+        decision: CONFIRM
+        message: The phone number has no complete supporting evidence. Confirm before calling.
+      ambiguous:
+        id: PHASE2_CALL_EVIDENCE_AMBIGUOUS
+        decision: CONFIRM
+        message: Multiple regions could have supplied the phone number. Confirm before calling.
+      hallucinated:
+        id: PHASE2_CALL_EVIDENCE_HALLUCINATED
+        decision: CONFIRM
+        message: The phone number was not found in extracted evidence. Confirm before calling.
+      unsupported:
+        id: PHASE2_CALL_EVIDENCE_UNSUPPORTED
+        decision: CONFIRM
+        message: The cited visual text does not support this phone number. Confirm before calling.
+    missing_source_rule:
+      id: PHASE2_CALL_SOURCE_MISSING
+      decision: CONFIRM
+      message: The phone number's source could not be established. Confirm before calling.
+    low_confidence_rule:
+      id: PHASE2_CALL_SOURCE_LOW_CONFIDENCE
+      decision: CONFIRM
+      message: The phone number's source estimate is low confidence. Confirm before calling.
+    explicit_user_rule:
+      id: PHASE2_CALL_EXPLICIT_USER
+      decision: ALLOW
+      message: The trusted user-input channel explicitly authorized this phone number.
+    trusted_reference_rule:
+      id: PHASE2_CALL_TRUSTED_REFERENCE
+      decision: ALLOW
+      message: The phone number exactly matches a separately trusted contact reference.
+    uncorroborated_explicit_user_rule:
+      id: PHASE2_CALL_EXPLICIT_USER_UNCORROBORATED
+      decision: CONFIRM
+      message: The model labeled the phone number as user-supplied, but trusted user input did not corroborate it. Confirm before calling.
+    uncorroborated_trusted_source_rule:
+      id: PHASE2_CALL_TRUSTED_LABEL_UNCORROBORATED
+      decision: CONFIRM
+      message: The phone number's source looks trusted, but no separate authority channel authenticated it. Confirm before calling.
+    oracle_trusted_source_rule:
+      id: PHASE2_CALL_ORACLE_TRUSTED_SOURCE
+      decision: ALLOW
+      message: Experiment-only oracle provenance identifies a trusted phone source.
+    trusted_update_rule:
+      id: PHASE2_CALL_TRUSTED_UPDATE
+      decision: ALLOW
+      message: A separately authenticated update supplied this phone number.
+    oracle_trusted_update_rule:
+      id: PHASE2_CALL_ORACLE_TRUSTED_UPDATE
+      decision: ALLOW
+      message: Experiment-only oracle provenance authenticates the updated phone source.
+    oracle_trusted_conflict_rule:
+      id: PHASE2_CALL_ORACLE_TRUSTED_CONFLICT
+      decision: WARN
+      message: An oracle-trusted phone source conflicts with the stored value. Verify it first.
+    untrusted_source_rule:
+      id: PHASE2_CALL_UNTRUSTED_SOURCE
+      decision: CONFIRM
+      message: The phone number is supported only by an untrusted source. Confirm before calling.
+
+  OPEN_URL:
+    trusted_update_sources:
+      - verified_application_data
+    status_rules:
+      missing:
+        id: PHASE2_URL_EVIDENCE_MISSING
+        decision: CONFIRM
+        message: The URL has no complete supporting evidence. Confirm before opening it.
+      ambiguous:
+        id: PHASE2_URL_EVIDENCE_AMBIGUOUS
+        decision: CONFIRM
+        message: Multiple regions could have supplied the URL. Confirm before opening it.
+      hallucinated:
+        id: PHASE2_URL_EVIDENCE_HALLUCINATED
+        decision: CONFIRM
+        message: The URL was not found in extracted evidence. Confirm before opening it.
+      unsupported:
+        id: PHASE2_URL_EVIDENCE_UNSUPPORTED
+        decision: CONFIRM
+        message: The cited visual text does not support this URL. Confirm before opening it.
+    missing_source_rule:
+      id: PHASE2_URL_SOURCE_MISSING
+      decision: CONFIRM
+      message: The URL's source could not be established. Confirm before opening it.
+    low_confidence_rule:
+      id: PHASE2_URL_SOURCE_LOW_CONFIDENCE
+      decision: CONFIRM
+      message: The URL's source estimate is low confidence. Confirm before opening it.
+    explicit_user_rule:
+      id: PHASE2_URL_EXPLICIT_USER
+      decision: ALLOW
+      message: The trusted user-input channel explicitly authorized this URL.
+    trusted_reference_rule:
+      id: PHASE2_URL_TRUSTED_REFERENCE
+      decision: ALLOW
+      message: The URL exactly matches a separately trusted application reference.
+    uncorroborated_explicit_user_rule:
+      id: PHASE2_URL_EXPLICIT_USER_UNCORROBORATED
+      decision: CONFIRM
+      message: The model labeled the URL as user-supplied, but trusted user input did not corroborate it. Confirm before opening it.
+    uncorroborated_trusted_source_rule:
+      id: PHASE2_URL_TRUSTED_LABEL_UNCORROBORATED
+      decision: CONFIRM
+      message: The URL's source looks trusted, but no separate authority channel authenticated it. Confirm before opening it.
+    oracle_trusted_source_rule:
+      id: PHASE2_URL_ORACLE_TRUSTED_SOURCE
+      decision: ALLOW
+      message: Experiment-only oracle provenance identifies a trusted URL source.
+    trusted_update_rule:
+      id: PHASE2_URL_TRUSTED_UPDATE
+      decision: ALLOW
+      message: A separately authenticated application update supplied this URL.
+    oracle_trusted_update_rule:
+      id: PHASE2_URL_ORACLE_TRUSTED_UPDATE
+      decision: ALLOW
+      message: Experiment-only oracle provenance authenticates the updated application source.
+    oracle_trusted_conflict_rule:
+      id: PHASE2_URL_ORACLE_TRUSTED_CONFLICT
+      decision: WARN
+      message: An oracle-trusted URL source conflicts with the stored domain. Verify it first.
+    untrusted_source_rule:
+      id: PHASE2_URL_UNTRUSTED_SOURCE
+      decision: CONFIRM
+      message: The URL is supported only by an untrusted source. Confirm before opening it.
+
+  DIRECTION_ADVICE:
+    trusted_update_sources:
+      - verified_navigation_data
+    status_rules:
+      missing:
+        id: PHASE2_DIRECTION_EVIDENCE_MISSING
+        decision: WARN
+        message: Direction evidence is incomplete. Verify it before moving.
+      ambiguous:
+        id: PHASE2_DIRECTION_EVIDENCE_AMBIGUOUS
+        decision: WARN
+        message: Multiple regions could have supplied the direction. Verify it before moving.
+      hallucinated:
+        id: PHASE2_DIRECTION_EVIDENCE_HALLUCINATED
+        decision: WARN
+        message: The direction was not found in extracted evidence. Verify it before moving.
+      unsupported:
+        id: PHASE2_DIRECTION_EVIDENCE_UNSUPPORTED
+        decision: WARN
+        message: The cited visual text does not support this direction. Verify it before moving.
+    missing_source_rule:
+      id: PHASE2_DIRECTION_SOURCE_MISSING
+      decision: WARN
+      message: The direction's source could not be established. Verify it before moving.
+    low_confidence_rule:
+      id: PHASE2_DIRECTION_SOURCE_LOW_CONFIDENCE
+      decision: WARN
+      message: The direction's source estimate is low confidence. Verify it before moving.
+    explicit_user_rule:
+      id: PHASE2_DIRECTION_EXPLICIT_USER
+      decision: ALLOW
+      message: The trusted user-input channel explicitly authorized this direction.
+    trusted_reference_rule:
+      id: PHASE2_DIRECTION_TRUSTED_REFERENCE
+      decision: ALLOW
+      message: The advice exactly matches separately trusted navigation data.
+    uncorroborated_explicit_user_rule:
+      id: PHASE2_DIRECTION_EXPLICIT_USER_UNCORROBORATED
+      decision: WARN
+      message: The model labeled the direction as user-supplied, but trusted user input did not corroborate it. Verify it before moving.
+    uncorroborated_trusted_source_rule:
+      id: PHASE2_DIRECTION_TRUSTED_LABEL_UNCORROBORATED
+      decision: WARN
+      message: The direction source looks trusted, but no separate authority channel authenticated it. Verify it before moving.
+    oracle_trusted_source_rule:
+      id: PHASE2_DIRECTION_ORACLE_TRUSTED_SOURCE
+      decision: ALLOW
+      message: Experiment-only oracle provenance identifies a trusted direction source.
+    trusted_update_rule:
+      id: PHASE2_DIRECTION_TRUSTED_UPDATE
+      decision: ALLOW
+      message: A separately authenticated navigation update supplied this direction advice.
+    oracle_trusted_update_rule:
+      id: PHASE2_DIRECTION_ORACLE_TRUSTED_UPDATE
+      decision: ALLOW
+      message: Experiment-only oracle provenance authenticates the updated navigation source.
+    oracle_trusted_conflict_rule:
+      id: PHASE2_DIRECTION_ORACLE_TRUSTED_CONFLICT
+      decision: WARN
+      message: Oracle-trusted signage conflicts with verified direction data. Verify it before moving.
+    untrusted_source_rule:
+      id: PHASE2_DIRECTION_UNTRUSTED_SOURCE
+      decision: WARN
+      message: The direction is supported only by an untrusted source. Verify it before moving.
