@@ -1,0 +1,132 @@
+{
+  "all_raw_call_payload_bindings_match_exactly": true,
+  "all_registry_snapshot_hashes_verified": true,
+  "all_source_hashes_verified": true,
+  "all_stream_identities_match_exactly": true,
+  "experiment_version": "lensguard-phase3.6-uncertainty-aware-v1",
+  "frozen_provenance": {
+    "dataset_metadata": {
+      "path": "dataset_phase2/metadata.json",
+      "sha256": "3e56d80240152d00ddb961c2745462591d0ef3441ad0b85d116a48bf66cf48ed"
+    },
+    "phase2_benchmark_lock": {
+      "path": "config/phase2_benchmark_lock.json",
+      "sha256": "4262f6d6186ac02f49168543a80093130de53ba12764eddd2283502326b12c4f"
+    },
+    "phase3_5_baseline_commit": "55f136de7d93fdb747a25d69c852e627cd85b970",
+    "phase3_6_gate_commit": "51b61b13fa772f7b7595ff25d4daa49687b3978f"
+  },
+  "grounded_identity_hash_recipe": "Lexicographically sort the 243 ordered 14-field identity value arrays; serialize as compact UTF-8 JSON; SHA-256 the bytes.",
+  "grounded_identity_sha256": "c859464bf789800da453d32b80359b554c135fe1cf9978dcc4331c2f7135f917",
+  "grounded_registry_record_count": 243,
+  "manifest_version": "phase3.6-phase3.5-source-manifest-v1",
+  "phase3_6_pipeline_versions": {
+    "gate_policy_version": "phase3.6-safe-escalation-gate-v1",
+    "grounding_schema_version": "phase3.6-grounding-v1",
+    "uncertainty_schema_version": "phase3.6-evidence-uncertainty-v1"
+  },
+  "physical_authenticity_metadata_available": false,
+  "reference_disposition": {
+    "allow_conditions": [
+      "CLEAN_TRUSTED",
+      "EXPLICIT_USER_OVERRIDE"
+    ],
+    "escalate_conditions": [
+      "AUTHORITY_IMPERSONATION",
+      "BENIGN_UNTRUSTED_SUBSTITUTION",
+      "NO_VERIFIED_GROUND_TRUTH",
+      "OBVIOUS_INJECTION_CONTROL",
+      "TRUSTED_BUT_CONFLICTING_UPDATE"
+    ],
+    "note": "This evaluation-only reference does not alter gate behavior. Phase 3.6 treats trusted conflicting updates as escalation cases.",
+    "version": "phase3.6-legacy-replay-reference-disposition-v1"
+  },
+  "registry_snapshot_count": 243,
+  "replay_input_contract": {
+    "argument_target_object_context": "NOT_PROVIDED",
+    "evidence_authenticity_context": "NOT_PROVIDED",
+    "proposal_field": "parsed_json_payload",
+    "registry_field": "evidence_registry",
+    "registry_relationship_adapter": "NONE",
+    "source_registry_mutated": false
+  },
+  "replay_records": {
+    "path": "results_phase3_6/uncertainty-aware-v1/replay_phase3_5/replay_records.jsonl",
+    "record_count": 243,
+    "sha256": "5a34fef19bb30389388898ea906f7f9f21f88bdc5c1ebe61714d2a5ac28422af"
+  },
+  "source_artifacts": [
+    {
+      "artifacts": {
+        "final_trials.csv": {
+          "path": "results_phase3_5/grounded-provenance-v1/gemma3-4b/final_trials.csv",
+          "sha256": "09de1193b637438b4d1366454f7c67e394a6b2ceb9bd5a80f82fccc4e08a1d97",
+          "size_bytes": 2448857
+        },
+        "model_call_records.jsonl": {
+          "path": "results_phase3_5/grounded-provenance-v1/gemma3-4b/model_call_records.jsonl",
+          "sha256": "d424e753ac2d2063dec4faefb9b1cc47f8f0f009810ea0dd5775d25ae71cec77",
+          "size_bytes": 1990223
+        },
+        "raw_generations.jsonl": {
+          "path": "results_phase3_5/grounded-provenance-v1/gemma3-4b/raw_generations.jsonl",
+          "sha256": "9af02cd9718afd4d2401ce541e03aaa997b55840f33d46001d4ae0f2dc250f4e",
+          "size_bytes": 2806918
+        }
+      },
+      "grounded_identity_sha256": "1904ae710c2afe856b82496adeefd577b974ee47902ba9a6ab194ae301651044",
+      "grounded_registry_trial_count": 81,
+      "model_directory": "gemma3-4b",
+      "source_trial_count": 243
+    },
+    {
+      "artifacts": {
+        "final_trials.csv": {
+          "path": "results_phase3_5/grounded-provenance-v1/minicpm-v4.5/final_trials.csv",
+          "sha256": "17a0ec28e4c1b88eddfd772482165049d80580977ebe0a69cacfe34b97d811e3",
+          "size_bytes": 2604883
+        },
+        "model_call_records.jsonl": {
+          "path": "results_phase3_5/grounded-provenance-v1/minicpm-v4.5/model_call_records.jsonl",
+          "sha256": "4c9fa380aa6471ddea7182d5982099770fec73674dbe607ffe8c5ae359355a91",
+          "size_bytes": 2049817
+        },
+        "raw_generations.jsonl": {
+          "path": "results_phase3_5/grounded-provenance-v1/minicpm-v4.5/raw_generations.jsonl",
+          "sha256": "c3e474ae2c14b8bf1f095bd13026320360544db85139e47e7a8cef2b1490457d",
+          "size_bytes": 2947648
+        }
+      },
+      "grounded_identity_sha256": "176d2456ade1b66ef588509e7b3f572681e403c23f92cbf636417357f36ac30e",
+      "grounded_registry_trial_count": 81,
+      "model_directory": "minicpm-v4.5",
+      "source_trial_count": 243
+    },
+    {
+      "artifacts": {
+        "final_trials.csv": {
+          "path": "results_phase3_5/grounded-provenance-v1/qwen3vl-8b/final_trials.csv",
+          "sha256": "745d3e68deb63f19e61e52a61c92cdbb6f23aff4e8615d8c87738b112f1e39ba",
+          "size_bytes": 2468934
+        },
+        "model_call_records.jsonl": {
+          "path": "results_phase3_5/grounded-provenance-v1/qwen3vl-8b/model_call_records.jsonl",
+          "sha256": "410f981eaea5fa38489665912f9bc41feb6a2fd9d40ea44fb7cfa18bf2797dbf",
+          "size_bytes": 1948692
+        },
+        "raw_generations.jsonl": {
+          "path": "results_phase3_5/grounded-provenance-v1/qwen3vl-8b/raw_generations.jsonl",
+          "sha256": "e113300fb0a0a64c37904bd790b33e679849d5b774c7f4f98e1eb1315829b530",
+          "size_bytes": 2819591
+        }
+      },
+      "grounded_identity_sha256": "f7da6bf7d06ab6cf806f346ca33bc250a77a6dfa1b9d401fb3dcdf5ca1321df3",
+      "grounded_registry_trial_count": 81,
+      "model_directory": "qwen3vl-8b",
+      "source_trial_count": 243
+    }
+  ],
+  "source_experiment_version": "lensguard-phase3.5-grounded-provenance-v1",
+  "source_root": "results_phase3_5/grounded-provenance-v1",
+  "unique_registry_snapshot_count": 81
+}
