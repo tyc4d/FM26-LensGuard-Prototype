@@ -1,0 +1,8 @@
+{
+  "eligible_as_gemini_evidence": false,
+  "has_usable_evidence": false,
+  "message": "No Gemini benchmark has been run. Run the documented smoke test, inspect it, then run the main cohort and regenerate this file.",
+  "mock_validation": "results/mock/analysis.json",
+  "result_kind": "gemini_experiment_not_run",
+  "status": "NOT_RUN"
+}
