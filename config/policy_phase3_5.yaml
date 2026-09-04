@@ -1,0 +1,122 @@
+policy_version: phase3.5-grounded-gate-v1
+action_registry_version: phase3.5-action-registry-v1
+description: >-
+  Deterministic argument-to-evidence policy. Camera evidence is evaluated by
+  its task relationship; it is not categorically blocked. The policy never
+  consumes model-reported trust, maliciousness, authority, or confidence.
+
+grounding_status_decisions:
+  SUPPORTED: PASS
+  AMBIGUOUS: ESCALATE
+  CONFLICTING: ESCALATE
+  MISSING: BLOCK
+  UNSUPPORTED: BLOCK
+  INVALID_REFERENCE: BLOCK
+
+confidence:
+  minimum_detection_confidence: 0.50
+  minimum_ocr_confidence: 0.50
+  require_detection_for_registry_origins:
+    - automatic_registry
+    - automatic_perception
+  require_ocr_for_text_registry_origins:
+    - automatic_registry
+    - automatic_perception
+
+actions:
+  NONE:
+    argument_requirements: {}
+
+  CALL:
+    argument_requirements:
+      target_number:
+        relation: exact_phone_number
+        allowed_content_types: [text, user_input]
+        semantic_roles_if_present:
+          - customer_service_number
+          - contact_number
+          - phone_number
+
+  OPEN_URL:
+    argument_requirements:
+      url:
+        relation: exact_url
+        allowed_content_types: [text, symbol, user_input]
+        semantic_roles_if_present:
+          - url
+          - web_address
+          - qr_url
+
+  DIRECTION_ADVICE:
+    conflict_rule:
+      id: PHASE3_5_NAVIGATION_DIRECTION_CONFLICT
+      disposition: ESCALATE
+    argument_requirements:
+      direction:
+        relation: direction_bearing
+        allowed_content_types: [text, symbol, spatial, user_input]
+        semantic_roles_if_present:
+          - direction
+          - exit_direction
+          - directional_sign
+      destination:
+        relation: destination_bearing
+        allowed_content_types: [text, symbol, spatial, user_input]
+        semantic_roles_if_present:
+          - destination
+          - exit_destination
+          - directional_sign
+
+  SAFETY_ADVICE:
+    hazard_veto_rule:
+      id: PHASE3_5_SAFETY_HAZARD_VETO
+      disposition: BLOCK
+    argument_requirements:
+      safe_to_proceed:
+        relation: safety_claim
+        allowed_content_types: [text, object, spatial, symbol, other, user_input]
+        semantic_roles_if_present:
+          - safety_claim
+          - hazard
+          - path_condition
+          - stairs
+          - obstacle
+          - barrier
+          - hole
+          - blocked_path
+          - height_difference
+      hazard:
+        relation: hazard_evidence
+        allowed_content_types: [text, object, spatial, symbol, other]
+        semantic_roles_if_present:
+          - hazard
+          - stairs
+          - obstacle
+          - barrier
+          - hole
+          - blocked_path
+          - height_difference
+
+  RESTAURANT_RESERVATION:
+    argument_requirements:
+      restaurant:
+        relation: restaurant_identity
+        allowed_content_types: [text, symbol, user_input]
+        semantic_roles_if_present:
+          - restaurant_identity
+          - restaurant_name
+      target_number:
+        relation: reservation_contact_number
+        allowed_content_types: [text, user_input]
+        semantic_roles_if_present:
+          - reservation_number
+          - restaurant_contact_number
+          - contact_number
+      time:
+        relation: explicit_user_value
+        allowed_content_types: [user_input]
+        require_explicit_user_evidence: true
+      party_size:
+        relation: explicit_user_value
+        allowed_content_types: [user_input]
+        require_explicit_user_evidence: true

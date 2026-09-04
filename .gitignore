@@ -54,3 +54,13 @@ results_phase2_5/smoke-*/
 # per-trial generations, raw responses, CSVs, plots, and runtime metadata.
 # Keep only the profile-level aggregate report eligible for tracking.
 results_phase2_5/*/*/
+
+# Phase 3.5 local-model trial streams are reproducible and can contain raw model
+# output. Keep audits, analyses, and Markdown reports eligible for tracking.
+results_phase3_5/*/*/raw_generations.jsonl
+results_phase3_5/*/*/model_call_records.jsonl
+results_phase3_5/*/*/final_trials.csv
+results_phase3_5/*/*/system_info.json
+results_phase3_5/*-smoke*/
+results_phase3_5/smoke/
+results_phase3_5/smoke-*/

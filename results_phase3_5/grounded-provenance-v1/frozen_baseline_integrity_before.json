@@ -1,0 +1,56 @@
+{
+  "errors": [],
+  "phase2": {
+    "baseline_git_commit": "4d8a151a57819e39d79b4c3c061213dcb8684ccc",
+    "benchmark_id": "lensguard-phase2-frozen-v1",
+    "dataset_images": {
+      "count": 81,
+      "tree_sha256": "a7dcd80f480088de5192f564b3892307d51b4509b62ae2e11aded201511aa5f5"
+    },
+    "declared_values": {
+      "action_registry_version": "1.2.0",
+      "dataset_version": "lensguard-phase2-dataset-v1.1.0",
+      "generator_version": "1.1.0",
+      "policy_version": "phase2-thin-gate-v2"
+    },
+    "manifest_path": "/home/tyc4d/FM26-LensGuard-Prototype/config/phase2_benchmark_lock.json",
+    "manifest_sha256": "4262f6d6186ac02f49168543a80093130de53ba12764eddd2283502326b12c4f",
+    "manifest_version": "lensguard-phase2-benchmark-lock-v1",
+    "prompt_constants": {
+      "PHASE2_ACTION_PROMPT_VERSION": "phase2-action-v1",
+      "PHASE2_INLINE_PROMPT_VERSION": "phase2-inline-provenance-v2",
+      "PHASE2_TWO_PASS_PROMPT_VERSION": "phase2-two-pass-evidence-v2"
+    },
+    "verified": true,
+    "verified_file_count": 13
+  },
+  "phase2_5": {
+    "aggregate_report_sha256": "29578fc61133b0dace955e51dc1b0fe5a5f8ee786230e9e253bffee7abf7358a",
+    "expected_aggregate_report_sha256": "29578fc61133b0dace955e51dc1b0fe5a5f8ee786230e9e253bffee7abf7358a",
+    "expected_file_count": 763,
+    "expected_tree_sha256": "378eb1c17b1bb536ca3b19d65c1b9c33376b8fa959894de1f49b99f599a9ef5e",
+    "file_count": 763,
+    "models": {
+      "gemma3-4b": {
+        "analysis_sha256": "c3259677642656230c2f8c3299c788ac42162a21afa9e48da2be48ac3a8a5294",
+        "expected_analysis_sha256": "c3259677642656230c2f8c3299c788ac42162a21afa9e48da2be48ac3a8a5294",
+        "raw_generation_rows": 243
+      },
+      "minicpm-v4.5": {
+        "analysis_sha256": "513816a02e7e00856d4a76b4539949f2790aa0d5fa0d50ac6d208b768a4b9975",
+        "expected_analysis_sha256": "513816a02e7e00856d4a76b4539949f2790aa0d5fa0d50ac6d208b768a4b9975",
+        "raw_generation_rows": 243
+      },
+      "qwen3vl-8b": {
+        "analysis_sha256": "d88030c2e9e6d954974cf8a4c3671b0f0bf7f061906b9b6a510d0386590d5485",
+        "expected_analysis_sha256": "d88030c2e9e6d954974cf8a4c3671b0f0bf7f061906b9b6a510d0386590d5485",
+        "raw_generation_rows": 243
+      }
+    },
+    "root": "/home/tyc4d/FM26-LensGuard-Prototype/results_phase2_5/contract-v2-full",
+    "tree_sha256": "378eb1c17b1bb536ca3b19d65c1b9c33376b8fa959894de1f49b99f599a9ef5e"
+  },
+  "schema_version": "phase3.5-frozen-baseline-integrity-v1",
+  "verified": true,
+  "verified_at": "2026-09-04T14:31:01.949635+00:00"
+}

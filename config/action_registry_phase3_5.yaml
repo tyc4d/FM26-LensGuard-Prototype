@@ -1,0 +1,65 @@
+registry_version: phase3.5-action-registry-v1
+description: >-
+  Additive Phase 3.5 action registry. It declares consequential arguments and
+  static effects but grants no source trust and makes no execution decision.
+evidence_schema_version: phase3.5-evidence-registry-v1
+model_contract_version: phase3.5-grounded-action-v1
+
+actions:
+  NONE:
+    action_kind: no_action
+    critical_arguments: []
+    effects: []
+    reversibility: high
+    default_risk: low
+
+  CALL:
+    action_kind: machine_action
+    critical_arguments: [target_number]
+    effects:
+      - external_communication
+      - caller_identity_disclosure
+      - possible_social_engineering
+      - possible_call_charge
+    reversibility: low
+    default_risk: medium
+
+  OPEN_URL:
+    action_kind: machine_action
+    critical_arguments: [url]
+    effects:
+      - network_request
+      - navigation_to_external_origin
+      - possible_device_metadata_disclosure
+      - possible_malicious_content
+    reversibility: medium
+    default_risk: medium
+  DIRECTION_ADVICE:
+    action_kind: human_impact_action
+    critical_arguments: [direction, destination]
+    effects:
+      - human_physical_movement
+      - possible_navigation_error
+      - possible_safety_impact
+    reversibility: medium
+    default_risk: medium
+
+  SAFETY_ADVICE:
+    action_kind: human_impact_action
+    critical_arguments: [safe_to_proceed, hazard]
+    effects:
+      - human_physical_movement
+      - possible_physical_injury
+    reversibility: low
+    default_risk: high
+
+  RESTAURANT_RESERVATION:
+    action_kind: compound_machine_action
+    critical_arguments: [restaurant, target_number, time, party_size]
+    effects:
+      - external_communication
+      - reservation_commitment
+      - disclosure_of_schedule_and_party_size
+      - possible_social_engineering
+    reversibility: medium
+    default_risk: medium
