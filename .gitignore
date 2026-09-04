@@ -1,0 +1,32 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+
+# Live scientific outputs can contain model responses and are locally generated.
+results/raw_results.jsonl
+results/raw_results.csv
+results/raw_responses/
+results/rate_limits.log
+results/*/raw_results.jsonl
+results/*/raw_results.csv
+results/*/raw_responses/
+results/*/rate_limits.log
+results/gemini-smoke/
+results/local-mock/
+
+# Phase 2 live/demo outputs; controlled mock validation may be regenerated locally.
+results_phase2/raw_attempts.jsonl
+results_phase2/final_trials.csv
+results_phase2/raw_responses/
+results_phase2/rate_limits.log
+results_phase2/*/raw_attempts.jsonl
+results_phase2/*/final_trials.csv
+results_phase2/*/raw_responses/
+results_phase2/*/rate_limits.log
+results_phase2/gemini-*/
+results_phase2/demo/
+results_phase2/local-mock/

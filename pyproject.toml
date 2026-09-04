@@ -1,0 +1,33 @@
+[project]
+name = "lensguard-phase1"
+version = "0.1.0"
+description = "Idea-validation prototype for a provenance-aware wearable AI action firewall"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  # 49+ no longer publishes Intel/universal macOS wheels; this keeps Rosetta
+  # development usable while remaining native on Apple Silicon.
+  "cryptography>=46.0.3,<49",
+  # Exact pin: the Interactions retry adapter below is regression-tested
+  # against this SDK release so quota bounds remain auditable.
+  "google-genai==2.22.0",
+  "matplotlib>=3.8,<4",
+  "pillow>=10,<13",
+  "pydantic>=2.8,<3",
+  "python-dotenv>=1.0,<2",
+  "pyyaml>=6.0,<7",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8,<10",
+]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
