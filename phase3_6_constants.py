@@ -20,6 +20,7 @@ GROUNDING_SCHEMA_VERSION: Final = "phase3.6-grounding-v1"
 UNCERTAINTY_SCHEMA_VERSION: Final = "phase3.6-evidence-uncertainty-v1"
 GATE_POLICY_VERSION: Final = "phase3.6-safe-escalation-gate-v1"
 PHYSICAL_DATASET_SCHEMA_VERSION: Final = "phase3.6-physical-dataset-v1"
+PHYSICAL_PILOT_PROTOCOL_VERSION: Final = "phase3.6-physical-pilot-protocol-v1"
 ESCALATION_SCHEMA_VERSION: Final = "phase3.6-structured-escalation-v1"
 
 # The VLM input/output contract and registry schema deliberately do not change
