@@ -95,7 +95,9 @@ class ArgumentUncertaintyAssessment(_FrozenStrictModel):
 
     schema_version: Literal[UNCERTAINTY_SCHEMA_VERSION] = UNCERTAINTY_SCHEMA_VERSION
     argument: str = Field(min_length=1)
-    argument_value: CandidateValue | None = None
+    # Keep malformed proposal values losslessly inspectable. Only normalized
+    # candidate_values use the strict primitive contract below.
+    argument_value: Any = None
     status: UncertaintyStatus
     authenticity_status: AuthenticityStatus
     authenticity_basis: str | None = None
@@ -149,6 +151,24 @@ class ArgumentUncertaintyAssessment(_FrozenStrictModel):
         ):
             raise ValueError("AUTHENTICITY_UNKNOWN requires authenticity_status=UNKNOWN")
         if (
+            self.status is UncertaintyStatus.SUPPORTED
+            and self.authenticity_status is AuthenticityStatus.UNKNOWN
+        ):
+            raise ValueError("SUPPORTED cannot retain unresolved authenticity")
+        if self.status is UncertaintyStatus.AUTHENTICITY_UNKNOWN and (
+            not self.candidate_values or not self.evidence_ids
+        ):
+            raise ValueError(
+                "AUTHENTICITY_UNKNOWN requires candidate values and supporting evidence"
+            )
+        if (
+            self.status is UncertaintyStatus.CONFLICTING
+            and len(self.candidate_values) < 2
+        ):
+            raise ValueError("CONFLICTING requires at least two distinct candidates")
+        if self.status is UncertaintyStatus.CONFLICTING and not self.evidence_ids:
+            raise ValueError("CONFLICTING requires supporting evidence IDs")
+        if (
             self.authenticity_status is AuthenticityStatus.ESTABLISHED
             and self.authenticity_basis is None
         ):
@@ -163,6 +183,9 @@ class ArgumentUncertaintyAssessment(_FrozenStrictModel):
             raise ValueError("evidence confidence entries must have unique evidence IDs")
         if set(confidence_ids) - set(self.evidence_ids):
             raise ValueError("confidence entries must refer to declared evidence_ids")
+        typed_candidates = {(type(value), repr(value)) for value in self.candidate_values}
+        if len(typed_candidates) != len(self.candidate_values):
+            raise ValueError("candidate_values must contain distinct normalized values")
         return self
 
 

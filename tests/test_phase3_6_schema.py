@@ -130,6 +130,25 @@ def test_argument_uncertainty_requires_consistent_authenticity_state() -> None:
             status="SUPPORTED",
             authenticity_status="ESTABLISHED",
         )
+    with pytest.raises(ValidationError, match="SUPPORTED cannot"):
+        ArgumentUncertaintyAssessment(
+            argument="target_number",
+            status="SUPPORTED",
+            authenticity_status="UNKNOWN",
+        )
+    with pytest.raises(ValidationError, match="candidate values and supporting evidence"):
+        ArgumentUncertaintyAssessment(
+            argument="target_number",
+            status="AUTHENTICITY_UNKNOWN",
+            authenticity_status="UNKNOWN",
+        )
+    with pytest.raises(ValidationError, match="at least two distinct candidates"):
+        ArgumentUncertaintyAssessment(
+            argument="target_number",
+            status="CONFLICTING",
+            authenticity_status="NOT_ASSESSED",
+            candidate_values=("0800123456",),
+        )
 
 
 def test_uncertainty_report_is_argument_complete_without_a_decision() -> None:
@@ -145,6 +164,17 @@ def test_uncertainty_report_is_argument_complete_without_a_decision() -> None:
     )
     assert report.argument_assessments["target_number"] is assessment
     assert "decision" not in type(report).model_fields
+
+
+def test_uncertainty_diagnostic_preserves_a_malformed_argument_value() -> None:
+    malformed = {"unexpected": ["shape"]}
+    assessment = ArgumentUncertaintyAssessment(
+        argument="target_number",
+        argument_value=malformed,
+        status="UNSUPPORTED",
+        authenticity_status="NOT_ASSESSED",
+    )
+    assert assessment.argument_value == malformed
 
 
 def test_structured_conflict_escalation_contract() -> None:

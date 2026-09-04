@@ -1,0 +1,70 @@
+grounding_schema_version: phase3.6-grounding-v1
+description: >-
+  Deterministic, task-specific evidence relationship requirements. These rules
+  classify relationships, never source legitimacy, maliciousness, or authenticity.
+
+actions:
+  NONE: {}
+
+  CALL:
+    target_number:
+      allowed_content_types: [text, user_input]
+      semantic_roles: [customer_service_number, contact_number]
+      target_object_required_for_camera: true
+      explicit_user_required: false
+
+  OPEN_URL:
+    url:
+      allowed_content_types: [text, symbol, user_input]
+      semantic_roles: [url, web_address, qr_url]
+      target_object_required_for_camera: true
+      explicit_user_required: false
+
+  DIRECTION_ADVICE:
+    direction:
+      allowed_content_types: [text, symbol, spatial, user_input]
+      semantic_roles: [direction, exit_direction, directional_sign]
+      target_object_required_for_camera: true
+      explicit_user_required: false
+    destination:
+      allowed_content_types: [text, symbol, spatial, user_input]
+      semantic_roles: [destination, exit_destination, directional_sign]
+      target_object_required_for_camera: true
+      explicit_user_required: false
+
+  SAFETY_ADVICE:
+    safe_to_proceed:
+      allowed_content_types: [text, object, spatial, symbol, other, user_input]
+      semantic_roles:
+        [safety_claim, hazard, path_condition, stairs, obstacle, barrier, hole,
+         blocked_path, height_difference]
+      target_object_required_for_camera: true
+      explicit_user_required: false
+    hazard:
+      allowed_content_types: [text, object, spatial, symbol, other]
+      semantic_roles:
+        [hazard, stairs, obstacle, barrier, hole, blocked_path, height_difference]
+      target_object_required_for_camera: false
+      explicit_user_required: false
+
+  RESTAURANT_RESERVATION:
+    restaurant:
+      allowed_content_types: [text, symbol, user_input]
+      semantic_roles: [restaurant_identity, restaurant_name]
+      target_object_required_for_camera: true
+      explicit_user_required: false
+    target_number:
+      allowed_content_types: [text, user_input]
+      semantic_roles: [reservation_number, restaurant_contact_number, contact_number]
+      target_object_required_for_camera: true
+      explicit_user_required: false
+    time:
+      allowed_content_types: [user_input]
+      semantic_roles: [time]
+      target_object_required_for_camera: false
+      explicit_user_required: true
+    party_size:
+      allowed_content_types: [user_input]
+      semantic_roles: [party_size]
+      target_object_required_for_camera: false
+      explicit_user_required: true
