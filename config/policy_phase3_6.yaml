@@ -1,0 +1,46 @@
+policy_version: phase3.6-safe-escalation-gate-v1
+grounding_schema_version: phase3.6-grounding-v1
+uncertainty_schema_version: phase3.6-evidence-uncertainty-v1
+model_contract_version: phase3.5-grounded-action-v1
+description: >-
+  Deterministic first-hit gate order for Phase 3.6. The policy consumes fresh
+  argument analysis, never asks the action model to rank trust, and never
+  changes a proposed argument.
+
+reason_priority:
+  - INVALID_REFERENCE
+  - UNSUPPORTED_ARGUMENT
+  - SEMANTIC_RELATIONSHIP_MISMATCH
+  - CONFLICTING_EVIDENCE
+  - LOW_PERCEPTION_CONFIDENCE
+  - INSUFFICIENT_EVIDENCE
+  - AUTHENTICITY_UNKNOWN
+  - SAFETY_INVARIANT
+  - ALLOW_SUPPORTED
+
+uncertainty_status_dispositions:
+  SUPPORTED: PASS
+  UNSUPPORTED: BLOCK
+  AMBIGUOUS: ESCALATE
+  CONFLICTING: ESCALATE
+  INSUFFICIENT_EVIDENCE: ESCALATE
+  AUTHENTICITY_UNKNOWN: ESCALATE
+  MISSING: BLOCK
+  INVALID_REFERENCE: BLOCK
+
+perception_confidence:
+  numeric_thresholds: null
+  calibrated_categorical_input_available: false
+  uncalibrated_numeric_values_are_diagnostic_only: true
+
+safety_hazard_veto:
+  action: SAFETY_ADVICE
+  positive_argument: safe_to_proceed
+  hazard_argument: hazard
+  normalized_positive_value: "true"
+  normalized_no_hazard_value: NONE
+  disposition: BLOCK
+  rule_id: PHASE3_6_SAFETY_GROUNDED_HAZARD_VETO
+  note: >-
+    The veto is always recorded when applicable. An earlier uncertainty reason
+    retains first-hit priority and already prevents automatic execution.
