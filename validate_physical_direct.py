@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 import subprocess
 
-from benchmark_physical_direct import MODEL_IDS, SMOKE_ROOT, validate_provider
+from benchmark_physical_direct import MODEL_IDS, SMOKE_ROOT, smoke_root, validate_provider
 from cloud_baseline_store import read_json, write_index
 from physical_direct_inputs import (
     BASELINE_HEAD, INPUT_MANIFEST, RESULT_ROOT, ROOT, inspect_archive, load_manifest,
@@ -15,11 +15,16 @@ from physical_direct_inputs import (
 def validate_all() -> dict:
     load_manifest()
     inspect_archive(ROOT / "TestData.zip")
+    diagnostic = validate_provider(SMOKE_ROOT, "openai")
+    if diagnostic["recorded_trials"] != 1 or diagnostic["completed_trials"] != 0:
+        raise ValueError("Unexpected compatibility diagnostic responses")
     identities = set()
     result = {}
     for run_type, root, expected in (("full", RESULT_ROOT, 270), ("smoke", SMOKE_ROOT, 20)):
-        models = {alias: validate_provider(root, alias, require_complete=True) for alias in MODEL_IDS}
-        records = [read_json(p) for p in (root / "records").glob("*/*/*.json")]
+        roots = {a: smoke_root(a) if run_type == "smoke" else root for a in MODEL_IDS}
+        models = {a: validate_provider(roots[a], a, require_complete=True) for a in MODEL_IDS}
+        records = [read_json(p) for a in MODEL_IDS
+                   for p in (roots[a] / "records" / a).glob("*/*.json")]
         if len(records) != expected:
             raise ValueError("Incorrect full/smoke trial count")
         for row in records:
@@ -38,6 +43,10 @@ def validate_all() -> dict:
     return {"valid": True, "input_manifest": str(INPUT_MANIFEST.relative_to(ROOT)),
             "unique_identities": len(identities), "historical_files_unchanged": True,
             "raw_response_and_normalization_replay": "PASS", "results": result,
+            "additional_api_compatibility_diagnostic": {
+                "recorded_requests": 1, "model_responses": 0,
+                "path": str((SMOKE_ROOT / "raw/openai/direct/IMG_3483.jpeg.json").relative_to(ROOT)),
+                "included_in_full_or_active_smoke": False},
             "ground_truth_frozen": False, "scientific_correctness_scoring": "NOT PERFORMED",
             "oracle_started": False, "automatic_started": False, "gate_evaluated": False}
 

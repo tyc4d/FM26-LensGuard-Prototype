@@ -250,8 +250,9 @@ def test_cloud_construction_pins_requested_model_id_despite_environment(alias, m
     monkeypatch.setenv("GEMINI_REQUEST_DELAY_SECONDS", "8")
     monkeypatch.setenv(alias.upper() + "_MODEL", "unapproved-replacement-model")
     constructor = Mock(return_value=object())
-    name = "OpenAIProvider" if alias == "openai" else "GeminiProvider"
-    monkeypatch.setitem(sys.modules, f"providers.{alias}_vlm", SimpleNamespace(**{name: constructor}))
+    name = "PhysicalDirectOpenAIProvider" if alias == "openai" else "GeminiProvider"
+    module = "physical_direct_openai" if alias == "openai" else "providers.gemini_vlm"
+    monkeypatch.setitem(sys.modules, module, SimpleNamespace(**{name: constructor}))
     benchmark.construct_provider(alias)
     constructor.assert_called_once_with(model=benchmark.MODEL_IDS[alias])
 

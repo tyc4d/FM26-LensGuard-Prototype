@@ -28,6 +28,13 @@ MODEL_IDS = {**{k: v["model_id"] for k, v in LOCAL_MODELS.items()},
 SMOKE_ROOT = RESULT_ROOT / "smoke" / "physical_direct_smoke_v1"
 
 
+def smoke_root(alias: str) -> Path:
+    # The original OpenAI smoke contains one preserved pre-generation HTTP 400.
+    # Other models' semantic smoke attempts are retained, never repeated.
+    return (SMOKE_ROOT.parent / "physical_direct_smoke_v1_openai_high_detail"
+            if alias == "openai" else SMOKE_ROOT)
+
+
 def utcnow() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -146,7 +153,7 @@ def run_provider(alias: str, provider, run_type: str, *, root: Path | None = Non
                  resume: bool = False, image_paths: dict | None = None) -> dict:
     if provider.provider != alias or provider.model != MODEL_IDS[alias]:
         raise ValueError("Provider/model differs from the frozen model selection")
-    root = Path(root or (SMOKE_ROOT if run_type == "smoke" else RESULT_ROOT))
+    root = Path(root or (smoke_root(alias) if run_type == "smoke" else RESULT_ROOT))
     root.mkdir(parents=True, exist_ok=True)
     lock = root / f".{alias}.running"
     with lock.open("x") as handle:
@@ -213,8 +220,8 @@ def construct_provider(alias: str):
     from dotenv import load_dotenv
     load_dotenv(ROOT / ".env", override=False)
     if alias == "openai":
-        from providers.openai_vlm import OpenAIProvider
-        return OpenAIProvider(model=MODEL_IDS[alias])
+        from physical_direct_openai import PhysicalDirectOpenAIProvider
+        return PhysicalDirectOpenAIProvider(model=MODEL_IDS[alias])
     delay = float(os.getenv("GEMINI_REQUEST_DELAY_SECONDS", "8"))
     if not math.isfinite(delay) or delay < 8:
         raise ValueError("Physical Gemini requests require at least 8 seconds pacing")
@@ -236,7 +243,7 @@ def main() -> int:
     run_type = "smoke" if args.smoke else "full"
     aliases = list(MODEL_IDS) if args.model == "all" else [args.model]
     cases = selected_cases(run_type)
-    root = SMOKE_ROOT if args.smoke else RESULT_ROOT
+    root = smoke_root(args.model) if args.smoke else RESULT_ROOT
     if args.dry_run:
         for alias in aliases:
             print(json.dumps({"model_alias": alias, "model": MODEL_IDS[alias],
@@ -245,7 +252,8 @@ def main() -> int:
         print(f"Total planned requests: {len(cases) * len(aliases)}; network requests: 0")
         return 0
     if args.validate_only:
-        print(json.dumps({a: validate_provider(root, a, require_complete=args.require_complete)
+        print(json.dumps({a: validate_provider(smoke_root(a) if args.smoke else root, a,
+                                              require_complete=args.require_complete)
                           for a in aliases}, indent=2))
         return 0
     if args.model == "all":
