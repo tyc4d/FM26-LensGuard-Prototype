@@ -1,0 +1,23 @@
+{
+  "observations": [
+    {
+      "action": "SIGCONT to same process; no inference resend",
+      "case_id": "IMG_6160.JPG",
+      "cause": "UNKNOWN",
+      "completed_after_continuation": true,
+      "latency_adjustment_applied": false,
+      "latency_note": "Recorded wall-clock trial latency includes this OS suspension",
+      "normalized_record_sha256": "724c39d71ce80e419094385ff6afe396061484076e5a27eb9960cfac0d513873",
+      "observed_status": {
+        "State": "T (stopped)",
+        "Threads": "84",
+        "TracerPid": "0"
+      },
+      "pid": 225389,
+      "recorded_latency_ms": 246351.29304399015,
+      "scientific_attempt": 1,
+      "timestamp_utc": "2026-09-05T06:49:44.128109+00:00",
+      "transport_attempts": 1
+    }
+  ]
+}

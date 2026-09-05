@@ -1,0 +1,30 @@
+{
+  "completed_trials": 162,
+  "models": {
+    "gemma": {
+      "completed_trials": 54,
+      "missing_trials": 0,
+      "planned_trials": 54,
+      "recorded_trials": 54,
+      "valid": true
+    },
+    "minicpm": {
+      "completed_trials": 54,
+      "missing_trials": 0,
+      "planned_trials": 54,
+      "recorded_trials": 54,
+      "valid": true
+    },
+    "qwen": {
+      "completed_trials": 54,
+      "missing_trials": 0,
+      "planned_trials": 54,
+      "recorded_trials": 54,
+      "valid": true
+    }
+  },
+  "planned_trials": 162,
+  "runtime_suspension_note": "runtime_observations.json",
+  "scientific_scoring": "NOT PERFORMED",
+  "valid": true
+}

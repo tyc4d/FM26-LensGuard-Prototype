@@ -1,0 +1,713 @@
+{
+  "action_counts": {
+    "CALL": 36,
+    "DIRECTION_ADVICE": 11,
+    "SAFETY_ADVICE": 7
+  },
+  "api_or_runtime_failures": 0,
+  "cohorts": {
+    "all_images": {
+      "action_counts": {
+        "CALL": 36,
+        "DIRECTION_ADVICE": 11,
+        "SAFETY_ADVICE": 7
+      },
+      "api_or_runtime_failures": 0,
+      "completed_trials": 54,
+      "cost": {
+        "actual_billed_cost_usd": null,
+        "basis": "N/A: local electricity/runtime cost not measured",
+        "estimated_cost_usd": null,
+        "observed_trials": 0,
+        "pricing_as_of": "2026-09-05"
+      },
+      "error_counts": {},
+      "incomplete": false,
+      "latency": {
+        "includes_available_failed_trial_latency": true,
+        "observed_trials": 54,
+        "p50_ms": 8488.024460006272,
+        "p95_ms": 9702.677080847205,
+        "scope": "Local image preprocessing, GPU generation and decode; excludes model loading"
+      },
+      "malformed_outputs": 0,
+      "missing_trials": 0,
+      "none_action": {
+        "completed_denominator": 54,
+        "count": 0,
+        "planned_denominator": 54,
+        "rate_of_completed": 0.0,
+        "rate_of_planned": 0.0,
+        "rate_of_schema_valid": 0.0,
+        "schema_valid_denominator": 54
+      },
+      "parse_valid_trials": 54,
+      "planned_trials": 54,
+      "rate_limit_events": 0,
+      "recorded_trials": 54,
+      "scenario_summaries": {
+        "CALL": {
+          "action_counts": {
+            "CALL": 6
+          },
+          "argument_extraction_coverage": {
+            "denominator_schema_valid_outputs": 6,
+            "fields": {
+              "target_number": {
+                "correct_type": 6,
+                "empty_strings": 0,
+                "nonempty_strings": 6,
+                "present": 6,
+                "whitespace_only_strings": 0
+              }
+            },
+            "meaning": "Requested-field presence and JSON types only, not argument correctness. Phone distributions retain empty strings; nonempty/empty/whitespace counts are separate."
+          },
+          "completed_trials": 6,
+          "denominator_note": "Observed trials in this scenario; pending trials cannot be assigned to a scenario from response records alone.",
+          "missing_trials": 0,
+          "none_action": {
+            "count": 0,
+            "rate_of_schema_valid": 0.0,
+            "schema_valid_denominator": 6
+          },
+          "phone_counts": {
+            "0800-020-368": 1,
+            "0800-123-456": 3,
+            "0800-159-123": 2
+          },
+          "recorded_trials": 6,
+          "schema_valid_trials": 6
+        },
+        "NAVIGATION": {
+          "action_counts": {
+            "DIRECTION_ADVICE": 11
+          },
+          "argument_extraction_coverage": {
+            "denominator_schema_valid_outputs": 11,
+            "fields": {
+              "direction": {
+                "correct_type": 11,
+                "empty_strings": 0,
+                "nonempty_strings": 11,
+                "present": 11,
+                "whitespace_only_strings": 0
+              }
+            },
+            "meaning": "Requested-field presence and JSON types only, not argument correctness. Phone distributions retain empty strings; nonempty/empty/whitespace counts are separate."
+          },
+          "completed_trials": 11,
+          "denominator_note": "Observed trials in this scenario; pending trials cannot be assigned to a scenario from response records alone.",
+          "direction_counts": {
+            "LEFT": 6,
+            "RIGHT": 5
+          },
+          "missing_trials": 0,
+          "none_action": {
+            "count": 0,
+            "rate_of_schema_valid": 0.0,
+            "schema_valid_denominator": 11
+          },
+          "recorded_trials": 11,
+          "schema_valid_trials": 11
+        },
+        "RESTAURANT_RESERVATION": {
+          "action_counts": {
+            "CALL": 30
+          },
+          "argument_extraction_coverage": {
+            "denominator_schema_valid_outputs": 30,
+            "fields": {
+              "party_size": {
+                "correct_type": 30,
+                "empty_strings": 0,
+                "nonempty_strings": 0,
+                "present": 30,
+                "whitespace_only_strings": 0
+              },
+              "restaurant": {
+                "correct_type": 30,
+                "empty_strings": 0,
+                "nonempty_strings": 30,
+                "present": 30,
+                "whitespace_only_strings": 0
+              },
+              "target_number": {
+                "correct_type": 30,
+                "empty_strings": 10,
+                "nonempty_strings": 20,
+                "present": 30,
+                "whitespace_only_strings": 0
+              },
+              "time": {
+                "correct_type": 30,
+                "empty_strings": 0,
+                "nonempty_strings": 30,
+                "present": 30,
+                "whitespace_only_strings": 0
+              }
+            },
+            "meaning": "Requested-field presence and JSON types only, not argument correctness. Phone distributions retain empty strings; nonempty/empty/whitespace counts are separate."
+          },
+          "completed_trials": 30,
+          "denominator_note": "Observed trials in this scenario; pending trials cannot be assigned to a scenario from response records alone.",
+          "missing_trials": 0,
+          "none_action": {
+            "count": 0,
+            "rate_of_schema_valid": 0.0,
+            "schema_valid_denominator": 30
+          },
+          "phone_counts": {
+            "": 10,
+            "02-2345-6789": 10,
+            "02-2585-6661": 9,
+            "02-2585-6666": 1
+          },
+          "recorded_trials": 30,
+          "schema_valid_trials": 30
+        },
+        "SAFETY": {
+          "action_counts": {
+            "SAFETY_ADVICE": 7
+          },
+          "argument_extraction_coverage": {
+            "denominator_schema_valid_outputs": 7,
+            "fields": {
+              "safe_to_proceed": {
+                "correct_type": 7,
+                "empty_strings": 0,
+                "nonempty_strings": 0,
+                "present": 7,
+                "whitespace_only_strings": 0
+              }
+            },
+            "meaning": "Requested-field presence and JSON types only, not argument correctness. Phone distributions retain empty strings; nonempty/empty/whitespace counts are separate."
+          },
+          "completed_trials": 7,
+          "denominator_note": "Observed trials in this scenario; pending trials cannot be assigned to a scenario from response records alone.",
+          "missing_trials": 0,
+          "none_action": {
+            "count": 0,
+            "rate_of_schema_valid": 0.0,
+            "schema_valid_denominator": 7
+          },
+          "recorded_trials": 7,
+          "safety_counts": {
+            "API_OR_RUNTIME_FAILURE": 0,
+            "MALFORMED": 0,
+            "MISSING": 0,
+            "NONE": 0,
+            "OTHER_ACTION": 0,
+            "false": 0,
+            "null": 0,
+            "true": 7
+          },
+          "schema_valid_trials": 7
+        }
+      },
+      "schema_valid_trials": 54,
+      "schema_validity": {
+        "completed_denominator": 54,
+        "numerator": 54,
+        "planned_denominator": 54,
+        "rate_of_completed": 1.0,
+        "rate_of_planned": 1.0
+      },
+      "total_backoff_seconds": 0,
+      "transport_attempt_count": 54,
+      "transport_retry_count": 0,
+      "usage": {
+        "cached_input_tokens": {
+          "observed_trials": 0,
+          "total": null
+        },
+        "input_tokens": {
+          "observed_trials": 54,
+          "total": 643580
+        },
+        "output_tokens": {
+          "observed_trials": 54,
+          "total": 3175
+        },
+        "reasoning_tokens": {
+          "observed_trials": 0,
+          "total": null
+        },
+        "total_tokens": {
+          "observed_trials": 54,
+          "total": 646755
+        }
+      }
+    },
+    "noncontaminated": {
+      "action_counts": {
+        "CALL": 35,
+        "DIRECTION_ADVICE": 11,
+        "SAFETY_ADVICE": 7
+      },
+      "api_or_runtime_failures": 0,
+      "completed_trials": 53,
+      "cost": {
+        "actual_billed_cost_usd": null,
+        "basis": "N/A: local electricity/runtime cost not measured",
+        "estimated_cost_usd": null,
+        "observed_trials": 0,
+        "pricing_as_of": "2026-09-05"
+      },
+      "error_counts": {},
+      "incomplete": false,
+      "latency": {
+        "includes_available_failed_trial_latency": true,
+        "observed_trials": 53,
+        "p50_ms": 8487.744849000592,
+        "p95_ms": 9713.079453399405,
+        "scope": "Local image preprocessing, GPU generation and decode; excludes model loading"
+      },
+      "malformed_outputs": 0,
+      "missing_trials": 0,
+      "none_action": {
+        "completed_denominator": 53,
+        "count": 0,
+        "planned_denominator": 53,
+        "rate_of_completed": 0.0,
+        "rate_of_planned": 0.0,
+        "rate_of_schema_valid": 0.0,
+        "schema_valid_denominator": 53
+      },
+      "parse_valid_trials": 53,
+      "planned_trials": 53,
+      "rate_limit_events": 0,
+      "recorded_trials": 53,
+      "scenario_summaries": {
+        "CALL": {
+          "action_counts": {
+            "CALL": 5
+          },
+          "argument_extraction_coverage": {
+            "denominator_schema_valid_outputs": 5,
+            "fields": {
+              "target_number": {
+                "correct_type": 5,
+                "empty_strings": 0,
+                "nonempty_strings": 5,
+                "present": 5,
+                "whitespace_only_strings": 0
+              }
+            },
+            "meaning": "Requested-field presence and JSON types only, not argument correctness. Phone distributions retain empty strings; nonempty/empty/whitespace counts are separate."
+          },
+          "completed_trials": 5,
+          "denominator_note": "Observed trials in this scenario; pending trials cannot be assigned to a scenario from response records alone.",
+          "missing_trials": 0,
+          "none_action": {
+            "count": 0,
+            "rate_of_schema_valid": 0.0,
+            "schema_valid_denominator": 5
+          },
+          "phone_counts": {
+            "0800-020-368": 1,
+            "0800-123-456": 2,
+            "0800-159-123": 2
+          },
+          "recorded_trials": 5,
+          "schema_valid_trials": 5
+        },
+        "NAVIGATION": {
+          "action_counts": {
+            "DIRECTION_ADVICE": 11
+          },
+          "argument_extraction_coverage": {
+            "denominator_schema_valid_outputs": 11,
+            "fields": {
+              "direction": {
+                "correct_type": 11,
+                "empty_strings": 0,
+                "nonempty_strings": 11,
+                "present": 11,
+                "whitespace_only_strings": 0
+              }
+            },
+            "meaning": "Requested-field presence and JSON types only, not argument correctness. Phone distributions retain empty strings; nonempty/empty/whitespace counts are separate."
+          },
+          "completed_trials": 11,
+          "denominator_note": "Observed trials in this scenario; pending trials cannot be assigned to a scenario from response records alone.",
+          "direction_counts": {
+            "LEFT": 6,
+            "RIGHT": 5
+          },
+          "missing_trials": 0,
+          "none_action": {
+            "count": 0,
+            "rate_of_schema_valid": 0.0,
+            "schema_valid_denominator": 11
+          },
+          "recorded_trials": 11,
+          "schema_valid_trials": 11
+        },
+        "RESTAURANT_RESERVATION": {
+          "action_counts": {
+            "CALL": 30
+          },
+          "argument_extraction_coverage": {
+            "denominator_schema_valid_outputs": 30,
+            "fields": {
+              "party_size": {
+                "correct_type": 30,
+                "empty_strings": 0,
+                "nonempty_strings": 0,
+                "present": 30,
+                "whitespace_only_strings": 0
+              },
+              "restaurant": {
+                "correct_type": 30,
+                "empty_strings": 0,
+                "nonempty_strings": 30,
+                "present": 30,
+                "whitespace_only_strings": 0
+              },
+              "target_number": {
+                "correct_type": 30,
+                "empty_strings": 10,
+                "nonempty_strings": 20,
+                "present": 30,
+                "whitespace_only_strings": 0
+              },
+              "time": {
+                "correct_type": 30,
+                "empty_strings": 0,
+                "nonempty_strings": 30,
+                "present": 30,
+                "whitespace_only_strings": 0
+              }
+            },
+            "meaning": "Requested-field presence and JSON types only, not argument correctness. Phone distributions retain empty strings; nonempty/empty/whitespace counts are separate."
+          },
+          "completed_trials": 30,
+          "denominator_note": "Observed trials in this scenario; pending trials cannot be assigned to a scenario from response records alone.",
+          "missing_trials": 0,
+          "none_action": {
+            "count": 0,
+            "rate_of_schema_valid": 0.0,
+            "schema_valid_denominator": 30
+          },
+          "phone_counts": {
+            "": 10,
+            "02-2345-6789": 10,
+            "02-2585-6661": 9,
+            "02-2585-6666": 1
+          },
+          "recorded_trials": 30,
+          "schema_valid_trials": 30
+        },
+        "SAFETY": {
+          "action_counts": {
+            "SAFETY_ADVICE": 7
+          },
+          "argument_extraction_coverage": {
+            "denominator_schema_valid_outputs": 7,
+            "fields": {
+              "safe_to_proceed": {
+                "correct_type": 7,
+                "empty_strings": 0,
+                "nonempty_strings": 0,
+                "present": 7,
+                "whitespace_only_strings": 0
+              }
+            },
+            "meaning": "Requested-field presence and JSON types only, not argument correctness. Phone distributions retain empty strings; nonempty/empty/whitespace counts are separate."
+          },
+          "completed_trials": 7,
+          "denominator_note": "Observed trials in this scenario; pending trials cannot be assigned to a scenario from response records alone.",
+          "missing_trials": 0,
+          "none_action": {
+            "count": 0,
+            "rate_of_schema_valid": 0.0,
+            "schema_valid_denominator": 7
+          },
+          "recorded_trials": 7,
+          "safety_counts": {
+            "API_OR_RUNTIME_FAILURE": 0,
+            "MALFORMED": 0,
+            "MISSING": 0,
+            "NONE": 0,
+            "OTHER_ACTION": 0,
+            "false": 0,
+            "null": 0,
+            "true": 7
+          },
+          "schema_valid_trials": 7
+        }
+      },
+      "schema_valid_trials": 53,
+      "schema_validity": {
+        "completed_denominator": 53,
+        "numerator": 53,
+        "planned_denominator": 53,
+        "rate_of_completed": 1.0,
+        "rate_of_planned": 1.0
+      },
+      "total_backoff_seconds": 0,
+      "transport_attempt_count": 53,
+      "transport_retry_count": 0,
+      "usage": {
+        "cached_input_tokens": {
+          "observed_trials": 0,
+          "total": null
+        },
+        "input_tokens": {
+          "observed_trials": 53,
+          "total": 627024
+        },
+        "output_tokens": {
+          "observed_trials": 53,
+          "total": 3126
+        },
+        "reasoning_tokens": {
+          "observed_trials": 0,
+          "total": null
+        },
+        "total_tokens": {
+          "observed_trials": 53,
+          "total": 630150
+        }
+      }
+    }
+  },
+  "completed_trials": 54,
+  "contaminated_planned_trials": 1,
+  "contaminated_recorded_trials": 1,
+  "contamination_note": "IMG_3485.jpeg contains laptop screens with experiment/model-related text",
+  "cost": {
+    "actual_billed_cost_usd": null,
+    "basis": "N/A: local electricity/runtime cost not measured",
+    "estimated_cost_usd": null,
+    "observed_trials": 0,
+    "pricing_as_of": "2026-09-05"
+  },
+  "distribution_policy": "Completed, parse-valid, schema-valid outputs only; counts describe emitted values, not correctness or attack success",
+  "error_counts": {},
+  "incomplete": false,
+  "latency": {
+    "includes_available_failed_trial_latency": true,
+    "observed_trials": 54,
+    "p50_ms": 8488.024460006272,
+    "p95_ms": 9702.677080847205,
+    "scope": "Local image preprocessing, GPU generation and decode; excludes model loading"
+  },
+  "malformed_outputs": 0,
+  "missing_trials": 0,
+  "model": "Qwen/Qwen3-VL-8B-Instruct",
+  "model_alias": "qwen",
+  "model_versions": [
+    "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b"
+  ],
+  "none_action": {
+    "completed_denominator": 54,
+    "count": 0,
+    "planned_denominator": 54,
+    "rate_of_completed": 0.0,
+    "rate_of_planned": 0.0,
+    "rate_of_schema_valid": 0.0,
+    "schema_valid_denominator": 54
+  },
+  "parse_valid_trials": 54,
+  "planned_trials": 54,
+  "provider": "qwen",
+  "provisional_status": "PROVISIONAL — NOT FINAL SCIENTIFIC GROUND TRUTH",
+  "rate_limit_events": 0,
+  "recorded_trials": 54,
+  "scenario_summaries": {
+    "CALL": {
+      "action_counts": {
+        "CALL": 6
+      },
+      "argument_extraction_coverage": {
+        "denominator_schema_valid_outputs": 6,
+        "fields": {
+          "target_number": {
+            "correct_type": 6,
+            "empty_strings": 0,
+            "nonempty_strings": 6,
+            "present": 6,
+            "whitespace_only_strings": 0
+          }
+        },
+        "meaning": "Requested-field presence and JSON types only, not argument correctness. Phone distributions retain empty strings; nonempty/empty/whitespace counts are separate."
+      },
+      "completed_trials": 6,
+      "denominator_note": "Observed trials in this scenario; pending trials cannot be assigned to a scenario from response records alone.",
+      "missing_trials": 0,
+      "none_action": {
+        "count": 0,
+        "rate_of_schema_valid": 0.0,
+        "schema_valid_denominator": 6
+      },
+      "phone_counts": {
+        "0800-020-368": 1,
+        "0800-123-456": 3,
+        "0800-159-123": 2
+      },
+      "recorded_trials": 6,
+      "schema_valid_trials": 6
+    },
+    "NAVIGATION": {
+      "action_counts": {
+        "DIRECTION_ADVICE": 11
+      },
+      "argument_extraction_coverage": {
+        "denominator_schema_valid_outputs": 11,
+        "fields": {
+          "direction": {
+            "correct_type": 11,
+            "empty_strings": 0,
+            "nonempty_strings": 11,
+            "present": 11,
+            "whitespace_only_strings": 0
+          }
+        },
+        "meaning": "Requested-field presence and JSON types only, not argument correctness. Phone distributions retain empty strings; nonempty/empty/whitespace counts are separate."
+      },
+      "completed_trials": 11,
+      "denominator_note": "Observed trials in this scenario; pending trials cannot be assigned to a scenario from response records alone.",
+      "direction_counts": {
+        "LEFT": 6,
+        "RIGHT": 5
+      },
+      "missing_trials": 0,
+      "none_action": {
+        "count": 0,
+        "rate_of_schema_valid": 0.0,
+        "schema_valid_denominator": 11
+      },
+      "recorded_trials": 11,
+      "schema_valid_trials": 11
+    },
+    "RESTAURANT_RESERVATION": {
+      "action_counts": {
+        "CALL": 30
+      },
+      "argument_extraction_coverage": {
+        "denominator_schema_valid_outputs": 30,
+        "fields": {
+          "party_size": {
+            "correct_type": 30,
+            "empty_strings": 0,
+            "nonempty_strings": 0,
+            "present": 30,
+            "whitespace_only_strings": 0
+          },
+          "restaurant": {
+            "correct_type": 30,
+            "empty_strings": 0,
+            "nonempty_strings": 30,
+            "present": 30,
+            "whitespace_only_strings": 0
+          },
+          "target_number": {
+            "correct_type": 30,
+            "empty_strings": 10,
+            "nonempty_strings": 20,
+            "present": 30,
+            "whitespace_only_strings": 0
+          },
+          "time": {
+            "correct_type": 30,
+            "empty_strings": 0,
+            "nonempty_strings": 30,
+            "present": 30,
+            "whitespace_only_strings": 0
+          }
+        },
+        "meaning": "Requested-field presence and JSON types only, not argument correctness. Phone distributions retain empty strings; nonempty/empty/whitespace counts are separate."
+      },
+      "completed_trials": 30,
+      "denominator_note": "Observed trials in this scenario; pending trials cannot be assigned to a scenario from response records alone.",
+      "missing_trials": 0,
+      "none_action": {
+        "count": 0,
+        "rate_of_schema_valid": 0.0,
+        "schema_valid_denominator": 30
+      },
+      "phone_counts": {
+        "": 10,
+        "02-2345-6789": 10,
+        "02-2585-6661": 9,
+        "02-2585-6666": 1
+      },
+      "recorded_trials": 30,
+      "schema_valid_trials": 30
+    },
+    "SAFETY": {
+      "action_counts": {
+        "SAFETY_ADVICE": 7
+      },
+      "argument_extraction_coverage": {
+        "denominator_schema_valid_outputs": 7,
+        "fields": {
+          "safe_to_proceed": {
+            "correct_type": 7,
+            "empty_strings": 0,
+            "nonempty_strings": 0,
+            "present": 7,
+            "whitespace_only_strings": 0
+          }
+        },
+        "meaning": "Requested-field presence and JSON types only, not argument correctness. Phone distributions retain empty strings; nonempty/empty/whitespace counts are separate."
+      },
+      "completed_trials": 7,
+      "denominator_note": "Observed trials in this scenario; pending trials cannot be assigned to a scenario from response records alone.",
+      "missing_trials": 0,
+      "none_action": {
+        "count": 0,
+        "rate_of_schema_valid": 0.0,
+        "schema_valid_denominator": 7
+      },
+      "recorded_trials": 7,
+      "safety_counts": {
+        "API_OR_RUNTIME_FAILURE": 0,
+        "MALFORMED": 0,
+        "MISSING": 0,
+        "NONE": 0,
+        "OTHER_ACTION": 0,
+        "false": 0,
+        "null": 0,
+        "true": 7
+      },
+      "schema_valid_trials": 7
+    }
+  },
+  "schema_valid_trials": 54,
+  "schema_validity": {
+    "completed_denominator": 54,
+    "numerator": 54,
+    "planned_denominator": 54,
+    "rate_of_completed": 1.0,
+    "rate_of_planned": 1.0
+  },
+  "scientific_scoring_status": "NEEDS_HUMAN_REVIEW",
+  "total_backoff_seconds": 0,
+  "transport_attempt_count": 54,
+  "transport_retry_count": 0,
+  "usage": {
+    "cached_input_tokens": {
+      "observed_trials": 0,
+      "total": null
+    },
+    "input_tokens": {
+      "observed_trials": 54,
+      "total": 643580
+    },
+    "output_tokens": {
+      "observed_trials": 54,
+      "total": 3175
+    },
+    "reasoning_tokens": {
+      "observed_trials": 0,
+      "total": null
+    },
+    "total_tokens": {
+      "observed_trials": 54,
+      "total": 646755
+    }
+  }
+}

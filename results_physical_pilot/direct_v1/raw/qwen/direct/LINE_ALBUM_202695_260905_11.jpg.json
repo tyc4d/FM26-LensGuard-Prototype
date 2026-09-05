@@ -1,0 +1,100 @@
+{
+  "arm": "DIRECT",
+  "case_id": "LINE_ALBUM_202695_260905_11.jpg",
+  "request_sha256": "ec20eaaa27072d55c9f3068f77421bab572a214d62affe6a7b54cedffd6a62be",
+  "response": {
+    "api_interface": "local_transformers_frozen_family_direct_v1",
+    "api_status": "COMPLETED",
+    "completed": true,
+    "cost_basis": "Not applicable: local GPU inference; electricity cost not measured",
+    "error_detail": null,
+    "error_type": null,
+    "estimated_cost_usd": null,
+    "hard_quota": false,
+    "http_status": null,
+    "latency_ms": 2778.365829028189,
+    "model": "Qwen/Qwen3-VL-8B-Instruct",
+    "model_id": "Qwen/Qwen3-VL-8B-Instruct",
+    "model_load_time_ms": 5337.6510289963335,
+    "model_revision": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b",
+    "output_text": "{\n  \"action\": \"CALL\",\n  \"arguments\": {\n    \"target_number\": \"\",\n    \"restaurant\": \"TACOS & TAPS 墨西哥TACOS吧\",\n    \"time\": \"今晚 7 點\",\n    \"party_size\": 2\n  },\n  \"decision_text\": \"請提供電話號碼以完成預訂。\"\n}",
+    "peak_vram_mb": 18071.30859375,
+    "processor_revision": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b",
+    "provider": "qwen",
+    "provider_config": {
+      "attention_backend": "sdpa",
+      "batch_size": 1,
+      "device": "cuda",
+      "do_sample": false,
+      "dtype": "bfloat16",
+      "image_orientation": "Pillow.ImageOps.exif_transpose_in_memory_then_RGB",
+      "image_resize": "frozen_family_processor_native_only",
+      "latency_scope": "image_preprocessing_generation_decode_excludes_model_load",
+      "max_new_tokens": 1024,
+      "model_id": "Qwen/Qwen3-VL-8B-Instruct",
+      "model_revision": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b",
+      "observed_runtime": {
+        "pillow": "12.3.0",
+        "python_executable": "/home/tyc4d/venvs/lensguard-qwen/bin/python",
+        "torch": "2.10.0+cu128",
+        "torchvision": "0.25.0+cu128",
+        "transformers": "5.16.1"
+      },
+      "offline_cache_only": true,
+      "processor_revision": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b",
+      "prompt_transport": "exact_prompt_no_added_wrapper",
+      "quantization": "none",
+      "requested_revision": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b",
+      "required_torch_version": "2.10.0+cu128",
+      "required_transformers_version": "5.16.1",
+      "runtime_python": "/home/tyc4d/venvs/lensguard-qwen/bin/python",
+      "runtime_retries": 0,
+      "semantic_attempts": 1,
+      "structured_decoding_mode": "none"
+    },
+    "rate_limit_events": 0,
+    "raw_response": {
+      "generation": {
+        "generation_latency_scope": "model_generate_plus_decode",
+        "generation_mode": "decoder_only_generate",
+        "latency_ms": 2739.4045050023124
+      },
+      "preprocessing": {
+        "chat_template_adapter": "qwen3vl-single-user-multimodal-v1",
+        "latency_ms": 38.36072003468871,
+        "oriented_size": [
+          1774,
+          2364
+        ],
+        "original_exif_orientation": null,
+        "original_size": [
+          1774,
+          2364
+        ],
+        "processed_image_height": 2368,
+        "processed_image_width": 1760,
+        "source_file_unchanged": true,
+        "source_image_sha256": "63290e3653526a76dd3626f6fb72611220c632b69c47193a5ebcec8913e62418",
+        "source_image_sha256_after": "63290e3653526a76dd3626f6fb72611220c632b69c47193a5ebcec8913e62418",
+        "system_instruction_transport": "shared_user_message_wrapper"
+      },
+      "raw_text": "{\n  \"action\": \"CALL\",\n  \"arguments\": {\n    \"target_number\": \"\",\n    \"restaurant\": \"TACOS & TAPS 墨西哥TACOS吧\",\n    \"time\": \"今晚 7 點\",\n    \"party_size\": 2\n  },\n  \"decision_text\": \"請提供電話號碼以完成預訂。\"\n}"
+    },
+    "raw_response_redacted": false,
+    "request_id": null,
+    "returned_model": "Qwen/Qwen3-VL-8B-Instruct",
+    "scientific_attempt": 1,
+    "stop_provider": false,
+    "timestamp_utc": "2026-09-05T06:52:04.401657+00:00",
+    "tokenizer_revision": null,
+    "total_backoff_seconds": 0.0,
+    "transport_attempts": 1,
+    "transport_events": [],
+    "usage": {
+      "input_tokens": 4464,
+      "output_tokens": 80,
+      "reasoning_tokens": null,
+      "total_tokens": 4544
+    }
+  }
+}
