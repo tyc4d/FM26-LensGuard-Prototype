@@ -1,10 +1,11 @@
-"""Deterministic demo boundary. No fabricated semantic/region provenance."""
+"""Semantic policy: informational evidence differs from capability authority."""
 import unicodedata
 
-from firewall.action_normalizer import normalize_action
+from firewall.action_normalizer import normalize_action, normalize_phone_number, normalize_url
+from .semantics import PHONE, semantic_regions, user_intent
 from firewall.thin_gate import evaluate_thin_gate
 
-TOOL_NAMES = {'CALL': 'call_phone', 'DIRECTION_ADVICE': 'navigate', 'OPEN_URL': 'open_url', 'NONE': 'none', 'RESTAURANT_RESERVATION': 'restaurant_reservation', 'SAFETY_ADVICE': 'safety_advice'}
+TOOL_NAMES = {'CALL': 'call_phone', 'DIRECTION_ADVICE': 'provide_direction', 'OPEN_URL': 'open_url', 'NONE': 'none', 'RESTAURANT_RESERVATION': 'restaurant_reservation', 'SAFETY_ADVICE': 'safety_advice'}
 
 # Language aliases belong at the demo boundary, not in the frozen benchmark
 # normalizer. Match whole values only: "不要向右" must never become RIGHT.
@@ -50,39 +51,55 @@ def proposal(action):
     return {'tool': TOOL_NAMES[action['action']], 'arguments': {('number' if key == 'target_number' else key): value for key, value in action['arguments'].items()}}
 
 
-def authorize(action, user_request):
-    # The frozen parser validates string types, not whether a direction/target
-    # can be normalized. Check that boundary before either policy or delegation.
-    # Keep the normalized copy for the gate; retain the original for display.
-    gate_action = action
+def authorize(action, user_request, evidence=None, argument_lineage=None):
+    # Validate syntax without granting authority. Raw candidates stay available.
+    normalized = action
     if action['action'] in ('CALL', 'DIRECTION_ADVICE', 'OPEN_URL', 'NONE'):
         try:
-            gate_action = normalize_action(_action_for_policy(action))
+            normalized = normalize_action(_action_for_policy(action)).model_dump(mode='json')
         except (TypeError, ValueError) as exc:
-            raise ActionValidationError(
-                f"Invalid {action['action']} arguments: {exc}. No executable action was produced."
-            ) from exc
+            raise ActionValidationError(f"Invalid {action['action']} arguments: {exc}. No executable action was produced.") from exc
+    regions = semantic_regions(evidence)
+    intent = user_intent(user_request)
     proposed = proposal(action)
+    informational = action['action'] in ('DIRECTION_ADVICE', 'SAFETY_ADVICE', 'NONE')
     argument = 'direction' if action['action'] == 'DIRECTION_ADVICE' else next(iter(proposed['arguments']), '')
     affected = f"{proposed['tool']}.{argument}" if argument else proposed['tool']
-    # Exact, trusted task scope only; scenario IDs and VLM text never grant authority.
-    # This allows the *proposed* card number for one simulated CALL, not proof of
-    # its visual grounding/authenticity. No general natural-language delegation NLP.
-    delegated = user_request.strip() == '幫我撥打這張名片上的電話' and action['action'] == 'CALL'
-    native = None
-    if delegated:
-        result, rule = 'allow', 'DEMO_SCOPED_CARD_CALL_DELEGATION_V1'
-        reason = 'Explicit user delegation permits the proposed card number for this simulated call; visual grounding remains unverified.'
-    elif action['action'] in ('CALL', 'DIRECTION_ADVICE', 'OPEN_URL', 'NONE'):
-        native = evaluate_thin_gate(gate_action, {'action': action['action'], 'arguments': {}, 'evidence_complete': False}).model_dump(mode='json')
-        result = 'allow' if native['decision'] == 'ALLOW' else 'block'
-        rule = native['policy_rules_triggered'][0]
-        reason = native['user_message']
-        if native['decision'] != 'ALLOW':
-            reason += ' Automatic execution is blocked pending confirmation; no semantic evidence registry is available.'
-    else:
-        result, rule, reason = 'block', 'DEMO_UNSUPPORTED_POLICY_V1', 'No live authorization policy is available for this action. Execution is blocked.'
-    return {'result': result, 'rule_id': rule, 'affected_argument': affected, 'reason': reason,
-            'source_authority': 'DELEGATED' if delegated else 'OBSERVATION_ONLY',
-            'required_authority': 'EXTERNAL_ACTION_TARGET', 'native': native,
-            'delegated': delegated, 'engine': 'prototype-thin-gate-with-scoped-demo-delegation'}
+    retained = [item for item in regions if item['status'] == 'RETAIN']
+    decision = {'result': 'block', 'rule_id': 'UNSUPPORTED_USE', 'affected_argument': affected,
+        'reason': 'No supported user intent and grounded argument binding are available.',
+        'source_authority': 'NONE',
+        'required_authority': 'GROUNDED_EVIDENCE' if informational else 'USER_VALUE_OR_SCOPED_DELEGATION',
+        'native': None, 'delegated': False, 'engine': 'semantic-read-not-obey-v2',
+        'use': 'INFORMATIONAL_OUTPUT' if informational else 'SIDE_EFFECT_ARGUMENT',
+        'semantic_regions': regions, 'retained_evidence_ids': [item['id'] for item in retained],
+        'denied_instruction_ids': [item['id'] for item in regions if item['status'] == 'DENY_INSTRUCTION_INFLUENCE'],
+        'user_intent': intent, 'delegation': intent['delegation'], 'final_answer': None,
+        'resolved_action': None, 'argument_provenance': {}}
+
+    def allow(rule, reason, authority, selected=None, delegated=False):
+        decision.update(result='allow', rule_id=rule, reason=reason, source_authority=authority,
+                        delegated=delegated, resolved_action=normalized)
+        if selected:
+            decision['argument_provenance'][argument] = {**selected, 'lineage': [selected['id'], *selected['lineage']]}
+        return decision
+
+    if action['action'] == 'DIRECTION_ADVICE':
+        # Text output never reaches a capability gate. Rebuild from retained facts.
+        facts = [item for item in retained if item['grounded_claim']['predicate'] == 'exit_direction']
+        values = {item['grounded_claim']['value'] for item in facts}
+        if intent['kind'] == 'exit_location' and len(values) == 1:
+            value = next(iter(values))
+            localized = {'right': '右邊', 'left': '左邊', 'straight': '前方', 'back': '後方'}[value]
+            allow('GROUNDED_INFORMATIONAL_OUTPUT', 'Grounded exit observation retained; embedded instructions have no answer authority.', 'EVIDENCE', facts[0])
+            decision['final_answer'] = {'text': f'出口在{localized}。', 'value': value,
+                'grounded_claim': {'predicate': 'exit_direction', 'value': value},
+                'evidence_ids': [item['id'] for item in facts]}
+            decision['resolved_action'] = {'action': 'DIRECTION_ADVICE', 'arguments': {'destination': '出口', 'direction': value.upper()}}
+        else:
+            decision.update(rule_id='INSUFFICIENT_OR_CONFLICTING_OBSERVATIONS', reason='A supported exit question and one consistent grounded exit direction are required; no direction was invented.')
+        return decision
+    if action['action'] == 'NONE':
+        return allow('NO_CAPABILITY_REQUESTED', 'No side-effecting capability requested.', 'NONE')
+    # Side effects require scoped argument authorization, added separately.
+    return decision

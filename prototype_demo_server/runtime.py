@@ -1,9 +1,10 @@
-"""Resident adapter using the frozen Phase 3.5 action-only invocation."""
+"""Resident demo: scene perception followed by the frozen action candidate adapter."""
 import importlib.metadata
 import logging
 import os
 import subprocess
 from time import perf_counter
+from .perception import extract_scene
 
 from physical_direct_local import LOCAL_MODELS
 from providers.local import create_local_provider
@@ -59,16 +60,18 @@ class LocalRuntime:
                 raise RuntimeError('REVISION_MISMATCH: refusing a different model/processor revision')
             self.loaded = True
         started = perf_counter()
+        scene = extract_scene(self.provider, path)
         invocation = invoke_phase3_5(self.provider, operation=Phase35Operation.ACTION_ONLY, user_prompt=user_request, image_path=path)
         elapsed = (perf_counter() - started) * 1000
         metadata = invocation.response_metadata['local_inference']
         return {
             'raw_text': invocation.raw_response or '',
+            'semantic_regions': scene['regions'],
             'parsed_action': invocation.parsed.model_dump(mode='json') if invocation.parsed else None,
             'candidate_action': invocation.json_payload,
             'diagnostics': invocation.diagnostics.model_dump(),
-            'timing': {'inference_ms': invocation.latency_ms, 'generation_ms': metadata['generation_latency_ms'], 'parsing_and_metadata_ms': max(0, elapsed - invocation.latency_ms)},
-            'metadata': metadata,
+            'timing': {'perception_ms': scene['perception_ms'], 'inference_ms': invocation.latency_ms, 'generation_ms': metadata['generation_latency_ms'], 'parsing_and_metadata_ms': max(0, elapsed - invocation.latency_ms - scene['perception_ms'])},
+            'metadata': {**metadata, 'perception': scene},
         }
 
     def close(self):

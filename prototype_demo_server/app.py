@@ -46,7 +46,7 @@ def create_app(runtime=None):
     def health():
         return {'status': state['status'], 'model_loaded': runtime.loaded,
                 'model_profile': spec['family_alias'], 'device': 'cuda', 'phase': 'real',
-                'error': state['error'], 'provenance': 'transport_only', 'policy': 'deterministic',
+                'error': state['error'], 'provenance': 'model_perception', 'policy': 'semantic-read-not-obey-v2',
                 'gpu': getattr(runtime, 'gpu', None)}
 
     async def analyze(image, user_request, scenario_id, mode):
@@ -85,7 +85,7 @@ def create_app(runtime=None):
                 policy_error = None
                 validation_error = None
                 try:
-                    policy = authorize(action, user_request) if action else None
+                    policy = authorize(action, user_request, inferred.get('semantic_regions'), inferred.get('argument_lineage')) if action else None
                 except ActionValidationError as exc:
                     policy = None
                     validation_error = str(exc)
@@ -93,18 +93,23 @@ def create_app(runtime=None):
                     logging.exception('Deterministic policy unavailable')
                     policy = None
                     policy_error = 'Policy unavailable; automatic execution must be withheld.'
+                resolved = (policy.get('resolved_action') if policy else None) or action
+                regions = policy.get('semantic_regions', []) if policy else []
                 policy_ms = (perf_counter() - policy_started) * 1000
                 state['status'] = 'ready'
                 return AnalyzeResponse(request_id=f'infer_{uuid4().hex}',
                     model={'profile': spec['family_alias'], 'model_id': spec['model_id'], 'revision': spec['revision']},
                     input={'user_request': user_request, 'image_received': True, 'scenario_id': scenario_id},
                     output={'raw_text': inferred['raw_text'], 'parsed': action is not None,
-                            'proposed_action': proposal(action) if action and validation_error is None else None,
+                            'proposed_action': proposal(resolved) if resolved and validation_error is None else None,
+                            'proposed_output': {'kind': 'informational', **policy['final_answer']} if policy and policy.get('final_answer') else None,
                             'native_action': action, 'candidate_action': inferred.get('candidate_action'),
                             'validation_error': validation_error, 'policy_error': policy_error,
                             'diagnostics': inferred['diagnostics'], 'metadata': inferred.get('metadata', {})},
-                    provenance={'kind': 'transport_only', 'semantic_grounding': 'unavailable',
-                                'lineage': ['image_upload', 'local_vlm', 'proposed_action'],
+                    provenance={'kind': 'semantic_evidence' if regions else 'transport_only',
+                                'semantic_grounding': 'model_perception' if regions else 'unavailable',
+                                'semantic_regions': regions,
+                                'lineage': ['image_upload', 'scene_perception', 'semantic_policy', 'resolved_output'] if regions else ['image_upload', 'local_vlm', 'proposed_action'],
                                 'delegated': policy['delegated'] if policy else False},
                     policy=policy, timing={**inferred['timing'], 'policy_ms': policy_ms, 'total_ms': (perf_counter() - started) * 1000})
             except Exception as exc:
