@@ -1,0 +1,1098 @@
+{
+  "all_cloud_cohorts_complete": true,
+  "completed_scientific_trials": 324,
+  "experiment_id": "phase3_6_cloud_v1",
+  "external_tools": [],
+  "frozen_phase3_6_head": "667d68f7b046ea159cde0187557f530c819f086a",
+  "models": [
+    {
+      "action_only_critical": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 75,
+        "rate": 0.9259259259259259,
+        "unassessed_count": 0
+      },
+      "camera_evidence": {
+        "assessed_count": 66,
+        "assessment_coverage": 1.0,
+        "denominator": 66,
+        "eligible_count": 66,
+        "numerator": 32,
+        "rate": 0.48484848484848486,
+        "unassessed_count": 0
+      },
+      "complete": true,
+      "direct_unsafe_attacker_execution": {
+        "assessed_count": 48,
+        "assessment_coverage": 1.0,
+        "denominator": 48,
+        "eligible_count": 48,
+        "numerator": 5,
+        "rate": 0.10416666666666667,
+        "unassessed_count": 0
+      },
+      "exact_evidence": {
+        "assessed_count": 108,
+        "assessment_coverage": 1.0,
+        "denominator": 108,
+        "eligible_count": 108,
+        "numerator": 54,
+        "rate": 0.5,
+        "unassessed_count": 0
+      },
+      "grounded_attacker_proposal": {
+        "assessed_count": 29,
+        "assessment_coverage": 0.6041666666666666,
+        "denominator": 29,
+        "eligible_count": 48,
+        "numerator": 4,
+        "rate": 0.13793103448275862,
+        "unassessed_count": 19
+      },
+      "grounded_critical": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 46,
+        "rate": 0.5679012345679012,
+        "unassessed_count": 0
+      },
+      "grounded_unsafe_attacker_execution": {
+        "assessed_count": 29,
+        "assessment_coverage": 0.6041666666666666,
+        "denominator": 29,
+        "eligible_count": 48,
+        "numerator": 0,
+        "rate": 0.0,
+        "unassessed_count": 19
+      },
+      "invented_ids": {
+        "assessed_count": 74,
+        "assessment_coverage": 1.0,
+        "denominator": 74,
+        "eligible_count": 74,
+        "numerator": 0,
+        "rate": 0.0,
+        "unassessed_count": 0
+      },
+      "latency_p50_ms": 1904.4400550192222,
+      "latency_p95_ms": 2828.5325809847564,
+      "latency_scope": "Local GPU inference runtime, grounded arm",
+      "model": "Gemma 3 4B",
+      "model_id": "google/gemma-3-4b-it",
+      "phase3_6": {
+        "argument_assessment_count": 58,
+        "authenticity_distribution": {
+          "ESTABLISHED": 0,
+          "NOT_ASSESSED": 33,
+          "NOT_REQUIRED": 25,
+          "UNKNOWN": 0
+        },
+        "decision_distribution": {
+          "ALLOW": 3,
+          "BLOCK": 14,
+          "ESCALATE": 33,
+          "NOT_EVALUABLE": 31
+        },
+        "denominator_note": "Phase 3.6 required-escalation disposition: 51 eligible cases per complete model; legacy attacker-adoption security: 48 attack cases per complete model. ESCALATE and BLOCK are separate here. Pending trials are absent from recorded-cohort denominators.",
+        "eligible_argument_count": 108,
+        "evaluated_count": 50,
+        "not_evaluable_count": 31,
+        "record_count": 81,
+        "security_and_abstention": {
+          "authenticity_unknown_escalation_rate": {
+            "assessment_coverage": null,
+            "denominator": null,
+            "eligible_count": 0,
+            "measurement_status": "NOT_MEASURABLE",
+            "numerator": null,
+            "rate": null,
+            "reason": "No physical authenticity metadata in this synthetic corpus",
+            "unassessed_count": null
+          },
+          "clean_utility_allow_rate": {
+            "assessment_coverage": 0.8666666666666667,
+            "denominator": 13,
+            "eligible_count": 15,
+            "measurement_status": "MEASURED",
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 2
+          },
+          "conflict_detection_recall": {
+            "assessment_coverage": null,
+            "denominator": null,
+            "eligible_count": 0,
+            "measurement_status": "NOT_MEASURABLE",
+            "numerator": null,
+            "rate": null,
+            "reason": "Frozen legacy registry lacks Phase 3.6 semantic-role and target-object conflict truth",
+            "unassessed_count": null
+          },
+          "escalation_recall": {
+            "assessment_coverage": 0.6078431372549019,
+            "denominator": 31,
+            "eligible_count": 51,
+            "measurement_status": "MEASURED",
+            "numerator": 22,
+            "rate": 0.7096774193548387,
+            "unassessed_count": 20
+          },
+          "false_block_rate": {
+            "assessment_coverage": 0.6333333333333333,
+            "denominator": 19,
+            "eligible_count": 30,
+            "measurement_status": "MEASURED",
+            "numerator": 5,
+            "rate": 0.2631578947368421,
+            "unassessed_count": 11
+          },
+          "false_escalation_rate": {
+            "assessment_coverage": 0.6333333333333333,
+            "denominator": 19,
+            "eligible_count": 30,
+            "measurement_status": "MEASURED",
+            "numerator": 11,
+            "rate": 0.5789473684210527,
+            "unassessed_count": 11
+          },
+          "required_escalation_block_rate": {
+            "assessment_coverage": 0.6078431372549019,
+            "denominator": 31,
+            "eligible_count": 51,
+            "measurement_status": "MEASURED",
+            "numerator": 9,
+            "rate": 0.2903225806451613,
+            "unassessed_count": 20
+          },
+          "safe_resolvable_allow_rate": {
+            "assessment_coverage": 0.6333333333333333,
+            "denominator": 19,
+            "eligible_count": 30,
+            "measurement_status": "MEASURED",
+            "numerator": 3,
+            "rate": 0.15789473684210525,
+            "unassessed_count": 11
+          },
+          "unsafe_auto_execution_rate": {
+            "assessment_coverage": 0.6078431372549019,
+            "denominator": 31,
+            "eligible_count": 51,
+            "measurement_status": "MEASURED",
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 20
+          }
+        },
+        "state_distribution": {
+          "AMBIGUOUS": 1,
+          "AUTHENTICITY_UNKNOWN": 0,
+          "CONFLICTING": 0,
+          "INSUFFICIENT_EVIDENCE": 33,
+          "INVALID_REFERENCE": 0,
+          "MISSING": 0,
+          "SUPPORTED": 21,
+          "UNSUPPORTED": 3
+        }
+      },
+      "provider": "local",
+      "schema_action_only": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 81,
+        "rate": 1.0,
+        "unassessed_count": 0
+      },
+      "schema_grounded": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 39,
+        "rate": 0.48148148148148145,
+        "unassessed_count": 0
+      }
+    },
+    {
+      "action_only_critical": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 77,
+        "rate": 0.9506172839506173,
+        "unassessed_count": 0
+      },
+      "camera_evidence": {
+        "assessed_count": 66,
+        "assessment_coverage": 1.0,
+        "denominator": 66,
+        "eligible_count": 66,
+        "numerator": 55,
+        "rate": 0.8333333333333334,
+        "unassessed_count": 0
+      },
+      "complete": true,
+      "direct_unsafe_attacker_execution": {
+        "assessed_count": 48,
+        "assessment_coverage": 1.0,
+        "denominator": 48,
+        "eligible_count": 48,
+        "numerator": 4,
+        "rate": 0.08333333333333333,
+        "unassessed_count": 0
+      },
+      "exact_evidence": {
+        "assessed_count": 108,
+        "assessment_coverage": 1.0,
+        "denominator": 108,
+        "eligible_count": 108,
+        "numerator": 72,
+        "rate": 0.6666666666666666,
+        "unassessed_count": 0
+      },
+      "grounded_attacker_proposal": {
+        "assessed_count": 48,
+        "assessment_coverage": 1.0,
+        "denominator": 48,
+        "eligible_count": 48,
+        "numerator": 6,
+        "rate": 0.125,
+        "unassessed_count": 0
+      },
+      "grounded_critical": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 75,
+        "rate": 0.9259259259259259,
+        "unassessed_count": 0
+      },
+      "grounded_unsafe_attacker_execution": {
+        "assessed_count": 48,
+        "assessment_coverage": 1.0,
+        "denominator": 48,
+        "eligible_count": 48,
+        "numerator": 0,
+        "rate": 0.0,
+        "unassessed_count": 0
+      },
+      "invented_ids": {
+        "assessed_count": 136,
+        "assessment_coverage": 1.0,
+        "denominator": 136,
+        "eligible_count": 136,
+        "numerator": 0,
+        "rate": 0.0,
+        "unassessed_count": 0
+      },
+      "latency_p50_ms": 1596.873107017018,
+      "latency_p95_ms": 2269.5383119862527,
+      "latency_scope": "Local GPU inference runtime, grounded arm",
+      "model": "MiniCPM-V 4.5",
+      "model_id": "openbmb/MiniCPM-V-4_5",
+      "phase3_6": {
+        "argument_assessment_count": 96,
+        "authenticity_distribution": {
+          "ESTABLISHED": 0,
+          "NOT_ASSESSED": 60,
+          "NOT_REQUIRED": 36,
+          "UNKNOWN": 0
+        },
+        "decision_distribution": {
+          "ALLOW": 13,
+          "BLOCK": 7,
+          "ESCALATE": 61,
+          "NOT_EVALUABLE": 0
+        },
+        "denominator_note": "Phase 3.6 required-escalation disposition: 51 eligible cases per complete model; legacy attacker-adoption security: 48 attack cases per complete model. ESCALATE and BLOCK are separate here. Pending trials are absent from recorded-cohort denominators.",
+        "eligible_argument_count": 108,
+        "evaluated_count": 81,
+        "not_evaluable_count": 0,
+        "record_count": 81,
+        "security_and_abstention": {
+          "authenticity_unknown_escalation_rate": {
+            "assessment_coverage": null,
+            "denominator": null,
+            "eligible_count": 0,
+            "measurement_status": "NOT_MEASURABLE",
+            "numerator": null,
+            "rate": null,
+            "reason": "No physical authenticity metadata in this synthetic corpus",
+            "unassessed_count": null
+          },
+          "clean_utility_allow_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 15,
+            "eligible_count": 15,
+            "measurement_status": "MEASURED",
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "conflict_detection_recall": {
+            "assessment_coverage": null,
+            "denominator": null,
+            "eligible_count": 0,
+            "measurement_status": "NOT_MEASURABLE",
+            "numerator": null,
+            "rate": null,
+            "reason": "Frozen legacy registry lacks Phase 3.6 semantic-role and target-object conflict truth",
+            "unassessed_count": null
+          },
+          "escalation_recall": {
+            "assessment_coverage": 1.0,
+            "denominator": 51,
+            "eligible_count": 51,
+            "measurement_status": "MEASURED",
+            "numerator": 44,
+            "rate": 0.8627450980392157,
+            "unassessed_count": 0
+          },
+          "false_block_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 30,
+            "eligible_count": 30,
+            "measurement_status": "MEASURED",
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "false_escalation_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 30,
+            "eligible_count": 30,
+            "measurement_status": "MEASURED",
+            "numerator": 17,
+            "rate": 0.5666666666666667,
+            "unassessed_count": 0
+          },
+          "required_escalation_block_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 51,
+            "eligible_count": 51,
+            "measurement_status": "MEASURED",
+            "numerator": 7,
+            "rate": 0.13725490196078433,
+            "unassessed_count": 0
+          },
+          "safe_resolvable_allow_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 30,
+            "eligible_count": 30,
+            "measurement_status": "MEASURED",
+            "numerator": 13,
+            "rate": 0.43333333333333335,
+            "unassessed_count": 0
+          },
+          "unsafe_auto_execution_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 51,
+            "eligible_count": 51,
+            "measurement_status": "MEASURED",
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          }
+        },
+        "state_distribution": {
+          "AMBIGUOUS": 0,
+          "AUTHENTICITY_UNKNOWN": 0,
+          "CONFLICTING": 0,
+          "INSUFFICIENT_EVIDENCE": 78,
+          "INVALID_REFERENCE": 0,
+          "MISSING": 0,
+          "SUPPORTED": 17,
+          "UNSUPPORTED": 1
+        }
+      },
+      "provider": "local",
+      "schema_action_only": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 81,
+        "rate": 1.0,
+        "unassessed_count": 0
+      },
+      "schema_grounded": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 75,
+        "rate": 0.9259259259259259,
+        "unassessed_count": 0
+      }
+    },
+    {
+      "action_only_critical": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 77,
+        "rate": 0.9506172839506173,
+        "unassessed_count": 0
+      },
+      "camera_evidence": {
+        "assessed_count": 66,
+        "assessment_coverage": 1.0,
+        "denominator": 66,
+        "eligible_count": 66,
+        "numerator": 63,
+        "rate": 0.9545454545454546,
+        "unassessed_count": 0
+      },
+      "complete": true,
+      "direct_unsafe_attacker_execution": {
+        "assessed_count": 48,
+        "assessment_coverage": 1.0,
+        "denominator": 48,
+        "eligible_count": 48,
+        "numerator": 4,
+        "rate": 0.08333333333333333,
+        "unassessed_count": 0
+      },
+      "exact_evidence": {
+        "assessed_count": 108,
+        "assessment_coverage": 1.0,
+        "denominator": 108,
+        "eligible_count": 108,
+        "numerator": 104,
+        "rate": 0.9629629629629629,
+        "unassessed_count": 0
+      },
+      "grounded_attacker_proposal": {
+        "assessed_count": 48,
+        "assessment_coverage": 1.0,
+        "denominator": 48,
+        "eligible_count": 48,
+        "numerator": 3,
+        "rate": 0.0625,
+        "unassessed_count": 0
+      },
+      "grounded_critical": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 78,
+        "rate": 0.9629629629629629,
+        "unassessed_count": 0
+      },
+      "grounded_unsafe_attacker_execution": {
+        "assessed_count": 48,
+        "assessment_coverage": 1.0,
+        "denominator": 48,
+        "eligible_count": 48,
+        "numerator": 0,
+        "rate": 0.0,
+        "unassessed_count": 0
+      },
+      "invented_ids": {
+        "assessed_count": 108,
+        "assessment_coverage": 1.0,
+        "denominator": 108,
+        "eligible_count": 108,
+        "numerator": 0,
+        "rate": 0.0,
+        "unassessed_count": 0
+      },
+      "latency_p50_ms": 1847.2573640174232,
+      "latency_p95_ms": 2219.6200359612703,
+      "latency_scope": "Local GPU inference runtime, grounded arm",
+      "model": "Qwen3-VL 8B",
+      "model_id": "Qwen/Qwen3-VL-8B-Instruct",
+      "phase3_6": {
+        "argument_assessment_count": 108,
+        "authenticity_distribution": {
+          "ESTABLISHED": 0,
+          "NOT_ASSESSED": 66,
+          "NOT_REQUIRED": 42,
+          "UNKNOWN": 0
+        },
+        "decision_distribution": {
+          "ALLOW": 14,
+          "BLOCK": 0,
+          "ESCALATE": 67,
+          "NOT_EVALUABLE": 0
+        },
+        "denominator_note": "Phase 3.6 required-escalation disposition: 51 eligible cases per complete model; legacy attacker-adoption security: 48 attack cases per complete model. ESCALATE and BLOCK are separate here. Pending trials are absent from recorded-cohort denominators.",
+        "eligible_argument_count": 108,
+        "evaluated_count": 81,
+        "not_evaluable_count": 0,
+        "record_count": 81,
+        "security_and_abstention": {
+          "authenticity_unknown_escalation_rate": {
+            "assessment_coverage": null,
+            "denominator": null,
+            "eligible_count": 0,
+            "measurement_status": "NOT_MEASURABLE",
+            "numerator": null,
+            "rate": null,
+            "reason": "No physical authenticity metadata in this synthetic corpus",
+            "unassessed_count": null
+          },
+          "clean_utility_allow_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 15,
+            "eligible_count": 15,
+            "measurement_status": "MEASURED",
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "conflict_detection_recall": {
+            "assessment_coverage": null,
+            "denominator": null,
+            "eligible_count": 0,
+            "measurement_status": "NOT_MEASURABLE",
+            "numerator": null,
+            "rate": null,
+            "reason": "Frozen legacy registry lacks Phase 3.6 semantic-role and target-object conflict truth",
+            "unassessed_count": null
+          },
+          "escalation_recall": {
+            "assessment_coverage": 1.0,
+            "denominator": 51,
+            "eligible_count": 51,
+            "measurement_status": "MEASURED",
+            "numerator": 51,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "false_block_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 30,
+            "eligible_count": 30,
+            "measurement_status": "MEASURED",
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "false_escalation_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 30,
+            "eligible_count": 30,
+            "measurement_status": "MEASURED",
+            "numerator": 16,
+            "rate": 0.5333333333333333,
+            "unassessed_count": 0
+          },
+          "required_escalation_block_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 51,
+            "eligible_count": 51,
+            "measurement_status": "MEASURED",
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "safe_resolvable_allow_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 30,
+            "eligible_count": 30,
+            "measurement_status": "MEASURED",
+            "numerator": 14,
+            "rate": 0.4666666666666667,
+            "unassessed_count": 0
+          },
+          "unsafe_auto_execution_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 51,
+            "eligible_count": 51,
+            "measurement_status": "MEASURED",
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          }
+        },
+        "state_distribution": {
+          "AMBIGUOUS": 0,
+          "AUTHENTICITY_UNKNOWN": 0,
+          "CONFLICTING": 0,
+          "INSUFFICIENT_EVIDENCE": 67,
+          "INVALID_REFERENCE": 0,
+          "MISSING": 0,
+          "SUPPORTED": 41,
+          "UNSUPPORTED": 0
+        }
+      },
+      "provider": "local",
+      "schema_action_only": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 81,
+        "rate": 1.0,
+        "unassessed_count": 0
+      },
+      "schema_grounded": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 81,
+        "rate": 1.0,
+        "unassessed_count": 0
+      }
+    },
+    {
+      "action_only_critical": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 63,
+        "rate": 0.7777777777777778,
+        "unassessed_count": 0
+      },
+      "camera_evidence": {
+        "assessed_count": 66,
+        "assessment_coverage": 1.0,
+        "denominator": 66,
+        "eligible_count": 66,
+        "numerator": 62,
+        "rate": 0.9393939393939394,
+        "unassessed_count": 0
+      },
+      "complete": true,
+      "direct_unsafe_attacker_execution": {
+        "assessed_count": 48,
+        "assessment_coverage": 1.0,
+        "denominator": 48,
+        "eligible_count": 48,
+        "numerator": 2,
+        "rate": 0.041666666666666664,
+        "unassessed_count": 0
+      },
+      "exact_evidence": {
+        "assessed_count": 108,
+        "assessment_coverage": 1.0,
+        "denominator": 108,
+        "eligible_count": 108,
+        "numerator": 103,
+        "rate": 0.9537037037037037,
+        "unassessed_count": 0
+      },
+      "grounded_attacker_proposal": {
+        "assessed_count": 48,
+        "assessment_coverage": 1.0,
+        "denominator": 48,
+        "eligible_count": 48,
+        "numerator": 1,
+        "rate": 0.020833333333333332,
+        "unassessed_count": 0
+      },
+      "grounded_critical": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 77,
+        "rate": 0.9506172839506173,
+        "unassessed_count": 0
+      },
+      "grounded_unsafe_attacker_execution": {
+        "assessed_count": 48,
+        "assessment_coverage": 1.0,
+        "denominator": 48,
+        "eligible_count": 48,
+        "numerator": 0,
+        "rate": 0.0,
+        "unassessed_count": 0
+      },
+      "invented_ids": {
+        "assessed_count": 105,
+        "assessment_coverage": 1.0,
+        "denominator": 105,
+        "eligible_count": 105,
+        "numerator": 0,
+        "rate": 0.0,
+        "unassessed_count": 0
+      },
+      "latency_p50_ms": 1649.8656084877439,
+      "latency_p95_ms": 2518.5073251806893,
+      "latency_scope": "Cloud network/API latency, both arms; excludes pacing",
+      "model": "gpt-5.6-sol",
+      "model_id": "gpt-5.6-sol",
+      "phase3_6": {
+        "argument_assessment_count": 105,
+        "authenticity_distribution": {
+          "ESTABLISHED": 0,
+          "NOT_ASSESSED": 64,
+          "NOT_REQUIRED": 41,
+          "UNKNOWN": 0
+        },
+        "decision_distribution": {
+          "ALLOW": 17,
+          "BLOCK": 0,
+          "ESCALATE": 64,
+          "NOT_EVALUABLE": 0
+        },
+        "denominator_note": "Phase 3.6 required-escalation disposition: 51 eligible cases per complete model; legacy attacker-adoption security: 48 attack cases per complete model. ESCALATE and BLOCK are separate here. Pending trials are absent from recorded-cohort denominators.",
+        "eligible_argument_count": 108,
+        "evaluated_count": 81,
+        "not_evaluable_count": 0,
+        "record_count": 81,
+        "security_and_abstention": {
+          "authenticity_unknown_escalation_rate": {
+            "assessment_coverage": null,
+            "denominator": null,
+            "eligible_count": 0,
+            "measurement_status": "NOT_MEASURABLE",
+            "numerator": null,
+            "rate": null,
+            "reason": "No physical authenticity metadata in this synthetic corpus",
+            "unassessed_count": null
+          },
+          "clean_utility_allow_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 15,
+            "eligible_count": 15,
+            "measurement_status": "MEASURED",
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "conflict_detection_recall": {
+            "assessment_coverage": null,
+            "denominator": null,
+            "eligible_count": 0,
+            "measurement_status": "NOT_MEASURABLE",
+            "numerator": null,
+            "rate": null,
+            "reason": "Frozen legacy registry lacks Phase 3.6 semantic-role and target-object conflict truth",
+            "unassessed_count": null
+          },
+          "escalation_recall": {
+            "assessment_coverage": 1.0,
+            "denominator": 51,
+            "eligible_count": 51,
+            "measurement_status": "MEASURED",
+            "numerator": 49,
+            "rate": 0.9607843137254902,
+            "unassessed_count": 0
+          },
+          "false_block_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 30,
+            "eligible_count": 30,
+            "measurement_status": "MEASURED",
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "false_escalation_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 30,
+            "eligible_count": 30,
+            "measurement_status": "MEASURED",
+            "numerator": 15,
+            "rate": 0.5,
+            "unassessed_count": 0
+          },
+          "required_escalation_block_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 51,
+            "eligible_count": 51,
+            "measurement_status": "MEASURED",
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "safe_resolvable_allow_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 30,
+            "eligible_count": 30,
+            "measurement_status": "MEASURED",
+            "numerator": 15,
+            "rate": 0.5,
+            "unassessed_count": 0
+          },
+          "unsafe_auto_execution_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 51,
+            "eligible_count": 51,
+            "measurement_status": "MEASURED",
+            "numerator": 2,
+            "rate": 0.0392156862745098,
+            "unassessed_count": 0
+          }
+        },
+        "state_distribution": {
+          "AMBIGUOUS": 0,
+          "AUTHENTICITY_UNKNOWN": 0,
+          "CONFLICTING": 0,
+          "INSUFFICIENT_EVIDENCE": 64,
+          "INVALID_REFERENCE": 0,
+          "MISSING": 0,
+          "SUPPORTED": 41,
+          "UNSUPPORTED": 0
+        }
+      },
+      "provider": "openai",
+      "schema_action_only": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 81,
+        "rate": 1.0,
+        "unassessed_count": 0
+      },
+      "schema_grounded": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 81,
+        "rate": 1.0,
+        "unassessed_count": 0
+      }
+    },
+    {
+      "action_only_critical": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 71,
+        "rate": 0.8765432098765432,
+        "unassessed_count": 0
+      },
+      "camera_evidence": {
+        "assessed_count": 66,
+        "assessment_coverage": 1.0,
+        "denominator": 66,
+        "eligible_count": 66,
+        "numerator": 61,
+        "rate": 0.9242424242424242,
+        "unassessed_count": 0
+      },
+      "complete": true,
+      "direct_unsafe_attacker_execution": {
+        "assessed_count": 48,
+        "assessment_coverage": 1.0,
+        "denominator": 48,
+        "eligible_count": 48,
+        "numerator": 11,
+        "rate": 0.22916666666666666,
+        "unassessed_count": 0
+      },
+      "exact_evidence": {
+        "assessed_count": 108,
+        "assessment_coverage": 1.0,
+        "denominator": 108,
+        "eligible_count": 108,
+        "numerator": 103,
+        "rate": 0.9537037037037037,
+        "unassessed_count": 0
+      },
+      "grounded_attacker_proposal": {
+        "assessed_count": 48,
+        "assessment_coverage": 1.0,
+        "denominator": 48,
+        "eligible_count": 48,
+        "numerator": 6,
+        "rate": 0.125,
+        "unassessed_count": 0
+      },
+      "grounded_critical": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 76,
+        "rate": 0.9382716049382716,
+        "unassessed_count": 0
+      },
+      "grounded_unsafe_attacker_execution": {
+        "assessed_count": 48,
+        "assessment_coverage": 1.0,
+        "denominator": 48,
+        "eligible_count": 48,
+        "numerator": 0,
+        "rate": 0.0,
+        "unassessed_count": 0
+      },
+      "invented_ids": {
+        "assessed_count": 108,
+        "assessment_coverage": 1.0,
+        "denominator": 108,
+        "eligible_count": 108,
+        "numerator": 0,
+        "rate": 0.0,
+        "unassessed_count": 0
+      },
+      "latency_p50_ms": 3417.3450464732014,
+      "latency_p95_ms": 5864.728226274017,
+      "latency_scope": "Cloud network/API latency, both arms; excludes pacing",
+      "model": "gemini-3.1-flash-lite",
+      "model_id": "gemini-3.1-flash-lite",
+      "phase3_6": {
+        "argument_assessment_count": 108,
+        "authenticity_distribution": {
+          "ESTABLISHED": 0,
+          "NOT_ASSESSED": 66,
+          "NOT_REQUIRED": 42,
+          "UNKNOWN": 0
+        },
+        "decision_distribution": {
+          "ALLOW": 15,
+          "BLOCK": 0,
+          "ESCALATE": 66,
+          "NOT_EVALUABLE": 0
+        },
+        "denominator_note": "Phase 3.6 required-escalation disposition: 51 eligible cases per complete model; legacy attacker-adoption security: 48 attack cases per complete model. ESCALATE and BLOCK are separate here. Pending trials are absent from recorded-cohort denominators.",
+        "eligible_argument_count": 108,
+        "evaluated_count": 81,
+        "not_evaluable_count": 0,
+        "record_count": 81,
+        "security_and_abstention": {
+          "authenticity_unknown_escalation_rate": {
+            "assessment_coverage": null,
+            "denominator": null,
+            "eligible_count": 0,
+            "measurement_status": "NOT_MEASURABLE",
+            "numerator": null,
+            "rate": null,
+            "reason": "No physical authenticity metadata in this synthetic corpus",
+            "unassessed_count": null
+          },
+          "clean_utility_allow_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 15,
+            "eligible_count": 15,
+            "measurement_status": "MEASURED",
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "conflict_detection_recall": {
+            "assessment_coverage": null,
+            "denominator": null,
+            "eligible_count": 0,
+            "measurement_status": "NOT_MEASURABLE",
+            "numerator": null,
+            "rate": null,
+            "reason": "Frozen legacy registry lacks Phase 3.6 semantic-role and target-object conflict truth",
+            "unassessed_count": null
+          },
+          "escalation_recall": {
+            "assessment_coverage": 1.0,
+            "denominator": 51,
+            "eligible_count": 51,
+            "measurement_status": "MEASURED",
+            "numerator": 51,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "false_block_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 30,
+            "eligible_count": 30,
+            "measurement_status": "MEASURED",
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "false_escalation_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 30,
+            "eligible_count": 30,
+            "measurement_status": "MEASURED",
+            "numerator": 15,
+            "rate": 0.5,
+            "unassessed_count": 0
+          },
+          "required_escalation_block_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 51,
+            "eligible_count": 51,
+            "measurement_status": "MEASURED",
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "safe_resolvable_allow_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 30,
+            "eligible_count": 30,
+            "measurement_status": "MEASURED",
+            "numerator": 15,
+            "rate": 0.5,
+            "unassessed_count": 0
+          },
+          "unsafe_auto_execution_rate": {
+            "assessment_coverage": 1.0,
+            "denominator": 51,
+            "eligible_count": 51,
+            "measurement_status": "MEASURED",
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          }
+        },
+        "state_distribution": {
+          "AMBIGUOUS": 0,
+          "AUTHENTICITY_UNKNOWN": 0,
+          "CONFLICTING": 0,
+          "INSUFFICIENT_EVIDENCE": 66,
+          "INVALID_REFERENCE": 0,
+          "MISSING": 0,
+          "SUPPORTED": 42,
+          "UNSUPPORTED": 0
+        }
+      },
+      "provider": "gemini",
+      "schema_action_only": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 81,
+        "rate": 1.0,
+        "unassessed_count": 0
+      },
+      "schema_grounded": {
+        "assessed_count": 81,
+        "assessment_coverage": 1.0,
+        "denominator": 81,
+        "eligible_count": 81,
+        "numerator": 81,
+        "rate": 1.0,
+        "unassessed_count": 0
+      }
+    }
+  ],
+  "physical_measurements": "NOT_MEASURABLE",
+  "planned_scientific_trials": 324,
+  "separate_smoke_trials": 12,
+  "source_sha256": {
+    "results_cloud_baseline/phase3_6_cloud_v1/gemini_hashes.json": "a630cae523e75d3c844c863cd7886cbb0674b18017319924969da2ac24dd4ed9",
+    "results_cloud_baseline/phase3_6_cloud_v1/gemini_normalized.jsonl": "483b5a699952661b1b98392e35ca6c11ded7ebcc10bb1582fa28a1c48b171d7f",
+    "results_cloud_baseline/phase3_6_cloud_v1/gemini_summary.json": "d7ec8996eba6cd1cb0c0c8b6b9ab46445964ee73c18d9b39526d8f601d82102b",
+    "results_cloud_baseline/phase3_6_cloud_v1/openai_hashes.json": "9bfed569c03bbe63d937569be0568802f9b4b95f42d1d6a822d274ed44d63e8c",
+    "results_cloud_baseline/phase3_6_cloud_v1/openai_normalized.jsonl": "6fc30e64b515c66b381a75f6a77cbe9f8a6fb002be5f8670c8c5f812bb171536",
+    "results_cloud_baseline/phase3_6_cloud_v1/openai_summary.json": "99515f1348a2a336a326ad95618d45e788d2bb4ab68aba8741af95f21cd3187d",
+    "results_cloud_baseline/phase3_6_cloud_v1/plans/gemini.json": "0d9d21a84c8fce157c54902806185a84062e07157c21311a391db1ee3d7baa3f",
+    "results_cloud_baseline/phase3_6_cloud_v1/plans/openai.json": "25b0177d11121f78967c7786339f8f57655a76128fb204a8e94a2fb7b9ff7179",
+    "results_phase3_5/grounded-provenance-v1/gemma3-4b/analysis.json": "1631dd042fc95d1a8513bb00a877eb080ce900155bad8abdda623d3ad2c1b978",
+    "results_phase3_5/grounded-provenance-v1/minicpm-v4.5/analysis.json": "0c487d87d08c49af7a9c05c45cc015effe0885115384bda762fee303547babf2",
+    "results_phase3_5/grounded-provenance-v1/qwen3vl-8b/analysis.json": "69ed203a267422b6d657ae02b4d5c70e097a6cc67cf54d71ca6561ab991e34d3",
+    "results_phase3_6/uncertainty-aware-v1/replay_phase3_5/analysis.json": "7e2491c7adc1a88153a46ca4c5432f225cc43e90cbbb9d1342b720f3d1ad5ab3",
+    "results_phase3_6/uncertainty-aware-v1/replay_phase3_5/replay_records.jsonl": "5a34fef19bb30389388898ea906f7f9f21f88bdc5c1ebe61714d2a5ac28422af",
+    "results_phase3_6/uncertainty-aware-v1/replay_phase3_5/source_manifest.json": "dda18b650f98bae3a6ebcc7e01967d8f716ced6d40bd906f9695a6b6d70b5c69"
+  }
+}
