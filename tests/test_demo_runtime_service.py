@@ -113,6 +113,12 @@ def test_policy_failure_keeps_model_output(monkeypatch):
 @pytest.mark.parametrize(('action', 'arguments', 'error'), [
     ('DIRECTION_ADVICE', {'destination': '出口', 'direction': '未知'}, 'unsupported direction'),
     ('DIRECTION_ADVICE', {'destination': 'exit', 'direction': 'unknown'}, 'unsupported direction'),
+    ('DIRECTION_ADVICE', {'destination': '出口', 'direction': '不要向右'}, 'unsupported direction'),
+    ('DIRECTION_ADVICE', {'destination': '出口', 'direction': '可能向右'}, 'unsupported direction'),
+    ('DIRECTION_ADVICE', {'destination': '出口', 'direction': '向左或向右'}, 'unsupported direction'),
+    ('DIRECTION_ADVICE', {'destination': '出口', 'direction': '向右然後向左'}, 'unsupported direction'),
+    ('DIRECTION_ADVICE', {'destination': '出口', 'direction': '在右邊'}, 'unsupported direction'),
+    ('DIRECTION_ADVICE', {'destination': 'exit', 'direction': 'not sure'}, 'unsupported direction'),
     ('CALL', {'target_number': 'unknown'}, 'phone number contains unsupported characters'),
     ('OPEN_URL', {'url': 'ftp://example.com'}, 'only http and https URLs are supported'),
 ])
@@ -153,6 +159,70 @@ def test_valid_direction_keeps_model_arguments_and_existing_policy():
         assert result['output']['native_action'] == json.loads(fake.raw)
         assert result['policy']['result'] == 'block'
         assert result['policy']['native']['critical_arguments']['direction'] == 'LEFT'
+
+
+@pytest.mark.parametrize(('direction', 'canonical'), [
+    ('向右', 'RIGHT'),
+    ('向右。', 'RIGHT'),
+    ('向右！', 'RIGHT'),
+    ('向左', 'LEFT'),
+    ('左轉', 'LEFT'),
+    ('右转', 'RIGHT'),
+    ('往右', 'RIGHT'),
+    ('往左', 'LEFT'),
+    ('直走', 'STRAIGHT'),
+    ('向前', 'STRAIGHT'),
+    ('向後', 'BACK'),
+    ('向后', 'BACK'),
+    ('後退', 'BACK'),
+    ('后退', 'BACK'),
+    ('向北', 'NORTH'),
+    ('向南', 'SOUTH'),
+    ('向東', 'EAST'),
+    ('向东', 'EAST'),
+    ('向西', 'WEST'),
+    ('東北', 'NORTHEAST'),
+    ('东北', 'NORTHEAST'),
+    ('往西南', 'SOUTHWEST'),
+    ('向東南', 'SOUTHEAST'),
+    ('西北', 'NORTHWEST'),
+])
+def test_chinese_direction_reaches_policy_without_changing_model_output(direction, canonical):
+    candidate = {'action': 'DIRECTION_ADVICE',
+                 'arguments': {'destination': '出口', 'direction': direction}}
+    fake = FakeAdapter()
+    fake.raw = json.dumps(candidate, ensure_ascii=False)
+    with TestClient(create_app(fake)) as client:
+        response = post(client, '出口往哪裡走？')
+        assert response.status_code == 200
+        result = response.json()
+        output = result['output']
+        assert output['parsed'] is True
+        assert output['diagnostics']['schema_valid'] is True
+        assert output['raw_text'] == fake.raw
+        assert output['native_action'] == candidate
+        assert output['candidate_action'] == candidate
+        assert output['proposed_action'] == {'tool': 'navigate', 'arguments': candidate['arguments']}
+        assert output['validation_error'] is None
+        assert output['policy_error'] is None
+        assert result['policy']['native']['critical_arguments']['direction'] == canonical
+        assert result['policy']['affected_argument'] == 'navigate.direction'
+        # Understanding a direction supplies no authority or semantic evidence.
+        assert result['policy']['result'] == 'block'
+        assert result['policy']['delegated'] is False
+
+
+@pytest.mark.parametrize('direction', ['向右', 'RIGHT'])
+@pytest.mark.parametrize('destination_first', [True, False])
+def test_direction_policy_uses_direction_argument_regardless_of_source_order(direction, destination_first):
+    arguments = ({'destination': '出口', 'direction': direction} if destination_first
+                 else {'direction': direction, 'destination': '出口'})
+    action = {'action': 'DIRECTION_ADVICE', 'arguments': arguments}
+    before = json.dumps(action, ensure_ascii=False)
+    result = authorize(action, '出口往哪裡走？')
+    assert result['affected_argument'] == 'navigate.direction'
+    assert result['native']['critical_arguments']['direction'] == 'RIGHT'
+    assert json.dumps(action, ensure_ascii=False) == before
 
 
 def test_busy_runtime_keeps_health_responsive():
