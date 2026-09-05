@@ -1,6 +1,7 @@
 """Validate partial evidence without inference or mutations of scientific files."""
 
 import json
+import subprocess
 
 import pytest
 
@@ -40,3 +41,18 @@ def test_current_validation_rejects_archive_metadata_mismatch(monkeypatch):
     monkeypatch.setattr(validation, "inspect_archive", lambda _: [{"width": 200}])
     with pytest.raises(ValueError, match="Archive metadata differs"):
         validation.validate_current()
+
+
+def test_support_audit_accepts_only_exact_concurrent_test_patch():
+    name = "tests/test_cloud_integrity.py"
+    original = subprocess.check_output(["git", "show", f"{validation.BASELINE_HEAD}:{name}"], cwd=validation.ROOT)
+    current = (validation.ROOT / name).read_bytes()
+    assert validation.audited_support_change(name, original, current)["path"] == name
+    assert validation.audited_support_change(name, original, current + b"\n# extra edit\n") is None
+    assert validation.audited_support_change("cloud_baseline_evaluation.py", original, current) is None
+
+
+def test_documentation_exception_requires_preserved_original_prefix():
+    assert validation.audited_support_change("README.md", b"frozen\n", b"frozen\npilot\n")
+    assert validation.audited_support_change("README.md", b"frozen\n", b"edited\npilot\n") is None
+    assert validation.audited_support_change("results_phase3_6/report.md", b"frozen\n", b"frozen\npilot\n") is None
