@@ -113,7 +113,13 @@ def test_evidence_coordinates_use_exif_oriented_display_not_raw_jpeg_dimensions(
     assert row['regions'][0]['bbox_normalized'] == pytest.approx([.1, .2, .7, .9], abs=.005)
     page.set_viewport_size({'width': 1100, 'height': 850})
     playwright.expect(page.locator('rect[data-region-id="R01"]')).to_be_visible()
-    rectangle = page.locator('rect[data-region-id="R01"]').bounding_box()
-    scaled = page.locator('#image').bounding_box()
-    assert rectangle['width'] / scaled['width'] == pytest.approx(.6, abs=.005)
-    assert rectangle['height'] / scaled['height'] == pytest.approx(.7, abs=.005)
+    # Measure both elements in one browser callback so independent layout reads
+    # cannot observe different resize frames or a replaced SVG child handle.
+    ratios = page.locator('#image-stage').evaluate("""stage => {
+        const rectangle = stage.querySelector('rect[data-region-id="R01"]').getBoundingClientRect();
+        const displayedImage = stage.querySelector('img').getBoundingClientRect();
+        return {width: rectangle.width / displayedImage.width,
+                height: rectangle.height / displayedImage.height};
+    }""")
+    assert ratios['width'] == pytest.approx(.6, abs=.005)
+    assert ratios['height'] == pytest.approx(.7, abs=.005)

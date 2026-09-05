@@ -205,7 +205,8 @@ document.addEventListener('keydown', event => {
   }
 });
 image.addEventListener('load', draw);
-new ResizeObserver(draw).observe(image);
+// The normalized SVG viewBox scales with the image through CSS. Resizing does
+// not change annotation geometry and must not replace active rectangle nodes.
 document.addEventListener('annotation-render', render);
 document.addEventListener('annotation-edited', updateStatus);
 document.addEventListener('annotation-saved', updateStatus);

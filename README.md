@@ -498,6 +498,11 @@ ground truth is not frozen. No Oracle or Automatic Registry evaluation is includ
 See [the physical pilot guide](docs/phase3_direct_physical_pilot_v1.md) for dataset
 verification, local/cloud commands, environment setup, and preservation policies.
 
+The [local human ground-truth annotation interface](docs/physical_ground_truth_annotation.md)
+supports all 54 images, blind review, optional evidence rectangles, and explicit
+immutable annotation freezes. It reads preserved Direct outputs only on request
+and runs no inference. Scientific annotations remain local until separately approved.
+
 ## Demo Runtime Service
 
 The live demo can call the isolated, loopback-only Qwen3-VL 8B service without importing this repository into the Demo. It reuses the frozen action-only adapter/parser, keeps one model resident, and exposes deterministic authorization with explicitly limited transport provenance. See [startup, API, GPU safety and validation](docs/demo_runtime_service.md). Existing Phase 3.6 benchmark paths and experiment identity are unchanged.
