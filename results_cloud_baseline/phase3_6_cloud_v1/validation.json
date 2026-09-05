@@ -1,0 +1,34 @@
+{
+  "cloud_integrity": {
+    "comparison_reproduces": true,
+    "full_planned": 324,
+    "full_recorded": 324,
+    "missing_raw_responses": 0,
+    "smoke_planned": 12,
+    "smoke_recorded": 12,
+    "unknown_or_duplicate_trials": 0
+  },
+  "frozen_phase3_6_head": "667d68f7b046ea159cde0187557f530c819f086a",
+  "historical_scientific_files_changed": [],
+  "non_gpu_suite": {
+    "elapsed_seconds": 22.53,
+    "failed": 0,
+    "passed": 700
+  },
+  "phase2_5_integrity": "PASS:763-file frozen tree",
+  "phase2_lock": "PASS:13 locked files and 81 images",
+  "phase3_5_integrity": "PASS:243 grounded records, raw/call/CSV bindings and 81 registries",
+  "phase3_6_integrity": "PASS:exact deterministic replay artifacts",
+  "physical_evaluation": "READY FOR INPUT, NOT YET MEASURED",
+  "preexisting_files_changed": [
+    "pyproject.toml",
+    "uv.lock"
+  ],
+  "secret_safety": {
+    "env_gitignored": true,
+    "env_tracked": false,
+    "literal_secret_matches_in_tracked_and_untracked_additions": 0
+  },
+  "tested_code_commit": "75b0abe923fad64d51b384a4a4bf86e98cb5c6d0",
+  "validated_at_utc": "2026-09-05T03:41:33.594824+00:00"
+}
