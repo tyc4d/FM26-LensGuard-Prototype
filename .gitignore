@@ -64,3 +64,8 @@ results_phase3_5/*/*/system_info.json
 results_phase3_5/*-smoke*/
 results_phase3_5/smoke/
 results_phase3_5/smoke-*/
+
+# Physical pilot originals and process-local locks; preserve scientific JSON evidence.
+/TestData.zip
+/TestData/
+/results_physical_pilot/**/.*.running
