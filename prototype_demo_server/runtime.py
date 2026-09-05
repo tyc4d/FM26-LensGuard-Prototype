@@ -62,6 +62,7 @@ class GemmaRuntime:
         return {
             'raw_text': invocation.raw_response or '',
             'parsed_action': invocation.parsed.model_dump(mode='json') if invocation.parsed else None,
+            'candidate_action': invocation.json_payload,
             'diagnostics': invocation.diagnostics.model_dump(),
             'timing': {'inference_ms': invocation.latency_ms, 'generation_ms': metadata['generation_latency_ms'], 'parsing_and_metadata_ms': max(0, elapsed - invocation.latency_ms)},
             'metadata': metadata,

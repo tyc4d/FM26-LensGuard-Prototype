@@ -18,9 +18,9 @@ class FakeAdapter:
         with Image.open(path) as image: assert image.size == (64, 64)
         self.calls += 1
         self.loaded = True
-        parsed, _, diagnostics = _parse_output(Phase35Operation.ACTION_ONLY, self.raw)
+        parsed, payload, diagnostics = _parse_output(Phase35Operation.ACTION_ONLY, self.raw)
         return {'raw_text': self.raw, 'parsed_action': parsed.model_dump(mode='json') if parsed else None,
-                'diagnostics': diagnostics.model_dump(), 'timing': {'inference_ms': 1.0}}
+                'candidate_action': payload, 'diagnostics': diagnostics.model_dump(), 'timing': {'inference_ms': 1.0}}
     def close(self): self.loaded = False
 
 
@@ -146,8 +146,8 @@ def test_gemma_runtime_constructs_and_loads_once(monkeypatch):
     def invoke(actual, **kwargs):
         assert actual is provider and kwargs['operation'] is Phase35Operation.ACTION_ONLY
         assert kwargs['user_prompt'] == 'trusted task'
-        parsed, _, diagnostics = _parse_output(Phase35Operation.ACTION_ONLY, FakeAdapter.raw)
-        return SimpleNamespace(parsed=parsed, raw_response=FakeAdapter.raw, diagnostics=diagnostics, latency_ms=1,
+        parsed, payload, diagnostics = _parse_output(Phase35Operation.ACTION_ONLY, FakeAdapter.raw)
+        return SimpleNamespace(parsed=parsed, json_payload=payload, raw_response=FakeAdapter.raw, diagnostics=diagnostics, latency_ms=1,
             response_metadata={'local_inference': {'generation_latency_ms': 1}})
     monkeypatch.setattr(module, 'gpu_preflight', lambda loaded: {})
     monkeypatch.setattr(module, 'create_local_provider', factory)
@@ -172,3 +172,26 @@ def test_optional_warmup_runs_once():
         assert client.post('/warmup').json()['status'] == 'warmed'
         assert client.post('/warmup').json()['status'] == 'already_warmed'
         assert fake.calls == 1
+
+
+def test_invalid_reservation_retains_decoded_candidate():
+    fake = FakeAdapter()
+    fake.raw = '{"action":"RESTAURANT_RESERVATION","arguments":{"restaurant":"Example Bistro","target_number":"02-2345-6661","time":"N/A","party_size":"N/A"}}'
+    with TestClient(create_app(fake)) as client:
+        result = post(client).json()
+        assert result['output']['parsed'] is False
+        assert result['output']['proposed_action'] is None
+        assert result['output']['candidate_action']['arguments']['party_size'] == 'N/A'
+        assert 'party_size' in result['output']['diagnostics']['error_message']
+        assert result['policy'] is None
+
+
+def test_complete_reservation_maps_and_reaches_policy():
+    fake = FakeAdapter()
+    fake.raw = '{"action":"RESTAURANT_RESERVATION","arguments":{"restaurant":"Example Bistro","target_number":"02-2345-6661","time":"19:00","party_size":2}}'
+    with TestClient(create_app(fake)) as client:
+        result = post(client).json()
+        assert result['output']['parsed'] is True
+        assert result['output']['proposed_action']['tool'] == 'restaurant_reservation'
+        assert result['output']['proposed_action']['arguments']['number'] == '02-2345-6661'
+        assert result['policy']['result'] == 'block'

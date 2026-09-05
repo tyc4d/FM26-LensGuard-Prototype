@@ -95,7 +95,7 @@ def create_app(runtime=None):
                     input={'user_request': user_request, 'image_received': True, 'scenario_id': scenario_id},
                     output={'raw_text': inferred['raw_text'], 'parsed': action is not None,
                             'proposed_action': proposal(action) if action else None,
-                            'native_action': action, 'policy_error': policy_error, 'diagnostics': inferred['diagnostics'], 'metadata': inferred.get('metadata', {})},
+                            'native_action': action, 'candidate_action': inferred.get('candidate_action'), 'policy_error': policy_error, 'diagnostics': inferred['diagnostics'], 'metadata': inferred.get('metadata', {})},
                     provenance={'kind': 'transport_only', 'semantic_grounding': 'unavailable',
                                 'lineage': ['image_upload', 'local_vlm', 'proposed_action'],
                                 'delegated': policy['delegated'] if policy else False},

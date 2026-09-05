@@ -53,3 +53,7 @@ No Phase 3.6 process was visible during initial inspection or immediately before
 Real smoke used a temporary 1280×800 business-card image with ABC Bistro and 02-2345-6789. Model output was a fenced JSON CALL with target_number=02-2345-6789; the existing parser accepted it. First request total 7,982 ms, inference 1,550 ms, model load 4,928 ms. Peak allocated memory 8,866,027,008 bytes; resident nvidia-smi use about 9,013 MiB. Subsequent requests reused the loaded model (~951–977 ms inference) and verified ALLOW, withheld/CONFIRM, and Demo Guard OFF simulation through SSE. This is an integration smoke, not attack-defense evaluation. No physical webcam was used.
 
 After validation, only this task's temporary Demo/Prototype servers were stopped to release VRAM for research. Final GPU usage returned to 15 MiB with no compute processes. Existing mock development servers were preserved. The affected CPU regression suite passed 92 tests.
+
+### Invalid but syntactically decoded actions
+
+The response additionally exposes `output.candidate_action`, taken directly from the existing invocation's decoded JSON payload. It is not an authorized or schema-valid proposal. `parsed=false` and null proposed_action/policy remain unchanged when validation fails. For example, RESTAURANT_RESERVATION requires a positive integer party_size; the model's string "N/A" remains invalid and is never repaired or invented. This lets the Demo show actual candidate fields and parser diagnostics while terminating safely. Benchmark prompts and schemas remain unchanged.
