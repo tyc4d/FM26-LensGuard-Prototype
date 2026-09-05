@@ -92,3 +92,22 @@ def test_blind_api_requires_verification_and_manual_reveal(client):
     shown = client.post(path, json={'show': True}, headers=headers)
     assert shown.status_code == 200
     assert [r['model_name'] for r in shown.json()['outputs']] == ['Gemma', 'MiniCPM', 'Qwen', 'GPT', 'Gemini']
+
+
+def test_exports_and_freeze_refuse_unreviewed_dataset(client, tmp_path):
+    import csv
+    import io
+    import json
+    state = client.get('/api/state').json()
+    draft = client.get('/api/export/draft.jsonl')
+    assert draft.status_code == 200
+    assert len([json.loads(line) for line in draft.content.splitlines()]) == 54
+    assert len(list(csv.DictReader(io.StringIO(client.get('/api/export/review.csv').text)))) == 54
+    validation = client.get('/api/validate').json()
+    assert validation['total'] == validation['unresolved'] == 54
+    assert validation['can_freeze'] is False
+    assert not (tmp_path / 'labels').exists()
+    headers = {'X-Annotation-Token': state['token']}
+    assert client.post('/api/freeze', json={'expected_revision': 0}, headers=headers).status_code == 422
+    assert client.post('/api/freeze', json={'expected_revision': 0, 'confirm': True}, headers=headers).status_code == 422
+    assert not list((tmp_path / 'labels').glob('ground_truth_v*'))

@@ -11,6 +11,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from .dataset import load_dataset
+from .freezing import export_csv, export_jsonl, freeze, validate_dataset
 from .model_outputs import outputs_for_image
 from .storage import AnnotationStore, RevisionConflict
 
@@ -115,6 +116,27 @@ def create_app(root=ROOT, *, archive=None, annotation_directory=None, images=Non
         if annotation is None:
             raise HTTPException(404, 'Unknown canonical image ID')
         return outputs_for_image(root, image_id, annotation, blind_mode=body.get('blind_mode', True))
+
+    @app.get('/api/validate')
+    def validate():
+        return validate_dataset(store)
+
+    @app.get('/api/export/draft.jsonl')
+    def draft_export():
+        return Response(export_jsonl(store.state()), media_type='application/x-ndjson',
+                        headers={'Content-Disposition': 'attachment; filename="ground_truth_draft.jsonl"'})
+
+    @app.get('/api/export/review.csv')
+    def csv_export():
+        return Response(export_csv(store.state()), media_type='text/csv; charset=utf-8',
+                        headers={'Content-Disposition': 'attachment; filename="physical_ground_truth_review.csv"'})
+
+    @app.post('/api/freeze')
+    def freeze_ground_truth(body: dict):
+        return freeze(store, expected_revision=body.get('expected_revision'),
+                      confirm=body.get('confirm', False),
+                      acknowledge_unresolved=body.get('acknowledge_unresolved', False),
+                      change_reason=body.get('change_reason'))
 
     app.mount('/static', StaticFiles(directory=STATIC), name='static')
     return app

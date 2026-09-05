@@ -141,6 +141,7 @@ def test_draw_region_coordinates_survive_scaling_and_reload(browser_page):
     assert region['bbox_normalized'] == pytest.approx([.2, .25, .8, .75], abs=.005)
     assert region['human_verified'] is False
     page.set_viewport_size({'width': 1100, 'height': 850})
+    playwright.expect(page.locator('rect[data-region-id="R01"]')).to_be_visible()
     rectangle = page.locator('rect[data-region-id="R01"]').bounding_box()
     scaled = page.locator('#image').bounding_box()
     assert rectangle['width'] / scaled['width'] == pytest.approx(.6, abs=.005)
@@ -159,6 +160,7 @@ def test_blind_outputs_never_requested_until_manual_reveal(browser_page):
     page.on('request', lambda request: requests.append(request.url))
     assert page.locator('#blind-mode').is_checked()
     assert page.locator('#show-model-outputs').is_disabled()
+
     assert page.locator('#model-output-results').is_hidden()
     page.locator('#reviewer').fill('TEST REVIEWER')
     page.locator('#verify').click()
@@ -172,3 +174,48 @@ def test_blind_outputs_never_requested_until_manual_reveal(browser_page):
     page.locator('#notes').fill('Temporary correction')
     assert page.locator('#model-output-results').is_hidden()
     assert page.locator('#show-model-outputs').is_disabled()
+
+
+def test_freeze_dialog_is_explicit_and_blocked_until_review(browser_page):
+    page, store = browser_page
+    page.locator('#freeze-ground-truth').click()
+    playwright.expect(page.locator('#freeze-dialog')).to_be_visible()
+    assert 'Unresolved: 54' in page.locator('#freeze-dialog').inner_text()
+    page.locator('#freeze-confirm-text').fill('FREEZE')
+    assert page.locator('#confirm-freeze').is_disabled()
+    page.locator('#freeze-cancel').click()
+    assert not list(store.directory.glob('ground_truth_v*'))
+
+
+def test_explicit_freeze_downloads_and_v2_correction(browser_page):
+    # Artificial verification is limited to this temporary test store.
+    page, store = browser_page
+    state = store.state()
+    for row in state['annotations']:
+        state = store.save(row['image_id'], row, state['revision'], verify=True, reviewer='TEST REVIEWER')
+    page.reload()
+    page.locator('#field-scenario').wait_for()
+    with page.expect_download() as download:
+        page.locator('#export-jsonl').click()
+    assert download.value.suggested_filename == 'ground_truth_draft.jsonl'
+    page.locator('#freeze-ground-truth').click()
+    assert page.locator('#confirm-freeze').is_disabled()
+    assert not list(store.directory.glob('ground_truth_v*'))
+    page.locator('#freeze-confirm-text').fill('FREEZE')
+    page.locator('#confirm-freeze').click()
+    playwright.expect(page.locator('#freeze-dialog h2')).to_have_text('Frozen v1')
+    first_bytes = (store.directory / 'ground_truth_v1.jsonl').read_bytes()
+    page.get_by_role('button', name='Close', exact=True).click()
+    page.locator('#notes').fill('Temporary correction for v2 test')
+    page.locator('#verify').click()
+    playwright.expect(page.locator('#filename')).to_have_text('IMG_3484.jpeg')
+    page.locator('#freeze-ground-truth').click()
+    page.locator('#freeze-change-reason').fill('Test-only correction')
+    page.locator('#freeze-confirm-text').fill('FREEZE')
+    page.locator('#confirm-freeze').click()
+    playwright.expect(page.locator('#freeze-dialog h2')).to_have_text('Frozen v2')
+    assert (store.directory / 'ground_truth_v1.jsonl').read_bytes() == first_bytes
+    import json
+    manifest = json.loads((store.directory / 'ground_truth_v2_manifest.json').read_text())
+    assert manifest['parent_version'] == 'v1'
+    assert manifest['changed_image_ids'] == ['IMG_3483.jpeg']

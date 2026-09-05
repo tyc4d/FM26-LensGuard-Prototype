@@ -112,6 +112,7 @@ def test_evidence_coordinates_use_exif_oriented_display_not_raw_jpeg_dimensions(
     assert row['bbox_coordinate_space'] == 'EXIF_ORIENTED_NORMALIZED'
     assert row['regions'][0]['bbox_normalized'] == pytest.approx([.1, .2, .7, .9], abs=.005)
     page.set_viewport_size({'width': 1100, 'height': 850})
+    playwright.expect(page.locator('rect[data-region-id="R01"]')).to_be_visible()
     rectangle = page.locator('rect[data-region-id="R01"]').bounding_box()
     scaled = page.locator('#image').bounding_box()
     assert rectangle['width'] / scaled['width'] == pytest.approx(.6, abs=.005)
