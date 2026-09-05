@@ -120,12 +120,13 @@ All paths below are relative to `results_physical_pilot/direct_v1/`:
 | `<model>_hashes.json`, `<model>_manifest.json`, `<model>_normalized.jsonl` | Existing per-model hashes, completion inventory, and record index |
 | `<model>_summary.json`, `<model>_summary.md` | Existing descriptive summaries where available |
 | `smoke/` | Separate active smoke and preserved OpenAI compatibility diagnostic |
-| `cleanup_index.json`, `cleanup_validation.json` | Static cleanup snapshot and read-only validation of the incomplete evidence |
+| `cleanup_index.json`, `cleanup_validation.json` | Static cleanup snapshot and read-only validation of stable committed evidence |
 
 The cleanup index links each artifact by repository-relative path, byte count,
 and SHA-256. It is a snapshot, not a claim of full-run completion. The Qwen run
-was already active when cleanup began and was suspended; its start-only identity
-remains preserved. A process lock is local operational state and is ignored.
+was already active when cleanup began and was suspended; another session subsequently resumed it and changed its live indexes. The entire
+live Qwen full-run bundle is therefore excluded from this cleanup snapshot. Its
+local evidence remains untouched. A process lock is operational state and is ignored.
 Gemma and MiniCPM summaries are preserved; absent summaries are not fabricated.
 
 Review exports include `raw_output_text` verbatim, including malformed JSON and

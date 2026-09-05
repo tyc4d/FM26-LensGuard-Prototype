@@ -1,0 +1,69 @@
+{
+  "validation_version": "physical-direct-current-v1",
+  "valid": true,
+  "full_planned_trials": 270,
+  "image_count": 54,
+  "scope": "Committed Gemma/MiniCPM full runs, pre-existing smoke evidence, and original inputs; live Qwen excluded",
+  "completeness_required": false,
+  "scientific_scoring": "NOT PERFORMED",
+  "results": {
+    "plans/gemma.json": {
+      "valid": true,
+      "planned_trials": 54,
+      "recorded_trials": 54,
+      "missing_trials": 0,
+      "completed_trials": 54
+    },
+    "plans/minicpm.json": {
+      "valid": true,
+      "planned_trials": 54,
+      "recorded_trials": 54,
+      "missing_trials": 0,
+      "completed_trials": 54
+    },
+    "smoke/physical_direct_smoke_v1/plans/gemini.json": {
+      "valid": true,
+      "planned_trials": 4,
+      "recorded_trials": 4,
+      "missing_trials": 0,
+      "completed_trials": 4
+    },
+    "smoke/physical_direct_smoke_v1/plans/gemma.json": {
+      "valid": true,
+      "planned_trials": 4,
+      "recorded_trials": 4,
+      "missing_trials": 0,
+      "completed_trials": 4
+    },
+    "smoke/physical_direct_smoke_v1/plans/minicpm.json": {
+      "valid": true,
+      "planned_trials": 4,
+      "recorded_trials": 4,
+      "missing_trials": 0,
+      "completed_trials": 4
+    },
+    "smoke/physical_direct_smoke_v1/plans/openai.json": {
+      "valid": true,
+      "planned_trials": 4,
+      "recorded_trials": 1,
+      "missing_trials": 3,
+      "completed_trials": 0
+    },
+    "smoke/physical_direct_smoke_v1/plans/qwen.json": {
+      "valid": true,
+      "planned_trials": 4,
+      "recorded_trials": 4,
+      "missing_trials": 0,
+      "completed_trials": 4
+    },
+    "smoke/physical_direct_smoke_v1_openai_high_detail/plans/openai.json": {
+      "valid": true,
+      "planned_trials": 4,
+      "recorded_trials": 4,
+      "missing_trials": 0,
+      "completed_trials": 4
+    }
+  },
+  "full_recorded_trials_in_snapshot": 108,
+  "excluded_live_model": "qwen"
+}
