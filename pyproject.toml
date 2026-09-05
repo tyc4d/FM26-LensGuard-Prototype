@@ -12,6 +12,7 @@ dependencies = [
   # against this SDK release so quota bounds remain auditable.
   "google-genai==2.22.0",
   "matplotlib>=3.8,<4",
+  "openai>=2,<3",
   "pillow>=10,<13",
   "pydantic>=2.8,<3",
   "python-dotenv>=1.0,<2",
