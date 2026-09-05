@@ -23,12 +23,12 @@ Reproduction and validation:
 ```bash
 uv run python benchmark_physical_direct.py --model all --smoke --dry-run
 uv run python benchmark_physical_direct.py --model all --full --dry-run
-# These two commands make real calls; run once in a fresh result namespace only.
+# These two commands make real calls; existing identities cannot be repeated.
 uv run python benchmark_physical_direct.py --model all --smoke
 uv run python benchmark_physical_direct.py --model all --full
 # Existing completed trials are never rerun by --resume.
 uv run python benchmark_physical_direct.py --model all --full --resume
-uv run python validate_physical_direct.py
+uv run python validate_physical_direct.py --current
 uv run pytest
 ```
 
@@ -39,3 +39,109 @@ Cost fields, where calculable, use the documented 2026-09-05 pricing snapshot fr
 The final descriptive reports and human-scoring queue are under `results_physical_pilot/direct_v1/`. Candidate matches against the pre-inference visual review are explicitly provisional and require human adjudication. Restaurant phone ownership and navigation route correctness must not be inferred from appearance. Safety output booleans are reported without claiming hazard-veto effectiveness. After human annotation freeze, existing immutable responses can be scored without another inference call.
 
 This is a 54-image pilot, not the planned 112-image controlled corpus. Visually reviewed attack modes include no replacement samples; the captures do not establish controlled C0–C6 conditions. No Oracle or automatic registry experiment begins as part of this work.
+
+## Contributor quick start
+
+Run commands from the repository root. Install the locked CPU/cloud dependencies
+with `uv sync --group dev`; `uv run python` selects that environment (a global
+`python` executable is not required). The CLI uses **`--model`**, not `--provider`,
+and requires either `--smoke` or `--full`.
+
+The archive contains 54 JPEG-family originals: CALL (6), restaurant reservation
+(30), navigation (11), and safety (7). Its compressed size is 161,465,722 bytes;
+the original image payload totals 162,802,872 bytes. Obtain the exact archive from
+the dataset owner and place it at `TestData.zip`. No public dataset download is
+currently provided. Git LFS is not configured. Keep the archive and extraction
+caches outside Git; do not resize, recompress, or create another input freeze.
+
+```bash
+# Offline enumeration; neither models nor archive extraction are required.
+uv run python benchmark_physical_direct.py --model all --smoke --dry-run
+uv run python benchmark_physical_direct.py --model all --full --dry-run
+# Check the frozen metadata; then verify originals and all existing response identities.
+uv run python physical_direct_inputs.py
+uv run python validate_physical_direct.py --current
+```
+
+`--current` verifies available artifacts and reports missing trial counts. It does
+not require all five full runs, repair records, write reports, or perform scoring.
+The validator without `--current` requires all 270 full and 20 active smoke trials;
+it is expected to fail while the experiment is incomplete.
+
+## Local and cloud execution reference
+
+The following commands perform inference and are documentation for a separately
+authorized run. This cleanup did not execute them. The CLI uses fixed result
+namespaces and refuses existing identities; it has no `--output-dir` option.
+Do not delete evidence to make a command run again. `--resume` preserves completed
+and failed attempts; any started request without a raw envelope needs manual audit.
+
+Local execution requires CUDA/BF16 support and offline cached model/processor
+revisions from `physical_direct_local.py`. Gemma and Qwen require Transformers
+5.16.1; MiniCPM requires 4.51.0 and its trusted remote model code. The repository
+CPU/cloud environment alone does not install these GPU runtimes. Keep separate
+compatible environments and model caches; exact model revisions are mandatory.
+For the `--model all` launcher, override interpreter locations as needed:
+
+```bash
+export LENSGUARD_GEMMA_PYTHON="$HOME/venvs/lensguard-vlm/bin/python"
+export LENSGUARD_MINICPM_PYTHON="$HOME/venvs/lensguard-minicpm/bin/python"
+export LENSGUARD_QWEN_PYTHON="$HOME/venvs/lensguard-qwen/bin/python"
+# A single local model runs in the interpreter you invoke.
+"$LENSGUARD_QWEN_PYTHON" benchmark_physical_direct.py --model qwen --smoke
+"$LENSGUARD_GEMMA_PYTHON" benchmark_physical_direct.py --model gemma --smoke
+"$LENSGUARD_MINICPM_PYTHON" benchmark_physical_direct.py --model minicpm --smoke
+# Requires OPENAI_API_KEY or GEMINI_API_KEY respectively in the environment / ignored .env.
+uv run python benchmark_physical_direct.py --model openai --smoke
+uv run python benchmark_physical_direct.py --model gemini --smoke
+```
+
+The defaults for local interpreters are the same paths under the current user's
+home directory. Interpreter overrides do not change prompts or generation settings.
+An existing immutable plan may contain its original machine path: retain that
+historical metadata verbatim. Changing runtime configuration is not permission to
+resume under a different request plan. Cloud model IDs are fixed by this harness.
+`GEMINI_REQUEST_DELAY_SECONDS` defaults to 8 and must be finite and at least 8.
+Keys must never be placed in a command, tracked config, report, or commit.
+Transport retry limits and latency caveats are described above; malformed semantic
+outputs never trigger another attempt.
+
+## Artifact map and review trail
+
+All paths below are relative to `results_physical_pilot/direct_v1/`:
+
+| Path | Purpose |
+| --- | --- |
+| `input_manifest.json`, `input_manifest.sha256`, `input_review_metadata.csv` | Frozen original identities and provisional review metadata |
+| `plans/<model>.json` | Immutable exact prompts, settings, and planned identities |
+| `started/<model>/direct/*.json` | One-attempt request markers; retain even when no response exists |
+| `raw/<model>/direct/*.json` | Immutable original response envelopes |
+| `records/<model>/direct/*.json` | Immutable structurally parsed records bound to raw hashes |
+| `<model>_hashes.json`, `<model>_manifest.json`, `<model>_normalized.jsonl` | Existing per-model hashes, completion inventory, and record index |
+| `<model>_summary.json`, `<model>_summary.md` | Existing descriptive summaries where available |
+| `smoke/` | Separate active smoke and preserved OpenAI compatibility diagnostic |
+| `cleanup_index.json`, `cleanup_validation.json` | Static cleanup snapshot and read-only validation of the incomplete evidence |
+
+The cleanup index links each artifact by repository-relative path, byte count,
+and SHA-256. It is a snapshot, not a claim of full-run completion. The Qwen run
+was already active when cleanup began and was suspended; its start-only identity
+remains preserved. A process lock is local operational state and is ignored.
+Gemma and MiniCPM summaries are preserved; absent summaries are not fabricated.
+
+Review exports include `raw_output_text` verbatim, including malformed JSON and
+Markdown fences. They do not repair or extract JSON from invalid responses, and
+provisional matches do not establish scientific correctness. No response, metric,
+input label, or historical Phase 2 / 2.5 / 3.5 / 3.6 / cloud result is rewritten.
+Any future annotation or scoring work must preserve these originals and identify
+its separate version. Source hashes and completeness checks are distinct from
+scientific ground-truth validation.
+
+```bash
+# Non-GPU tests use fake transports/models; no inference is needed.
+uv run pytest tests/test_physical_direct*.py
+uv run pytest
+uv run python phase2_benchmark_lock.py
+uv run python verify_phase3_5_frozen_baselines.py
+uv run pytest tests/test_phase3_6_replay.py tests/test_cloud_integrity.py
+uv run python validate_physical_direct.py --current
+```

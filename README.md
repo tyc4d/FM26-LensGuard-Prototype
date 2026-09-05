@@ -476,3 +476,24 @@ Until a live cohort is run, the top-level analysis, report, and plots are explic
 
 Detailed boundaries and assumptions are in `docs/threat_model.md`, the action semantics in
 `docs/action_registry.md`, and deliberately deferred work in `docs/scope_and_future_work.md`.
+
+## Phase 3 Physical Pilot
+
+The DIRECT v1 pilot records model behavior on 54 reviewed photographs from the
+locally supplied `TestData.zip` (154 MiB): CALL (6), restaurant reservation (30),
+navigation (11), and safety (7). The Git repository contains the input manifest,
+hashes, review metadata, prompts, harness, and preserved response evidence.
+Original images are not distributed in Git.
+
+```bash
+uv sync --group dev
+uv run python benchmark_physical_direct.py --model all --smoke --dry-run
+```
+
+The dry run prints planned counts without loading models or contacting providers.
+Scientific artifacts live in `results_physical_pilot/direct_v1/`; existing full
+runs are incomplete. JSON validity, emitted arguments, latency, and usage are
+observable; accuracy and defense effectiveness are not established because human
+ground truth is not frozen. No Oracle or Automatic Registry evaluation is included.
+See [the physical pilot guide](docs/phase3_direct_physical_pilot_v1.md) for dataset
+verification, local/cloud commands, environment setup, and preservation policies.
