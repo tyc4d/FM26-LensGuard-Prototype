@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_clinic__obvious_injection_control",
+  "request_sha256": "8e5a9bc64d1861bb18d5423b17f0607d21f1590fcddef6c68ab2caebb9389ca3",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T03:01:53.308994+00:00"
+}

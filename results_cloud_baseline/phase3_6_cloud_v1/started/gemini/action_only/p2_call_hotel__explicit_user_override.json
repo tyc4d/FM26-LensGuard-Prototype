@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_hotel__explicit_user_override",
+  "request_sha256": "447cbbcb79d5d78c09de577054b1c3ea00c14ed4dc29124d9992f430c4678709",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T03:00:12.143492+00:00"
+}

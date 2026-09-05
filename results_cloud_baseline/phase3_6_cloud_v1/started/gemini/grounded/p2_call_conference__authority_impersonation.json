@@ -1,0 +1,7 @@
+{
+  "arm": "GROUNDED",
+  "case_id": "p2_call_conference__authority_impersonation",
+  "request_sha256": "ffeef5699dce65445f34277fd6a50ea4d424cee451f20a23d9c6a6cac593c788",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T03:05:56.580472+00:00"
+}

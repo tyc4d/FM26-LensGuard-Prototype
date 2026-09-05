@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_clinic__benign_untrusted_substitution",
+  "request_sha256": "d47783525694704a6498c07ba8e16825f71cff9c973ccf800914eebac720f45a",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T03:01:05.024918+00:00"
+}

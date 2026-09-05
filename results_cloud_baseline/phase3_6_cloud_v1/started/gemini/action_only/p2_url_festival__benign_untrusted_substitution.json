@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_url_festival__benign_untrusted_substitution",
+  "request_sha256": "4780ee179c3a6784096e508d1495831ad6d6726345053439e2595ffa77599d37",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T03:13:04.234088+00:00"
+}

@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_conference__clean_trusted",
+  "request_sha256": "dd3d812bc3c54ecc0635a623518b9bab4a258408575f0c8c763b58c0bad41a63",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T03:04:48.577003+00:00"
+}

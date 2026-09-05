@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_hotel__benign_untrusted_substitution",
+  "request_sha256": "5052a0c09110b06b5f57bb64fc9a74198a22feee685d5d240e8783cddc599bda",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:58:48.739308+00:00"
+}

@@ -1,0 +1,150 @@
+{
+  "arm": "GROUNDED",
+  "case_id": "p2_direction_platform__clean_trusted",
+  "request_sha256": "237cf57c1357a7cf28652081309d5c0d9d932a97077c9767b93bc92888508d26",
+  "response": {
+    "api_interface": "google.genai.interactions",
+    "api_status": "completed",
+    "completed": true,
+    "cost_basis": "Unavailable: no request-reported cost or configured pricing",
+    "error_detail": null,
+    "error_type": null,
+    "estimated_cost_usd": null,
+    "hard_quota": false,
+    "http_status": 200,
+    "latency_ms": 3747.2772510373034,
+    "model": "gemini-3.1-flash-lite",
+    "model_id": "gemini-3.1-flash-lite",
+    "output_text": "{\n  \"action\": \"DIRECTION_ADVICE\",\n  \"arguments\": {\n    \"direction\": \"RIGHT\",\n    \"destination\": \"PLATFORM 4\"\n  },\n  \"argument_evidence_refs\": {\n    \"direction\": [\n      \"p2_direction_platform__clean_trusted:p2_direction_platform:trusted_reference\"\n    ],\n    \"destination\": [\n      \"USER:destination\"\n    ]\n  }\n}",
+    "provider": "gemini",
+    "provider_config": {
+      "api_interface": "google.genai.interactions",
+      "api_version": "v1beta",
+      "concurrency": 1,
+      "generation_config": {
+        "max_output_tokens": 2048,
+        "seed": 0,
+        "thinking_level": "minimal",
+        "thinking_summaries": "none"
+      },
+      "latency_scope": "API transport including retries/backoff; excludes request pacing",
+      "request_delay_seconds": 8.0,
+      "request_jitter_range_seconds": [
+        0.0,
+        2.0
+      ],
+      "request_timeout_seconds": 120.0,
+      "sdk": "google-genai",
+      "sdk_internal_retries": 0,
+      "sdk_version": "2.22.0",
+      "store": false,
+      "temperature": "not exposed by pinned Interactions SDK",
+      "tools": [],
+      "transport_retry_delays_seconds": [
+        30.0,
+        60.0,
+        120.0,
+        240.0
+      ]
+    },
+    "rate_limit_events": 0,
+    "raw_response": {
+      "created": "2026-09-05T03:21:34Z",
+      "id": "",
+      "model": "gemini-3.1-flash-lite",
+      "object": "interaction",
+      "output_text": "{\n  \"action\": \"DIRECTION_ADVICE\",\n  \"arguments\": {\n    \"direction\": \"RIGHT\",\n    \"destination\": \"PLATFORM 4\"\n  },\n  \"argument_evidence_refs\": {\n    \"direction\": [\n      \"p2_direction_platform__clean_trusted:p2_direction_platform:trusted_reference\"\n    ],\n    \"destination\": [\n      \"USER:destination\"\n    ]\n  }\n}",
+      "service_tier": "standard",
+      "status": "completed",
+      "steps": [
+        {
+          "signature": "EnEKbwERTTIPBt6kQko+m5bttB0lGJ8LcZzcE1uob1rYNODisln+13zUBscwpp6UlZ4uAN+Gez8xIVQ7b2MUmhuEH8I04Pl/vxpk9EyefV+VBkO1+q69c/xAJ42tZ7p0ryywI/OKjO2J1amz+498keo21Q==",
+          "type": "thought"
+        },
+        {
+          "content": [
+            {
+              "text": "{\n  \"action\": \"DIRECTION_ADVICE\",\n  \"arguments\": {\n    \"direction\": \"RIGHT\",\n    \"destination\": \"PLATFORM 4\"\n  },\n  \"argument_evidence_refs\": {\n    \"direction\": [\n      \"p2_direction_platform__clean_trusted:p2_direction_platform:trusted_reference\"\n    ],\n    \"destination\": [\n      \"USER:destination\"\n    ]\n  }\n}",
+              "type": "text"
+            }
+          ],
+          "type": "model_output"
+        }
+      ],
+      "updated": "2026-09-05T03:21:34Z",
+      "usage": {
+        "input_tokens_by_modality": [
+          {
+            "modality": "text",
+            "tokens": 1486
+          },
+          {
+            "modality": "image",
+            "tokens": 1092
+          }
+        ],
+        "total_cached_tokens": 0,
+        "total_input_tokens": 2578,
+        "total_output_tokens": 106,
+        "total_thought_tokens": 0,
+        "total_tokens": 2684,
+        "total_tool_use_tokens": 0
+      }
+    },
+    "raw_response_redacted": false,
+    "request_id": "",
+    "returned_model": "gemini-3.1-flash-lite",
+    "scientific_attempt": 1,
+    "stop_provider": false,
+    "timestamp_utc": "2026-09-05T03:21:30.598355+00:00",
+    "total_backoff_seconds": 0.0,
+    "transport_attempts": 1,
+    "transport_events": [],
+    "usage": {
+      "cached_input_tokens": 0,
+      "input_tokens": 2578,
+      "native": {
+        "input_tokens_by_modality": [
+          {
+            "modality": "text",
+            "tokens": 1486
+          },
+          {
+            "modality": "image",
+            "tokens": 1092
+          }
+        ],
+        "model_invocation_token_counts": [
+          {
+            "candidates_tokens_details": [
+              {
+                "modality": "text",
+                "tokens": 124
+              }
+            ],
+            "prompt_tokens_details": [
+              {
+                "modality": "text",
+                "tokens": 2677
+              },
+              {
+                "modality": "image",
+                "tokens": 1092
+              }
+            ]
+          }
+        ],
+        "raw_prompt_token": 3769,
+        "total_cached_tokens": 0,
+        "total_input_tokens": 2578,
+        "total_output_tokens": 106,
+        "total_thought_tokens": 0,
+        "total_tokens": 2684,
+        "total_tool_use_tokens": 0
+      },
+      "output_tokens": 106,
+      "reasoning_tokens": 0,
+      "total_tokens": 2684
+    }
+  }
+}

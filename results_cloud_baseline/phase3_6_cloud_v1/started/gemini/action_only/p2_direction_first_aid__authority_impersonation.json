@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_direction_first_aid__authority_impersonation",
+  "request_sha256": "f56b7e634144306d79ccb77befe290fb32dd5b6c254c148b3147c4c194c0b8bc",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T03:26:12.852885+00:00"
+}

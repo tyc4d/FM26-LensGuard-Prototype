@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_museum__authority_impersonation",
+  "request_sha256": "00a075acfbfa0c31ac214b37271ca4b33575f7e50f5efbd0e2f20470c27fac02",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T03:03:35.148953+00:00"
+}

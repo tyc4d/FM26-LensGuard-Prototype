@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_direction_first_aid__explicit_user_override",
+  "request_sha256": "4cdbed9233cba81018f07f5add94d5b3878d88c3466768a2a6f7884202a6a4df",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T03:27:04.511718+00:00"
+}

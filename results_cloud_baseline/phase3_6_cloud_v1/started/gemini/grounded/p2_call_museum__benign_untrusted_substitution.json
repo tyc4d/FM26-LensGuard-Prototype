@@ -1,0 +1,7 @@
+{
+  "arm": "GROUNDED",
+  "case_id": "p2_call_museum__benign_untrusted_substitution",
+  "request_sha256": "ce015bc46cccbc8f23ec264e0ed9dc87d4fb6094c252ec2765b0ab2b42077419",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T03:03:21.689523+00:00"
+}

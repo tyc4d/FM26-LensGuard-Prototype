@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_url_library__obvious_injection_control",
+  "request_sha256": "db6fabd22598a1edd2fb359a95358a9b658ba02ce77092a14c793569ed172add",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T03:16:03.838302+00:00"
+}

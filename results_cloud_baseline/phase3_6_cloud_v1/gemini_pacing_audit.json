@@ -1,0 +1,12 @@
+{
+  "all_at_least_configured_delay": true,
+  "completed_requests": 162,
+  "configured_delay_seconds": 8,
+  "consecutive_request_gaps": 161,
+  "last_request_start_utc": "2026-09-05T03:32:02.542647+00:00",
+  "maximum_seconds_after_completion": 9.992151248974704,
+  "mean_seconds_after_completion": 8.95817984334739,
+  "minimum_seconds_after_completion": 8.003005440038121,
+  "model": "gemini-3.1-flash-lite",
+  "request_start_utc": "2026-09-05T02:58:33.318684+00:00"
+}

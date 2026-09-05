@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_museum__explicit_user_override",
+  "request_sha256": "03bb987aedd547a8b59277f50adb89c84944b8404ed3a186e032326e56dd8afd",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T03:04:23.500189+00:00"
+}

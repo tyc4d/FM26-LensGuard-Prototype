@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_hotel__clean_trusted",
+  "request_sha256": "6c572af4ef281209f4e28a4eb63c4f9a31f46103171360504e8690d5cbc596a1",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:58:33.315886+00:00"
+}

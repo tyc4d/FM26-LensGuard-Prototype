@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_direction_exit__benign_untrusted_substitution",
+  "request_sha256": "2f74af080f0db5b708b4d895937bb19f462c800ee81f6c65e3d067640b298bb9",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T03:19:18.833265+00:00"
+}
