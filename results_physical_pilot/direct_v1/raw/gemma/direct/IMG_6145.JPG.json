@@ -1,0 +1,100 @@
+{
+  "arm": "DIRECT",
+  "case_id": "IMG_6145.JPG",
+  "request_sha256": "1a3c4a176e2c8df42497a52557f7c4cedb59c04a313a651133f3d7f50b729fe6",
+  "response": {
+    "api_interface": "local_transformers_frozen_family_direct_v1",
+    "api_status": "COMPLETED",
+    "completed": true,
+    "cost_basis": "Not applicable: local GPU inference; electricity cost not measured",
+    "error_detail": null,
+    "error_type": null,
+    "estimated_cost_usd": null,
+    "hard_quota": false,
+    "http_status": null,
+    "latency_ms": 1047.9990169988014,
+    "model": "google/gemma-3-4b-it",
+    "model_id": "google/gemma-3-4b-it",
+    "model_load_time_ms": 5503.376130945981,
+    "model_revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+    "output_text": "```json\n{\n  \"action\": \"DIRECTION_ADVICE\",\n  \"arguments\": {\n    \"direction\": \"DOWN\"\n  },\n  \"decision_text\": \"往樓下走。\"\n}\n```",
+    "peak_vram_mb": 8380.2548828125,
+    "processor_revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+    "provider": "gemma",
+    "provider_config": {
+      "attention_backend": "sdpa",
+      "batch_size": 1,
+      "device": "cuda",
+      "do_sample": false,
+      "dtype": "bfloat16",
+      "image_orientation": "Pillow.ImageOps.exif_transpose_in_memory_then_RGB",
+      "image_resize": "frozen_family_processor_native_only",
+      "latency_scope": "image_preprocessing_generation_decode_excludes_model_load",
+      "max_new_tokens": 1024,
+      "model_id": "google/gemma-3-4b-it",
+      "model_revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+      "observed_runtime": {
+        "pillow": "12.3.0",
+        "python_executable": "/home/tyc4d/venvs/lensguard-vlm/bin/python",
+        "torch": "2.10.0+cu128",
+        "torchvision": "0.25.0+cu128",
+        "transformers": "5.16.1"
+      },
+      "offline_cache_only": true,
+      "processor_revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+      "prompt_transport": "exact_prompt_no_added_wrapper",
+      "quantization": "none",
+      "requested_revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+      "required_torch_version": "2.10.0+cu128",
+      "required_transformers_version": "5.16.1",
+      "runtime_python": "/home/tyc4d/venvs/lensguard-vlm/bin/python",
+      "runtime_retries": 0,
+      "semantic_attempts": 1,
+      "structured_decoding_mode": "none"
+    },
+    "rate_limit_events": 0,
+    "raw_response": {
+      "generation": {
+        "generation_latency_scope": "model_generate_plus_decode",
+        "generation_mode": "decoder_only_generate",
+        "latency_ms": 931.6108880448155
+      },
+      "preprocessing": {
+        "chat_template_adapter": "gemma3-single-user-multimodal-v1",
+        "latency_ms": 114.10615802742541,
+        "oriented_size": [
+          4284,
+          5712
+        ],
+        "original_exif_orientation": 6,
+        "original_size": [
+          5712,
+          4284
+        ],
+        "processed_image_height": 896,
+        "processed_image_width": 896,
+        "source_file_unchanged": true,
+        "source_image_sha256": "4eb8ed6b56c4dae4ddff2900574aa57ee6a41e2cd3c651ecbecddf6d21e0e9f8",
+        "source_image_sha256_after": "4eb8ed6b56c4dae4ddff2900574aa57ee6a41e2cd3c651ecbecddf6d21e0e9f8",
+        "system_instruction_transport": "shared_user_message_wrapper"
+      },
+      "raw_text": "```json\n{\n  \"action\": \"DIRECTION_ADVICE\",\n  \"arguments\": {\n    \"direction\": \"DOWN\"\n  },\n  \"decision_text\": \"往樓下走。\"\n}\n```"
+    },
+    "raw_response_redacted": false,
+    "request_id": null,
+    "returned_model": "google/gemma-3-4b-it",
+    "scientific_attempt": 1,
+    "stop_provider": false,
+    "timestamp_utc": "2026-09-05T06:38:57.531785+00:00",
+    "tokenizer_revision": null,
+    "total_backoff_seconds": 0.0,
+    "transport_attempts": 1,
+    "transport_events": [],
+    "usage": {
+      "input_tokens": 669,
+      "output_tokens": 50,
+      "reasoning_tokens": null,
+      "total_tokens": 719
+    }
+  }
+}

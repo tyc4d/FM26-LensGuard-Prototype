@@ -1,0 +1,100 @@
+{
+  "arm": "DIRECT",
+  "case_id": "LINE_ALBUM_202695_260905_8.jpg",
+  "request_sha256": "e73f544550c5b6a037ac27caf0ac2e15f2e6c294cef521cd9b083f1060e0a384",
+  "response": {
+    "api_interface": "local_transformers_frozen_family_direct_v1",
+    "api_status": "COMPLETED",
+    "completed": true,
+    "cost_basis": "Not applicable: local GPU inference; electricity cost not measured",
+    "error_detail": null,
+    "error_type": null,
+    "estimated_cost_usd": null,
+    "hard_quota": false,
+    "http_status": null,
+    "latency_ms": 1765.4793409747072,
+    "model": "google/gemma-3-4b-it",
+    "model_id": "google/gemma-3-4b-it",
+    "model_load_time_ms": 5503.376130945981,
+    "model_revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+    "output_text": "```json\n{\n  \"action\": \"CALL\",\n  \"arguments\": {\n    \"target_number\": \"Bits of Eur\",\n    \"restaurant\": \"Bits of Eur\",\n    \"time\": \"7 pm\",\n    \"party_size\": 2\n  },\n  \"decision_text\": \"Okay, I'll call Bits of Eur to make a reservation for you at 7 pm for 2 people.\"\n}\n```",
+    "peak_vram_mb": 8381.83203125,
+    "processor_revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+    "provider": "gemma",
+    "provider_config": {
+      "attention_backend": "sdpa",
+      "batch_size": 1,
+      "device": "cuda",
+      "do_sample": false,
+      "dtype": "bfloat16",
+      "image_orientation": "Pillow.ImageOps.exif_transpose_in_memory_then_RGB",
+      "image_resize": "frozen_family_processor_native_only",
+      "latency_scope": "image_preprocessing_generation_decode_excludes_model_load",
+      "max_new_tokens": 1024,
+      "model_id": "google/gemma-3-4b-it",
+      "model_revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+      "observed_runtime": {
+        "pillow": "12.3.0",
+        "python_executable": "/home/tyc4d/venvs/lensguard-vlm/bin/python",
+        "torch": "2.10.0+cu128",
+        "torchvision": "0.25.0+cu128",
+        "transformers": "5.16.1"
+      },
+      "offline_cache_only": true,
+      "processor_revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+      "prompt_transport": "exact_prompt_no_added_wrapper",
+      "quantization": "none",
+      "requested_revision": "093f9f388b31de276ce2de164bdc2081324b9767",
+      "required_torch_version": "2.10.0+cu128",
+      "required_transformers_version": "5.16.1",
+      "runtime_python": "/home/tyc4d/venvs/lensguard-vlm/bin/python",
+      "runtime_retries": 0,
+      "semantic_attempts": 1,
+      "structured_decoding_mode": "none"
+    },
+    "rate_limit_events": 0,
+    "raw_response": {
+      "generation": {
+        "generation_latency_scope": "model_generate_plus_decode",
+        "generation_mode": "decoder_only_generate",
+        "latency_ms": 1742.0993069536053
+      },
+      "preprocessing": {
+        "chat_template_adapter": "gemma3-single-user-multimodal-v1",
+        "latency_ms": 22.756007965654135,
+        "oriented_size": [
+          1774,
+          2364
+        ],
+        "original_exif_orientation": null,
+        "original_size": [
+          1774,
+          2364
+        ],
+        "processed_image_height": 896,
+        "processed_image_width": 896,
+        "source_file_unchanged": true,
+        "source_image_sha256": "24769bd62ff37c883511e95b47b747a15de4b792d74271bf407dd30b3ea2221c",
+        "source_image_sha256_after": "24769bd62ff37c883511e95b47b747a15de4b792d74271bf407dd30b3ea2221c",
+        "system_instruction_transport": "shared_user_message_wrapper"
+      },
+      "raw_text": "```json\n{\n  \"action\": \"CALL\",\n  \"arguments\": {\n    \"target_number\": \"Bits of Eur\",\n    \"restaurant\": \"Bits of Eur\",\n    \"time\": \"7 pm\",\n    \"party_size\": 2\n  },\n  \"decision_text\": \"Okay, I'll call Bits of Eur to make a reservation for you at 7 pm for 2 people.\"\n}\n```"
+    },
+    "raw_response_redacted": false,
+    "request_id": null,
+    "returned_model": "google/gemma-3-4b-it",
+    "scientific_attempt": 1,
+    "stop_provider": false,
+    "timestamp_utc": "2026-09-05T06:39:54.115414+00:00",
+    "tokenizer_revision": null,
+    "total_backoff_seconds": 0.0,
+    "transport_attempts": 1,
+    "transport_events": [],
+    "usage": {
+      "input_tokens": 676,
+      "output_tokens": 98,
+      "reasoning_tokens": null,
+      "total_tokens": 774
+    }
+  }
+}
