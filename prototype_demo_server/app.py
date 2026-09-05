@@ -14,6 +14,7 @@ from pydantic import BaseModel
 
 from .policy import ActionValidationError, authorize, proposal
 from .runtime import LocalRuntime, SPEC
+from .semantics import PHONE
 
 MAX_BYTES = 10 * 1024 * 1024
 
@@ -95,6 +96,22 @@ def create_app(runtime=None):
                     policy_error = 'Policy unavailable; automatic execution must be withheld.'
                 resolved = (policy.get('resolved_action') if policy else None) or action
                 regions = policy.get('semantic_regions', []) if policy else []
+                if policy and action['action'] == 'CALL':
+                    # Inspect alternative bindings without changing the proposed
+                    # call or invoking a capability. UI can show retained good
+                    # numbers alongside instruction-derived rejected targets.
+                    policy['argument_decisions'] = []
+                    for region in regions:
+                        for number in PHONE.findall(region['content']):
+                            try:
+                                checked = authorize({'action': 'CALL', 'arguments': {'target_number': number}},
+                                                    user_request, inferred.get('semantic_regions'), {'number': [region['id']]})
+                            except ActionValidationError:
+                                continue
+                            policy['argument_decisions'].append({
+                                **{key: checked[key] for key in ('result', 'rule_id', 'affected_argument', 'reason', 'source_authority', 'required_authority', 'use')},
+                                'value': number, 'source_id': region['id'],
+                                'semantic_role': 'instruction_derived' if region['semantic_role'] == 'instruction' else region['semantic_role']})
                 policy_ms = (perf_counter() - policy_started) * 1000
                 state['status'] = 'ready'
                 return AnalyzeResponse(request_id=f'infer_{uuid4().hex}',

@@ -101,5 +101,57 @@ def authorize(action, user_request, evidence=None, argument_lineage=None):
         return decision
     if action['action'] == 'NONE':
         return allow('NO_CAPABILITY_REQUESTED', 'No side-effecting capability requested.', 'NONE')
-    # Side effects require scoped argument authorization, added separately.
+    if action['action'] == 'CALL':
+        number = normalized['arguments']['target_number']
+        if intent['trusted_values'].get('call_phone.number') == number:
+            return allow('TRUSTED_USER_ARGUMENT', 'The user explicitly supplied this call target.', 'USER',
+                         {'id': 'user:number', 'source': 'user', 'semantic_role': 'entity', 'lineage': [],
+                          'grounded_claim': {'predicate': 'phone_number', 'value': number},
+                          'grounding': {'status': 'supported', 'method': 'trusted_user_literal'}})
+        delegation = intent['delegation']
+        eligible = [item for item in retained if item['semantic_role'] == 'entity'
+                    and delegation and item['grounded_claim']['predicate'] == delegation['predicate']]
+        matches = [item for item in eligible if normalize_phone_number(item['grounded_claim']['value']) == number]
+        references = None
+        if argument_lineage is not None:
+            # Both public and native argument spellings are accepted, but one
+            # spelling cannot hide tainted lineage supplied under the other.
+            aliases = [argument_lineage[key] for key in ('number', 'target_number')
+                       if isinstance(argument_lineage, dict) and key in argument_lineage]
+            valid = bool(aliases) and all(isinstance(refs, list) and refs
+                       and all(isinstance(ref, str) for ref in refs) for refs in aliases)
+            references = list(dict.fromkeys(ref for refs in aliases for ref in refs)) if valid else []
+        if references is not None:
+            by_id = {item['id']: item for item in matches}
+            matches = [by_id[ref] for ref in references if ref in by_id] if references and all(ref in by_id for ref in references) else []
+        unique = {normalize_phone_number(item['grounded_claim']['value']) for item in eligible}
+        if matches and len(unique) == 1:
+            return allow('USER_DELEGATED_OBSERVED_ENTITY', 'The user delegated this observed entity role to call_phone.number; its literal value and lineage match.', 'DELEGATED', matches[0], True)
+        # Show the rejected source without converting it into authorization.
+        # Supplied argument ancestry wins over coincidental equal values.
+        if references:
+            sources = [item for item in regions if item['id'] in references]
+            sources.sort(key=lambda item: item['status'] != 'DENY_INSTRUCTION_INFLUENCE')
+        else:
+            sources = []
+            for item in regions:
+                for literal in PHONE.findall(item['content']):
+                    try:
+                        if normalize_phone_number(literal) == number:
+                            sources.append(item)
+                            break
+                    except (TypeError, ValueError):
+                        continue
+            sources.sort(key=lambda item: item['status'] != 'DENY_INSTRUCTION_INFLUENCE')
+        if sources:
+            selected = sources[0]
+            decision['argument_provenance']['number'] = {
+                **selected, 'lineage': [selected['id'], *selected['lineage']]}
+        decision.update(rule_id='NO_DELEGATED_GROUNDED_ARGUMENT', reason='Call target lacks a matching trusted user value or narrowly delegated, grounded entity with instruction-free lineage.')
+        return decision
+    if action['action'] == 'OPEN_URL':
+        trusted = intent['trusted_values'].get('open_url.url')
+        if trusted and normalize_url(trusted) == normalized['arguments']['url']:
+            return allow('TRUSTED_USER_ARGUMENT', 'The user explicitly supplied this URL target.', 'USER')
+    # Unsupported capability sinks and intent grammars retain their gate.
     return decision

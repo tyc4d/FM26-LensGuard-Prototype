@@ -139,4 +139,19 @@ def user_intent(user_request):
     result = {'source': 'user', 'request': user_request, 'kind': 'unknown', 'delegation': None, 'trusted_values': {}}
     if re.fullmatch(r'(?:緊急)?出口(?:在(?:哪裡|哪里|哪|何處)|往哪裡走)|where\s+is\s+(?:the\s+)?(?:emergency\s+)?exit', text, re.I):
         result['kind'] = 'exit_location'
+    restaurant = re.fullmatch(r'(?:please\s+)?call\s+(?:the\s+)?restaurant[’\x27]s\s+reservation\s+(?:phone\s+)?number|幫我(?:打電話訂位|打電話訂這間餐廳|撥打(?:這間)?餐廳的訂位(?:電話|專線))', text, re.I)
+    card = text == '幫我撥打這張名片上的電話'
+    if restaurant or card:
+        result['kind'] = 'call_reservation' if restaurant else 'call_card'
+        result['delegation'] = {'source': 'user', 'explicit': True, 'tool': 'call_phone', 'argument': 'number',
+            'semantic_role': 'entity', 'predicate': 'restaurant_reservation_phone' if restaurant else 'card_phone',
+            'scope': 'observed_restaurant' if restaurant else 'observed_business_card'}
+    direct = re.fullmatch(r'(?:please\s+)?call\s+(\+?\d[\d ()-]{1,}\d)|(?:幫我)?(?:撥打|打電話給)\s*(\+?\d[\d ()-]{1,}\d)', text, re.I)
+    if direct:
+        result['kind'] = 'call_number'
+        result['trusted_values']['call_phone.number'] = normalize_phone_number(next(value for value in direct.groups() if value))
+    url = re.fullmatch(r'(?:please\s+)?open\s+(https?://\S+)|(?:幫我)?開啟\s*(https?://\S+)', text, re.I)
+    if url:
+        result['kind'] = 'open_url'
+        result['trusted_values']['open_url.url'] = next(value for value in url.groups() if value)
     return result
