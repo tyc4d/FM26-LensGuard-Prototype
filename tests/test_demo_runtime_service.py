@@ -245,19 +245,20 @@ def test_busy_runtime_keeps_health_responsive():
         assert future.result().status_code == 200
 
 
-def test_gemma_runtime_constructs_and_loads_once(monkeypatch):
+@pytest.mark.parametrize('profile', ['qwen3vl-8b', 'gemma3-4b'])
+def test_local_runtime_constructs_and_loads_once(monkeypatch, profile):
     from types import SimpleNamespace
     from prototype_demo_server import runtime as module
     constructed = []
     class Provider:
-        model_revision = processor_revision = module.SPEC['revision']
+        model_revision = processor_revision = module.PROFILES[profile]['revision']
         loads = 0
         def load(self): self.loads += 1
         def close(self): pass
     provider = Provider()
     def factory(alias, **kwargs):
-        assert alias == 'gemma3-4b' and kwargs['max_new_tokens'] == 1024
-        assert kwargs['revision'] == module.SPEC['revision']
+        assert alias == profile and kwargs['max_new_tokens'] == 1024
+        assert kwargs['revision'] == module.PROFILES[profile]['revision']
         constructed.append(alias)
         return provider
     def invoke(actual, **kwargs):
@@ -266,14 +267,14 @@ def test_gemma_runtime_constructs_and_loads_once(monkeypatch):
         parsed, payload, diagnostics = _parse_output(Phase35Operation.ACTION_ONLY, FakeAdapter.raw)
         return SimpleNamespace(parsed=parsed, json_payload=payload, raw_response=FakeAdapter.raw, diagnostics=diagnostics, latency_ms=1,
             response_metadata={'local_inference': {'generation_latency_ms': 1}})
-    monkeypatch.setattr(module, 'gpu_preflight', lambda loaded: {})
+    monkeypatch.setattr(module, 'gpu_preflight', lambda loaded, model: {})
     monkeypatch.setattr(module, 'create_local_provider', factory)
     monkeypatch.setattr(module, 'invoke_phase3_5', invoke)
     monkeypatch.setattr(module.importlib.metadata, 'version', lambda package: {'torch':'2.10.0+cu128','transformers':'5.16.1'}[package])
-    runtime = module.GemmaRuntime()
+    runtime = module.LocalRuntime(profile)
     runtime.infer('fixture.png', 'trusted task')
     runtime.infer('fixture.png', 'trusted task')
-    assert constructed == ['gemma3-4b'] and provider.loads == 1
+    assert constructed == [profile] and provider.loads == 1
 
 
 def test_optional_warmup_runs_once():
@@ -312,3 +313,9 @@ def test_complete_reservation_maps_and_reaches_policy():
         assert result['output']['proposed_action']['tool'] == 'restaurant_reservation'
         assert result['output']['proposed_action']['arguments']['number'] == '02-2345-6661'
         assert result['policy']['result'] == 'block'
+
+
+def test_default_model_identity_is_qwen():
+    with TestClient(create_app(FakeAdapter())) as client:
+        assert client.get('/health').json()['model_profile'] == 'qwen3vl-8b'
+        assert post(client).json()['model']['model_id'] == 'Qwen/Qwen3-VL-8B-Instruct'

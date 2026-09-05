@@ -4,19 +4,19 @@ The independent `FM26-LensGuard-Demo` presentation app calls this repository ove
 
 ## Start
 
-First inspect `nvidia-smi` and experiment processes. Phase 3.6 takes priority; never stop, pause, restart or renice it for the demo. No other compute process may be active on GPU 0. Leave at least 14,000 MiB free for first load (BF16 weights plus conservative input/generation reserve); subsequent requests require 4,096 MiB free. The preflight checks process ownership and logs GPU name/total/used/free. This is a point-in-time check, not a GPU reservation against future experiment launches.
+First inspect `nvidia-smi` and experiment processes. Phase 3.6 takes priority; never stop, pause, restart or renice it for the demo. No other compute process may be active on GPU 0. Leave at least 21,000 MiB free for Qwen (14,000 for Gemma) for first load (BF16 weights plus conservative input/generation reserve); subsequent requests require 4,096 MiB free. The preflight checks process ownership and logs GPU name/total/used/free. This is a point-in-time check, not a GPU reservation against future experiment launches.
 
 ```bash
 cd /home/tyc4d/FM26-LensGuard-Prototype
 source /home/tyc4d/venvs/lensguard-vlm/bin/activate
 # Only web packages, after confirming existing AnyIO/Pydantic/Click/h11 dependencies:
 python -m pip install --no-deps -r requirements/demo-runtime.txt
-python -m prototype_demo_server --model gemma3-4b --host 127.0.0.1 --port 8010
+python -m prototype_demo_server --model qwen3vl-8b --host 127.0.0.1 --port 8010
 ```
 
-This uses the verified PyTorch 2.10.0+cu128 / Transformers 5.16.1 environment. No torch/transformers/CUDA upgrades are part of setup. The service validates those versions before loading. Downloads are disabled, and Gemma's existing pinned model/processor revision is reused from the physical-local profile: `093f9f388b31de276ce2de164bdc2081324b9767`. The model cache must already exist. Do not run multiple workers, reload, or a second VLM family. Check `/health` before starting another service.
+This uses the verified PyTorch 2.10.0+cu128 / Transformers 5.16.1 environment. No torch/transformers/CUDA upgrades are part of setup. The service validates those versions before loading. Downloads are disabled, and Qwen's existing pinned model/processor revision is reused from the physical-local profile: `0c351dd01ed87e9c1b53cbc748cba10e6187ff3b`. The model cache must already exist. Do not run multiple workers, reload, or a second VLM family. Check `/health` before starting another service.
 
-`create_local_provider('gemma3-4b')` uses the existing Gemma3Provider. `invoke_phase3_5(... ACTION_ONLY ...)` supplies the frozen prompt, native image preprocessing, deterministic BF16/SDPA generation (1024 token limit), and existing JSON extraction / Phase35ActionOutput parser. The trusted user request and visual input remain distinct; scenario IDs never add attacker text or dictate answers. Model loading is lazy and idempotent; the same provider remains resident across requests.
+The default `qwen3vl-8b` profile uses `Qwen/Qwen3-VL-8B-Instruct` through the existing Qwen3VLProvider; `--model gemma3-4b` remains available. Health and responses report the selected profile. Both use the verified Torch/Transformers environment above. `invoke_phase3_5(... ACTION_ONLY ...)` supplies the frozen prompt, native image preprocessing, deterministic BF16/SDPA generation (1024 token limit), and existing JSON extraction / Phase35ActionOutput parser. The trusted user request and visual input remain distinct; scenario IDs never add attacker text or dictate answers. Model loading is lazy and idempotent; the same provider remains resident across requests.
 
 ## API
 
@@ -63,3 +63,9 @@ The response additionally exposes `output.candidate_action`, taken directly from
 The demo boundary separately checks CALL, OPEN_URL, DIRECTION_ADVICE and NONE with the existing action normalizer before authorization or scoped delegation. A string such as `direction: "未知"` can pass the frozen parser while still being unusable as a direction. These responses preserve `parsed=true`, parser diagnostics, raw text, native action and candidate, and return an explicit `output.validation_error` with null proposed_action/policy. They do not report an infrastructure policy failure or substitute a guessed direction. The Demo displays the candidate as invalid and terminates without authorization or simulated execution, even with Guard OFF. Unexpected policy failures remain separately reported in `output.policy_error`.
 
 The demo adapter recognizes explicit traditional/simplified Chinese direction aliases, such as `向右` → `RIGHT`, `向左` → `LEFT`, `直走` → `STRAIGHT`, and `向後` → `BACK`, plus cardinal/intercardinal names. Only a separate copy passed to the gate is canonicalized; raw text, native/candidate actions and displayed proposals retain the original Chinese. The policy's native critical arguments expose the canonical direction, and navigation identifies `navigate.direction` regardless of argument order. Matching is exact after Unicode/whitespace and terminal punctuation normalization: unknown, negated or ambiguous phrases are rejected rather than interpreted. Language normalization grants no authority; missing semantic evidence still requires confirmation. The frozen benchmark normalizer and model prompts remain unchanged.
+
+### Qwen demo switch
+
+The live default is now Qwen3-VL 8B Instruct, BF16/SDPA without quantization. The historical Gemma smoke timings above do not describe Qwen. The Demo reservation request starts empty; the user supplies their request, reservation date/time and party size. No reservation values are prefilled.
+
+Qwen verification: 82 CPU tests passed; blank-image warmup parsed successfully. A generated 1000×600 card produced the exact phone number with a valid CALL in ~769 ms inference. An end-to-end Demo/SSE reservation request preserved the user-supplied date/time and party size 4 and completed (authorization remains blocked by the existing reservation policy). Five browser tests passed for blank requests, exact submission, draft isolation and reset behavior. This is a smoke test, not a camera accuracy benchmark.

@@ -13,7 +13,7 @@ from PIL import Image, UnidentifiedImageError
 from pydantic import BaseModel
 
 from .policy import ActionValidationError, authorize, proposal
-from .runtime import GemmaRuntime, SPEC
+from .runtime import LocalRuntime, SPEC
 
 MAX_BYTES = 10 * 1024 * 1024
 
@@ -30,7 +30,8 @@ class AnalyzeResponse(BaseModel):
 
 
 def create_app(runtime=None):
-    runtime = runtime if runtime is not None else GemmaRuntime()
+    runtime = runtime if runtime is not None else LocalRuntime()
+    spec = getattr(runtime, 'spec', SPEC)
     lock = asyncio.Lock()
     state = {'status': 'unloaded', 'error': None, 'warmed': False}
 
@@ -44,7 +45,7 @@ def create_app(runtime=None):
     @app.get('/health')
     def health():
         return {'status': state['status'], 'model_loaded': runtime.loaded,
-                'model_profile': 'gemma3-4b', 'device': 'cuda', 'phase': 'real',
+                'model_profile': spec['family_alias'], 'device': 'cuda', 'phase': 'real',
                 'error': state['error'], 'provenance': 'transport_only', 'policy': 'deterministic',
                 'gpu': getattr(runtime, 'gpu', None)}
 
@@ -95,7 +96,7 @@ def create_app(runtime=None):
                 policy_ms = (perf_counter() - policy_started) * 1000
                 state['status'] = 'ready'
                 return AnalyzeResponse(request_id=f'infer_{uuid4().hex}',
-                    model={'profile': 'gemma3-4b', 'model_id': SPEC['model_id'], 'revision': SPEC['revision']},
+                    model={'profile': spec['family_alias'], 'model_id': spec['model_id'], 'revision': spec['revision']},
                     input={'user_request': user_request, 'image_received': True, 'scenario_id': scenario_id},
                     output={'raw_text': inferred['raw_text'], 'parsed': action is not None,
                             'proposed_action': proposal(action) if action and validation_error is None else None,

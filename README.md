@@ -500,4 +500,4 @@ verification, local/cloud commands, environment setup, and preservation policies
 
 ## Demo Runtime Service
 
-The live demo can call the isolated, loopback-only Gemma 3 4B service without importing this repository into the Demo. It reuses the frozen action-only adapter/parser, keeps one model resident, and exposes deterministic authorization with explicitly limited transport provenance. See [startup, API, GPU safety and validation](docs/demo_runtime_service.md). Existing Phase 3.6 benchmark paths and experiment identity are unchanged.
+The live demo can call the isolated, loopback-only Qwen3-VL 8B service without importing this repository into the Demo. It reuses the frozen action-only adapter/parser, keeps one model resident, and exposes deterministic authorization with explicitly limited transport provenance. See [startup, API, GPU safety and validation](docs/demo_runtime_service.md). Existing Phase 3.6 benchmark paths and experiment identity are unchanged.
