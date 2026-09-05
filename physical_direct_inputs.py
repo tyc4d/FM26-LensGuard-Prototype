@@ -222,7 +222,9 @@ def extract_originals(archive: Path = ROOT / "TestData.zip", cache: Path | None 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--freeze", action="store_true")
-    parser.add_argument("--review-csv", type=Path, default=Path("/tmp/lensguard_testdata_review.csv"))
+    parser.add_argument("--review-csv", type=Path, help="Reviewed CSV required for an initial freeze")
     args = parser.parse_args()
+    if args.freeze and args.review_csv is None:
+        parser.error("--freeze requires --review-csv PATH; existing manifests must not be refrozen")
     value = freeze_inputs(ROOT / "TestData.zip", args.review_csv) if args.freeze else load_manifest()
     print(json.dumps({"valid": True, "images": len(value["records"]), "archive_sha256": value["archive_sha256"]}))

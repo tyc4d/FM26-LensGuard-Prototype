@@ -262,6 +262,9 @@ def main() -> int:
             command = [python, str(Path(__file__).resolve()), "--model", alias, "--" + run_type]
             if args.resume:
                 command.append("--resume")
+            if not Path(python).is_file():
+                parser.error(f"Interpreter missing for {alias}: {python}. "
+                             f"Set LENSGUARD_{alias.upper()}_PYTHON to its pinned environment.")
             subprocess.run(command, cwd=ROOT, check=True)
         return 0
     provider = construct_provider(args.model)

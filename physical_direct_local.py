@@ -38,14 +38,16 @@ LOCAL_MODELS = {
     "gemma": {
         "model_id": "google/gemma-3-4b-it", "family_alias": "gemma3-4b",
         "revision": "093f9f388b31de276ce2de164bdc2081324b9767",
-        "runtime_python": "/home/tyc4d/venvs/lensguard-vlm/bin/python",
+        "runtime_python": str(Path(os.environ.get("LENSGUARD_GEMMA_PYTHON",
+            str(Path.home() / "venvs/lensguard-vlm/bin/python"))).expanduser()),
         "transformers_version": "5.16.1",
         "default_config": {**_COMMON_CONFIG, "attention_backend": "sdpa"},
     },
     "minicpm": {
         "model_id": "openbmb/MiniCPM-V-4_5", "family_alias": "minicpm-v4.5",
         "revision": "daef484c35ec93210ec93c5e901f8f3e9b78ee34",
-        "runtime_python": "/home/tyc4d/venvs/lensguard-minicpm/bin/python",
+        "runtime_python": str(Path(os.environ.get("LENSGUARD_MINICPM_PYTHON",
+            str(Path.home() / "venvs/lensguard-minicpm/bin/python"))).expanduser()),
         "transformers_version": "4.51.0",
         "default_config": {
             **_COMMON_CONFIG, "attention_backend": "llm_sdpa_vision_eager",
@@ -57,7 +59,8 @@ LOCAL_MODELS = {
     "qwen": {
         "model_id": "Qwen/Qwen3-VL-8B-Instruct", "family_alias": "qwen3vl-8b",
         "revision": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b",
-        "runtime_python": "/home/tyc4d/venvs/lensguard-qwen/bin/python",
+        "runtime_python": str(Path(os.environ.get("LENSGUARD_QWEN_PYTHON",
+            str(Path.home() / "venvs/lensguard-qwen/bin/python"))).expanduser()),
         "transformers_version": "5.16.1",
         "default_config": {**_COMMON_CONFIG, "attention_backend": "sdpa"},
     },
