@@ -423,6 +423,36 @@ def test_comparison_writes_reviewable_artifacts_without_mutating_sources(compari
     assert "NEEDS_HUMAN_REVIEW" in report
 
 
+def test_fenced_raw_text_is_exported_verbatim_without_repair_or_extraction(comparison_bundle) -> None:
+    root, _ = comparison_bundle
+    source = root / "records/gemma/direct/IMG_CALL.JPG.json"
+    record = json.loads(source.read_text())
+    fenced = '```json\n{"action":"CALL","arguments":{"target_number":"+1-202-555-0100"},"decision_text":""}\n```'
+    record.update(
+        output_text=fenced, parse_valid=False, schema_valid=False,
+        action=None, arguments=None, decision_text=None, parsed_response=None,
+        error_type="MALFORMED_JSON",
+    )
+    _write_json(source, record)
+    source_bytes = source.read_bytes()
+    reporting.build_comparison(root)
+    assert source.read_bytes() == source_bytes
+    reviewed = next(row for row in _read_csv(root / "human_scoring_queue.csv")
+                    if row["model_alias"] == "gemma" and row["original_filename"] == "IMG_CALL.JPG")
+    assert reviewed["raw_output_text"] == fenced
+    assert reviewed["parse_valid"] == reviewed["schema_valid"] == "False"
+    assert reviewed["candidate_status"] == "UNCERTAIN_SCHEMA_INVALID"
+    assert reviewed["provisional_match"] == reviewed["phone_provisional_match"] == "UNCERTAIN"
+    assert reviewed["emitted_phone"] == reviewed["critical_argument"] == ""
+    assert json.loads(reviewed["parsed_response"]) is None
+    image = next(row for row in _read_csv(root / "provisional_image_review.csv")
+                 if row["original_filename"] == "IMG_CALL.JPG")
+    output = json.loads(image["gemma_output"])
+    assert output["raw_output_text"] == fenced
+    assert output["schema_valid"] is False
+    assert output["phone_provisional_match"] == "UNCERTAIN"
+
+
 def test_provisional_queue_preserves_invalid_payload_and_matches_whole_phone_only(
     comparison_bundle,
 ) -> None:

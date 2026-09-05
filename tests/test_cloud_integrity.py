@@ -14,7 +14,11 @@ def test_all_preexisting_scientific_files_unchanged():
         ["git", "diff", "--name-only", FROZEN_HEAD, "--"], cwd=ROOT, text=True,
     ).splitlines())
     # Only shared dependency declarations are extended by this additive experiment.
-    assert changed & original <= {"pyproject.toml", "uv.lock"}
+    documentation = {"README.md", ".gitignore"}
+    for name in changed & original & documentation:
+        previous = subprocess.check_output(["git", "show", f"{FROZEN_HEAD}:{name}"], cwd=ROOT)
+        assert (ROOT / name).read_bytes().startswith(previous), name
+    assert changed & original <= {"pyproject.toml", "uv.lock"} | documentation
 
 
 def test_preserved_cloud_result_integrity_when_present():
