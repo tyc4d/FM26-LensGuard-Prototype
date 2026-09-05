@@ -68,6 +68,14 @@ not require all five full runs, repair records, write reports, or perform scorin
 The validator without `--current` requires all 270 full and 20 active smoke trials;
 it is expected to fail while the experiment is incomplete.
 
+## Completed DIRECT inference after the cleanup snapshot
+
+The full inference coverage is now 270/270 recorded trials, with 265 complete model responses and five OpenAI token-limit responses preserved without retry. Active smoke coverage is 20/20, plus the separate initial OpenAI HTTP 400 diagnostic. No inference request is pending.
+
+See [execution notes](../results_physical_pilot/direct_v1/execution_notes.md), [descriptive comparison](../results_physical_pilot/direct_v1/comparison.md), [exact raw argument inventory](../results_physical_pilot/direct_v1/raw_argument_inventory.md), and the [270-row human scoring queue](../results_physical_pilot/direct_v1/human_scoring_queue.csv). These distinguish structural validity, raw output, provisional interpretation and required human review. No final accuracy/attack-success/defense-success score exists.
+
+The frozen scientific files remain unchanged. Three concurrent support-file changes are explicitly disclosed in final validation: append-only README/ignore guidance and the exact cloud-integrity test maintenance patch. The Qwen latency outlier retains time spent in the concurrently suspended process. Oracle and Automatic Registry evaluation remain unstarted.
+
 ## Local and cloud execution reference
 
 The following commands perform inference and are documentation for a separately

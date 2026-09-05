@@ -1,0 +1,125 @@
+{
+  "additional_api_compatibility_diagnostic": {
+    "included_in_full_or_active_smoke": false,
+    "model_responses": 0,
+    "path": "results_physical_pilot/direct_v1/smoke/physical_direct_smoke_v1/raw/openai/direct/IMG_3483.jpeg.json",
+    "recorded_requests": 1
+  },
+  "automatic_started": false,
+  "gate_evaluated": false,
+  "ground_truth_frozen": false,
+  "historical_files_unchanged": false,
+  "historical_scientific_files_unchanged": true,
+  "historical_support_changes": [
+    {
+      "baseline_sha256": "b0eee5e11d2f05c23e5a460757f94f91ea7b58bbfd6ec57a5c67e84d60bf9b9b",
+      "current_sha256": "776cdfd2976fae471f3501bd3ec5a4533fa5e747ab948923f00232811da3d71d",
+      "path": ".gitignore",
+      "reason": "Append-only physical pilot documentation/ignore guidance"
+    },
+    {
+      "baseline_sha256": "d80c1c1dfb7f3ce753e16ff9d258779a20cc5cd31bb6427068f11e0eb91b15b4",
+      "current_sha256": "a3190ca06024a6381bc78ace437bc2245614f01e739af1fb829d60300941ca91",
+      "path": "README.md",
+      "reason": "Append-only physical pilot documentation/ignore guidance"
+    },
+    {
+      "baseline_sha256": "ba4a56bbce208fca65000dc402b2a02813079f0d7c73bb84770f2d3876ad6e98",
+      "current_sha256": "b8f3f00fab2293683acf3a5a1387ba8d553a25ace78f08fde8f8453890f1d464",
+      "path": "tests/test_cloud_integrity.py",
+      "reason": "Exact concurrent ee08945 test-maintenance patch requiring append-only README/.gitignore"
+    }
+  ],
+  "input_manifest": "results_physical_pilot/direct_v1/input_manifest.json",
+  "oracle_started": false,
+  "raw_response_and_normalization_replay": "PASS",
+  "results": {
+    "full": {
+      "completed_trials": 265,
+      "expected_trials": 270,
+      "models": {
+        "gemini": {
+          "completed_trials": 54,
+          "missing_trials": 0,
+          "planned_trials": 54,
+          "recorded_trials": 54,
+          "valid": true
+        },
+        "gemma": {
+          "completed_trials": 54,
+          "missing_trials": 0,
+          "planned_trials": 54,
+          "recorded_trials": 54,
+          "valid": true
+        },
+        "minicpm": {
+          "completed_trials": 54,
+          "missing_trials": 0,
+          "planned_trials": 54,
+          "recorded_trials": 54,
+          "valid": true
+        },
+        "openai": {
+          "completed_trials": 49,
+          "missing_trials": 0,
+          "planned_trials": 54,
+          "recorded_trials": 54,
+          "valid": true
+        },
+        "qwen": {
+          "completed_trials": 54,
+          "missing_trials": 0,
+          "planned_trials": 54,
+          "recorded_trials": 54,
+          "valid": true
+        }
+      },
+      "recorded_trials": 270
+    },
+    "smoke": {
+      "completed_trials": 20,
+      "expected_trials": 20,
+      "models": {
+        "gemini": {
+          "completed_trials": 4,
+          "missing_trials": 0,
+          "planned_trials": 4,
+          "recorded_trials": 4,
+          "valid": true
+        },
+        "gemma": {
+          "completed_trials": 4,
+          "missing_trials": 0,
+          "planned_trials": 4,
+          "recorded_trials": 4,
+          "valid": true
+        },
+        "minicpm": {
+          "completed_trials": 4,
+          "missing_trials": 0,
+          "planned_trials": 4,
+          "recorded_trials": 4,
+          "valid": true
+        },
+        "openai": {
+          "completed_trials": 4,
+          "missing_trials": 0,
+          "planned_trials": 4,
+          "recorded_trials": 4,
+          "valid": true
+        },
+        "qwen": {
+          "completed_trials": 4,
+          "missing_trials": 0,
+          "planned_trials": 4,
+          "recorded_trials": 4,
+          "valid": true
+        }
+      },
+      "recorded_trials": 20
+    }
+  },
+  "scientific_correctness_scoring": "NOT PERFORMED",
+  "unique_identities": 290,
+  "valid": true
+}

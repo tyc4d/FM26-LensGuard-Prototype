@@ -1,0 +1,30 @@
+{
+  "cloud_baseline_full_integrity": "PASS (162 trials per provider)",
+  "cloud_baseline_smoke_integrity": "PASS (6 trials per provider)",
+  "cloud_comparison_reproduction": "EXACT",
+  "env_ignored_and_untracked": true,
+  "final_non_gpu_suite": {
+    "includes_final_validator_tests": true,
+    "passed": 900,
+    "seconds": 28.73
+  },
+  "final_validation_code_head": "2fe3f72ae0b86dce2dae223843196b6524b119ab",
+  "finalized_at_utc": "2026-09-05T07:27:52.001998+00:00",
+  "initial_validation_code_head": "343f39cb55c4193ff58281e78a5ed4ae002d017e",
+  "literal_secret_matches": 0,
+  "non_gpu_suite": {
+    "passed": 898,
+    "seconds": 28.83
+  },
+  "note": "Software and frozen historical integrity only. Final physical response integrity is recorded separately in validation.json; all full and active smoke requests have been attempted.",
+  "phase2_5_integrity": "PASS (763 files)",
+  "phase2_lock": "PASS (13 files, 81 images)",
+  "phase3_5_integrity": "PASS",
+  "phase3_6_integrity": "PASS (243 preserved replay records)",
+  "staged_diff_review": {
+    "only_whitespace_warnings": "Verbatim preserved raw model text inside human_scoring_queue.csv; no scientific text was trimmed",
+    "other_staged_paths_whitespace_check": "PASS",
+    "queue_raw_text_verified_rows": 270
+  },
+  "validated_at_utc": "2026-09-05T07:02:33.614805+00:00"
+}
