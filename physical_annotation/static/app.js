@@ -95,5 +95,5 @@ document.addEventListener('keydown',event=>{
   else if(!event.ctrlKey&&!event.metaKey&&!event.altKey){if(event.key==='ArrowLeft')$('previous').click();if(event.key==='ArrowRight')$('next').click();if(event.key.toLowerCase()==='v')$('verify').click();if(event.key.toLowerCase()==='n')$('needs-review').click();}
 });
 window.addEventListener('beforeunload',event=>{if(context.dirty){event.preventDefault();event.returnValue='';}});
-async function start(){context.state=await api('/api/state');const remembered=localStorage.getItem('physical-annotation-current');context.current=structuredClone(context.state.annotations.find(a=>a.image_id===remembered)||context.state.annotations[0]);render();}
+async function start(){await import('./forms.js');context.state=await api('/api/state');const remembered=localStorage.getItem('physical-annotation-current');context.current=structuredClone(context.state.annotations.find(a=>a.image_id===remembered)||context.state.annotations[0]);render();}
 start().catch(e=>message(e.message,true));
