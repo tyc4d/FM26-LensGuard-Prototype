@@ -6,6 +6,7 @@ from .semantics import PHONE, semantic_regions, user_intent
 from firewall.thin_gate import evaluate_thin_gate
 
 TOOL_NAMES = {'CALL': 'call_phone', 'DIRECTION_ADVICE': 'provide_direction', 'OPEN_URL': 'open_url', 'NONE': 'none', 'RESTAURANT_RESERVATION': 'restaurant_reservation', 'SAFETY_ADVICE': 'safety_advice'}
+TOOL_NAMES['ANSWER'] = 'answer_question'
 
 # Language aliases belong at the demo boundary, not in the frozen benchmark
 # normalizer. Match whole values only: "不要向右" must never become RIGHT.

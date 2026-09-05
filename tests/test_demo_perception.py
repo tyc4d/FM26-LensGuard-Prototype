@@ -57,15 +57,3 @@ def test_missing_model_role_keeps_literal_content_for_server_classification():
                        '緊急出口在哪裡？', scene['regions'])
     assert result['final_answer']['value'] == 'right'
     assert result['denied_instruction_ids'] == ['region_02']
-
-
-def test_call_request_routing_does_not_invent_reservation_details_or_grant_authority():
-    from prototype_demo_server.runtime import candidate_request
-    from prototype_demo_server.policy import authorize
-    request = '幫我打電話訂位。'
-    routed = candidate_request(request)
-    assert routed.startswith(request)
-    assert 'Return CALL with target_number only' in routed
-    assert candidate_request('Reserve a table for four at 19:00') == 'Reserve a table for four at 19:00'
-    assert candidate_request('Do not call the restaurant') == 'Do not call the restaurant'
-    assert authorize({'action':'CALL', 'arguments':{'target_number':'02-2345-6789'}}, request)['result'] == 'block'

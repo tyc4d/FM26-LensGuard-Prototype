@@ -15,6 +15,7 @@ from pydantic import BaseModel
 from .policy import ActionValidationError, authorize, proposal
 from .runtime import LocalRuntime, SPEC
 from .semantics import PHONE
+from .task_boundary import authorize_selection
 
 MAX_BYTES = 10 * 1024 * 1024
 
@@ -47,12 +48,12 @@ def create_app(runtime=None):
     def health():
         return {'status': state['status'], 'model_loaded': runtime.loaded,
                 'model_profile': spec['family_alias'], 'device': 'cuda', 'phase': 'real',
-                'error': state['error'], 'provenance': 'model_perception', 'policy': 'semantic-read-not-obey-v2',
+                'error': state['error'], 'provenance': 'model_perception', 'policy': 'user-task-cited-evidence-v1',
                 'gpu': getattr(runtime, 'gpu', None)}
 
-    async def analyze(image, user_request, scenario_id, mode):
+    async def analyze(image, user_request, scenario_id, mode, guard_enabled=True):
         if mode != 'action_only':
-            raise HTTPException(422, 'Only the frozen action_only mode is supported.')
+            raise HTTPException(422, 'Only the demo action_only mode is supported.')
         started = perf_counter()
         data = await image.read(MAX_BYTES + 1)
         await image.close()
@@ -75,7 +76,9 @@ def create_app(runtime=None):
                     file.flush()
                     # shield ensures cancellation cannot release the model lock while
                     # its worker still generates or delete its temporary input early.
-                    task = asyncio.create_task(asyncio.to_thread(runtime.infer, file.name, user_request))
+                    inference = (asyncio.to_thread(runtime.infer_for_demo, file.name, user_request, guard_enabled)
+                                 if hasattr(runtime, 'infer_for_demo') else asyncio.to_thread(runtime.infer, file.name, user_request))
+                    task = asyncio.create_task(inference)
                     try:
                         inferred = await asyncio.shield(task)
                     except asyncio.CancelledError:
@@ -86,7 +89,21 @@ def create_app(runtime=None):
                 policy_error = None
                 validation_error = None
                 try:
-                    policy = authorize(action, user_request, inferred.get('semantic_regions'), inferred.get('argument_lineage')) if action else None
+                    if 'boundary' in inferred:
+                        boundary = inferred['boundary']
+                        policy = authorize_selection(user_request, boundary.get('task'),
+                            inferred.get('semantic_regions'), boundary.get('selection'))
+                        action = policy['resolved_action']
+                    elif inferred.get('unprotected'):
+                        if guard_enabled and hasattr(runtime, 'infer_for_demo'):
+                            raise ValueError('Protected inference returned an unprotected proposal')
+                        policy = None
+                    elif hasattr(runtime, 'infer_for_demo'):
+                        raise ValueError('Resident inference returned no boundary result')
+                    else:
+                        # Compatibility for older in-process test adapters only.
+                        # The resident runtime always supplies boundary or unprotected.
+                        policy = authorize(action, user_request, inferred.get('semantic_regions'), inferred.get('argument_lineage')) if action else None
                 except ActionValidationError as exc:
                     policy = None
                     validation_error = str(exc)
@@ -96,7 +113,7 @@ def create_app(runtime=None):
                     policy_error = 'Policy unavailable; automatic execution must be withheld.'
                 resolved = (policy.get('resolved_action') if policy else None) or action
                 regions = policy.get('semantic_regions', []) if policy else []
-                if policy and action['action'] == 'CALL':
+                if policy and action['action'] == 'CALL' and 'boundary' not in inferred:
                     # Inspect alternative bindings without changing the proposed
                     # call or invoking a capability. UI can show retained good
                     # numbers alongside instruction-derived rejected targets.
@@ -116,11 +133,11 @@ def create_app(runtime=None):
                 state['status'] = 'ready'
                 return AnalyzeResponse(request_id=f'infer_{uuid4().hex}',
                     model={'profile': spec['family_alias'], 'model_id': spec['model_id'], 'revision': spec['revision']},
-                    input={'user_request': user_request, 'image_received': True, 'scenario_id': scenario_id},
+                    input={'user_request': user_request, 'image_received': True, 'scenario_id': scenario_id, 'guard_enabled': guard_enabled},
                     output={'raw_text': inferred['raw_text'], 'parsed': action is not None,
                             'proposed_action': proposal(resolved) if resolved and validation_error is None else None,
                             'proposed_output': {'kind': 'informational', **policy['final_answer']} if policy and policy.get('final_answer') else None,
-                            'native_action': action, 'candidate_action': inferred.get('candidate_action'),
+                            'native_action': None if 'boundary' in inferred else action, 'candidate_action': inferred.get('candidate_action'),
                             'validation_error': validation_error, 'policy_error': policy_error,
                             'diagnostics': inferred['diagnostics'], 'metadata': inferred.get('metadata', {})},
                     provenance={'kind': 'semantic_evidence' if regions else 'transport_only',
@@ -137,10 +154,10 @@ def create_app(runtime=None):
                 raise HTTPException(503, state['error']) from exc
 
     @app.post('/v1/analyze', response_model=AnalyzeResponse)
-    async def endpoint(image: UploadFile = File(...), user_request: str = Form(..., min_length=1, max_length=4000), scenario_id: str | None = Form(None), mode: str = Form('action_only')):
+    async def endpoint(image: UploadFile = File(...), user_request: str = Form(..., min_length=1, max_length=4000), scenario_id: str | None = Form(None), mode: str = Form('action_only'), guard_enabled: bool = Form(True)):
         if not user_request.strip():
             raise HTTPException(422, 'User request must not be blank.')
-        return await analyze(image, user_request, scenario_id, mode)
+        return await analyze(image, user_request, scenario_id, mode, guard_enabled)
 
     @app.post('/warmup')
     async def warmup():

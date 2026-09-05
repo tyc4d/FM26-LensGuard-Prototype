@@ -276,17 +276,12 @@ def test_local_runtime_constructs_and_loads_once(monkeypatch, profile):
         assert kwargs['revision'] == module.PROFILES[profile]['revision']
         constructed.append(alias)
         return provider
-    def invoke(actual, **kwargs):
-        assert actual is provider and kwargs['operation'] is Phase35Operation.ACTION_ONLY
-        assert kwargs['user_prompt'] == 'trusted task'
-        parsed, payload, diagnostics = _parse_output(Phase35Operation.ACTION_ONLY, FakeAdapter.raw)
-        return SimpleNamespace(parsed=parsed, json_payload=payload, raw_response=FakeAdapter.raw, diagnostics=diagnostics, latency_ms=1,
-            response_metadata={'local_inference': {'generation_latency_ms': 1}})
     monkeypatch.setattr(module, 'gpu_preflight', lambda loaded, model: {})
     monkeypatch.setattr(module, 'create_local_provider', factory)
-    monkeypatch.setattr(module, 'invoke_phase3_5', invoke)
     monkeypatch.setattr(module, 'extract_scene', lambda *args: {
         'regions': [], 'raw_text': '', 'error': None, 'method': 'model_perception', 'perception_ms': 0})
+    monkeypatch.setattr(module, 'understand_task', lambda *args: {'value': {}, 'elapsed_ms': 0})
+    monkeypatch.setattr(module, 'select_evidence', lambda *args: {'value': None, 'raw_text': '', 'error': None, 'elapsed_ms': 0})
     monkeypatch.setattr(module.importlib.metadata, 'version', lambda package: {'torch':'2.10.0+cu128','transformers':'5.16.1'}[package])
     runtime = module.LocalRuntime(profile)
     runtime.infer('fixture.png', 'trusted task')

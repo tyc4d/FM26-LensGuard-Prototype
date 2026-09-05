@@ -1,5 +1,51 @@
 # Local Demo Runtime Service
 
+## Current task/citation boundary
+
+The resident demo now uses `user-task-cited-evidence-v1`. The CPU-tested legacy
+`semantic-read-not-obey-v2` policy described in historical sections below is no
+longer the live inference path. Benchmark prompts, providers and schemas remain
+unchanged; demo prompts live under `prototype_demo_server`.
+
+Guard ON makes three fresh, stateless calls to the same resident model: user-only
+text task interpretation, image-only transcription, then text-only cited selection
+from retained records. The latter has no pixels or tool access. Detected AI-directed
+instructions are excluded unless the user explicitly requests quoting/listing them
+as data. User task fields cannot be replaced by image fields. Scene IDs and camera
+origin are assigned by the service; schema-invalid source/authority claims are
+rejected. The deterministic gate checks operation/type, source membership, exact
+quoted substrings and complete phone literals, then constructs `CALL` or `ANSWER`.
+Phone contacts need no reservation/card predicate. Every additional phone must be
+accounted for as another target or it prevents automatic selection. Unclear inputs
+return a blocked `NONE` with a specific Traditional Chinese explanation.
+
+`POST /v1/analyze` now accepts `guard_enabled=true|false` (default true). Guard OFF
+uses a separate raw image/user proposal with no task/citation protection. Neither
+path executes external tools. `ANSWER` maps to `answer_question.text`; it may contain
+an extracted phone, direction, or text. General free-form inference/translation and
+other tools are outside this minimal boundary. Metadata preserves all three raw
+model outputs/errors; the guarded `native_action` is null. `parsed` describes the
+structured service result; individual model parsing is recorded in diagnostics.
+
+Task interpretation, role classification, target association and exclusions remain
+model judgments. The checks establish literal/reference consistency relative to
+model transcription, not independent OCR, image authenticity, phone ownership or
+proof of causal reasoning. This is an integration prototype, not a full CaMeL
+implementation or a claim of general prompt-injection immunity.
+
+Run CPU regression checks with:
+
+```bash
+.venv/bin/python -m pytest tests/test_demo_task_boundary.py tests/test_demo_perception.py tests/test_demo_semantic_policy.py tests/test_demo_runtime_service.py
+```
+
+Against an already running and idle loopback model service, run
+`.venv/bin/python scripts/smoke_demo_task_boundary.py` for synthetic image checks.
+Raw results are stored under `/tmp/lensguard-task-boundary-live`. This checks
+integration, not physical camera accuracy or held-out attack success rates.
+
+The setup instructions and historical behavior/results below remain for reference.
+
 The independent `FM26-LensGuard-Demo` presentation app calls this repository over loopback HTTP. No repository merge, cross-repository Python imports, model code copies, or editable package installation is needed. Benchmark modules/configuration are unchanged.
 
 ## Start
@@ -27,6 +73,7 @@ The default `qwen3vl-8b` profile uses `Qwen/Qwen3-VL-8B-Instruct` through the ex
 Response `contract_version=lensguard-demo-v1` carries model identity, input acknowledgement, raw_text, parsed, proposed_action, native_action, parser diagnostics, provenance, policy and actual timing. Invalid model output is HTTP 200 with parsed=false and null proposed_action/policy, preserving raw text. Invalid input is 422/413, busy/loading contention 409, GPU/runtime failures 503. No model retry or mock fallback is performed.
 
 Temporary images are deleted after inference; cancellation waits for the worker before releasing the model lock or deleting its image. Timing includes inference, generation, parsing-plus-metadata, deterministic policy, and total request handling; first total includes model loading. Raw images and outputs are never written into benchmark results.
+
 
 ## Authorization boundary and limitations
 
