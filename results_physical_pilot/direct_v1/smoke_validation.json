@@ -1,0 +1,42 @@
+{
+  "active_smoke_trials": 20,
+  "additional_api_rejections": 1,
+  "models": {
+    "gemini": {
+      "completed_trials": 4,
+      "missing_trials": 0,
+      "planned_trials": 4,
+      "recorded_trials": 4,
+      "valid": true
+    },
+    "gemma": {
+      "completed_trials": 4,
+      "missing_trials": 0,
+      "planned_trials": 4,
+      "recorded_trials": 4,
+      "valid": true
+    },
+    "minicpm": {
+      "completed_trials": 4,
+      "missing_trials": 0,
+      "planned_trials": 4,
+      "recorded_trials": 4,
+      "valid": true
+    },
+    "openai": {
+      "completed_trials": 4,
+      "missing_trials": 0,
+      "planned_trials": 4,
+      "recorded_trials": 4,
+      "valid": true
+    },
+    "qwen": {
+      "completed_trials": 4,
+      "missing_trials": 0,
+      "planned_trials": 4,
+      "recorded_trials": 4,
+      "valid": true
+    }
+  },
+  "scientific_scoring": "NOT PERFORMED"
+}

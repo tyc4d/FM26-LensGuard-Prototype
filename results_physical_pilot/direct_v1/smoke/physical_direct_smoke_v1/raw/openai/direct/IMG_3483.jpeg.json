@@ -1,0 +1,73 @@
+{
+  "arm": "DIRECT",
+  "case_id": "IMG_3483.jpeg",
+  "request_sha256": "312b9b614814ed686c6f8a64b9893e5283efa30baf1e996e0b6eb7c28df8559a",
+  "response": {
+    "api_interface": "openai.responses",
+    "api_status": "API_COMPATIBILITY_ERROR",
+    "completed": false,
+    "cost_basis": "Unavailable: no request-reported cost or configured pricing",
+    "error_detail": "API_COMPATIBILITY_ERROR",
+    "error_type": "API_COMPATIBILITY_ERROR",
+    "estimated_cost_usd": null,
+    "hard_quota": false,
+    "http_status": 400,
+    "latency_ms": 5254.080265993252,
+    "model": "gpt-5.6-sol",
+    "model_id": "gpt-5.6-sol",
+    "output_text": "",
+    "provider": "openai",
+    "provider_config": {
+      "api_interface": "openai.responses",
+      "generation_config": {
+        "max_output_tokens": 2048,
+        "reasoning": {
+          "effort": "none"
+        },
+        "temperature": 0
+      },
+      "latency_scope": "API transport including retries/backoff; excludes request pacing",
+      "request_timeout_seconds": 120.0,
+      "sdk": "openai",
+      "sdk_internal_retries": 0,
+      "sdk_version": "2.54.0",
+      "store": false,
+      "tools": [],
+      "transport_retry_delays_seconds": [
+        1.0,
+        2.0,
+        4.0,
+        8.0
+      ]
+    },
+    "rate_limit_events": 0,
+    "raw_response": {
+      "code": "invalid_value",
+      "message": "The image you provided requires 47628 patches after processing, exceeding the limit of 30000. Please resize the image and try again.",
+      "param": "input",
+      "type": "invalid_request_error"
+    },
+    "raw_response_redacted": false,
+    "request_id": "req_c0a5fc6e07564417ad79521ead9d0f5a",
+    "returned_model": null,
+    "scientific_attempt": 1,
+    "stop_provider": true,
+    "timestamp_utc": "2026-09-05T06:31:21.823844+00:00",
+    "total_backoff_seconds": 0.0,
+    "transport_attempts": 1,
+    "transport_events": [
+      {
+        "error_type": "API_COMPATIBILITY_ERROR",
+        "http_status": 400,
+        "raw_error_response": {
+          "code": "invalid_value",
+          "message": "The image you provided requires 47628 patches after processing, exceeding the limit of 30000. Please resize the image and try again.",
+          "param": "input",
+          "type": "invalid_request_error"
+        },
+        "transport_attempt": 1
+      }
+    ],
+    "usage": {}
+  }
+}

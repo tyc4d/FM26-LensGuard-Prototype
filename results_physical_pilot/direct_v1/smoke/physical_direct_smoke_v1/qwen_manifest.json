@@ -1,0 +1,32 @@
+{
+  "completed_case_ids": [
+    "IMG_3483.jpeg",
+    "IMG_6152.JPG",
+    "IMG_6157.JPG",
+    "IMG_6164.JPG"
+  ],
+  "completed_trial_ids": [
+    "IMG_3483.jpeg/DIRECT",
+    "IMG_6152.JPG/DIRECT",
+    "IMG_6157.JPG/DIRECT",
+    "IMG_6164.JPG/DIRECT"
+  ],
+  "completed_trials": 4,
+  "experiment_id": "lensguard-phase3-physical-direct-v1",
+  "failed_case_ids": [],
+  "failed_trial_ids": [],
+  "incomplete": false,
+  "incomplete_due_to_quota": false,
+  "interrupted_trial_ids": [],
+  "model": "Qwen/Qwen3-VL-8B-Instruct",
+  "pending_case_ids": [],
+  "pending_trial_ids": [],
+  "planned_trials": 4,
+  "provider": "qwen",
+  "rate_limit_events": 0,
+  "recorded_trials": 4,
+  "resume_policy": "Only missing trials; completed and failed records are immutable. An interrupted send with no raw envelope requires manual audit.",
+  "stop_reasons": [],
+  "total_backoff_seconds": 0.0,
+  "transport_retry_count": 0
+}
