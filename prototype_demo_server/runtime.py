@@ -44,7 +44,16 @@ class LocalRuntime:
         self.gpu = None
 
     def infer_for_demo(self, path, user_request, guard_enabled=True):
-        return self.infer(path, user_request, guard_enabled)
+        try:
+            return self.infer(path, user_request, guard_enabled)
+        finally:
+            # Release this request's unused allocator reserve before the next
+            # nvidia-smi preflight. Resident weights stay loaded. Without this,
+            # a large photograph can strand an idle service below its free-VRAM
+            # threshold even though the reserve is reusable by this process.
+            if self.loaded and self.provider is not None:
+                self.provider._synchronize()
+                self.provider._torch_module().cuda.empty_cache()
 
     def infer(self, path, user_request, guard_enabled=True):
         self.gpu = gpu_preflight(self.loaded, self.model_profile)

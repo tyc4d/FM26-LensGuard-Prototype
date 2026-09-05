@@ -74,6 +74,13 @@ Response `contract_version=lensguard-demo-v1` carries model identity, input ackn
 
 Temporary images are deleted after inference; cancellation waits for the worker before releasing the model lock or deleting its image. Timing includes inference, generation, parsing-plus-metadata, deterministic policy, and total request handling; first total includes model loading. Raw images and outputs are never written into benchmark results.
 
+After each resident API request, `infer_for_demo` synchronizes the provider and
+releases unused CUDA allocator cache in `finally`, including on errors. Model
+weights stay loaded. A large physical photograph previously left enough unused
+cached VRAM to make the next `nvidia-smi` preflight reject this same idle service;
+cache release prevents that deadlock without lowering the free-memory threshold
+or changing another process. This does not change prompts, model settings,
+perception, or authorization rules.
 
 ## Authorization boundary and limitations
 
