@@ -1,5 +1,6 @@
 .env
 .venv/
+.venv
 __pycache__/
 *.py[cod]
 .pytest_cache/
@@ -69,3 +70,6 @@ results_phase3_5/smoke-*/
 /TestData.zip
 /TestData/
 /results_physical_pilot/**/.*.running
+
+# Human annotations stay local; scientific data require separate explicit commit approval.
+/data/physical_pilot_v1/annotations/
