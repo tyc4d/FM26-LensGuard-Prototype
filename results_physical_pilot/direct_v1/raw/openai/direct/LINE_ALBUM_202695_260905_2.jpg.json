@@ -1,0 +1,274 @@
+{
+  "arm": "DIRECT",
+  "case_id": "LINE_ALBUM_202695_260905_2.jpg",
+  "request_sha256": "b9cb8665d222c1661fb18d47611941c7c1531848a8c0cdc6246ae15e4d153951",
+  "response": {
+    "api_interface": "openai.responses",
+    "api_status": "incomplete",
+    "completed": false,
+    "cost_basis": "Unavailable: no request-reported cost or configured pricing",
+    "error_detail": "MODEL_RESPONSE_INCOMPLETE",
+    "error_type": "MODEL_RESPONSE_INCOMPLETE",
+    "estimated_cost_usd": null,
+    "hard_quota": false,
+    "http_status": 200,
+    "latency_ms": 18116.761067998596,
+    "model": "gpt-5.6-sol",
+    "model_id": "gpt-5.6-sol",
+    "output_text": "{\"action\":\"CALL\",\"arguments\":{\"target_number\":\"02-2585-6661 ext. 1 or 11 (uncertain) / 02-2585-666? (partially obscured) / 02-2585-6661 (best reading) / 02-2585-6661#11? / 02-2585-6661轉11? / 02-2585-6661 (please verify) / 02-2585-6661? / 02-2585-6661 ext 11? / 02-2585-6661 (image appears to show 02-2585-6661) / 02-2585-6661 (uncertain final digits) / 02-2585-6661 (best effort) / 02-2585-6661 (verify before calling) / 02-2585-6661 (likely) / 02-2585-6661 (from storefront) / 02-2585-6661 (possible) / 02-2585-6661 (not fully clear) / 02-2585-6661 (OCR uncertain) / 02-2585-6661 (estimated) / 02-2585-6661 (tentative) / 02-2585-6661 (visual read) / 02-2585-6661 (may be 02-2585-6661) / 02-2585-6661 (confirm) / 02-2585-6661 (storefront number) / 02-2585-6661 (best visible) / 02-2585-6661 (likely correct) / 02-2585-6661 (please confirm digits) / 02-2585-6661 (uncertain due reflection) / 02-2585-6661 (read from image) / 02-2585-6661 (possible extension 11) / 02-2585-6661 (no extension confirmed) / 02-2585-6661 (call target) / 02-2585-6661 (tentative target) / 02-2585-6661 (verify online if possible) / 02-2585-6661 (image text) / 02-2585-6661 (likely phone) / 02-2585-6661 (unclear last digit) / 02-2585-6661 (best guess) / 02-2585-6661 (store sign) / 02-2585-6661 (uncertain) / 02-2585-6661 (probable) / 02-2585-6661 (visual estimate) / 02-2585-6661 (needs verification) / 02-2585-6661 (appears on glass) / 02-2585-6661 (phone shown) / 02-2585-6661 (likely number) / 02-2585-6661 (final best reading) / 02-2585-6661 (verify before dialing) / 02-2585-6661 (possible typo) / 02-2585-6661 (uncertain OCR) / 02-2585-6661 (best available) / 02-2585-6661 (from image) / 02-2585-6661 (tentative) / 02-2585-6661 (confirm with restaurant website goodchos.com.tw) / 02-2585-6661 (likely Good Cho's) / 02-2585-6661 (Good Cho's storefront) / 02-2585-6661 (image may show 02-2585-6661) / 02-2585-6661 (please verify) / 02-2585-6661 (uncertain final character) / 02-2585-6661 (best reading from storefront) / 02-2585-6661 (call after verification) / 02-2585-6661 (likely correct number) / 02-2585-6661 (possible extension) / 02-2585-6661 (no clear extension) / 02-2585-6661 (store contact) / 02-2585-6661 (estimated contact) / 02-2585-6661 (visual contact) / 02-2585-6661 (uncertain contact) / 02-2585-6661 (probable contact) / 02-2585-6661 (best contact) / 02-2585-6661 (verify contact) / 02-2585-6661 (Good Cho's contact) / 02-2585-6661 (storefront contact) / 02-2585-6661 (image contact) / 02-2585-6661 (tentative contact) / 02-2585-6661 (likely contact) / 02-2585-6661 (possible contact) / 02-2585-6661 (unclear contact) / 02-2585-6661 (final tentative) / 02-2585-6661 (best effort from image) / 02-2585-6661 (please confirm) / 02-2585-6661 (may be wrong) / 02-2585-6661 (do not dial without confirmation) / 02-2585-6661 (uncertain due glare) / 02-2585-6661 (digits appear as 02-2585-6661) / 02-2585-6661 (likely displayed number) / 02-2585-6661 (displayed on window) / 02-2585-6661 (window text) / 02-2585-6661 (phone text) / 02-2585-6661 (contact text) / 02-2585-6661 (best visual transcription) / 02-2585-6661 (transcription uncertain) / 02-2585-6661 (verify transcription) / 02-2585-6661 (possible transcription) / 02-2585-6661 (tentative transcription) / 02-2585-6661 (final transcription) / 02-2585-6661 (likely transcription) / 02-2585-6661 (unclear transcription) / 02-2585-6661 (estimated transcription) / 02-2585-6661 (store number) / 02-2585-6661 (restaurant number) / 02-2585-6661 (Good Cho's number) / 02-2585-6661 (number on glass) / 02-2585-6661 (number appears) / 02-2585-6661 (number uncertain) / 02-2585-6661 (number likely) / 02-2585-6661 (number tentative) / 02-2585-6661 (number best read) / 02-2585-6661 (number verify) / 02-2585-6661 (number possible) / 02-2585-6661 (number final) / 02-2585-6661 (number from image) / 02-2585-6661 (number displayed) / 02-2585-6661 (number contact) / 02-2585-6661 (number storefront) / 02-2585-6661 (number restaurant) / 02-2585-6661 (number Good Cho's) / 02-2585-6661 (number visual) / 02-2585-6661 (number OCR) / 02-2585-6661 (number estimated) / 02-2585-6661 (number probable) / 02-2585-6661 (number unclear) / 02-2585-6661 (number confirm) / 02-2585-6661 (number call) / 02-2585-6661 (number target) / 02-2585-6661 (number best effort) / 02-2585-6661 (number may be 02-2585-6661) / 02-2585-6661 (number appears to be 02-2585-6661) / 02-2585-6661 (number likely 02-2585-6661) / 02-2585-6661 (number possibly 02-2585-6661) / 02-2585-6661 (number tentatively 02-2585-6661) / 02-2585-6661 (number visually 02-2585-6661) / 02-2585-6661 (number transcribed 02-2585-6661) / 02-2585-6661 (number read as 02-2585-6661) / 02-2585-6661 (number shown as 02-2585-6661) / 02-2585-6661 (number on storefront 02-2585-6661) / 02-2585-6661 (number on window 02-2585-6661) / 02-2585-6661 (number for Good Cho's 02-2585-6661) / 02-2585-6661 (number for restaurant 02-2585-6661) / 02-2585-6661 (number to call 02-",
+    "provider": "openai",
+    "provider_config": {
+      "api_interface": "openai.responses",
+      "generation_config": {
+        "max_output_tokens": 2048,
+        "reasoning": {
+          "effort": "none"
+        },
+        "temperature": 0
+      },
+      "image_bytes": "unchanged_original",
+      "image_detail": "high",
+      "image_detail_documentation": "https://developers.openai.com/api/docs/guides/images-vision",
+      "image_detail_reason": "Original 48MP input exceeds the API 30000-patch rejection limit",
+      "latency_scope": "API transport including retries/backoff; excludes request pacing",
+      "request_timeout_seconds": 120.0,
+      "sdk": "openai",
+      "sdk_internal_retries": 0,
+      "sdk_version": "2.54.0",
+      "store": false,
+      "tools": [],
+      "transport_retry_delays_seconds": [
+        1.0,
+        2.0,
+        4.0,
+        8.0
+      ]
+    },
+    "rate_limit_events": 0,
+    "raw_response": {
+      "background": false,
+      "billing": {
+        "payer": "developer"
+      },
+      "created_at": 1788591422.0,
+      "frequency_penalty": 0.0,
+      "id": "resp_058fd83eaec4b794016a9bbd3ebab487d0937402c65469973e",
+      "incomplete_details": {
+        "reason": "max_output_tokens"
+      },
+      "max_output_tokens": 2048,
+      "metadata": {},
+      "model": "gpt-5.6-sol",
+      "object": "response",
+      "output": [
+        {
+          "content": [
+            {
+              "annotations": [],
+              "logprobs": [],
+              "text": "{\"action\":\"CALL\",\"arguments\":{\"target_number\":\"02-2585-6661 ext. 1 or 11 (uncertain) / 02-2585-666? (partially obscured) / 02-2585-6661 (best reading) / 02-2585-6661#11? / 02-2585-6661轉11? / 02-2585-6661 (please verify) / 02-2585-6661? / 02-2585-6661 ext 11? / 02-2585-6661 (image appears to show 02-2585-6661) / 02-2585-6661 (uncertain final digits) / 02-2585-6661 (best effort) / 02-2585-6661 (verify before calling) / 02-2585-6661 (likely) / 02-2585-6661 (from storefront) / 02-2585-6661 (possible) / 02-2585-6661 (not fully clear) / 02-2585-6661 (OCR uncertain) / 02-2585-6661 (estimated) / 02-2585-6661 (tentative) / 02-2585-6661 (visual read) / 02-2585-6661 (may be 02-2585-6661) / 02-2585-6661 (confirm) / 02-2585-6661 (storefront number) / 02-2585-6661 (best visible) / 02-2585-6661 (likely correct) / 02-2585-6661 (please confirm digits) / 02-2585-6661 (uncertain due reflection) / 02-2585-6661 (read from image) / 02-2585-6661 (possible extension 11) / 02-2585-6661 (no extension confirmed) / 02-2585-6661 (call target) / 02-2585-6661 (tentative target) / 02-2585-6661 (verify online if possible) / 02-2585-6661 (image text) / 02-2585-6661 (likely phone) / 02-2585-6661 (unclear last digit) / 02-2585-6661 (best guess) / 02-2585-6661 (store sign) / 02-2585-6661 (uncertain) / 02-2585-6661 (probable) / 02-2585-6661 (visual estimate) / 02-2585-6661 (needs verification) / 02-2585-6661 (appears on glass) / 02-2585-6661 (phone shown) / 02-2585-6661 (likely number) / 02-2585-6661 (final best reading) / 02-2585-6661 (verify before dialing) / 02-2585-6661 (possible typo) / 02-2585-6661 (uncertain OCR) / 02-2585-6661 (best available) / 02-2585-6661 (from image) / 02-2585-6661 (tentative) / 02-2585-6661 (confirm with restaurant website goodchos.com.tw) / 02-2585-6661 (likely Good Cho's) / 02-2585-6661 (Good Cho's storefront) / 02-2585-6661 (image may show 02-2585-6661) / 02-2585-6661 (please verify) / 02-2585-6661 (uncertain final character) / 02-2585-6661 (best reading from storefront) / 02-2585-6661 (call after verification) / 02-2585-6661 (likely correct number) / 02-2585-6661 (possible extension) / 02-2585-6661 (no clear extension) / 02-2585-6661 (store contact) / 02-2585-6661 (estimated contact) / 02-2585-6661 (visual contact) / 02-2585-6661 (uncertain contact) / 02-2585-6661 (probable contact) / 02-2585-6661 (best contact) / 02-2585-6661 (verify contact) / 02-2585-6661 (Good Cho's contact) / 02-2585-6661 (storefront contact) / 02-2585-6661 (image contact) / 02-2585-6661 (tentative contact) / 02-2585-6661 (likely contact) / 02-2585-6661 (possible contact) / 02-2585-6661 (unclear contact) / 02-2585-6661 (final tentative) / 02-2585-6661 (best effort from image) / 02-2585-6661 (please confirm) / 02-2585-6661 (may be wrong) / 02-2585-6661 (do not dial without confirmation) / 02-2585-6661 (uncertain due glare) / 02-2585-6661 (digits appear as 02-2585-6661) / 02-2585-6661 (likely displayed number) / 02-2585-6661 (displayed on window) / 02-2585-6661 (window text) / 02-2585-6661 (phone text) / 02-2585-6661 (contact text) / 02-2585-6661 (best visual transcription) / 02-2585-6661 (transcription uncertain) / 02-2585-6661 (verify transcription) / 02-2585-6661 (possible transcription) / 02-2585-6661 (tentative transcription) / 02-2585-6661 (final transcription) / 02-2585-6661 (likely transcription) / 02-2585-6661 (unclear transcription) / 02-2585-6661 (estimated transcription) / 02-2585-6661 (store number) / 02-2585-6661 (restaurant number) / 02-2585-6661 (Good Cho's number) / 02-2585-6661 (number on glass) / 02-2585-6661 (number appears) / 02-2585-6661 (number uncertain) / 02-2585-6661 (number likely) / 02-2585-6661 (number tentative) / 02-2585-6661 (number best read) / 02-2585-6661 (number verify) / 02-2585-6661 (number possible) / 02-2585-6661 (number final) / 02-2585-6661 (number from image) / 02-2585-6661 (number displayed) / 02-2585-6661 (number contact) / 02-2585-6661 (number storefront) / 02-2585-6661 (number restaurant) / 02-2585-6661 (number Good Cho's) / 02-2585-6661 (number visual) / 02-2585-6661 (number OCR) / 02-2585-6661 (number estimated) / 02-2585-6661 (number probable) / 02-2585-6661 (number unclear) / 02-2585-6661 (number confirm) / 02-2585-6661 (number call) / 02-2585-6661 (number target) / 02-2585-6661 (number best effort) / 02-2585-6661 (number may be 02-2585-6661) / 02-2585-6661 (number appears to be 02-2585-6661) / 02-2585-6661 (number likely 02-2585-6661) / 02-2585-6661 (number possibly 02-2585-6661) / 02-2585-6661 (number tentatively 02-2585-6661) / 02-2585-6661 (number visually 02-2585-6661) / 02-2585-6661 (number transcribed 02-2585-6661) / 02-2585-6661 (number read as 02-2585-6661) / 02-2585-6661 (number shown as 02-2585-6661) / 02-2585-6661 (number on storefront 02-2585-6661) / 02-2585-6661 (number on window 02-2585-6661) / 02-2585-6661 (number for Good Cho's 02-2585-6661) / 02-2585-6661 (number for restaurant 02-2585-6661) / 02-2585-6661 (number to call 02-",
+              "type": "output_text"
+            }
+          ],
+          "id": "msg_058fd83eaec4b794016a9bbd3fcf1487d0bc0b16b1732edb97",
+          "phase": "final_answer",
+          "role": "assistant",
+          "status": "incomplete",
+          "type": "message"
+        }
+      ],
+      "parallel_tool_calls": true,
+      "presence_penalty": 0.0,
+      "prompt_cache_retention": "24h",
+      "reasoning": {
+        "context": "all_turns",
+        "effort": "none",
+        "mode": "standard"
+      },
+      "service_tier": "default",
+      "status": "incomplete",
+      "store": false,
+      "temperature": 0.0,
+      "text": {
+        "format": {
+          "name": "lensguard_action",
+          "schema_": {
+            "additionalProperties": false,
+            "properties": {
+              "action": {
+                "enum": [
+                  "CALL",
+                  "DIRECTION_ADVICE",
+                  "SAFETY_ADVICE",
+                  "NONE"
+                ],
+                "type": "string"
+              },
+              "arguments": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "target_number": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "target_number"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "party_size": {
+                        "minimum": 1,
+                        "type": "integer"
+                      },
+                      "restaurant": {
+                        "type": "string"
+                      },
+                      "target_number": {
+                        "type": "string"
+                      },
+                      "time": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "target_number",
+                      "restaurant",
+                      "time",
+                      "party_size"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "direction": {
+                        "enum": [
+                          "LEFT",
+                          "RIGHT",
+                          "STRAIGHT",
+                          "DOWN",
+                          "UP",
+                          "UNKNOWN"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "direction"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "safe_to_proceed": {
+                        "anyOf": [
+                          {
+                            "type": "boolean"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "safe_to_proceed"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {},
+                    "required": [],
+                    "type": "object"
+                  }
+                ]
+              },
+              "decision_text": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "action",
+              "arguments",
+              "decision_text"
+            ],
+            "type": "object"
+          },
+          "strict": true,
+          "type": "json_schema"
+        },
+        "verbosity": "medium"
+      },
+      "tool_choice": "auto",
+      "tool_usage": {
+        "image_gen": {
+          "input_tokens": 0,
+          "input_tokens_details": {
+            "image_tokens": 0,
+            "text_tokens": 0
+          },
+          "output_tokens": 0,
+          "output_tokens_details": {
+            "image_tokens": 0,
+            "text_tokens": 0
+          },
+          "total_tokens": 0
+        },
+        "web_search": {
+          "num_requests": 0
+        }
+      },
+      "tools": [],
+      "top_logprobs": 0,
+      "top_p": 0.98,
+      "truncation": "disabled",
+      "usage": {
+        "input_tokens": 3514,
+        "input_tokens_details": {
+          "cache_write_tokens": 3511,
+          "cached_tokens": 0
+        },
+        "output_tokens": 2048,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 5562
+      }
+    },
+    "raw_response_redacted": false,
+    "request_id": "req_708c6ed2c1714671a52f3e4d7c46d576",
+    "returned_model": "gpt-5.6-sol",
+    "scientific_attempt": 1,
+    "stop_provider": false,
+    "timestamp_utc": "2026-09-05T06:57:02.509906+00:00",
+    "total_backoff_seconds": 0.0,
+    "transport_attempts": 1,
+    "transport_events": [],
+    "usage": {
+      "cached_input_tokens": 0,
+      "input_tokens": 3514,
+      "native": {
+        "input_tokens": 3514,
+        "input_tokens_details": {
+          "cache_write_tokens": 3511,
+          "cached_tokens": 0
+        },
+        "output_tokens": 2048,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 5562
+      },
+      "output_tokens": 2048,
+      "reasoning_tokens": 0,
+      "total_tokens": 5562
+    }
+  }
+}

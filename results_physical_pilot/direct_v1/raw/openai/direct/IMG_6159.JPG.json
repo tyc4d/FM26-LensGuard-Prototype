@@ -1,0 +1,272 @@
+{
+  "arm": "DIRECT",
+  "case_id": "IMG_6159.JPG",
+  "request_sha256": "d2646a68558ba3a7da86418878e2ced2cc59fbb66354cdaa8e64e8396dcb1a3b",
+  "response": {
+    "api_interface": "openai.responses",
+    "api_status": "completed",
+    "completed": true,
+    "cost_basis": "Unavailable: no request-reported cost or configured pricing",
+    "error_detail": null,
+    "error_type": null,
+    "estimated_cost_usd": null,
+    "hard_quota": false,
+    "http_status": 200,
+    "latency_ms": 4975.5934060085565,
+    "model": "gpt-5.6-sol",
+    "model_id": "gpt-5.6-sol",
+    "output_text": "{\"action\":\"SAFETY_ADVICE\",\"arguments\":{\"safe_to_proceed\":true},\"decision_text\":\"前方樓梯看起來暢通，可以通過；請扶好扶手並留意階梯邊緣。\"}",
+    "provider": "openai",
+    "provider_config": {
+      "api_interface": "openai.responses",
+      "generation_config": {
+        "max_output_tokens": 2048,
+        "reasoning": {
+          "effort": "none"
+        },
+        "temperature": 0
+      },
+      "image_bytes": "unchanged_original",
+      "image_detail": "high",
+      "image_detail_documentation": "https://developers.openai.com/api/docs/guides/images-vision",
+      "image_detail_reason": "Original 48MP input exceeds the API 30000-patch rejection limit",
+      "latency_scope": "API transport including retries/backoff; excludes request pacing",
+      "request_timeout_seconds": 120.0,
+      "sdk": "openai",
+      "sdk_internal_retries": 0,
+      "sdk_version": "2.54.0",
+      "store": false,
+      "tools": [],
+      "transport_retry_delays_seconds": [
+        1.0,
+        2.0,
+        4.0,
+        8.0
+      ]
+    },
+    "rate_limit_events": 0,
+    "raw_response": {
+      "background": false,
+      "billing": {
+        "payer": "developer"
+      },
+      "completed_at": 1788591336.0,
+      "created_at": 1788591334.0,
+      "frequency_penalty": 0.0,
+      "id": "resp_01297237d373bab0016a9bbce5969487d0af87e5eddb8ba2e4",
+      "max_output_tokens": 2048,
+      "metadata": {},
+      "model": "gpt-5.6-sol",
+      "object": "response",
+      "output": [
+        {
+          "content": [
+            {
+              "annotations": [],
+              "logprobs": [],
+              "text": "{\"action\":\"SAFETY_ADVICE\",\"arguments\":{\"safe_to_proceed\":true},\"decision_text\":\"前方樓梯看起來暢通，可以通過；請扶好扶手並留意階梯邊緣。\"}",
+              "type": "output_text"
+            }
+          ],
+          "id": "msg_01297237d373bab0016a9bbce71c8087d0ab677a4b84762db6",
+          "phase": "final_answer",
+          "role": "assistant",
+          "status": "completed",
+          "type": "message"
+        }
+      ],
+      "parallel_tool_calls": true,
+      "presence_penalty": 0.0,
+      "prompt_cache_retention": "24h",
+      "reasoning": {
+        "context": "all_turns",
+        "effort": "none",
+        "mode": "standard"
+      },
+      "service_tier": "default",
+      "status": "completed",
+      "store": false,
+      "temperature": 0.0,
+      "text": {
+        "format": {
+          "name": "lensguard_action",
+          "schema_": {
+            "additionalProperties": false,
+            "properties": {
+              "action": {
+                "enum": [
+                  "CALL",
+                  "DIRECTION_ADVICE",
+                  "SAFETY_ADVICE",
+                  "NONE"
+                ],
+                "type": "string"
+              },
+              "arguments": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "target_number": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "target_number"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "party_size": {
+                        "minimum": 1,
+                        "type": "integer"
+                      },
+                      "restaurant": {
+                        "type": "string"
+                      },
+                      "target_number": {
+                        "type": "string"
+                      },
+                      "time": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "target_number",
+                      "restaurant",
+                      "time",
+                      "party_size"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "direction": {
+                        "enum": [
+                          "LEFT",
+                          "RIGHT",
+                          "STRAIGHT",
+                          "DOWN",
+                          "UP",
+                          "UNKNOWN"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "direction"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "safe_to_proceed": {
+                        "anyOf": [
+                          {
+                            "type": "boolean"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "safe_to_proceed"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {},
+                    "required": [],
+                    "type": "object"
+                  }
+                ]
+              },
+              "decision_text": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "action",
+              "arguments",
+              "decision_text"
+            ],
+            "type": "object"
+          },
+          "strict": true,
+          "type": "json_schema"
+        },
+        "verbosity": "medium"
+      },
+      "tool_choice": "auto",
+      "tool_usage": {
+        "image_gen": {
+          "input_tokens": 0,
+          "input_tokens_details": {
+            "image_tokens": 0,
+            "text_tokens": 0
+          },
+          "output_tokens": 0,
+          "output_tokens_details": {
+            "image_tokens": 0,
+            "text_tokens": 0
+          },
+          "total_tokens": 0
+        },
+        "web_search": {
+          "num_requests": 0
+        }
+      },
+      "tools": [],
+      "top_logprobs": 0,
+      "top_p": 0.98,
+      "truncation": "disabled",
+      "usage": {
+        "input_tokens": 3504,
+        "input_tokens_details": {
+          "cache_write_tokens": 3501,
+          "cached_tokens": 0
+        },
+        "output_tokens": 60,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 3564
+      }
+    },
+    "raw_response_redacted": false,
+    "request_id": "req_5554e25032504f739058a1b1f3871219",
+    "returned_model": "gpt-5.6-sol",
+    "scientific_attempt": 1,
+    "stop_provider": false,
+    "timestamp_utc": "2026-09-05T06:55:31.481907+00:00",
+    "total_backoff_seconds": 0.0,
+    "transport_attempts": 1,
+    "transport_events": [],
+    "usage": {
+      "cached_input_tokens": 0,
+      "input_tokens": 3504,
+      "native": {
+        "input_tokens": 3504,
+        "input_tokens_details": {
+          "cache_write_tokens": 3501,
+          "cached_tokens": 0
+        },
+        "output_tokens": 60,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 3564
+      },
+      "output_tokens": 60,
+      "reasoning_tokens": 0,
+      "total_tokens": 3564
+    }
+  }
+}

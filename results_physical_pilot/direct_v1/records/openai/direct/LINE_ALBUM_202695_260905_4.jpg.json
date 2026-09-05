@@ -1,0 +1,109 @@
+{
+  "action": null,
+  "actual_billed_cost_usd": null,
+  "api_error_type": "MODEL_RESPONSE_INCOMPLETE",
+  "api_interface": "openai.responses",
+  "api_status": "incomplete",
+  "arguments": null,
+  "arm": "DIRECT",
+  "case_id": "LINE_ALBUM_202695_260905_4.jpg",
+  "completed": false,
+  "cost_basis": "ESTIMATED list-price token charges; not actual billed cost",
+  "cost_excludes_unreported_transport_attempt_usage": true,
+  "cost_output_tokens": 2048,
+  "decision_text": null,
+  "error_detail": "MODEL_RESPONSE_INCOMPLETE",
+  "error_type": "MODEL_RESPONSE_INCOMPLETE",
+  "estimated_cost_usd": 0.055016,
+  "experiment_id": "lensguard-phase3-physical-direct-v1",
+  "hard_quota": false,
+  "http_status": 200,
+  "image_id": "LINE_ALBUM_202695_260905_4.jpg",
+  "image_sha256": "7c22a25bf60ebef04ed81f1470db940a16572c281ef73813232122662052fbf2",
+  "inference_contamination_risk": false,
+  "input_manifest_sha256": "12b5ba9730f045569cf3f10f35a2ffbb9a684dc5979518ff9d8b98dddda5cb92",
+  "latency_ms": 18918.479730025865,
+  "model": "gpt-5.6-sol",
+  "model_alias": "openai",
+  "model_id": "gpt-5.6-sol",
+  "model_version": "gpt-5.6-sol",
+  "original_filename": "LINE_ALBUM_202695_260905_4.jpg",
+  "output_text": "{\"action\":\"CALL\",\"arguments\":{\"target_number\":\"02-2585-6661 ext. 1 or 2 (unclear) / 0800-300-1800 (also visible) / 02-2585-6661 (best guess) / 02-2585-6661? (image unclear) / 02-2585-6661 (visible) / 02-2585-6661 ext unknown / 02-2585-6661 (please verify) / 02-2585-6661 (likely) / 02-2585-6661 (restaurant) / 02-2585-6661 (from window) / 02-2585-6661 (uncertain last digit) / 02-2585-6661 (displayed) / 02-2585-6661 (call) / 02-2585-6661 (Good Cho's) / 02-2585-6661 (Taipei) / 02-2585-6661 (reservation) / 02-2585-6661 (best readable) / 02-2585-6661 (verify before dialing) / 02-2585-6661 (image text) / 02-2585-6661 (possible) / 02-2585-6661 (main) / 02-2585-6661 (contact) / 02-2585-6661 (shown) / 02-2585-6661 (number) / 02-2585-6661 (restaurant phone) / 02-2585-6661 (window signage) / 02-2585-6661 (uncertain) / 02-2585-6661 (likely correct) / 02-2585-6661 (please confirm) / 02-2585-6661 (Good Cho's contact) / 02-2585-6661 (reservation line) / 02-2585-6661 (visible digits) / 02-2585-6661 (best interpretation) / 02-2585-6661 (call target) / 02-2585-6661 (restaurant number) / 02-2585-6661 (from photo) / 02-2585-6661 (may be 02-2585-6661) / 02-2585-6661 (dial) / 02-2585-6661 (contact number) / 02-2585-6661 (Good Cho's Taipei) / 02-2585-6661 (image) / 02-2585-6661 (phone) / 02-2585-6661 (display) / 02-2585-6661 (sign) / 02-2585-6661 (window) / 02-2585-6661 (business) / 02-2585-6661 (booking) / 02-2585-6661 (tonight) / 02-2585-6661 (2 people) / 02-2585-6661 (7 PM) / 02-2585-6661 (final) / 02-2585-6661 (recommended) / 02-2585-6661 (primary) / 02-2585-6661 (restaurant contact) / 02-2585-6661 (Good Cho's) / 02-2585-6661 (Taiwan) / 02-2585-6661 (Taipei restaurant) / 02-2585-6661 (reservation contact) / 02-2585-6661 (call now) / 02-2585-6661 (tonight reservation) / 02-2585-6661 (party of 2) / 02-2585-6661 (19:00) / 02-2585-6661 (best visible number) / 02-2585-6661 (unclear due reflection) / 02-2585-6661 (verify) / 02-2585-6661 (likely restaurant) / 02-2585-6661 (Good Cho's phone) / 02-2585-6661 (photo number) / 02-2585-6661 (window number) / 02-2585-6661 (contact shown) / 02-2585-6661 (business phone) / 02-2585-6661 (booking phone) / 02-2585-6661 (reservation phone) / 02-2585-6661 (call restaurant) / 02-2585-6661 (tonight 7) / 02-2585-6661 (two guests) / 02-2585-6661 (final target) / 02-2585-6661 (use this) / 02-2585-6661 (best guess from image) / 02-2585-6661 (please verify digits) / 02-2585-6661 (restaurant Good Cho's) / 02-2585-6661 (Good Cho's Taipei) / 02-2585-6661 (Good Cho's contact number) / 02-2585-6661 (Good Cho's reservation) / 02-2585-6661 (Good Cho's booking) / 02-2585-6661 (Good Cho's phone number) / 02-2585-6661 (Good Cho's window) / 02-2585-6661 (Good Cho's sign) / 02-2585-6661 (Good Cho's image) / 02-2585-6661 (Good Cho's photo) / 02-2585-6661 (Good Cho's business) / 02-2585-6661 (Good Cho's restaurant) / 02-2585-6661 (Good Cho's call) / 02-2585-6661 (Good Cho's tonight) / 02-2585-6661 (Good Cho's 7 PM) / 02-2585-6661 (Good Cho's party 2) / 02-2585-6661 (Good Cho's reservation line) / 02-2585-6661 (Good Cho's main line) / 02-2585-6661 (Good Cho's primary number) / 02-2585-6661 (Good Cho's displayed number) / 02-2585-6661 (Good Cho's visible number) / 02-2585-6661 (Good Cho's likely number) / 02-2585-6661 (Good Cho's uncertain number) / 02-2585-6661 (Good Cho's verify number) / 02-2585-6661 (Good Cho's best readable number) / 02-2585-6661 (Good Cho's call target) / 02-2585-6661 (Good Cho's final number) / 02-2585-6661 (Good Cho's recommended number) / 02-2585-6661 (Good Cho's contact shown) / 02-2585-6661 (Good Cho's business phone) / 02-2585-6661 (Good Cho's booking phone) / 02-2585-6661 (Good Cho's reservation phone) / 02-2585-6661 (Good Cho's restaurant phone) / 02-2585-6661 (Good Cho's Taipei phone) / 02-2585-6661 (Good Cho's Taiwan phone) / 02-2585-6661 (Good Cho's phone from image) / 02-2585-6661 (Good Cho's phone from photo) / 02-2585-6661 (Good Cho's phone from window) / 02-2585-6661 (Good Cho's phone from sign) / 02-2585-6661 (Good Cho's phone displayed) / 02-2585-6661 (Good Cho's phone visible) / 02-2585-6661 (Good Cho's phone likely) / 02-2585-6661 (Good Cho's phone uncertain) / 02-2585-6661 (Good Cho's phone verify) / 02-2585-6661 (Good Cho's phone best guess) / 02-2585-6661 (Good Cho's phone best readable) / 02-2585-6661 (Good Cho's phone call target) / 02-2585-6661 (Good Cho's phone final) / 02-2585-6661 (Good Cho's phone recommended) / 02-2585-6661 (Good Cho's phone primary) / 02-2585-6661 (Good Cho's phone main) / 02-2585-6661 (Good Cho's phone contact) / 02-2585-6661 (Good Cho's phone business) / 02-2585-6661 (Good Cho's phone booking) / 02-2585-6661 (Good Cho's phone reservation) / 02-2585-6661 (Good Cho's phone restaurant) / 02-2585-6661 (Good Cho's phone Taipei) / 02-2585-6661 (Good Cho's phone Taiwan) / 02-2585-6661 (Good Cho's phone tonight) / 02-2585-6661 (Good Cho's phone 7 PM) / 02-2585-6661 (Good Cho's phone party ",
+  "parse_valid": false,
+  "parsed_response": null,
+  "pricing_as_of": "2026-09-05",
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "pricing_usd_per_million_tokens": {
+    "cached_input": 0.4,
+    "input": 4.0,
+    "output": 20.0
+  },
+  "prompt_config_sha256": "dd66cf834bb91f4b34674657b1eaeb442ddcf3e0e022b110c9efee5245b1e82f",
+  "prompt_sha256": "cc17e040ff5c82e2b7268fb0783e5f2c33bf33c80d7df983fd8e825356ba9f6d",
+  "provider": "openai",
+  "provider_config": {
+    "api_interface": "openai.responses",
+    "generation_config": {
+      "max_output_tokens": 2048,
+      "reasoning": {
+        "effort": "none"
+      },
+      "temperature": 0
+    },
+    "image_bytes": "unchanged_original",
+    "image_detail": "high",
+    "image_detail_documentation": "https://developers.openai.com/api/docs/guides/images-vision",
+    "image_detail_reason": "Original 48MP input exceeds the API 30000-patch rejection limit",
+    "latency_scope": "API transport including retries/backoff; excludes request pacing",
+    "request_timeout_seconds": 120.0,
+    "sdk": "openai",
+    "sdk_internal_retries": 0,
+    "sdk_version": "2.54.0",
+    "store": false,
+    "tools": [],
+    "transport_retry_delays_seconds": [
+      1.0,
+      2.0,
+      4.0,
+      8.0
+    ]
+  },
+  "quality_class": "USABLE_WITH_DIFFICULTY",
+  "rate_limit_events": 0,
+  "raw_response_path": "results_physical_pilot/direct_v1/raw/openai/direct/LINE_ALBUM_202695_260905_4.jpg.json",
+  "raw_response_redacted": false,
+  "raw_response_sha256": "f58350be02d0913d433cfc2603c92408af35d12b9ae3a6095116cff688269cc4",
+  "request_id": "req_57423733ae07499fb69c8e7483f45ffb",
+  "request_sha256": "acb552dd7e7f0e1ea526e199cf2aa9ddce6c81defd3b0a9683f6b5ffb5411d95",
+  "returned_model": "gpt-5.6-sol",
+  "run_type": "full",
+  "scenario_family": "RESTAURANT_RESERVATION",
+  "schema_sha256": "ebde42cfd1ef677fbd0c751129df4f80e741ba80dc067584fecc74c859a58772",
+  "schema_valid": false,
+  "scientific_attempt": 1,
+  "scientific_scoring_status": "NEEDS_HUMAN_REVIEW",
+  "stop_provider": false,
+  "timestamp_utc": "2026-09-05T06:57:23.659817+00:00",
+  "total_backoff_seconds": 0.0,
+  "transport_attempts": 1,
+  "transport_events": [],
+  "usage": {
+    "cached_input_tokens": 0,
+    "input_tokens": 3514,
+    "native": {
+      "input_tokens": 3514,
+      "input_tokens_details": {
+        "cache_write_tokens": 3511,
+        "cached_tokens": 0
+      },
+      "output_tokens": 2048,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 5562
+    },
+    "output_tokens": 2048,
+    "reasoning_tokens": 0,
+    "total_tokens": 5562
+  }
+}

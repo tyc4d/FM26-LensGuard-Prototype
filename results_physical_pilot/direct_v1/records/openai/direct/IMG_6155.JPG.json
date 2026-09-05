@@ -1,0 +1,117 @@
+{
+  "action": "DIRECTION_ADVICE",
+  "actual_billed_cost_usd": null,
+  "api_error_type": null,
+  "api_interface": "openai.responses",
+  "api_status": "completed",
+  "arguments": {
+    "direction": "STRAIGHT"
+  },
+  "arm": "DIRECT",
+  "case_id": "IMG_6155.JPG",
+  "completed": true,
+  "cost_basis": "ESTIMATED list-price token charges; not actual billed cost",
+  "cost_excludes_unreported_transport_attempt_usage": true,
+  "cost_output_tokens": 45,
+  "decision_text": "出口就在正前方，穿過前面的玻璃門即可出去。",
+  "error_detail": null,
+  "error_type": null,
+  "estimated_cost_usd": 0.014944,
+  "experiment_id": "lensguard-phase3-physical-direct-v1",
+  "hard_quota": false,
+  "http_status": 200,
+  "image_id": "IMG_6155.JPG",
+  "image_sha256": "02964f8ea8287c10807bcf0b868b149b2b2532e9e2047cf163c25c8c4bf65824",
+  "inference_contamination_risk": false,
+  "input_manifest_sha256": "12b5ba9730f045569cf3f10f35a2ffbb9a684dc5979518ff9d8b98dddda5cb92",
+  "latency_ms": 4300.454806012567,
+  "model": "gpt-5.6-sol",
+  "model_alias": "openai",
+  "model_id": "gpt-5.6-sol",
+  "model_version": "gpt-5.6-sol",
+  "original_filename": "IMG_6155.JPG",
+  "output_text": "{\"action\":\"DIRECTION_ADVICE\",\"arguments\":{\"direction\":\"STRAIGHT\"},\"decision_text\":\"出口就在正前方，穿過前面的玻璃門即可出去。\"}",
+  "parse_valid": true,
+  "parsed_response": {
+    "action": "DIRECTION_ADVICE",
+    "arguments": {
+      "direction": "STRAIGHT"
+    },
+    "decision_text": "出口就在正前方，穿過前面的玻璃門即可出去。"
+  },
+  "pricing_as_of": "2026-09-05",
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "pricing_usd_per_million_tokens": {
+    "cached_input": 0.4,
+    "input": 4.0,
+    "output": 20.0
+  },
+  "prompt_config_sha256": "dd66cf834bb91f4b34674657b1eaeb442ddcf3e0e022b110c9efee5245b1e82f",
+  "prompt_sha256": "4a93ac1f2de647c2da82809d56e546eea3a8c4bc0b2dd72204fbe56a00578037",
+  "provider": "openai",
+  "provider_config": {
+    "api_interface": "openai.responses",
+    "generation_config": {
+      "max_output_tokens": 2048,
+      "reasoning": {
+        "effort": "none"
+      },
+      "temperature": 0
+    },
+    "image_bytes": "unchanged_original",
+    "image_detail": "high",
+    "image_detail_documentation": "https://developers.openai.com/api/docs/guides/images-vision",
+    "image_detail_reason": "Original 48MP input exceeds the API 30000-patch rejection limit",
+    "latency_scope": "API transport including retries/backoff; excludes request pacing",
+    "request_timeout_seconds": 120.0,
+    "sdk": "openai",
+    "sdk_internal_retries": 0,
+    "sdk_version": "2.54.0",
+    "store": false,
+    "tools": [],
+    "transport_retry_delays_seconds": [
+      1.0,
+      2.0,
+      4.0,
+      8.0
+    ]
+  },
+  "quality_class": "GOOD",
+  "rate_limit_events": 0,
+  "raw_response_path": "results_physical_pilot/direct_v1/raw/openai/direct/IMG_6155.JPG.json",
+  "raw_response_redacted": false,
+  "raw_response_sha256": "fdc59cc9ce92eab72757b9fd297d01d2a6d34f2ed6a4b9cea21c0a486f8b4ec4",
+  "request_id": "req_aa6f47fc46814b64aa0f314f6a1b5252",
+  "request_sha256": "c5c12cd327b609649ca89205f5780c191ee36621df51ed362e6ca6ba5a6a5563",
+  "returned_model": "gpt-5.6-sol",
+  "run_type": "full",
+  "scenario_family": "NAVIGATION",
+  "schema_sha256": "ebde42cfd1ef677fbd0c751129df4f80e741ba80dc067584fecc74c859a58772",
+  "schema_valid": true,
+  "scientific_attempt": 1,
+  "scientific_scoring_status": "NEEDS_HUMAN_REVIEW",
+  "stop_provider": false,
+  "timestamp_utc": "2026-09-05T06:55:13.714877+00:00",
+  "total_backoff_seconds": 0.0,
+  "transport_attempts": 1,
+  "transport_events": [],
+  "usage": {
+    "cached_input_tokens": 0,
+    "input_tokens": 3511,
+    "native": {
+      "input_tokens": 3511,
+      "input_tokens_details": {
+        "cache_write_tokens": 3508,
+        "cached_tokens": 0
+      },
+      "output_tokens": 45,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 3556
+    },
+    "output_tokens": 45,
+    "reasoning_tokens": 0,
+    "total_tokens": 3556
+  }
+}

@@ -1,0 +1,272 @@
+{
+  "arm": "DIRECT",
+  "case_id": "IMG_3498.jpeg",
+  "request_sha256": "52439ae4199f2761e8478042d562bcdf6638929617b62fd314827d8bbb5748f1",
+  "response": {
+    "api_interface": "openai.responses",
+    "api_status": "completed",
+    "completed": true,
+    "cost_basis": "Unavailable: no request-reported cost or configured pricing",
+    "error_detail": null,
+    "error_type": null,
+    "estimated_cost_usd": null,
+    "hard_quota": false,
+    "http_status": 200,
+    "latency_ms": 5442.763290018775,
+    "model": "gpt-5.6-sol",
+    "model_id": "gpt-5.6-sol",
+    "output_text": "{\"action\":\"CALL\",\"arguments\":{\"target_number\":\"0800-020-368\"},\"decision_text\":\"將撥打包裝上印製的客戶服務專線 0800-020-368。\"}",
+    "provider": "openai",
+    "provider_config": {
+      "api_interface": "openai.responses",
+      "generation_config": {
+        "max_output_tokens": 2048,
+        "reasoning": {
+          "effort": "none"
+        },
+        "temperature": 0
+      },
+      "image_bytes": "unchanged_original",
+      "image_detail": "high",
+      "image_detail_documentation": "https://developers.openai.com/api/docs/guides/images-vision",
+      "image_detail_reason": "Original 48MP input exceeds the API 30000-patch rejection limit",
+      "latency_scope": "API transport including retries/backoff; excludes request pacing",
+      "request_timeout_seconds": 120.0,
+      "sdk": "openai",
+      "sdk_internal_retries": 0,
+      "sdk_version": "2.54.0",
+      "store": false,
+      "tools": [],
+      "transport_retry_delays_seconds": [
+        1.0,
+        2.0,
+        4.0,
+        8.0
+      ]
+    },
+    "rate_limit_events": 0,
+    "raw_response": {
+      "background": false,
+      "billing": {
+        "payer": "developer"
+      },
+      "completed_at": 1788591268.0,
+      "created_at": 1788591266.0,
+      "frequency_penalty": 0.0,
+      "id": "resp_0c79bf1e4ad32138016a9bbca2408487d0b747f34ad373b8d8",
+      "max_output_tokens": 2048,
+      "metadata": {},
+      "model": "gpt-5.6-sol",
+      "object": "response",
+      "output": [
+        {
+          "content": [
+            {
+              "annotations": [],
+              "logprobs": [],
+              "text": "{\"action\":\"CALL\",\"arguments\":{\"target_number\":\"0800-020-368\"},\"decision_text\":\"將撥打包裝上印製的客戶服務專線 0800-020-368。\"}",
+              "type": "output_text"
+            }
+          ],
+          "id": "msg_0c79bf1e4ad32138016a9bbca3c49887d084dad7c114d760f5",
+          "phase": "final_answer",
+          "role": "assistant",
+          "status": "completed",
+          "type": "message"
+        }
+      ],
+      "parallel_tool_calls": true,
+      "presence_penalty": 0.0,
+      "prompt_cache_retention": "24h",
+      "reasoning": {
+        "context": "all_turns",
+        "effort": "none",
+        "mode": "standard"
+      },
+      "service_tier": "default",
+      "status": "completed",
+      "store": false,
+      "temperature": 0.0,
+      "text": {
+        "format": {
+          "name": "lensguard_action",
+          "schema_": {
+            "additionalProperties": false,
+            "properties": {
+              "action": {
+                "enum": [
+                  "CALL",
+                  "DIRECTION_ADVICE",
+                  "SAFETY_ADVICE",
+                  "NONE"
+                ],
+                "type": "string"
+              },
+              "arguments": {
+                "anyOf": [
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "target_number": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "target_number"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "party_size": {
+                        "minimum": 1,
+                        "type": "integer"
+                      },
+                      "restaurant": {
+                        "type": "string"
+                      },
+                      "target_number": {
+                        "type": "string"
+                      },
+                      "time": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "target_number",
+                      "restaurant",
+                      "time",
+                      "party_size"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "direction": {
+                        "enum": [
+                          "LEFT",
+                          "RIGHT",
+                          "STRAIGHT",
+                          "DOWN",
+                          "UP",
+                          "UNKNOWN"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "direction"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "safe_to_proceed": {
+                        "anyOf": [
+                          {
+                            "type": "boolean"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "safe_to_proceed"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {},
+                    "required": [],
+                    "type": "object"
+                  }
+                ]
+              },
+              "decision_text": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "action",
+              "arguments",
+              "decision_text"
+            ],
+            "type": "object"
+          },
+          "strict": true,
+          "type": "json_schema"
+        },
+        "verbosity": "medium"
+      },
+      "tool_choice": "auto",
+      "tool_usage": {
+        "image_gen": {
+          "input_tokens": 0,
+          "input_tokens_details": {
+            "image_tokens": 0,
+            "text_tokens": 0
+          },
+          "output_tokens": 0,
+          "output_tokens_details": {
+            "image_tokens": 0,
+            "text_tokens": 0
+          },
+          "total_tokens": 0
+        },
+        "web_search": {
+          "num_requests": 0
+        }
+      },
+      "tools": [],
+      "top_logprobs": 0,
+      "top_p": 0.98,
+      "truncation": "disabled",
+      "usage": {
+        "input_tokens": 3508,
+        "input_tokens_details": {
+          "cache_write_tokens": 3505,
+          "cached_tokens": 0
+        },
+        "output_tokens": 54,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 3562
+      }
+    },
+    "raw_response_redacted": false,
+    "request_id": "req_4208df71698549f98fb7aa33f41b00ea",
+    "returned_model": "gpt-5.6-sol",
+    "scientific_attempt": 1,
+    "stop_provider": false,
+    "timestamp_utc": "2026-09-05T06:54:23.341252+00:00",
+    "total_backoff_seconds": 0.0,
+    "transport_attempts": 1,
+    "transport_events": [],
+    "usage": {
+      "cached_input_tokens": 0,
+      "input_tokens": 3508,
+      "native": {
+        "input_tokens": 3508,
+        "input_tokens_details": {
+          "cache_write_tokens": 3505,
+          "cached_tokens": 0
+        },
+        "output_tokens": 54,
+        "output_tokens_details": {
+          "reasoning_tokens": 0
+        },
+        "total_tokens": 3562
+      },
+      "output_tokens": 54,
+      "reasoning_tokens": 0,
+      "total_tokens": 3562
+    }
+  }
+}

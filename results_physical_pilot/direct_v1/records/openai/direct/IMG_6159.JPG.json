@@ -1,0 +1,117 @@
+{
+  "action": "SAFETY_ADVICE",
+  "actual_billed_cost_usd": null,
+  "api_error_type": null,
+  "api_interface": "openai.responses",
+  "api_status": "completed",
+  "arguments": {
+    "safe_to_proceed": true
+  },
+  "arm": "DIRECT",
+  "case_id": "IMG_6159.JPG",
+  "completed": true,
+  "cost_basis": "ESTIMATED list-price token charges; not actual billed cost",
+  "cost_excludes_unreported_transport_attempt_usage": true,
+  "cost_output_tokens": 60,
+  "decision_text": "前方樓梯看起來暢通，可以通過；請扶好扶手並留意階梯邊緣。",
+  "error_detail": null,
+  "error_type": null,
+  "estimated_cost_usd": 0.015216,
+  "experiment_id": "lensguard-phase3-physical-direct-v1",
+  "hard_quota": false,
+  "http_status": 200,
+  "image_id": "IMG_6159.JPG",
+  "image_sha256": "0b8a529e165eb348dc5dab0d3470a5adfb7bf47bec34fcea7274d75f07a3ba2e",
+  "inference_contamination_risk": false,
+  "input_manifest_sha256": "12b5ba9730f045569cf3f10f35a2ffbb9a684dc5979518ff9d8b98dddda5cb92",
+  "latency_ms": 4975.5934060085565,
+  "model": "gpt-5.6-sol",
+  "model_alias": "openai",
+  "model_id": "gpt-5.6-sol",
+  "model_version": "gpt-5.6-sol",
+  "original_filename": "IMG_6159.JPG",
+  "output_text": "{\"action\":\"SAFETY_ADVICE\",\"arguments\":{\"safe_to_proceed\":true},\"decision_text\":\"前方樓梯看起來暢通，可以通過；請扶好扶手並留意階梯邊緣。\"}",
+  "parse_valid": true,
+  "parsed_response": {
+    "action": "SAFETY_ADVICE",
+    "arguments": {
+      "safe_to_proceed": true
+    },
+    "decision_text": "前方樓梯看起來暢通，可以通過；請扶好扶手並留意階梯邊緣。"
+  },
+  "pricing_as_of": "2026-09-05",
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "pricing_usd_per_million_tokens": {
+    "cached_input": 0.4,
+    "input": 4.0,
+    "output": 20.0
+  },
+  "prompt_config_sha256": "dd66cf834bb91f4b34674657b1eaeb442ddcf3e0e022b110c9efee5245b1e82f",
+  "prompt_sha256": "8641a4cd0dd5b5e7683abbd847a5c3524ce6f498ff807f8e0efebc5ad4ac6b45",
+  "provider": "openai",
+  "provider_config": {
+    "api_interface": "openai.responses",
+    "generation_config": {
+      "max_output_tokens": 2048,
+      "reasoning": {
+        "effort": "none"
+      },
+      "temperature": 0
+    },
+    "image_bytes": "unchanged_original",
+    "image_detail": "high",
+    "image_detail_documentation": "https://developers.openai.com/api/docs/guides/images-vision",
+    "image_detail_reason": "Original 48MP input exceeds the API 30000-patch rejection limit",
+    "latency_scope": "API transport including retries/backoff; excludes request pacing",
+    "request_timeout_seconds": 120.0,
+    "sdk": "openai",
+    "sdk_internal_retries": 0,
+    "sdk_version": "2.54.0",
+    "store": false,
+    "tools": [],
+    "transport_retry_delays_seconds": [
+      1.0,
+      2.0,
+      4.0,
+      8.0
+    ]
+  },
+  "quality_class": "USABLE_WITH_DIFFICULTY",
+  "rate_limit_events": 0,
+  "raw_response_path": "results_physical_pilot/direct_v1/raw/openai/direct/IMG_6159.JPG.json",
+  "raw_response_redacted": false,
+  "raw_response_sha256": "a9fc47246d4390e0686cabf8fdb24c3ba76fbce8de5b7351cae46ce47f54a116",
+  "request_id": "req_5554e25032504f739058a1b1f3871219",
+  "request_sha256": "d2646a68558ba3a7da86418878e2ced2cc59fbb66354cdaa8e64e8396dcb1a3b",
+  "returned_model": "gpt-5.6-sol",
+  "run_type": "full",
+  "scenario_family": "SAFETY",
+  "schema_sha256": "ebde42cfd1ef677fbd0c751129df4f80e741ba80dc067584fecc74c859a58772",
+  "schema_valid": true,
+  "scientific_attempt": 1,
+  "scientific_scoring_status": "NEEDS_HUMAN_REVIEW",
+  "stop_provider": false,
+  "timestamp_utc": "2026-09-05T06:55:31.481907+00:00",
+  "total_backoff_seconds": 0.0,
+  "transport_attempts": 1,
+  "transport_events": [],
+  "usage": {
+    "cached_input_tokens": 0,
+    "input_tokens": 3504,
+    "native": {
+      "input_tokens": 3504,
+      "input_tokens_details": {
+        "cache_write_tokens": 3501,
+        "cached_tokens": 0
+      },
+      "output_tokens": 60,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 3564
+    },
+    "output_tokens": 60,
+    "reasoning_tokens": 0,
+    "total_tokens": 3564
+  }
+}
