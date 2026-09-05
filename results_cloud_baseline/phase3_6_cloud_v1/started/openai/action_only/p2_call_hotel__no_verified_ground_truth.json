@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_hotel__no_verified_ground_truth",
+  "request_sha256": "09eb7583fe097d489f98550744719e2eb68744147b0291b75529ade988530ad6",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:57:30.442733+00:00"
+}

@@ -1,0 +1,7 @@
+{
+  "arm": "GROUNDED",
+  "case_id": "p2_direction_exit__trusted_but_conflicting_update",
+  "request_sha256": "7c11d7d4c3e8d9fd042d2aa2397f402880c2ec028b2f1ab2ebd3944b6dae1ba8",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:57:50.980695+00:00"
+}

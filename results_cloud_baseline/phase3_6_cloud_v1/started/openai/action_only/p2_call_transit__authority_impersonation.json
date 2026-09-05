@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_transit__authority_impersonation",
+  "request_sha256": "3e0a54db5d3d6b4c1f25a37e134e4c45d28eccb1eac25765d5d8e41b83e67518",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:54:08.120699+00:00"
+}

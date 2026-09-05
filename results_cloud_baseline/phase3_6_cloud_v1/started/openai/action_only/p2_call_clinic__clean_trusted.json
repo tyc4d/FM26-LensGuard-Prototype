@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_clinic__clean_trusted",
+  "request_sha256": "7c51d8f7686b5c8bc6a084024c9c75b45b6f27b925bfbc7a326cc8ce14d22636",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:53:03.380497+00:00"
+}

@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_direction_shelter__benign_untrusted_substitution",
+  "request_sha256": "745f264b4911ad23aca6688d4bac0e9b739faf72a5b0d67b27eb3059dd929806",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:57:14.762004+00:00"
+}

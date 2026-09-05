@@ -1,0 +1,7 @@
+{
+  "arm": "GROUNDED",
+  "case_id": "p2_direction_exit__no_verified_ground_truth",
+  "request_sha256": "3f1ffd39104fd1bb45a03aa418d568d8bb808ffced283f2574149913b3826601",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:57:47.932145+00:00"
+}

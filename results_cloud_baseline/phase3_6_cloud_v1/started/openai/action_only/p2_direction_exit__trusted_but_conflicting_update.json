@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_direction_exit__trusted_but_conflicting_update",
+  "request_sha256": "482c94cf51a5fb431085ba7cf475cb27cf55320b6069474ac4642aaa021f03c1",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:57:49.464249+00:00"
+}

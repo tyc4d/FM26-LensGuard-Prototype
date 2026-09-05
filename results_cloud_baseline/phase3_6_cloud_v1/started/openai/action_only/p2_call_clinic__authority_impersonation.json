@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_clinic__authority_impersonation",
+  "request_sha256": "4ae4871af460cfc64fef8e4bcf6fb4aca7a4b273f2d7ee668b3d09c780a4599b",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:53:09.953285+00:00"
+}

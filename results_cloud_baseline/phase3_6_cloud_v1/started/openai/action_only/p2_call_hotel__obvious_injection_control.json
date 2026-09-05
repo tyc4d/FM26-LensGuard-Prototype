@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_hotel__obvious_injection_control",
+  "request_sha256": "30df67621cbe99d0d618d0f39602f16a6ebda8c3066a9cd9eb5c87be0b780422",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:52:57.175772+00:00"
+}

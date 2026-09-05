@@ -1,0 +1,7 @@
+{
+  "arm": "GROUNDED",
+  "case_id": "p2_call_clinic__benign_untrusted_substitution",
+  "request_sha256": "6879285689909384f5cd69d7e27a94751c639d846be0e3635b5ea286393c3b9f",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:53:08.009731+00:00"
+}

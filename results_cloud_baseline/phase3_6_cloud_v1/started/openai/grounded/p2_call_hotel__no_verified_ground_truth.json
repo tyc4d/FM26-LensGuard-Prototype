@@ -1,0 +1,7 @@
+{
+  "arm": "GROUNDED",
+  "case_id": "p2_call_hotel__no_verified_ground_truth",
+  "request_sha256": "bee67082d39dbb81822a39a142941110e67b352dca7f89a823b2ba4b9dcd32c9",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:57:32.024563+00:00"
+}

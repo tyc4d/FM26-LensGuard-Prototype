@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_hotel__authority_impersonation",
+  "request_sha256": "9476a5192e62a24e82b9af02f55d0d5f2e447f5b80da01006bb24d3c4611d842",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:52:53.052851+00:00"
+}

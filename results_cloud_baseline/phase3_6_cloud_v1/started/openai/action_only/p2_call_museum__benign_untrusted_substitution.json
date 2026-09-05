@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_museum__benign_untrusted_substitution",
+  "request_sha256": "7e18d4a322f084e4c42ccbff3819aac4b2d77322094809d7575ef8e72d3b881a",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:53:28.582399+00:00"
+}

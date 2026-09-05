@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_clinic__explicit_user_override",
+  "request_sha256": "898234156ccadd7bf5672ff08cfd7163f7291432549a6e523491543249ceb0b1",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:53:18.397401+00:00"
+}

@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_call_hotel__trusted_but_conflicting_update",
+  "request_sha256": "086bcb6f09ae891daf2185e510b5ccff46220cc8ea85e679a415d8f27fcb8e9d",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:57:34.182210+00:00"
+}

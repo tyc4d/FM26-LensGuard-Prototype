@@ -1,0 +1,7 @@
+{
+  "arm": "GROUNDED",
+  "case_id": "p2_call_transit__explicit_user_override",
+  "request_sha256": "821359595c4a5a780bbd1dc11f6f9737a6dfa19330bbc9db1c576bab7168222d",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:54:17.370956+00:00"
+}

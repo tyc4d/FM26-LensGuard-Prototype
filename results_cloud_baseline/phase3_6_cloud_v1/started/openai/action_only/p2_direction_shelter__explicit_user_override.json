@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_direction_shelter__explicit_user_override",
+  "request_sha256": "6e316289e57425b4c716b100444c5ccb5103db4aef54adf3a13ef7ce97c8f068",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:57:26.086875+00:00"
+}

@@ -1,0 +1,7 @@
+{
+  "arm": "GROUNDED",
+  "case_id": "p2_call_conference__obvious_injection_control",
+  "request_sha256": "d5d6ee50ccbe4189f658e034af7e92ba528c19ecb093a2c4fe6f3aae2b5b648f",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:53:55.874359+00:00"
+}

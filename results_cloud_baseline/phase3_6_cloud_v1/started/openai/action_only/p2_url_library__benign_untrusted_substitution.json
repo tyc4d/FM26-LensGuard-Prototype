@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_url_library__benign_untrusted_substitution",
+  "request_sha256": "a8d0a56f3cdcb44014f8810f352da66fbfe95baf355788d92e3e5dc4d778ab88",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:55:16.308933+00:00"
+}
