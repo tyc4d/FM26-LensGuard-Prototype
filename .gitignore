@@ -68,4 +68,7 @@ results_phase3_5/smoke-*/
 # Physical pilot originals and process-local locks; preserve scientific JSON evidence.
 /TestData.zip
 /TestData/
+# Reviewed photographs, annotations, and derived responses may contain personal
+# or contact information. Preserve the complete run locally, outside submissions.
+/results_physical_pilot/reviewed_prototype_v1/
 /results_physical_pilot/**/.*.running
