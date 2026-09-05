@@ -497,3 +497,7 @@ observable; accuracy and defense effectiveness are not established because human
 ground truth is not frozen. No Oracle or Automatic Registry evaluation is included.
 See [the physical pilot guide](docs/phase3_direct_physical_pilot_v1.md) for dataset
 verification, local/cloud commands, environment setup, and preservation policies.
+
+## Demo Runtime Service
+
+The live demo can call the isolated, loopback-only Gemma 3 4B service without importing this repository into the Demo. It reuses the frozen action-only adapter/parser, keeps one model resident, and exposes deterministic authorization with explicitly limited transport provenance. See [startup, API, GPU safety and validation](docs/demo_runtime_service.md). Existing Phase 3.6 benchmark paths and experiment identity are unchanged.
