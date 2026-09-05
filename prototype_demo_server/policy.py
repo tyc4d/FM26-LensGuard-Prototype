@@ -1,7 +1,12 @@
 """Deterministic demo boundary. No fabricated semantic/region provenance."""
+from firewall.action_normalizer import normalize_action
 from firewall.thin_gate import evaluate_thin_gate
 
 TOOL_NAMES = {'CALL': 'call_phone', 'DIRECTION_ADVICE': 'navigate', 'OPEN_URL': 'open_url', 'NONE': 'none', 'RESTAURANT_RESERVATION': 'restaurant_reservation', 'SAFETY_ADVICE': 'safety_advice'}
+
+
+class ActionValidationError(ValueError):
+    """A parsed model candidate has unusable arguments for the demo action boundary."""
 
 
 def proposal(action):
@@ -9,6 +14,16 @@ def proposal(action):
 
 
 def authorize(action, user_request):
+    # The frozen parser validates string types, not whether a direction/target
+    # can be normalized. Check that boundary before either policy or delegation.
+    # Discard the normalized copy: retain exactly the model's parsed arguments.
+    if action['action'] in ('CALL', 'DIRECTION_ADVICE', 'OPEN_URL', 'NONE'):
+        try:
+            normalize_action(action)
+        except (TypeError, ValueError) as exc:
+            raise ActionValidationError(
+                f"Invalid {action['action']} arguments: {exc}. No executable action was produced."
+            ) from exc
     proposed = proposal(action)
     argument = next(iter(proposed['arguments']), '')
     affected = f"{proposed['tool']}.{argument}" if argument else proposed['tool']

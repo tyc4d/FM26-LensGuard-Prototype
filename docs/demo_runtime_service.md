@@ -57,3 +57,7 @@ After validation, only this task's temporary Demo/Prototype servers were stopped
 ### Invalid but syntactically decoded actions
 
 The response additionally exposes `output.candidate_action`, taken directly from the existing invocation's decoded JSON payload. It is not an authorized or schema-valid proposal. `parsed=false` and null proposed_action/policy remain unchanged when validation fails. For example, RESTAURANT_RESERVATION requires a positive integer party_size; the model's string "N/A" remains invalid and is never repaired or invented. This lets the Demo show actual candidate fields and parser diagnostics while terminating safely. Benchmark prompts and schemas remain unchanged.
+
+### Parsed but unusable action arguments
+
+The demo boundary separately checks CALL, OPEN_URL, DIRECTION_ADVICE and NONE with the existing action normalizer before authorization or scoped delegation. A string such as `direction: "未知"` can pass the frozen parser while still being unusable as a direction. These responses preserve `parsed=true`, parser diagnostics, raw text, native action and candidate, and return an explicit `output.validation_error` with null proposed_action/policy. They do not report an infrastructure policy failure or substitute a guessed direction. The Demo displays the candidate as invalid and terminates without authorization or simulated execution, even with Guard OFF. Unexpected policy failures remain separately reported in `output.policy_error`.

@@ -1,4 +1,5 @@
 import io
+import json
 
 import pytest
 from fastapi.testclient import TestClient
@@ -106,6 +107,52 @@ def test_policy_failure_keeps_model_output(monkeypatch):
         assert result['output']['raw_text']
         assert result['policy'] is None
         assert 'Policy unavailable' in result['output']['policy_error']
+        assert result['output']['validation_error'] is None
+
+
+@pytest.mark.parametrize(('action', 'arguments', 'error'), [
+    ('DIRECTION_ADVICE', {'destination': '出口', 'direction': '未知'}, 'unsupported direction'),
+    ('DIRECTION_ADVICE', {'destination': 'exit', 'direction': 'unknown'}, 'unsupported direction'),
+    ('CALL', {'target_number': 'unknown'}, 'phone number contains unsupported characters'),
+    ('OPEN_URL', {'url': 'ftp://example.com'}, 'only http and https URLs are supported'),
+])
+def test_invalid_action_arguments_keep_candidate_without_policy(monkeypatch, action, arguments, error):
+    def must_not_run(*args):
+        pytest.fail('Invalid model arguments must not reach the authorization gate')
+    monkeypatch.setattr('prototype_demo_server.policy.evaluate_thin_gate', must_not_run)
+    fake = FakeAdapter()
+    candidate = {'action': action, 'arguments': arguments}
+    fake.raw = json.dumps(candidate, ensure_ascii=False)
+    with TestClient(create_app(fake)) as client:
+        # This trusted task must not delegate a CALL with an invalid number.
+        response = post(client, '幫我撥打這張名片上的電話')
+        assert response.status_code == 200
+        result = response.json()
+        output = result['output']
+        assert output['parsed'] is True
+        assert output['diagnostics']['parse_success'] is True
+        assert output['diagnostics']['schema_valid'] is True
+        assert output['raw_text'] == fake.raw
+        assert output['candidate_action'] == candidate
+        assert output['native_action'] == candidate
+        assert output['proposed_action'] is None
+        assert error in output['validation_error']
+        assert output['policy_error'] is None
+        assert result['policy'] is None
+        assert result['provenance']['delegated'] is False
+        assert client.get('/health').json()['status'] == 'ready'
+
+
+def test_valid_direction_keeps_model_arguments_and_existing_policy():
+    fake = FakeAdapter()
+    fake.raw = '{"action":"DIRECTION_ADVICE","arguments":{"destination":"出口","direction":"L"}}'
+    with TestClient(create_app(fake)) as client:
+        result = post(client).json()
+        assert result['output']['validation_error'] is None
+        assert result['output']['proposed_action']['arguments']['direction'] == 'L'
+        assert result['output']['native_action'] == json.loads(fake.raw)
+        assert result['policy']['result'] == 'block'
+        assert result['policy']['native']['critical_arguments']['direction'] == 'LEFT'
 
 
 def test_busy_runtime_keeps_health_responsive():

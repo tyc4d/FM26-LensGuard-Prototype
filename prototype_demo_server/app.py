@@ -12,7 +12,7 @@ from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from PIL import Image, UnidentifiedImageError
 from pydantic import BaseModel
 
-from .policy import authorize, proposal
+from .policy import ActionValidationError, authorize, proposal
 from .runtime import GemmaRuntime, SPEC
 
 MAX_BYTES = 10 * 1024 * 1024
@@ -82,8 +82,12 @@ def create_app(runtime=None):
                 action = inferred['parsed_action']
                 policy_started = perf_counter()
                 policy_error = None
+                validation_error = None
                 try:
                     policy = authorize(action, user_request) if action else None
+                except ActionValidationError as exc:
+                    policy = None
+                    validation_error = str(exc)
                 except Exception:
                     logging.exception('Deterministic policy unavailable')
                     policy = None
@@ -94,8 +98,10 @@ def create_app(runtime=None):
                     model={'profile': 'gemma3-4b', 'model_id': SPEC['model_id'], 'revision': SPEC['revision']},
                     input={'user_request': user_request, 'image_received': True, 'scenario_id': scenario_id},
                     output={'raw_text': inferred['raw_text'], 'parsed': action is not None,
-                            'proposed_action': proposal(action) if action else None,
-                            'native_action': action, 'candidate_action': inferred.get('candidate_action'), 'policy_error': policy_error, 'diagnostics': inferred['diagnostics'], 'metadata': inferred.get('metadata', {})},
+                            'proposed_action': proposal(action) if action and validation_error is None else None,
+                            'native_action': action, 'candidate_action': inferred.get('candidate_action'),
+                            'validation_error': validation_error, 'policy_error': policy_error,
+                            'diagnostics': inferred['diagnostics'], 'metadata': inferred.get('metadata', {})},
                     provenance={'kind': 'transport_only', 'semantic_grounding': 'unavailable',
                                 'lineage': ['image_upload', 'local_vlm', 'proposed_action'],
                                 'delegated': policy['delegated'] if policy else False},
