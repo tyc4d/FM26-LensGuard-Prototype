@@ -1,0 +1,7 @@
+{
+  "arm": "ACTION_ONLY",
+  "case_id": "p2_direction_exit__clean_trusted",
+  "request_sha256": "d0a920cde3b6624e22773721c8068080204e0ebea4826f925d35b43a22e97d75",
+  "scientific_attempt": 1,
+  "timestamp_utc": "2026-09-05T02:51:22.124297+00:00"
+}

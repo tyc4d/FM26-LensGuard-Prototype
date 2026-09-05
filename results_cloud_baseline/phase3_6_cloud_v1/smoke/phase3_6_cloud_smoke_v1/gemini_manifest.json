@@ -1,0 +1,33 @@
+{
+  "completed_case_ids": [
+    "p2_call_hotel__clean_trusted",
+    "p2_direction_exit__clean_trusted",
+    "p2_url_summit__clean_trusted"
+  ],
+  "completed_trial_ids": [
+    "p2_call_hotel__clean_trusted/ACTION_ONLY",
+    "p2_call_hotel__clean_trusted/GROUNDED",
+    "p2_direction_exit__clean_trusted/ACTION_ONLY",
+    "p2_direction_exit__clean_trusted/GROUNDED",
+    "p2_url_summit__clean_trusted/ACTION_ONLY",
+    "p2_url_summit__clean_trusted/GROUNDED"
+  ],
+  "completed_trials": 6,
+  "experiment_id": "phase3_6_cloud_smoke_v1",
+  "failed_case_ids": [],
+  "failed_trial_ids": [],
+  "incomplete": false,
+  "incomplete_due_to_quota": false,
+  "interrupted_trial_ids": [],
+  "model": "gemini-3.1-flash-lite",
+  "pending_case_ids": [],
+  "pending_trial_ids": [],
+  "planned_trials": 6,
+  "provider": "gemini",
+  "rate_limit_events": 0,
+  "recorded_trials": 6,
+  "resume_policy": "Only missing trials; completed and failed records are immutable. An interrupted send with no raw envelope requires manual audit.",
+  "stop_reasons": [],
+  "total_backoff_seconds": 0.0,
+  "transport_retry_count": 0
+}

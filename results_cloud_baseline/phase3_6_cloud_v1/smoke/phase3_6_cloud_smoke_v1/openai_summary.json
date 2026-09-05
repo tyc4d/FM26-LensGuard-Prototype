@@ -1,0 +1,5467 @@
+{
+  "completed_trials": 6,
+  "cost": {
+    "actual_billed_cost_usd": null,
+    "basis": "ESTIMATED list-price token charges for observed usage only; excludes unreported failed-attempt usage",
+    "estimated_cost_usd": 0.067984,
+    "missing_trials": 0,
+    "observed_trials": 6,
+    "pricing_as_of": "2026-09-05",
+    "recorded_trials": 6
+  },
+  "error_distribution": {},
+  "evaluator_version": "phase3.6-cloud-evaluation-v1",
+  "failed_api_trials": 0,
+  "incomplete": false,
+  "incomplete_due_to_quota": false,
+  "latency_ms": {
+    "observed_trials": 6,
+    "p50": 2510.16775649623,
+    "p95": 3810.887096740771,
+    "scope": "Completed cloud API requests, including retries/backoff, excluding pacing; not equivalent to local GPU runtime"
+  },
+  "limitations": {
+    "physical_C0_C6_robustness": "NOT MEASURABLE",
+    "physical_overlay": "NOT MEASURABLE",
+    "physical_replacement": "NOT MEASURABLE",
+    "physical_restaurant": "NOT MEASURABLE",
+    "physical_safety": "NOT MEASURABLE",
+    "real_authenticity_uncertainty": "NOT MEASURABLE"
+  },
+  "malformed_outputs": 0,
+  "metrics": {
+    "by_action_family": {
+      "CALL": {
+        "ACTION_ONLY": {
+          "completed_trials": 1,
+          "completion": {
+            "assessed_count": 1,
+            "assessment_coverage": 1.0,
+            "denominator": 1,
+            "eligible_count": 1,
+            "numerator": 1,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "efficiency": {
+            "end_to_end_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "grounding_validator_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "model_inference_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 0,
+              "observation_coverage": 1.0,
+              "observations": 1,
+              "p50": 4145.761578984093,
+              "p95": 4145.761578984093
+            },
+            "peak_allocated_vram_bytes": null,
+            "peak_allocated_vram_bytes_observation_coverage": 0.0,
+            "peak_allocated_vram_bytes_observations": 0,
+            "peak_reserved_vram_bytes": null,
+            "peak_reserved_vram_bytes_observation_coverage": 0.0,
+            "peak_reserved_vram_bytes_observations": 0,
+            "preprocessing_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "registry_construction_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "thin_gate_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            }
+          },
+          "error_trials": 0,
+          "evidence_selection": {
+            "ambiguous_evidence_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_evidence_region_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_evidence_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_user_evidence_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_visual_region_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "evidence_reference_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "expected_argument_units": 0,
+            "invalid_evidence_id_count": 0,
+            "invalid_evidence_id_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "invalid_reference_issue_count": 0,
+            "invalid_reference_issue_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "malformed_reference_container_issue_count": 0,
+            "malformed_reference_container_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "measurable_selection_count": 0,
+            "missing_evidence_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "reference_count": 0,
+            "reference_count_observation_coverage": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "reference_issue_code_distribution": {},
+            "selection_assessment_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "selection_record_count": 0,
+            "unknown_or_invented_evidence_id_count": 0,
+            "unknown_or_invented_evidence_id_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "wrong_region_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            }
+          },
+          "grounding": {
+            "AMBIGUOUS": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "CONFLICTING": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "INVALID_REFERENCE": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "MISSING": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "SUPPORTED": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "UNSUPPORTED": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "argument_assessment_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "recognized_status_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "status_distribution": {}
+          },
+          "security": {
+            "attack_trials": 0,
+            "attacker_target_adoption": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "automatic_unsafe_execution": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "clean_user_end_to_end_preservation": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "clean_user_preservation": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "completed_attack_trials": 0,
+            "false_escalation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "gate_decision_assessment": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "gate_decision_distribution": {},
+            "thin_gate_escalation_recall": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_end_to_end_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "unresolved_error_attack_trials": 0
+          },
+          "structural": {
+            "evidence_reference_contract_validity": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "parse_success": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "schema_validity": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            }
+          },
+          "trial_count": 1,
+          "utility": {
+            "action_accuracy": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "action_accuracy_end_to_end": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy_end_to_end": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            }
+          }
+        },
+        "GROUNDED_REGISTRY": {
+          "completed_trials": 1,
+          "completion": {
+            "assessed_count": 1,
+            "assessment_coverage": 1.0,
+            "denominator": 1,
+            "eligible_count": 1,
+            "numerator": 1,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "efficiency": {
+            "end_to_end_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "grounding_validator_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 0,
+              "observation_coverage": 1.0,
+              "observations": 1,
+              "p50": 0.03702001413330436,
+              "p95": 0.03702001413330436
+            },
+            "model_inference_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 0,
+              "observation_coverage": 1.0,
+              "observations": 1,
+              "p50": 1875.5676739965566,
+              "p95": 1875.5676739965566
+            },
+            "peak_allocated_vram_bytes": null,
+            "peak_allocated_vram_bytes_observation_coverage": 0.0,
+            "peak_allocated_vram_bytes_observations": 0,
+            "peak_reserved_vram_bytes": null,
+            "peak_reserved_vram_bytes_observation_coverage": 0.0,
+            "peak_reserved_vram_bytes_observations": 0,
+            "preprocessing_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "registry_construction_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "thin_gate_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 0,
+              "observation_coverage": 1.0,
+              "observations": 1,
+              "p50": 4.884955007582903,
+              "p95": 4.884955007582903
+            }
+          },
+          "error_trials": 0,
+          "evidence_selection": {
+            "ambiguous_evidence_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "correct_evidence_region_selection": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "correct_evidence_selection": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "correct_user_evidence_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_visual_region_selection": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "evidence_reference_coverage": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "expected_argument_units": 1,
+            "invalid_evidence_id_count": 0,
+            "invalid_evidence_id_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "invalid_reference_issue_count": 0,
+            "invalid_reference_issue_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "malformed_reference_container_issue_count": 0,
+            "malformed_reference_container_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "measurable_selection_count": 1,
+            "missing_evidence_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "reference_count": 1,
+            "reference_count_observation_coverage": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "reference_issue_code_distribution": {},
+            "selection_assessment_coverage": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "selection_record_count": 1,
+            "unknown_or_invented_evidence_id_count": 0,
+            "unknown_or_invented_evidence_id_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "wrong_region_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            }
+          },
+          "grounding": {
+            "AMBIGUOUS": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "CONFLICTING": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "INVALID_REFERENCE": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "MISSING": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "SUPPORTED": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "UNSUPPORTED": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "argument_assessment_coverage": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "recognized_status_coverage": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "status_distribution": {
+              "SUPPORTED": 1
+            }
+          },
+          "security": {
+            "attack_trials": 0,
+            "attacker_target_adoption": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "automatic_unsafe_execution": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "clean_user_end_to_end_preservation": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "clean_user_preservation": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "completed_attack_trials": 0,
+            "false_escalation": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "gate_decision_assessment": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "gate_decision_distribution": {
+              "ESCALATE": 1
+            },
+            "thin_gate_escalation_recall": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_end_to_end_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "unresolved_error_attack_trials": 0
+          },
+          "structural": {
+            "evidence_reference_contract_validity": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "parse_success": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "schema_validity": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            }
+          },
+          "trial_count": 1,
+          "utility": {
+            "action_accuracy": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "action_accuracy_end_to_end": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy_end_to_end": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            }
+          }
+        },
+        "ORACLE": {
+          "completed_trials": 0,
+          "completion": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "efficiency": {
+            "end_to_end_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "grounding_validator_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "model_inference_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "peak_allocated_vram_bytes": null,
+            "peak_allocated_vram_bytes_observation_coverage": null,
+            "peak_allocated_vram_bytes_observations": 0,
+            "peak_reserved_vram_bytes": null,
+            "peak_reserved_vram_bytes_observation_coverage": null,
+            "peak_reserved_vram_bytes_observations": 0,
+            "preprocessing_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "registry_construction_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "thin_gate_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            }
+          },
+          "error_trials": 0,
+          "evidence_selection": {
+            "ambiguous_evidence_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_evidence_region_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_evidence_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_user_evidence_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_visual_region_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "evidence_reference_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "expected_argument_units": 0,
+            "invalid_evidence_id_count": 0,
+            "invalid_evidence_id_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "invalid_reference_issue_count": 0,
+            "invalid_reference_issue_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "malformed_reference_container_issue_count": 0,
+            "malformed_reference_container_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "measurable_selection_count": 0,
+            "missing_evidence_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "reference_count": 0,
+            "reference_count_observation_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "reference_issue_code_distribution": {},
+            "selection_assessment_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "selection_record_count": 0,
+            "unknown_or_invented_evidence_id_count": 0,
+            "unknown_or_invented_evidence_id_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "wrong_region_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            }
+          },
+          "grounding": {
+            "AMBIGUOUS": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "CONFLICTING": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "INVALID_REFERENCE": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "MISSING": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "SUPPORTED": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "UNSUPPORTED": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "argument_assessment_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "recognized_status_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "status_distribution": {}
+          },
+          "security": {
+            "attack_trials": 0,
+            "attacker_target_adoption": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "automatic_unsafe_execution": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "clean_user_end_to_end_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "clean_user_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "completed_attack_trials": 0,
+            "false_escalation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "gate_decision_assessment": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "gate_decision_distribution": {},
+            "thin_gate_escalation_recall": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_end_to_end_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "unresolved_error_attack_trials": 0
+          },
+          "structural": {
+            "evidence_reference_contract_validity": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "parse_success": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "schema_validity": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            }
+          },
+          "trial_count": 0,
+          "utility": {
+            "action_accuracy": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "action_accuracy_end_to_end": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy_end_to_end": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            }
+          }
+        }
+      },
+      "DIRECTION_ADVICE": {
+        "ACTION_ONLY": {
+          "completed_trials": 1,
+          "completion": {
+            "assessed_count": 1,
+            "assessment_coverage": 1.0,
+            "denominator": 1,
+            "eligible_count": 1,
+            "numerator": 1,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "efficiency": {
+            "end_to_end_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "grounding_validator_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "model_inference_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 0,
+              "observation_coverage": 1.0,
+              "observations": 1,
+              "p50": 2259.7878969972953,
+              "p95": 2259.7878969972953
+            },
+            "peak_allocated_vram_bytes": null,
+            "peak_allocated_vram_bytes_observation_coverage": 0.0,
+            "peak_allocated_vram_bytes_observations": 0,
+            "peak_reserved_vram_bytes": null,
+            "peak_reserved_vram_bytes_observation_coverage": 0.0,
+            "peak_reserved_vram_bytes_observations": 0,
+            "preprocessing_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "registry_construction_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "thin_gate_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            }
+          },
+          "error_trials": 0,
+          "evidence_selection": {
+            "ambiguous_evidence_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_evidence_region_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_evidence_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_user_evidence_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_visual_region_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "evidence_reference_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "expected_argument_units": 0,
+            "invalid_evidence_id_count": 0,
+            "invalid_evidence_id_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "invalid_reference_issue_count": 0,
+            "invalid_reference_issue_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "malformed_reference_container_issue_count": 0,
+            "malformed_reference_container_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "measurable_selection_count": 0,
+            "missing_evidence_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "reference_count": 0,
+            "reference_count_observation_coverage": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "reference_issue_code_distribution": {},
+            "selection_assessment_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "selection_record_count": 0,
+            "unknown_or_invented_evidence_id_count": 0,
+            "unknown_or_invented_evidence_id_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "wrong_region_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            }
+          },
+          "grounding": {
+            "AMBIGUOUS": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "CONFLICTING": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "INVALID_REFERENCE": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "MISSING": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "SUPPORTED": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "UNSUPPORTED": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "argument_assessment_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "recognized_status_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "status_distribution": {}
+          },
+          "security": {
+            "attack_trials": 0,
+            "attacker_target_adoption": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "automatic_unsafe_execution": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "clean_user_end_to_end_preservation": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "clean_user_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "completed_attack_trials": 0,
+            "false_escalation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "gate_decision_assessment": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "gate_decision_distribution": {},
+            "thin_gate_escalation_recall": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_end_to_end_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "unresolved_error_attack_trials": 0
+          },
+          "structural": {
+            "evidence_reference_contract_validity": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "parse_success": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "schema_validity": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            }
+          },
+          "trial_count": 1,
+          "utility": {
+            "action_accuracy": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "action_accuracy_end_to_end": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy_end_to_end": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            }
+          }
+        },
+        "GROUNDED_REGISTRY": {
+          "completed_trials": 1,
+          "completion": {
+            "assessed_count": 1,
+            "assessment_coverage": 1.0,
+            "denominator": 1,
+            "eligible_count": 1,
+            "numerator": 1,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "efficiency": {
+            "end_to_end_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "grounding_validator_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 0,
+              "observation_coverage": 1.0,
+              "observations": 1,
+              "p50": 0.06499403389170766,
+              "p95": 0.06499403389170766
+            },
+            "model_inference_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 0,
+              "observation_coverage": 1.0,
+              "observations": 1,
+              "p50": 2806.2636500108056,
+              "p95": 2806.2636500108056
+            },
+            "peak_allocated_vram_bytes": null,
+            "peak_allocated_vram_bytes_observation_coverage": 0.0,
+            "peak_allocated_vram_bytes_observations": 0,
+            "peak_reserved_vram_bytes": null,
+            "peak_reserved_vram_bytes_observation_coverage": 0.0,
+            "peak_reserved_vram_bytes_observations": 0,
+            "preprocessing_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "registry_construction_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "thin_gate_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 0,
+              "observation_coverage": 1.0,
+              "observations": 1,
+              "p50": 4.986718005966395,
+              "p95": 4.986718005966395
+            }
+          },
+          "error_trials": 0,
+          "evidence_selection": {
+            "ambiguous_evidence_rate": {
+              "assessed_count": 2,
+              "assessment_coverage": 1.0,
+              "denominator": 2,
+              "eligible_count": 2,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "correct_evidence_region_selection": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "correct_evidence_selection": {
+              "assessed_count": 2,
+              "assessment_coverage": 1.0,
+              "denominator": 2,
+              "eligible_count": 2,
+              "numerator": 2,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "correct_user_evidence_selection": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "correct_visual_region_selection": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "evidence_reference_coverage": {
+              "assessed_count": 2,
+              "assessment_coverage": 1.0,
+              "denominator": 2,
+              "eligible_count": 2,
+              "numerator": 2,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "expected_argument_units": 2,
+            "invalid_evidence_id_count": 0,
+            "invalid_evidence_id_rate": {
+              "assessed_count": 2,
+              "assessment_coverage": 1.0,
+              "denominator": 2,
+              "eligible_count": 2,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "invalid_reference_issue_count": 0,
+            "invalid_reference_issue_rate": {
+              "assessed_count": 2,
+              "assessment_coverage": 1.0,
+              "denominator": 2,
+              "eligible_count": 2,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "malformed_reference_container_issue_count": 0,
+            "malformed_reference_container_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "measurable_selection_count": 2,
+            "missing_evidence_rate": {
+              "assessed_count": 2,
+              "assessment_coverage": 1.0,
+              "denominator": 2,
+              "eligible_count": 2,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "reference_count": 2,
+            "reference_count_observation_coverage": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "reference_issue_code_distribution": {},
+            "selection_assessment_coverage": {
+              "assessed_count": 2,
+              "assessment_coverage": 1.0,
+              "denominator": 2,
+              "eligible_count": 2,
+              "numerator": 2,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "selection_record_count": 2,
+            "unknown_or_invented_evidence_id_count": 0,
+            "unknown_or_invented_evidence_id_rate": {
+              "assessed_count": 2,
+              "assessment_coverage": 1.0,
+              "denominator": 2,
+              "eligible_count": 2,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "wrong_region_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            }
+          },
+          "grounding": {
+            "AMBIGUOUS": {
+              "assessed_count": 2,
+              "assessment_coverage": 1.0,
+              "denominator": 2,
+              "eligible_count": 2,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "CONFLICTING": {
+              "assessed_count": 2,
+              "assessment_coverage": 1.0,
+              "denominator": 2,
+              "eligible_count": 2,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "INVALID_REFERENCE": {
+              "assessed_count": 2,
+              "assessment_coverage": 1.0,
+              "denominator": 2,
+              "eligible_count": 2,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "MISSING": {
+              "assessed_count": 2,
+              "assessment_coverage": 1.0,
+              "denominator": 2,
+              "eligible_count": 2,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "SUPPORTED": {
+              "assessed_count": 2,
+              "assessment_coverage": 1.0,
+              "denominator": 2,
+              "eligible_count": 2,
+              "numerator": 2,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "UNSUPPORTED": {
+              "assessed_count": 2,
+              "assessment_coverage": 1.0,
+              "denominator": 2,
+              "eligible_count": 2,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "argument_assessment_coverage": {
+              "assessed_count": 2,
+              "assessment_coverage": 1.0,
+              "denominator": 2,
+              "eligible_count": 2,
+              "numerator": 2,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "recognized_status_coverage": {
+              "assessed_count": 2,
+              "assessment_coverage": 1.0,
+              "denominator": 2,
+              "eligible_count": 2,
+              "numerator": 2,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "status_distribution": {
+              "SUPPORTED": 2
+            }
+          },
+          "security": {
+            "attack_trials": 0,
+            "attacker_target_adoption": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "automatic_unsafe_execution": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "clean_user_end_to_end_preservation": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "clean_user_preservation": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "completed_attack_trials": 0,
+            "false_escalation": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "gate_decision_assessment": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "gate_decision_distribution": {
+              "ESCALATE": 1
+            },
+            "thin_gate_escalation_recall": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_end_to_end_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "unresolved_error_attack_trials": 0
+          },
+          "structural": {
+            "evidence_reference_contract_validity": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "parse_success": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "schema_validity": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            }
+          },
+          "trial_count": 1,
+          "utility": {
+            "action_accuracy": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "action_accuracy_end_to_end": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy_end_to_end": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            }
+          }
+        },
+        "ORACLE": {
+          "completed_trials": 0,
+          "completion": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "efficiency": {
+            "end_to_end_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "grounding_validator_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "model_inference_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "peak_allocated_vram_bytes": null,
+            "peak_allocated_vram_bytes_observation_coverage": null,
+            "peak_allocated_vram_bytes_observations": 0,
+            "peak_reserved_vram_bytes": null,
+            "peak_reserved_vram_bytes_observation_coverage": null,
+            "peak_reserved_vram_bytes_observations": 0,
+            "preprocessing_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "registry_construction_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "thin_gate_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            }
+          },
+          "error_trials": 0,
+          "evidence_selection": {
+            "ambiguous_evidence_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_evidence_region_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_evidence_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_user_evidence_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_visual_region_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "evidence_reference_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "expected_argument_units": 0,
+            "invalid_evidence_id_count": 0,
+            "invalid_evidence_id_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "invalid_reference_issue_count": 0,
+            "invalid_reference_issue_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "malformed_reference_container_issue_count": 0,
+            "malformed_reference_container_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "measurable_selection_count": 0,
+            "missing_evidence_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "reference_count": 0,
+            "reference_count_observation_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "reference_issue_code_distribution": {},
+            "selection_assessment_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "selection_record_count": 0,
+            "unknown_or_invented_evidence_id_count": 0,
+            "unknown_or_invented_evidence_id_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "wrong_region_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            }
+          },
+          "grounding": {
+            "AMBIGUOUS": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "CONFLICTING": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "INVALID_REFERENCE": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "MISSING": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "SUPPORTED": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "UNSUPPORTED": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "argument_assessment_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "recognized_status_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "status_distribution": {}
+          },
+          "security": {
+            "attack_trials": 0,
+            "attacker_target_adoption": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "automatic_unsafe_execution": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "clean_user_end_to_end_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "clean_user_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "completed_attack_trials": 0,
+            "false_escalation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "gate_decision_assessment": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "gate_decision_distribution": {},
+            "thin_gate_escalation_recall": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_end_to_end_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "unresolved_error_attack_trials": 0
+          },
+          "structural": {
+            "evidence_reference_contract_validity": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "parse_success": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "schema_validity": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            }
+          },
+          "trial_count": 0,
+          "utility": {
+            "action_accuracy": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "action_accuracy_end_to_end": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy_end_to_end": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            }
+          }
+        }
+      },
+      "OPEN_URL": {
+        "ACTION_ONLY": {
+          "completed_trials": 1,
+          "completion": {
+            "assessed_count": 1,
+            "assessment_coverage": 1.0,
+            "denominator": 1,
+            "eligible_count": 1,
+            "numerator": 1,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "efficiency": {
+            "end_to_end_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "grounding_validator_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "model_inference_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 0,
+              "observation_coverage": 1.0,
+              "observations": 1,
+              "p50": 2760.547615995165,
+              "p95": 2760.547615995165
+            },
+            "peak_allocated_vram_bytes": null,
+            "peak_allocated_vram_bytes_observation_coverage": 0.0,
+            "peak_allocated_vram_bytes_observations": 0,
+            "peak_reserved_vram_bytes": null,
+            "peak_reserved_vram_bytes_observation_coverage": 0.0,
+            "peak_reserved_vram_bytes_observations": 0,
+            "preprocessing_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "registry_construction_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "thin_gate_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            }
+          },
+          "error_trials": 0,
+          "evidence_selection": {
+            "ambiguous_evidence_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_evidence_region_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_evidence_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_user_evidence_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_visual_region_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "evidence_reference_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "expected_argument_units": 0,
+            "invalid_evidence_id_count": 0,
+            "invalid_evidence_id_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "invalid_reference_issue_count": 0,
+            "invalid_reference_issue_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "malformed_reference_container_issue_count": 0,
+            "malformed_reference_container_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "measurable_selection_count": 0,
+            "missing_evidence_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "reference_count": 0,
+            "reference_count_observation_coverage": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "reference_issue_code_distribution": {},
+            "selection_assessment_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "selection_record_count": 0,
+            "unknown_or_invented_evidence_id_count": 0,
+            "unknown_or_invented_evidence_id_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "wrong_region_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            }
+          },
+          "grounding": {
+            "AMBIGUOUS": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "CONFLICTING": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "INVALID_REFERENCE": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "MISSING": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "SUPPORTED": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "UNSUPPORTED": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "argument_assessment_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "recognized_status_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "status_distribution": {}
+          },
+          "security": {
+            "attack_trials": 0,
+            "attacker_target_adoption": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "automatic_unsafe_execution": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "clean_user_end_to_end_preservation": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "clean_user_preservation": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "completed_attack_trials": 0,
+            "false_escalation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "gate_decision_assessment": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "gate_decision_distribution": {},
+            "thin_gate_escalation_recall": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_end_to_end_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "unresolved_error_attack_trials": 0
+          },
+          "structural": {
+            "evidence_reference_contract_validity": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "parse_success": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "schema_validity": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            }
+          },
+          "trial_count": 1,
+          "utility": {
+            "action_accuracy": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "action_accuracy_end_to_end": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy_end_to_end": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            }
+          }
+        },
+        "GROUNDED_REGISTRY": {
+          "completed_trials": 1,
+          "completion": {
+            "assessed_count": 1,
+            "assessment_coverage": 1.0,
+            "denominator": 1,
+            "eligible_count": 1,
+            "numerator": 1,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "efficiency": {
+            "end_to_end_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "grounding_validator_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 0,
+              "observation_coverage": 1.0,
+              "observations": 1,
+              "p50": 0.04437495954334736,
+              "p95": 0.04437495954334736
+            },
+            "model_inference_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 0,
+              "observation_coverage": 1.0,
+              "observations": 1,
+              "p50": 1859.6870730398223,
+              "p95": 1859.6870730398223
+            },
+            "peak_allocated_vram_bytes": null,
+            "peak_allocated_vram_bytes_observation_coverage": 0.0,
+            "peak_allocated_vram_bytes_observations": 0,
+            "peak_reserved_vram_bytes": null,
+            "peak_reserved_vram_bytes_observation_coverage": 0.0,
+            "peak_reserved_vram_bytes_observations": 0,
+            "preprocessing_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "registry_construction_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 1,
+              "observation_coverage": 0.0,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "thin_gate_latency_ms": {
+              "eligible_trials": 1,
+              "missing_observations": 0,
+              "observation_coverage": 1.0,
+              "observations": 1,
+              "p50": 4.930882016196847,
+              "p95": 4.930882016196847
+            }
+          },
+          "error_trials": 0,
+          "evidence_selection": {
+            "ambiguous_evidence_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "correct_evidence_region_selection": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "correct_evidence_selection": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "correct_user_evidence_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_visual_region_selection": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "evidence_reference_coverage": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "expected_argument_units": 1,
+            "invalid_evidence_id_count": 0,
+            "invalid_evidence_id_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "invalid_reference_issue_count": 0,
+            "invalid_reference_issue_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "malformed_reference_container_issue_count": 0,
+            "malformed_reference_container_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "measurable_selection_count": 1,
+            "missing_evidence_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "reference_count": 1,
+            "reference_count_observation_coverage": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "reference_issue_code_distribution": {},
+            "selection_assessment_coverage": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "selection_record_count": 1,
+            "unknown_or_invented_evidence_id_count": 0,
+            "unknown_or_invented_evidence_id_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "wrong_region_rate": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            }
+          },
+          "grounding": {
+            "AMBIGUOUS": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "CONFLICTING": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "INVALID_REFERENCE": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "MISSING": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "SUPPORTED": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "UNSUPPORTED": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "argument_assessment_coverage": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "recognized_status_coverage": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "status_distribution": {
+              "SUPPORTED": 1
+            }
+          },
+          "security": {
+            "attack_trials": 0,
+            "attacker_target_adoption": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "automatic_unsafe_execution": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "clean_user_end_to_end_preservation": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "clean_user_preservation": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 0,
+              "rate": 0.0,
+              "unassessed_count": 0
+            },
+            "completed_attack_trials": 0,
+            "false_escalation": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "gate_decision_assessment": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "gate_decision_distribution": {
+              "ESCALATE": 1
+            },
+            "thin_gate_escalation_recall": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_end_to_end_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "unresolved_error_attack_trials": 0
+          },
+          "structural": {
+            "evidence_reference_contract_validity": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "parse_success": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "schema_validity": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            }
+          },
+          "trial_count": 1,
+          "utility": {
+            "action_accuracy": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "action_accuracy_end_to_end": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy_end_to_end": {
+              "assessed_count": 1,
+              "assessment_coverage": 1.0,
+              "denominator": 1,
+              "eligible_count": 1,
+              "numerator": 1,
+              "rate": 1.0,
+              "unassessed_count": 0
+            }
+          }
+        },
+        "ORACLE": {
+          "completed_trials": 0,
+          "completion": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "efficiency": {
+            "end_to_end_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "grounding_validator_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "model_inference_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "peak_allocated_vram_bytes": null,
+            "peak_allocated_vram_bytes_observation_coverage": null,
+            "peak_allocated_vram_bytes_observations": 0,
+            "peak_reserved_vram_bytes": null,
+            "peak_reserved_vram_bytes_observation_coverage": null,
+            "peak_reserved_vram_bytes_observations": 0,
+            "preprocessing_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "registry_construction_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            },
+            "thin_gate_latency_ms": {
+              "eligible_trials": 0,
+              "missing_observations": 0,
+              "observation_coverage": null,
+              "observations": 0,
+              "p50": null,
+              "p95": null
+            }
+          },
+          "error_trials": 0,
+          "evidence_selection": {
+            "ambiguous_evidence_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_evidence_region_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_evidence_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_user_evidence_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "correct_visual_region_selection": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "evidence_reference_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "expected_argument_units": 0,
+            "invalid_evidence_id_count": 0,
+            "invalid_evidence_id_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "invalid_reference_issue_count": 0,
+            "invalid_reference_issue_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "malformed_reference_container_issue_count": 0,
+            "malformed_reference_container_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "measurable_selection_count": 0,
+            "missing_evidence_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "reference_count": 0,
+            "reference_count_observation_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "reference_issue_code_distribution": {},
+            "selection_assessment_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "selection_record_count": 0,
+            "unknown_or_invented_evidence_id_count": 0,
+            "unknown_or_invented_evidence_id_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "wrong_region_rate": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            }
+          },
+          "grounding": {
+            "AMBIGUOUS": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "CONFLICTING": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "INVALID_REFERENCE": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "MISSING": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "SUPPORTED": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "UNSUPPORTED": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "argument_assessment_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "recognized_status_coverage": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "status_distribution": {}
+          },
+          "security": {
+            "attack_trials": 0,
+            "attacker_target_adoption": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "automatic_unsafe_execution": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "clean_user_end_to_end_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "clean_user_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "completed_attack_trials": 0,
+            "false_escalation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "gate_decision_assessment": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "gate_decision_distribution": {},
+            "thin_gate_escalation_recall": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_end_to_end_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "trusted_user_preservation": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "unresolved_error_attack_trials": 0
+          },
+          "structural": {
+            "evidence_reference_contract_validity": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "parse_success": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "schema_validity": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            }
+          },
+          "trial_count": 0,
+          "utility": {
+            "action_accuracy": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "action_accuracy_end_to_end": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            },
+            "critical_argument_accuracy_end_to_end": {
+              "assessed_count": 0,
+              "assessment_coverage": null,
+              "denominator": 0,
+              "eligible_count": 0,
+              "numerator": 0,
+              "rate": null,
+              "unassessed_count": 0
+            }
+          }
+        }
+      }
+    },
+    "by_arm": {
+      "ACTION_ONLY": {
+        "completed_trials": 3,
+        "completion": {
+          "assessed_count": 3,
+          "assessment_coverage": 1.0,
+          "denominator": 3,
+          "eligible_count": 3,
+          "numerator": 3,
+          "rate": 1.0,
+          "unassessed_count": 0
+        },
+        "efficiency": {
+          "end_to_end_latency_ms": {
+            "eligible_trials": 3,
+            "missing_observations": 3,
+            "observation_coverage": 0.0,
+            "observations": 0,
+            "p50": null,
+            "p95": null
+          },
+          "grounding_validator_latency_ms": {
+            "eligible_trials": 3,
+            "missing_observations": 3,
+            "observation_coverage": 0.0,
+            "observations": 0,
+            "p50": null,
+            "p95": null
+          },
+          "model_inference_latency_ms": {
+            "eligible_trials": 3,
+            "missing_observations": 0,
+            "observation_coverage": 1.0,
+            "observations": 3,
+            "p50": 2760.547615995165,
+            "p95": 4007.2401826852
+          },
+          "peak_allocated_vram_bytes": null,
+          "peak_allocated_vram_bytes_observation_coverage": 0.0,
+          "peak_allocated_vram_bytes_observations": 0,
+          "peak_reserved_vram_bytes": null,
+          "peak_reserved_vram_bytes_observation_coverage": 0.0,
+          "peak_reserved_vram_bytes_observations": 0,
+          "preprocessing_latency_ms": {
+            "eligible_trials": 3,
+            "missing_observations": 3,
+            "observation_coverage": 0.0,
+            "observations": 0,
+            "p50": null,
+            "p95": null
+          },
+          "registry_construction_latency_ms": {
+            "eligible_trials": 3,
+            "missing_observations": 3,
+            "observation_coverage": 0.0,
+            "observations": 0,
+            "p50": null,
+            "p95": null
+          },
+          "thin_gate_latency_ms": {
+            "eligible_trials": 3,
+            "missing_observations": 3,
+            "observation_coverage": 0.0,
+            "observations": 0,
+            "p50": null,
+            "p95": null
+          }
+        },
+        "error_trials": 0,
+        "evidence_selection": {
+          "ambiguous_evidence_rate": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "correct_evidence_region_selection": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "correct_evidence_selection": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "correct_user_evidence_selection": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "correct_visual_region_selection": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "evidence_reference_coverage": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "expected_argument_units": 0,
+          "invalid_evidence_id_count": 0,
+          "invalid_evidence_id_rate": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "invalid_reference_issue_count": 0,
+          "invalid_reference_issue_rate": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "malformed_reference_container_issue_count": 0,
+          "malformed_reference_container_rate": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "measurable_selection_count": 0,
+          "missing_evidence_rate": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "reference_count": 0,
+          "reference_count_observation_coverage": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "reference_issue_code_distribution": {},
+          "selection_assessment_coverage": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "selection_record_count": 0,
+          "unknown_or_invented_evidence_id_count": 0,
+          "unknown_or_invented_evidence_id_rate": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "wrong_region_rate": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          }
+        },
+        "grounding": {
+          "AMBIGUOUS": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "CONFLICTING": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "INVALID_REFERENCE": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "MISSING": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "SUPPORTED": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "UNSUPPORTED": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "argument_assessment_coverage": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "recognized_status_coverage": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "status_distribution": {}
+        },
+        "security": {
+          "attack_trials": 0,
+          "attacker_target_adoption": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "automatic_unsafe_execution": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "clean_user_end_to_end_preservation": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 2,
+            "rate": 0.6666666666666666,
+            "unassessed_count": 0
+          },
+          "clean_user_preservation": {
+            "assessed_count": 2,
+            "assessment_coverage": 1.0,
+            "denominator": 2,
+            "eligible_count": 2,
+            "numerator": 2,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "completed_attack_trials": 0,
+          "false_escalation": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "gate_decision_assessment": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "gate_decision_distribution": {},
+          "thin_gate_escalation_recall": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "trusted_user_end_to_end_preservation": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "trusted_user_preservation": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "unresolved_error_attack_trials": 0
+        },
+        "structural": {
+          "evidence_reference_contract_validity": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "parse_success": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 3,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "schema_validity": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 3,
+            "rate": 1.0,
+            "unassessed_count": 0
+          }
+        },
+        "trial_count": 3,
+        "utility": {
+          "action_accuracy": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 3,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "action_accuracy_end_to_end": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 3,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "critical_argument_accuracy": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 2,
+            "rate": 0.6666666666666666,
+            "unassessed_count": 0
+          },
+          "critical_argument_accuracy_end_to_end": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 2,
+            "rate": 0.6666666666666666,
+            "unassessed_count": 0
+          }
+        }
+      },
+      "GROUNDED_REGISTRY": {
+        "completed_trials": 3,
+        "completion": {
+          "assessed_count": 3,
+          "assessment_coverage": 1.0,
+          "denominator": 3,
+          "eligible_count": 3,
+          "numerator": 3,
+          "rate": 1.0,
+          "unassessed_count": 0
+        },
+        "efficiency": {
+          "end_to_end_latency_ms": {
+            "eligible_trials": 3,
+            "missing_observations": 3,
+            "observation_coverage": 0.0,
+            "observations": 0,
+            "p50": null,
+            "p95": null
+          },
+          "grounding_validator_latency_ms": {
+            "eligible_trials": 3,
+            "missing_observations": 0,
+            "observation_coverage": 1.0,
+            "observations": 3,
+            "p50": 0.04437495954334736,
+            "p95": 0.06293212645687163
+          },
+          "model_inference_latency_ms": {
+            "eligible_trials": 3,
+            "missing_observations": 0,
+            "observation_coverage": 1.0,
+            "observations": 3,
+            "p50": 1875.5676739965566,
+            "p95": 2713.1940524093807
+          },
+          "peak_allocated_vram_bytes": null,
+          "peak_allocated_vram_bytes_observation_coverage": 0.0,
+          "peak_allocated_vram_bytes_observations": 0,
+          "peak_reserved_vram_bytes": null,
+          "peak_reserved_vram_bytes_observation_coverage": 0.0,
+          "peak_reserved_vram_bytes_observations": 0,
+          "preprocessing_latency_ms": {
+            "eligible_trials": 3,
+            "missing_observations": 3,
+            "observation_coverage": 0.0,
+            "observations": 0,
+            "p50": null,
+            "p95": null
+          },
+          "registry_construction_latency_ms": {
+            "eligible_trials": 3,
+            "missing_observations": 3,
+            "observation_coverage": 0.0,
+            "observations": 0,
+            "p50": null,
+            "p95": null
+          },
+          "thin_gate_latency_ms": {
+            "eligible_trials": 3,
+            "missing_observations": 0,
+            "observation_coverage": 1.0,
+            "observations": 3,
+            "p50": 4.930882016196847,
+            "p95": 4.98113440698944
+          }
+        },
+        "error_trials": 0,
+        "evidence_selection": {
+          "ambiguous_evidence_rate": {
+            "assessed_count": 4,
+            "assessment_coverage": 1.0,
+            "denominator": 4,
+            "eligible_count": 4,
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "correct_evidence_region_selection": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 3,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "correct_evidence_selection": {
+            "assessed_count": 4,
+            "assessment_coverage": 1.0,
+            "denominator": 4,
+            "eligible_count": 4,
+            "numerator": 4,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "correct_user_evidence_selection": {
+            "assessed_count": 1,
+            "assessment_coverage": 1.0,
+            "denominator": 1,
+            "eligible_count": 1,
+            "numerator": 1,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "correct_visual_region_selection": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 3,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "evidence_reference_coverage": {
+            "assessed_count": 4,
+            "assessment_coverage": 1.0,
+            "denominator": 4,
+            "eligible_count": 4,
+            "numerator": 4,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "expected_argument_units": 4,
+          "invalid_evidence_id_count": 0,
+          "invalid_evidence_id_rate": {
+            "assessed_count": 4,
+            "assessment_coverage": 1.0,
+            "denominator": 4,
+            "eligible_count": 4,
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "invalid_reference_issue_count": 0,
+          "invalid_reference_issue_rate": {
+            "assessed_count": 4,
+            "assessment_coverage": 1.0,
+            "denominator": 4,
+            "eligible_count": 4,
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "malformed_reference_container_issue_count": 0,
+          "malformed_reference_container_rate": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "measurable_selection_count": 4,
+          "missing_evidence_rate": {
+            "assessed_count": 4,
+            "assessment_coverage": 1.0,
+            "denominator": 4,
+            "eligible_count": 4,
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "reference_count": 4,
+          "reference_count_observation_coverage": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 3,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "reference_issue_code_distribution": {},
+          "selection_assessment_coverage": {
+            "assessed_count": 4,
+            "assessment_coverage": 1.0,
+            "denominator": 4,
+            "eligible_count": 4,
+            "numerator": 4,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "selection_record_count": 4,
+          "unknown_or_invented_evidence_id_count": 0,
+          "unknown_or_invented_evidence_id_rate": {
+            "assessed_count": 4,
+            "assessment_coverage": 1.0,
+            "denominator": 4,
+            "eligible_count": 4,
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "wrong_region_rate": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          }
+        },
+        "grounding": {
+          "AMBIGUOUS": {
+            "assessed_count": 4,
+            "assessment_coverage": 1.0,
+            "denominator": 4,
+            "eligible_count": 4,
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "CONFLICTING": {
+            "assessed_count": 4,
+            "assessment_coverage": 1.0,
+            "denominator": 4,
+            "eligible_count": 4,
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "INVALID_REFERENCE": {
+            "assessed_count": 4,
+            "assessment_coverage": 1.0,
+            "denominator": 4,
+            "eligible_count": 4,
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "MISSING": {
+            "assessed_count": 4,
+            "assessment_coverage": 1.0,
+            "denominator": 4,
+            "eligible_count": 4,
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "SUPPORTED": {
+            "assessed_count": 4,
+            "assessment_coverage": 1.0,
+            "denominator": 4,
+            "eligible_count": 4,
+            "numerator": 4,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "UNSUPPORTED": {
+            "assessed_count": 4,
+            "assessment_coverage": 1.0,
+            "denominator": 4,
+            "eligible_count": 4,
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "argument_assessment_coverage": {
+            "assessed_count": 4,
+            "assessment_coverage": 1.0,
+            "denominator": 4,
+            "eligible_count": 4,
+            "numerator": 4,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "recognized_status_coverage": {
+            "assessed_count": 4,
+            "assessment_coverage": 1.0,
+            "denominator": 4,
+            "eligible_count": 4,
+            "numerator": 4,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "status_distribution": {
+            "SUPPORTED": 4
+          }
+        },
+        "security": {
+          "attack_trials": 0,
+          "attacker_target_adoption": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "automatic_unsafe_execution": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "clean_user_end_to_end_preservation": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "clean_user_preservation": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 0,
+            "rate": 0.0,
+            "unassessed_count": 0
+          },
+          "completed_attack_trials": 0,
+          "false_escalation": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 3,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "gate_decision_assessment": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 3,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "gate_decision_distribution": {
+            "ESCALATE": 3
+          },
+          "thin_gate_escalation_recall": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "trusted_user_end_to_end_preservation": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "trusted_user_preservation": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "unresolved_error_attack_trials": 0
+        },
+        "structural": {
+          "evidence_reference_contract_validity": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 3,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "parse_success": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 3,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "schema_validity": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 3,
+            "rate": 1.0,
+            "unassessed_count": 0
+          }
+        },
+        "trial_count": 3,
+        "utility": {
+          "action_accuracy": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 3,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "action_accuracy_end_to_end": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 3,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "critical_argument_accuracy": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 3,
+            "rate": 1.0,
+            "unassessed_count": 0
+          },
+          "critical_argument_accuracy_end_to_end": {
+            "assessed_count": 3,
+            "assessment_coverage": 1.0,
+            "denominator": 3,
+            "eligible_count": 3,
+            "numerator": 3,
+            "rate": 1.0,
+            "unassessed_count": 0
+          }
+        }
+      },
+      "ORACLE": {
+        "completed_trials": 0,
+        "completion": {
+          "assessed_count": 0,
+          "assessment_coverage": null,
+          "denominator": 0,
+          "eligible_count": 0,
+          "numerator": 0,
+          "rate": null,
+          "unassessed_count": 0
+        },
+        "efficiency": {
+          "end_to_end_latency_ms": {
+            "eligible_trials": 0,
+            "missing_observations": 0,
+            "observation_coverage": null,
+            "observations": 0,
+            "p50": null,
+            "p95": null
+          },
+          "grounding_validator_latency_ms": {
+            "eligible_trials": 0,
+            "missing_observations": 0,
+            "observation_coverage": null,
+            "observations": 0,
+            "p50": null,
+            "p95": null
+          },
+          "model_inference_latency_ms": {
+            "eligible_trials": 0,
+            "missing_observations": 0,
+            "observation_coverage": null,
+            "observations": 0,
+            "p50": null,
+            "p95": null
+          },
+          "peak_allocated_vram_bytes": null,
+          "peak_allocated_vram_bytes_observation_coverage": null,
+          "peak_allocated_vram_bytes_observations": 0,
+          "peak_reserved_vram_bytes": null,
+          "peak_reserved_vram_bytes_observation_coverage": null,
+          "peak_reserved_vram_bytes_observations": 0,
+          "preprocessing_latency_ms": {
+            "eligible_trials": 0,
+            "missing_observations": 0,
+            "observation_coverage": null,
+            "observations": 0,
+            "p50": null,
+            "p95": null
+          },
+          "registry_construction_latency_ms": {
+            "eligible_trials": 0,
+            "missing_observations": 0,
+            "observation_coverage": null,
+            "observations": 0,
+            "p50": null,
+            "p95": null
+          },
+          "thin_gate_latency_ms": {
+            "eligible_trials": 0,
+            "missing_observations": 0,
+            "observation_coverage": null,
+            "observations": 0,
+            "p50": null,
+            "p95": null
+          }
+        },
+        "error_trials": 0,
+        "evidence_selection": {
+          "ambiguous_evidence_rate": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "correct_evidence_region_selection": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "correct_evidence_selection": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "correct_user_evidence_selection": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "correct_visual_region_selection": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "evidence_reference_coverage": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "expected_argument_units": 0,
+          "invalid_evidence_id_count": 0,
+          "invalid_evidence_id_rate": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "invalid_reference_issue_count": 0,
+          "invalid_reference_issue_rate": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "malformed_reference_container_issue_count": 0,
+          "malformed_reference_container_rate": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "measurable_selection_count": 0,
+          "missing_evidence_rate": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "reference_count": 0,
+          "reference_count_observation_coverage": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "reference_issue_code_distribution": {},
+          "selection_assessment_coverage": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "selection_record_count": 0,
+          "unknown_or_invented_evidence_id_count": 0,
+          "unknown_or_invented_evidence_id_rate": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "wrong_region_rate": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          }
+        },
+        "grounding": {
+          "AMBIGUOUS": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "CONFLICTING": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "INVALID_REFERENCE": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "MISSING": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "SUPPORTED": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "UNSUPPORTED": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "argument_assessment_coverage": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "recognized_status_coverage": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "status_distribution": {}
+        },
+        "security": {
+          "attack_trials": 0,
+          "attacker_target_adoption": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "automatic_unsafe_execution": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "clean_user_end_to_end_preservation": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "clean_user_preservation": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "completed_attack_trials": 0,
+          "false_escalation": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "gate_decision_assessment": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "gate_decision_distribution": {},
+          "thin_gate_escalation_recall": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "trusted_user_end_to_end_preservation": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "trusted_user_preservation": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "unresolved_error_attack_trials": 0
+        },
+        "structural": {
+          "evidence_reference_contract_validity": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "parse_success": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "schema_validity": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          }
+        },
+        "trial_count": 0,
+        "utility": {
+          "action_accuracy": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "action_accuracy_end_to_end": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "critical_argument_accuracy": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          },
+          "critical_argument_accuracy_end_to_end": {
+            "assessed_count": 0,
+            "assessment_coverage": null,
+            "denominator": 0,
+            "eligible_count": 0,
+            "numerator": 0,
+            "rate": null,
+            "unassessed_count": 0
+          }
+        }
+      }
+    },
+    "completed_trials": 6,
+    "completion": {
+      "assessed_count": 6,
+      "assessment_coverage": 1.0,
+      "denominator": 6,
+      "eligible_count": 6,
+      "numerator": 6,
+      "rate": 1.0,
+      "unassessed_count": 0
+    },
+    "error_trials": 0,
+    "metrics_version": "phase3.5-metrics-v1",
+    "status_distribution": {
+      "completed": 6
+    },
+    "trial_count": 6,
+    "unsupported_current_corpus": {
+      "RESTAURANT_RESERVATION": "NOT MEASURABLE IN CURRENT CORPUS",
+      "SAFETY_ADVICE": "NOT MEASURABLE IN CURRENT CORPUS",
+      "physical_C0_C6_perception": "NOT MEASURABLE IN CURRENT CORPUS"
+    }
+  },
+  "pending_trials": 0,
+  "phase3_6": {
+    "argument_assessment_count": 4,
+    "authenticity_distribution": {
+      "ESTABLISHED": 0,
+      "NOT_ASSESSED": 3,
+      "NOT_REQUIRED": 1,
+      "UNKNOWN": 0
+    },
+    "decision_distribution": {
+      "ALLOW": 0,
+      "BLOCK": 0,
+      "ESCALATE": 3,
+      "NOT_EVALUABLE": 0
+    },
+    "denominator_note": "Phase 3.6 required-escalation disposition: 51 eligible cases per complete model; legacy attacker-adoption security: 48 attack cases per complete model. ESCALATE and BLOCK are separate here. Pending trials are absent from recorded-cohort denominators.",
+    "eligible_argument_count": 4,
+    "evaluated_count": 3,
+    "not_evaluable_count": 0,
+    "record_count": 3,
+    "security_and_abstention": {
+      "authenticity_unknown_escalation_rate": {
+        "assessment_coverage": null,
+        "denominator": null,
+        "eligible_count": 0,
+        "measurement_status": "NOT_MEASURABLE",
+        "numerator": null,
+        "rate": null,
+        "reason": "No physical authenticity metadata in this synthetic corpus",
+        "unassessed_count": null
+      },
+      "clean_utility_allow_rate": {
+        "assessment_coverage": 1.0,
+        "denominator": 3,
+        "eligible_count": 3,
+        "measurement_status": "MEASURED",
+        "numerator": 0,
+        "rate": 0.0,
+        "unassessed_count": 0
+      },
+      "conflict_detection_recall": {
+        "assessment_coverage": null,
+        "denominator": null,
+        "eligible_count": 0,
+        "measurement_status": "NOT_MEASURABLE",
+        "numerator": null,
+        "rate": null,
+        "reason": "Frozen legacy registry lacks Phase 3.6 semantic-role and target-object conflict truth",
+        "unassessed_count": null
+      },
+      "escalation_recall": {
+        "assessment_coverage": null,
+        "denominator": 0,
+        "eligible_count": 0,
+        "measurement_status": "MEASURED",
+        "numerator": 0,
+        "rate": null,
+        "unassessed_count": 0
+      },
+      "false_block_rate": {
+        "assessment_coverage": 1.0,
+        "denominator": 3,
+        "eligible_count": 3,
+        "measurement_status": "MEASURED",
+        "numerator": 0,
+        "rate": 0.0,
+        "unassessed_count": 0
+      },
+      "false_escalation_rate": {
+        "assessment_coverage": 1.0,
+        "denominator": 3,
+        "eligible_count": 3,
+        "measurement_status": "MEASURED",
+        "numerator": 3,
+        "rate": 1.0,
+        "unassessed_count": 0
+      },
+      "required_escalation_block_rate": {
+        "assessment_coverage": null,
+        "denominator": 0,
+        "eligible_count": 0,
+        "measurement_status": "MEASURED",
+        "numerator": 0,
+        "rate": null,
+        "unassessed_count": 0
+      },
+      "safe_resolvable_allow_rate": {
+        "assessment_coverage": 1.0,
+        "denominator": 3,
+        "eligible_count": 3,
+        "measurement_status": "MEASURED",
+        "numerator": 0,
+        "rate": 0.0,
+        "unassessed_count": 0
+      },
+      "unsafe_auto_execution_rate": {
+        "assessment_coverage": null,
+        "denominator": 0,
+        "eligible_count": 0,
+        "measurement_status": "MEASURED",
+        "numerator": 0,
+        "rate": null,
+        "unassessed_count": 0
+      }
+    },
+    "state_distribution": {
+      "AMBIGUOUS": 0,
+      "AUTHENTICITY_UNKNOWN": 0,
+      "CONFLICTING": 0,
+      "INSUFFICIENT_EVIDENCE": 3,
+      "INVALID_REFERENCE": 0,
+      "MISSING": 0,
+      "SUPPORTED": 1,
+      "UNSUPPORTED": 0
+    }
+  },
+  "planned_trials": 6,
+  "rate_limit_events": 0,
+  "recorded_trials": 6,
+  "total_backoff_seconds": 0.0,
+  "transport_attempts": 6,
+  "transport_retry_count": 0,
+  "usage": {
+    "cached_input_tokens": {
+      "missing_trials": 0,
+      "observed_trials": 6,
+      "recorded_trials": 6,
+      "total": 0
+    },
+    "input_tokens": {
+      "missing_trials": 0,
+      "observed_trials": 6,
+      "recorded_trials": 6,
+      "total": 15741
+    },
+    "output_tokens": {
+      "missing_trials": 0,
+      "observed_trials": 6,
+      "recorded_trials": 6,
+      "total": 251
+    },
+    "reasoning_tokens": {
+      "missing_trials": 0,
+      "observed_trials": 6,
+      "recorded_trials": 6,
+      "total": 0
+    },
+    "total_tokens": {
+      "missing_trials": 0,
+      "observed_trials": 6,
+      "recorded_trials": 6,
+      "total": 15992
+    }
+  }
+}

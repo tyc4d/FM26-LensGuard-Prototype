@@ -1,0 +1,130 @@
+{
+  "gemini": {
+    "all_raw_responses_preserved": true,
+    "completed_trials": 6,
+    "cost": {
+      "actual_billed_cost_usd": null,
+      "basis": "ESTIMATED list-price token charges for observed usage only; excludes unreported failed-attempt usage",
+      "estimated_cost_usd": 0.00388525,
+      "missing_trials": 0,
+      "observed_trials": 6,
+      "pricing_as_of": "2026-09-05",
+      "recorded_trials": 6
+    },
+    "evaluation_last_start_utc": "2026-09-05T02:51:42.653127+00:00",
+    "evaluation_start_utc": "2026-09-05T02:50:40.945213+00:00",
+    "failed_api_trials": 0,
+    "gate_evaluated_grounded_trials": 3,
+    "grounded_evidence_ids_valid": true,
+    "latency_ms": {
+      "observed_trials": 6,
+      "p50": 3300.0077394826803,
+      "p95": 4578.05485476274,
+      "scope": "Completed cloud API requests, including retries/backoff, excluding pacing; not equivalent to local GPU runtime"
+    },
+    "malformed_outputs": 0,
+    "model": "gemini-3.1-flash-lite",
+    "native_model_ids": [
+      "gemini-3.1-flash-lite"
+    ],
+    "planned_trials": 6,
+    "rate_limit_events": 0,
+    "transport_retry_count": 0,
+    "usage": {
+      "cached_input_tokens": {
+        "missing_trials": 0,
+        "observed_trials": 6,
+        "recorded_trials": 6,
+        "total": 0
+      },
+      "input_tokens": {
+        "missing_trials": 0,
+        "observed_trials": 6,
+        "recorded_trials": 6,
+        "total": 13141
+      },
+      "output_tokens": {
+        "missing_trials": 0,
+        "observed_trials": 6,
+        "recorded_trials": 6,
+        "total": 400
+      },
+      "reasoning_tokens": {
+        "missing_trials": 0,
+        "observed_trials": 6,
+        "recorded_trials": 6,
+        "total": 0
+      },
+      "total_tokens": {
+        "missing_trials": 0,
+        "observed_trials": 6,
+        "recorded_trials": 6,
+        "total": 13541
+      }
+    }
+  },
+  "openai": {
+    "all_raw_responses_preserved": true,
+    "completed_trials": 6,
+    "cost": {
+      "actual_billed_cost_usd": null,
+      "basis": "ESTIMATED list-price token charges for observed usage only; excludes unreported failed-attempt usage",
+      "estimated_cost_usd": 0.067984,
+      "missing_trials": 0,
+      "observed_trials": 6,
+      "pricing_as_of": "2026-09-05",
+      "recorded_trials": 6
+    },
+    "evaluation_last_start_utc": "2026-09-05T02:50:35.272975+00:00",
+    "evaluation_start_utc": "2026-09-05T02:50:22.293167+00:00",
+    "failed_api_trials": 0,
+    "gate_evaluated_grounded_trials": 3,
+    "grounded_evidence_ids_valid": true,
+    "latency_ms": {
+      "observed_trials": 6,
+      "p50": 2510.16775649623,
+      "p95": 3810.887096740771,
+      "scope": "Completed cloud API requests, including retries/backoff, excluding pacing; not equivalent to local GPU runtime"
+    },
+    "malformed_outputs": 0,
+    "model": "gpt-5.6-sol",
+    "native_model_ids": [
+      "gpt-5.6-sol"
+    ],
+    "planned_trials": 6,
+    "rate_limit_events": 0,
+    "transport_retry_count": 0,
+    "usage": {
+      "cached_input_tokens": {
+        "missing_trials": 0,
+        "observed_trials": 6,
+        "recorded_trials": 6,
+        "total": 0
+      },
+      "input_tokens": {
+        "missing_trials": 0,
+        "observed_trials": 6,
+        "recorded_trials": 6,
+        "total": 15741
+      },
+      "output_tokens": {
+        "missing_trials": 0,
+        "observed_trials": 6,
+        "recorded_trials": 6,
+        "total": 251
+      },
+      "reasoning_tokens": {
+        "missing_trials": 0,
+        "observed_trials": 6,
+        "recorded_trials": 6,
+        "total": 0
+      },
+      "total_tokens": {
+        "missing_trials": 0,
+        "observed_trials": 6,
+        "recorded_trials": 6,
+        "total": 15992
+      }
+    }
+  }
+}
