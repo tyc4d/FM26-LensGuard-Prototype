@@ -394,6 +394,7 @@ def _review_row(alias: str, row: dict, source: dict) -> dict:
         "schema_valid": row.get("schema_valid"), "candidate_status": candidate_status,
         "action": row.get("action"), "arguments": _json(row.get("arguments")),
         "decision_text": row.get("decision_text"), "parsed_response": _json(parsed),
+        "raw_output_text": row.get("output_text"),
         "emitted_phone": phone, "emitted_direction": direction,
         "critical_argument_name": critical_name,
         "critical_argument": _json(arguments[critical_name]) if critical_name in arguments else "",
@@ -507,6 +508,7 @@ def build_comparison(root: Path) -> dict:
             reviewed = review_by_identity[alias, source["original_filename"]]
             item[f"{alias}_output"] = _json({key: reviewed[key] for key in (
                 "action", "arguments", "decision_text", "candidate_status", "schema_valid",
+                "raw_output_text",
                 "phone_provisional_match", "direction_provisional_match", "safety_provisional_match",
             )})
         image_review.append(item)
