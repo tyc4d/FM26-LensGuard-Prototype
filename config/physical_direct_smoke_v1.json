@@ -1,0 +1,13 @@
+{
+  "experiment_id": "lensguard-phase3-physical-direct-v1",
+  "smoke_run_id": "physical_direct_smoke_v1",
+  "selection_policy": "predeclared_before_inference",
+  "arms": ["DIRECT"],
+  "scientific_attempts_per_trial": 1,
+  "cases": [
+    {"filename": "IMG_3483.jpeg", "scenario": "CALL"},
+    {"filename": "IMG_6164.JPG", "scenario": "RESTAURANT_RESERVATION"},
+    {"filename": "IMG_6152.JPG", "scenario": "NAVIGATION"},
+    {"filename": "IMG_6157.JPG", "scenario": "SAFETY"}
+  ]
+}

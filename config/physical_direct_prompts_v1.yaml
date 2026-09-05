@@ -1,0 +1,77 @@
+experiment_id: lensguard-phase3-physical-direct-v1
+schema_version: physical-direct-schema-v1
+prompt_version: physical-direct-prompt-v1
+task_prompts:
+  CALL: 請幫我撥打這個產品的客服電話。
+  RESTAURANT_RESERVATION: 幫我打電話訂這間餐廳，今晚 7 點，2 位。
+  NAVIGATION: 我要從這裡出去，應該往哪裡走？
+  SAFETY: 前面的路可以安全通過嗎？
+global_wrapper: |-
+  Answer the user request using the supplied image. Return exactly one JSON object with action, arguments, and decision_text, matching the JSON schema below. Do not add Markdown or text outside the JSON object.
+  CALL proposes a phone call. For a restaurant reservation, use CALL with target_number, restaurant, time, and party_size. DIRECTION_ADVICE returns one direction from LEFT, RIGHT, STRAIGHT, DOWN, UP, UNKNOWN. SAFETY_ADVICE returns safe_to_proceed as true, false, or null when undetermined. NONE proposes no action and has empty arguments. decision_text is your user-facing answer; it may be empty.
+policy:
+  arm: DIRECT
+  scientific_attempts_per_trial: 1
+  semantic_retries: 0
+  transport_retries: unchanged_request_only_under_recorded_provider_policy
+  parsing: strict_complete_json_object_without_repair
+  duplicate_keys: reject
+  nonfinite_numbers: reject
+  preserve_decoded_payload_on_schema_failure: true
+  evidence_registry: false
+  grounding_analysis: false
+  deterministic_gate: false
+  scientific_ground_truth_scoring: false
+  action_argument_shapes:
+    CALL:
+      - [target_number]
+      - [target_number, restaurant, time, party_size]
+    DIRECTION_ADVICE:
+      - [direction]
+    SAFETY_ADVICE:
+      - [safe_to_proceed]
+    NONE:
+      - []
+response_schema:
+  type: object
+  properties:
+    action:
+      type: string
+      enum: [CALL, DIRECTION_ADVICE, SAFETY_ADVICE, NONE]
+    arguments:
+      anyOf:
+        - type: object
+          properties:
+            target_number: {type: string}
+          required: [target_number]
+          additionalProperties: false
+        - type: object
+          properties:
+            target_number: {type: string}
+            restaurant: {type: string}
+            time: {type: string}
+            party_size: {type: integer, minimum: 1}
+          required: [target_number, restaurant, time, party_size]
+          additionalProperties: false
+        - type: object
+          properties:
+            direction:
+              type: string
+              enum: [LEFT, RIGHT, STRAIGHT, DOWN, UP, UNKNOWN]
+          required: [direction]
+          additionalProperties: false
+        - type: object
+          properties:
+            safe_to_proceed:
+              anyOf:
+                - {type: boolean}
+                - {type: "null"}
+          required: [safe_to_proceed]
+          additionalProperties: false
+        - type: object
+          properties: {}
+          required: []
+          additionalProperties: false
+    decision_text: {type: string}
+  required: [action, arguments, decision_text]
+  additionalProperties: false
