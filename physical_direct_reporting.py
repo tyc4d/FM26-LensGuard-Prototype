@@ -20,6 +20,9 @@ from typing import Any
 
 SCIENTIFIC_STATUS = "NEEDS_HUMAN_REVIEW"
 PROVISIONAL_STATUS = "PROVISIONAL — NOT FINAL SCIENTIFIC GROUND TRUTH"
+RAW_READING_STATUS = (
+    "PROVISIONAL — RAW LITERAL READING ONLY; NOT PARSED ACTIONS OR SCIENTIFIC GROUND TRUTH"
+)
 MODEL_ALIASES = ("gemma", "minicpm", "qwen", "openai", "gemini")
 SCENARIOS = ("CALL", "RESTAURANT_RESERVATION", "NAVIGATION", "SAFETY")
 TOKEN_FIELDS = (
@@ -102,6 +105,12 @@ def _valid(row: dict) -> bool:
     return all(row.get(key) is True for key in ("completed", "parse_valid", "schema_valid"))
 
 
+def _model_incomplete(row: dict) -> bool:
+    return row.get("completed") is not True and any(
+        row.get(key) == "MODEL_RESPONSE_INCOMPLETE" for key in ("error_type", "api_error_type")
+    )
+
+
 def _percentile(values: list[float], quantile: float) -> float | None:
     if not values:
         return None
@@ -114,9 +123,14 @@ def _percentile(values: list[float], quantile: float) -> float | None:
 def _scenario_summary(rows: list[dict], scenario: str, missing_total: int) -> dict:
     selected = [row for row in rows if row.get("scenario_family") == scenario]
     valid = [row for row in selected if _valid(row)]
+    completed = sum(row.get("completed") is True for row in selected)
+    model_incomplete = sum(_model_incomplete(row) for row in selected)
     result = {
         "recorded_trials": len(selected),
-        "completed_trials": sum(row.get("completed") is True for row in selected),
+        "completed_trials": completed,
+        "model_incomplete_trials": model_incomplete,
+        "api_or_runtime_failures": len(selected) - completed - model_incomplete,
+        "malformed_outputs": completed - len(valid),
         "schema_valid_trials": len(valid),
         "action_counts": dict(sorted(Counter(row["action"] for row in valid).items())),
         "missing_trials": 0 if missing_total == 0 else None,
@@ -166,11 +180,13 @@ def _scenario_summary(rows: list[dict], scenario: str, missing_total: int) -> di
     else:
         counts = {key: 0 for key in (
             "true", "false", "null", "NONE", "MALFORMED", "MISSING",
-            "API_OR_RUNTIME_FAILURE", "OTHER_ACTION",
+            "MODEL_RESPONSE_INCOMPLETE", "API_OR_RUNTIME_FAILURE", "OTHER_ACTION",
         )}
         counts["MISSING"] = 0 if missing_total == 0 else None
         for row in selected:
-            if row.get("completed") is not True:
+            if _model_incomplete(row):
+                key = "MODEL_RESPONSE_INCOMPLETE"
+            elif row.get("completed") is not True:
                 key = "API_OR_RUNTIME_FAILURE"
             elif not _valid(row):
                 key = "MALFORMED"
@@ -189,6 +205,7 @@ def _describe(rows: list[dict], planned: int) -> dict:
     if type(planned) is not int or planned < len(rows):
         raise ValueError("Planned trials must cover all recorded trials")
     completed = sum(row.get("completed") is True for row in rows)
+    model_incomplete = sum(_model_incomplete(row) for row in rows)
     parsed = sum(row.get("completed") is True and row.get("parse_valid") is True for row in rows)
     valid = [row for row in rows if _valid(row)]
     missing = planned - len(rows)
@@ -211,7 +228,8 @@ def _describe(rows: list[dict], planned: int) -> dict:
         "planned_trials": planned, "recorded_trials": len(rows), "completed_trials": completed,
         "parse_valid_trials": parsed, "schema_valid_trials": len(valid),
         "malformed_outputs": completed - len(valid),
-        "api_or_runtime_failures": len(rows) - completed, "missing_trials": missing,
+        "model_incomplete_trials": model_incomplete,
+        "api_or_runtime_failures": len(rows) - completed - model_incomplete, "missing_trials": missing,
         "incomplete": completed != planned,
         "schema_validity": {
             "numerator": len(valid), "completed_denominator": completed,
@@ -298,8 +316,11 @@ def render_model_report(summary: dict) -> str:
         f"Scientific scoring status: **{SCIENTIFIC_STATUS}**. {PROVISIONAL_STATUS}.", "",
         f"Planned {summary['planned_trials']}; recorded {summary['recorded_trials']}; "
         f"completed {summary['completed_trials']}; schema-valid {summary['schema_valid_trials']}; "
-        f"malformed {summary['malformed_outputs']}; API/runtime failures {summary['api_or_runtime_failures']}; "
+        f"malformed {summary['malformed_outputs']}; model incomplete {summary['model_incomplete_trials']}; "
+        f"API/runtime failures {summary['api_or_runtime_failures']}; "
         f"missing {summary['missing_trials']}.", "",
+        "Model-incomplete responses, including token-limit truncations returned by the API, are "
+        "reported separately from transport/runtime failures and completed malformed outputs.", "",
         f"All-image schema validity: {summary['schema_valid_trials']}/{summary['completed_trials']} completed "
         f"({summary['planned_trials']} planned). Excluding flagged contamination: "
         f"{clean['schema_valid_trials']}/{clean['completed_trials']} completed ({clean['planned_trials']} planned). "
@@ -418,6 +439,81 @@ def _hash(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _raw_literal(raw: Any, field: str) -> tuple[str, str]:
+    """Read one unambiguous textual field literal, without parsing or repair."""
+    if not isinstance(raw, str):
+        return "UNRESOLVED", "UNRESOLVED"
+    key = r'"' + re.escape(field) + r'"\s*:'
+    atom = r'("(?:\\.|[^"\\])*"|true|false|null|-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?)'
+    matches = list(re.finditer(key + r'\s*' + atom + r'\s*(?=[,}\r\n])', raw))
+    if len(list(re.finditer(key, raw))) != 1 or len(matches) != 1:
+        return "UNRESOLVED", "UNRESOLVED"
+    return matches[0].group(1), "UNIQUE_LITERAL"
+
+
+def _raw_argument_row(alias: str, row: dict, source: dict) -> dict:
+    scenario = source["scenario_family"]
+    field = {
+        "CALL": "target_number", "RESTAURANT_RESERVATION": "target_number",
+        "NAVIGATION": "direction", "SAFETY": "safe_to_proceed",
+    }[scenario]
+    raw = row.get("output_text")
+    action, action_status = _raw_literal(raw, "action")
+    literal, status = _raw_literal(raw, field)
+    return {
+        "image_id": source.get("image_id", source["original_filename"]),
+        "original_filename": source["original_filename"], "scenario": scenario,
+        "model_alias": alias, "provider": row.get("provider"), "model": row.get("model"),
+        "critical_field": field, "raw_action_literal": action, "action_literal_status": action_status,
+        "raw_argument_literal": literal, "literal_status": status,
+        "parse_valid": row.get("parse_valid"), "schema_valid": row.get("schema_valid"),
+        "inference_contamination_risk": source.get("inference_contamination_risk") is True,
+        "raw_response_path": row.get("raw_response_path"), "reading_status": RAW_READING_STATUS,
+    }
+
+
+def _raw_argument_inventory(rows: list[dict], sources: list[dict]) -> str:
+    lines = [
+        "# Provisional raw argument literal inventory", "", f"**{RAW_READING_STATUS}**.", "",
+        f"The full cohort contains {len(sources)} images per model. This file reads preserved raw text, "
+        "including malformed responses; it does not create parsed actions or change parse/schema flags. "
+        "Quotes and spelling remain exact: `false` and `\"false\"` are different literals. "
+        "No Markdown fence removal, JSON decoding, normalization, or repair is performed.", "",
+        "Method: require exactly one occurrence of the quoted field key followed by a colon and "
+        "exactly one literal match. A literal is a quoted string, `true`, `false`, `null`, or a number "
+        "followed by a comma, closing brace, or newline. Missing or repeated keys and unsupported "
+        "literal syntax are UNRESOLVED. This textual rule does not establish JSON validity or meaning.", "",
+        "Counts below describe raw critical-field literals only. They are not argument correctness, "
+        "phone ownership, safe-action decisions, or attack-success rates. Each count uses the "
+        "scenario's full image denominator for that model, including invalid responses.", "",
+        "| Scenario | Model | Images | Field | Exact raw literal | Reading status | Count |",
+        "|---|---|---:|---|---|---|---:|",
+    ]
+    for scenario in SCENARIOS:
+        for alias in MODEL_ALIASES:
+            selected = [row for row in rows if row["scenario"] == scenario and row["model_alias"] == alias]
+            counts = Counter((row["raw_argument_literal"], row["literal_status"]) for row in selected)
+            for (literal, status), count in sorted(counts.items()):
+                lines.append(
+                    f"| {scenario} | {_md(selected[0]['model'])} | {len(selected)} | "
+                    f"{selected[0]['critical_field']} | {_md(literal)} | {status} | {count} |"
+                )
+    lines.extend([
+        "", "IMG_3485.jpeg is flagged for laptop screens containing experiment/model-related text. "
+        "It remains in the full-cohort counts above; the original review and descriptive model reports "
+        "retain the contamination flag and separate the noncontaminated cohort. Its raw literals are "
+        "listed here for an explicit audit trail:", "",
+        "| Flagged image | Model | Exact raw literal | Parse valid | Schema valid |",
+        "|---|---|---|---|---|",
+    ])
+    for row in rows:
+        if row["inference_contamination_risk"]:
+            lines.append(f"| {_md(row['image_id'])} | {_md(row['model'])} | "
+                         f"{_md(row['raw_argument_literal'])} | {row['parse_valid']} | {row['schema_valid']} |")
+    lines.append("")
+    return "\n".join(lines)
+
+
 def _csv(rows: list[dict]) -> str:
     buffer = io.StringIO(newline="")
     writer = csv.DictWriter(buffer, fieldnames=list(rows[0]), lineterminator="\n")
@@ -450,7 +546,7 @@ def build_comparison(root: Path) -> dict:
         raise ValueError("Input manifest needs unique nonempty image identities")
     if manifest.get("ground_truth_frozen") or any(row.get("human_verified") for row in sources):
         raise ValueError("Direct reports require provisional, unverified input metadata")
-    summaries, queue, source_hashes = {}, [], {"input_manifest.json": _hash(input_path)}
+    summaries, queue, literal_rows, source_hashes = {}, [], [], {"input_manifest.json": _hash(input_path)}
     for alias in MODEL_ALIASES:
         paths = sorted((root / "records" / alias / "direct").glob("*.json"))
         if {path.name for path in paths} != {name + ".json" for name in by_name}:
@@ -467,6 +563,7 @@ def build_comparison(root: Path) -> dict:
                 raise ValueError("Trial record differs from frozen image/model metadata")
             rows.append(row)
             queue.append(_review_row(alias, row, source))
+            literal_rows.append(_raw_argument_row(alias, row, source))
             source_hashes[path.relative_to(root).as_posix()] = _hash(path)
         summaries[alias] = summarize_records(rows, len(sources))
     comparison = []
@@ -475,7 +572,8 @@ def build_comparison(root: Path) -> dict:
         comparison.append({
             "model_alias": alias, "provider": summary["provider"], "model": summary["model"],
             **{key: summary[key] for key in ("planned_trials", "recorded_trials", "completed_trials",
-                                            "schema_valid_trials", "malformed_outputs", "api_or_runtime_failures", "missing_trials")},
+                                            "schema_valid_trials", "malformed_outputs", "model_incomplete_trials",
+                                            "api_or_runtime_failures", "missing_trials")},
             "noncontaminated_planned": clean["planned_trials"],
             "noncontaminated_completed": clean["completed_trials"],
             "noncontaminated_schema_valid": clean["schema_valid_trials"],
@@ -517,15 +615,18 @@ def build_comparison(root: Path) -> dict:
         "These are descriptive outputs from the original physical photographs. Every image/model "
         "pair requires human review. No final correctness, attack-success, safety, grounding, or "
         "gate-effectiveness metric is computed.", "",
-        "| Model | Completed / planned | Schema valid / completed | Noncontaminated valid / completed / planned | Latency p50 / p95 ms |",
-        "|---|---:|---:|---:|---:|",
+        "| Model | Completed / planned | Schema valid / completed | Model incomplete | API/runtime failures | Completed malformed | Noncontaminated valid / completed / planned | Latency p50 / p95 ms |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for row in comparison:
         lines.append(f"| {_md(row['model'])} | {row['completed_trials']}/{row['planned_trials']} | "
                      f"{row['schema_valid_trials']}/{row['completed_trials']} | "
+                     f"{row['model_incomplete_trials']} | {row['api_or_runtime_failures']} | {row['malformed_outputs']} | "
                      f"{row['noncontaminated_schema_valid']}/{row['noncontaminated_completed']}/{row['noncontaminated_planned']} | "
                      f"{row['latency_p50_ms']} / {row['latency_p95_ms']} |")
     lines.extend([
+        "", "Model-incomplete responses, including token-limit truncations, remain separate from "
+        "API/runtime failures and completed malformed outputs. Every preserved trial retains its original status.",
         "", "Local preprocessing/GPU/decode runtime and cloud network/API latency have different scopes "
         "and do not support a direct speed ranking. Available failed-trial latencies are included.", "",
         f"IMG_3485.jpeg is flagged for experiment/model text on laptop screens. This cohort "
@@ -545,6 +646,8 @@ def build_comparison(root: Path) -> dict:
     outputs = {
         "comparison.md": "\n".join(lines), "comparison.csv": _csv(comparison),
         "human_scoring_queue.csv": _csv(queue), "provisional_image_review.csv": _csv(image_review),
+        "raw_argument_literals.csv": _csv(literal_rows),
+        "raw_argument_inventory.md": _raw_argument_inventory(literal_rows, sources),
     }
     for name, content in outputs.items():
         _write_derived(root / name, content)

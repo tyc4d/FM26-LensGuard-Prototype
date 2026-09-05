@@ -22,6 +22,9 @@ MODELS = {
     "gemini": "gemini-3.1-flash-lite",
 }
 PROVISIONAL_STATUS = "PROVISIONAL — NOT FINAL SCIENTIFIC GROUND TRUTH"
+RAW_READING_STATUS = (
+    "PROVISIONAL — RAW LITERAL READING ONLY; NOT PARSED ACTIONS OR SCIENTIFIC GROUND TRUTH"
+)
 MATCH_VALUES = {"MATCH", "NO_MATCH", "UNCERTAIN", "NOT_APPLICABLE"}
 
 
@@ -206,7 +209,8 @@ def test_safety_distribution_distinguishes_abstention_uncertainty_and_failures()
     summary = reporting.summarize_records(records, planned_trials=7)
     assert summary["scenario_summaries"]["SAFETY"]["safety_counts"] == {
         "true": 1, "false": 1, "null": 1, "NONE": 1, "MALFORMED": 1,
-        "MISSING": 0, "API_OR_RUNTIME_FAILURE": 1, "OTHER_ACTION": 1,
+        "MISSING": 0, "MODEL_RESPONSE_INCOMPLETE": 0,
+        "API_OR_RUNTIME_FAILURE": 1, "OTHER_ACTION": 1,
     }
     pending = reporting.summarize_records(records, planned_trials=8)
     assert pending["scenario_summaries"]["SAFETY"]["safety_counts"]["MISSING"] is None
@@ -330,6 +334,60 @@ def test_local_cost_is_explicitly_unmeasured(alias) -> None:
     assert cost["estimated_cost_usd"] is None
     assert cost["actual_billed_cost_usd"] is None
     assert cost["cost_basis"] == "N/A: local electricity/runtime cost not measured"
+
+
+@pytest.mark.parametrize("error_field", ("error_type", "api_error_type"))
+def test_incomplete_model_response_is_separate_from_api_failure_and_malformed_output(
+    error_field,
+) -> None:
+    partial = '{"action":"SAFETY_ADVICE","arguments":{"safe_to_proceed":'
+    record = _record(
+        "incomplete.JPG", scenario="SAFETY", action=None, arguments={}, completed=False,
+        parse_valid=False, schema_valid=False, parsed_response=None, output_text=partial,
+        http_status=200, api_status="incomplete", transport_attempts=1,
+        raw_response={
+            "status": "incomplete", "incomplete_details": {"reason": "max_output_tokens"},
+            "output_text": partial,
+        },
+        **{error_field: "MODEL_RESPONSE_INCOMPLETE"},
+    )
+    before = copy.deepcopy(record)
+    summary = reporting.summarize_records([record], planned_trials=1)
+    assert record == before
+    assert record["output_text"] == partial
+    assert summary["model_incomplete_trials"] == 1
+    assert summary["api_or_runtime_failures"] == 0
+    assert summary["malformed_outputs"] == 0
+    assert summary["transport_retry_count"] == 0
+    assert summary["completed_trials"] == 0
+    assert summary["parse_valid_trials"] == summary["schema_valid_trials"] == 0
+    safety = summary["scenario_summaries"]["SAFETY"]["safety_counts"]
+    assert safety["MODEL_RESPONSE_INCOMPLETE"] == 1
+    assert safety["API_OR_RUNTIME_FAILURE"] == safety["MALFORMED"] == 0
+    report = reporting.render_model_report(summary).casefold()
+    assert "model incomplete 1" in report
+    assert "api/runtime failures 0" in report
+
+
+@pytest.mark.parametrize(
+    ("alias", "completed", "error_type", "http_status", "expected_api", "expected_malformed"),
+    (
+        ("openai", False, "RATE_LIMIT_EXHAUSTED", 429, 1, 0),
+        ("gemma", False, "LOCAL_RUNTIME_ERROR", None, 1, 0),
+        ("openai", True, "MALFORMED_JSON", 200, 0, 1),
+    ),
+)
+def test_transport_runtime_and_completed_malformed_categories_remain_distinct(
+    alias, completed, error_type, http_status, expected_api, expected_malformed
+) -> None:
+    record = _record(
+        alias=alias, completed=completed, parse_valid=False, schema_valid=False,
+        parsed_response=None, error_type=error_type, http_status=http_status,
+    )
+    summary = reporting.summarize_records([record], planned_trials=1)
+    assert summary["model_incomplete_trials"] == 0
+    assert summary["api_or_runtime_failures"] == expected_api
+    assert summary["malformed_outputs"] == expected_malformed
 
 
 @pytest.fixture
@@ -471,6 +529,40 @@ def test_provisional_queue_preserves_invalid_payload_and_matches_whole_phone_onl
     assert by_identity["openai", "IMG_SAFETY.JPG"]["safety_provisional_match"] == "UNCERTAIN"
 
 
+def test_comparison_reports_model_incomplete_separately_and_preserves_partial_source(
+    comparison_bundle,
+) -> None:
+    root, _ = comparison_bundle
+    path = root / "records" / "openai" / "direct" / "IMG_SAFETY.JPG.json"
+    record = json.loads(path.read_text())
+    partial = '{"action":"SAFETY_ADVICE","arguments":'
+    record.update(
+        completed=False, parse_valid=False, schema_valid=False, parsed_response=None,
+        action=None, arguments={}, output_text=partial, http_status=200,
+        api_status="incomplete", error_type="MODEL_RESPONSE_INCOMPLETE",
+        raw_response={
+            "status": "incomplete", "incomplete_details": {"reason": "max_output_tokens"},
+            "output_text": partial,
+        },
+    )
+    _write_json(path, record)
+    before = path.read_bytes()
+    result = reporting.build_comparison(root)
+    assert path.read_bytes() == before
+    summary = result["models"]["openai"]
+    assert summary["model_incomplete_trials"] == 1
+    assert summary["api_or_runtime_failures"] == summary["malformed_outputs"] == 0
+    assert summary["completed_trials"] == summary["schema_valid_trials"] == 3
+    comparison = _read_csv(root / "comparison.csv")
+    row = next(row for row in comparison if row["model_alias"] == "openai")
+    assert row["model_incomplete_trials"] == "1"
+    assert row["api_or_runtime_failures"] == "0"
+    markdown = (root / "comparison.md").read_text()
+    header = next(line for line in markdown.splitlines() if line.startswith("| Model |"))
+    assert "incomplete" in header.casefold()
+    assert "api/runtime" in header.casefold()
+
+
 @pytest.mark.parametrize("tamper", ("image_hash", "original_filename", "missing_model_record"))
 def test_comparison_rejects_unbound_or_incomplete_source_cohorts(comparison_bundle, tamper) -> None:
     root, _ = comparison_bundle
@@ -500,3 +592,91 @@ def test_reporting_does_not_import_a_frozen_scientific_evaluator() -> None:
         if module.startswith(("cloud_baseline_evaluation", "metrics_phase", "benchmark_phase",
                               "replay_phase", "firewall", "provenance"))
     ]
+
+
+@pytest.mark.parametrize(
+    "raw",
+    (
+        None,
+        {},
+        "{}",
+        '{"target_number": "123", "target_number": "456"}',
+        '{"target_number": "123", "target_number": ["456"]}',
+        '{"target_number": ["123"]}',
+        '{"target_number": {"value": "123"}}',
+        '{"target_number": undefined}',
+    ),
+)
+def test_raw_literal_is_unresolved_when_missing_duplicated_or_not_an_atom(raw) -> None:
+    assert reporting._raw_literal(raw, "target_number") == ("UNRESOLVED", "UNRESOLVED")
+
+
+@pytest.mark.parametrize("literal", ("false", '"false"', "null"))
+def test_raw_safety_literals_keep_booleans_strings_and_null_distinct(literal) -> None:
+    raw = '{"safe_to_proceed": ' + literal + "}"
+    assert reporting._raw_literal(raw, "safe_to_proceed") == (literal, "UNIQUE_LITERAL")
+
+
+def test_raw_string_literal_preserves_quotes_and_backslashes_without_decoding() -> None:
+    literal = json.dumps('+886-2\\ext"')
+    raw = '{"target_number": ' + literal + "}"
+    extracted, status = reporting._raw_literal(raw, "target_number")
+    assert status == "UNIQUE_LITERAL"
+    assert extracted == literal
+    assert extracted != json.loads(literal)
+
+
+def test_raw_inventory_preserves_invalid_fenced_output_flags_and_source_bytes(
+    comparison_bundle,
+) -> None:
+    root, _ = comparison_bundle
+    path = root / "records" / "gemma" / "direct" / "IMG_CALL.JPG.json"
+    record = json.loads(path.read_text())
+    literal = json.dumps("+1 (202) 555-0100")
+    payload_text = (
+        '{"action":"CALL","arguments":{"target_number":'
+        + literal + '},"decision_text":""}'
+    )
+    fence = chr(96) * 3
+    record.update(
+        output_text=fence + "json\n" + payload_text + "\n" + fence,
+        parse_valid=False, schema_valid=False, parsed_response=None,
+        action=None, arguments={}, decision_text=None, error_type="MALFORMED_JSON",
+    )
+    _write_json(path, record)
+    source_before = {
+        source: source.read_bytes()
+        for source in [root / "input_manifest.json", *root.glob("records/*/direct/*.json")]
+    }
+    result = reporting.build_comparison(root)
+    assert all(source.read_bytes() == content for source, content in source_before.items())
+    raw_rows = _read_csv(root / "raw_argument_literals.csv")
+    queue = _read_csv(root / "human_scoring_queue.csv")
+    assert len(raw_rows) == 20
+    raw_row = next(
+        row for row in raw_rows
+        if row["model_alias"] == "gemma" and row["original_filename"] == "IMG_CALL.JPG"
+    )
+    queue_row = next(
+        row for row in queue
+        if row["model_alias"] == "gemma" and row["original_filename"] == "IMG_CALL.JPG"
+    )
+    assert raw_row["raw_action_literal"] == '"CALL"'
+    assert raw_row["action_literal_status"] == "UNIQUE_LITERAL"
+    assert raw_row["raw_argument_literal"] == literal
+    assert raw_row["literal_status"] == "UNIQUE_LITERAL"
+    assert raw_row["critical_field"] == "target_number"
+    for row in (raw_row, queue_row):
+        assert row["parse_valid"].casefold() == "false"
+        assert row["schema_valid"].casefold() == "false"
+    assert json.loads(queue_row["parsed_response"]) is None
+    assert {row["reading_status"] for row in raw_rows} == {RAW_READING_STATUS}
+    unresolved = [row for row in raw_rows if row is not raw_row]
+    assert {row["raw_argument_literal"] for row in unresolved} == {"UNRESOLVED"}
+    assert {row["literal_status"] for row in unresolved} == {"UNRESOLVED"}
+    for filename in ("raw_argument_literals.csv", "raw_argument_inventory.md"):
+        assert result["derived_output_sha256"][filename] == hashlib.sha256(
+            (root / filename).read_bytes()
+        ).hexdigest()
+    manifest = json.loads((root / "manifest.json").read_text())
+    assert manifest["derived_output_sha256"] == result["derived_output_sha256"]
