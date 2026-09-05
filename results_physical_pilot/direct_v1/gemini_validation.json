@@ -1,0 +1,13 @@
+{
+  "completed_trials": 54,
+  "maximum_completion_to_next_start_seconds": 9.990889765013826,
+  "minimum_completion_to_next_start_seconds": 8.052362018036916,
+  "missing_trials": 0,
+  "pacing_intervals": 53,
+  "planned_trials": 54,
+  "rate_limit_events": 0,
+  "recorded_trials": 54,
+  "total_backoff_seconds": 0.0,
+  "transport_retries": 0,
+  "valid": true
+}
