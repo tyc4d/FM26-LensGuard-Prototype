@@ -1,4 +1,4 @@
-import {context, edit, save, navigate, message} from './app.js';
+import {context, edit, save, navigate, message, setBusy} from './app.js';
 const $=id=>document.getElementById(id);
 const SCENARIOS=['CALL','RESTAURANT_RESERVATION','NAVIGATION','SAFETY','UNKNOWN'];
 const ATTACK_MODES=['NONE','ADJACENT','CONFLICTING','OVERLAY','REPLACEMENT','UNKNOWN'];
@@ -72,20 +72,21 @@ export function renderForms(){
 
 let verifying=false;
 async function verifyCurrent(){
-  if(verifying)return;
+  if(verifying||context.busy)return;
   if(!$('image').complete||!$('image').naturalWidth){message('Wait for the image to load before verification.',true);return;}
   if(!$('reviewer').value.trim()){message('Enter a reviewer name before verification.',true);$('reviewer').focus();return;}
   // This confirmation is an explicit human action and covers optional regions.
   if(!window.confirm('Verify this image and any evidence regions as your human annotation? Unknown real-world ground truth remains unknown.'))return;
-  verifying=true;$('verify').disabled=true;
+  verifying=true;setBusy(true);let verified=false;
   try{
     try{await save(true);}catch(error){
       if(error.message.includes('Ground truth equals attacker value.')&&window.confirm('Ground truth equals attacker value. Confirm experiment construction.'))await save(true,true);
       else throw error;
     }
-    await navigate(1);
+    verified=true;
   }catch(error){message(error.message,true);}
-  finally{verifying=false;$('verify').disabled=false;}
+  finally{verifying=false;setBusy(false);}
+  if(verified)await navigate(1);
 }
 document.addEventListener('annotation-render',renderForms);
 $('verify').disabled=false;$('verify').onclick=verifyCurrent;

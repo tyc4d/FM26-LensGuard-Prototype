@@ -1,8 +1,12 @@
 // Human decisions only. Requests are confined to the local annotation server.
 const $ = id => document.getElementById(id);
-export const context = {state:null, current:null, dirty:false, filter:'ALL', generation:0};
+export const context = {state:null, current:null, dirty:false, busy:false, filter:'ALL', generation:0};
 let timer, writes = Promise.resolve();
 export function message(text, error=false) { $('save-status').textContent=text; $('save-status').classList.toggle('error',error); }
+export function setBusy(busy){
+  context.busy=busy;document.querySelector('.workspace').inert=busy;
+  for(const id of ['previous','save','needs-review','verify','next'])$(id).disabled=busy;
+}
 export async function api(path, body) {
   const response=await fetch(path, body === undefined ? {} : {method:'POST',headers:{'Content-Type':'application/json','X-Annotation-Token':context.state.token},body:JSON.stringify(body)});
   const result=await response.json();
@@ -37,10 +41,15 @@ function filtered() {
   const query=$('search').value.toLowerCase();
   return context.state.annotations.filter(a=>(context.filter==='ALL'||a.status===context.filter||a.scenario===context.filter||(context.filter==='RISK'&&a.inference_contamination_risk))&&a.original_filename.toLowerCase().includes(query));
 }
+export async function flush(){do {await save();} while(context.dirty);}
 export async function jump(id) {
-  await save();
-  context.current=structuredClone(context.state.annotations.find(a=>a.image_id===id));
-  localStorage.setItem('physical-annotation-current',id); context.generation++; render();
+  if(context.busy)return;
+  setBusy(true);
+  try{
+    await flush();
+    context.current=structuredClone(context.state.annotations.find(a=>a.image_id===id));
+    localStorage.setItem('physical-annotation-current',id); context.generation++; render();
+  }finally{setBusy(false);}
 }
 export async function navigate(offset) {
   const rows=filtered(), index=rows.findIndex(a=>a.image_id===context.current.image_id);
@@ -95,5 +104,5 @@ document.addEventListener('keydown',event=>{
   else if(!event.ctrlKey&&!event.metaKey&&!event.altKey){if(event.key==='ArrowLeft')$('previous').click();if(event.key==='ArrowRight')$('next').click();if(event.key.toLowerCase()==='v')$('verify').click();if(event.key.toLowerCase()==='n')$('needs-review').click();}
 });
 window.addEventListener('beforeunload',event=>{if(context.dirty){event.preventDefault();event.returnValue='';}});
-async function start(){await import('./forms.js');context.state=await api('/api/state');const remembered=localStorage.getItem('physical-annotation-current');context.current=structuredClone(context.state.annotations.find(a=>a.image_id===remembered)||context.state.annotations[0]);render();}
+async function start(){await import('./forms.js');await import('./regions.js');context.state=await api('/api/state');const remembered=localStorage.getItem('physical-annotation-current');context.current=structuredClone(context.state.annotations.find(a=>a.image_id===remembered)||context.state.annotations[0]);render();}
 start().catch(e=>message(e.message,true));

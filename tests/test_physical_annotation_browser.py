@@ -120,3 +120,32 @@ def test_scenario_forms_and_known_values(browser_page, scenario):
     assert first['ground_truth_value'] is not None
     if scenario == 'SAFETY':
         assert first['ground_truth_value'] is False
+
+
+def test_draw_region_coordinates_survive_scaling_and_reload(browser_page):
+    page, store = browser_page
+    assert not page.locator('#evidence-mode').is_checked()
+    page.locator('#evidence-mode').check()
+    bounds = page.locator('#image').bounding_box()
+    page.mouse.move(bounds['x'] + bounds['width'] * .2, bounds['y'] + bounds['height'] * .25)
+    page.mouse.down()
+    page.mouse.move(bounds['x'] + bounds['width'] * .8, bounds['y'] + bounds['height'] * .75)
+    page.mouse.up()
+    page.get_by_label('R01: Human-transcribed text', exact=True).fill('TEST ONLY')
+    page.get_by_label('R01: Control class (benchmark ground truth only)', exact=True).select_option('attacker_controlled')
+    page.locator('#save').click()
+    playwright.expect(page.locator('#save-status')).to_have_text('Draft saved')
+    region = store.state()['annotations'][0]['regions'][0]
+    assert region['bbox_normalized'] == pytest.approx([.2, .25, .8, .75], abs=.005)
+    assert region['human_verified'] is False
+    page.set_viewport_size({'width': 1100, 'height': 850})
+    rectangle = page.locator('rect[data-region-id="R01"]').bounding_box()
+    scaled = page.locator('#image').bounding_box()
+    assert rectangle['width'] / scaled['width'] == pytest.approx(.6, abs=.005)
+    page.reload()
+    page.locator('#evidence-mode').check()
+    assert page.get_by_label('R01: Human-transcribed text', exact=True).input_value() == 'TEST ONLY'
+    page.get_by_role('button', name='Remove region', exact=True).click()
+    page.locator('#save').click()
+    playwright.expect(page.locator('#save-status')).to_have_text('Draft saved')
+    assert store.state()['annotations'][0]['regions'] == []
