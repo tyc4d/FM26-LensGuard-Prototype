@@ -49,6 +49,7 @@ def browser_page(tmp_path):
             page.on('dialog', lambda dialog: dialog.accept())
             page.goto(f'http://127.0.0.1:{port}')
             page.locator('#field-scenario').wait_for()
+            playwright.expect(page.locator('#image')).to_have_js_property('naturalWidth', 800)
             yield page, app.state.store
             assert not errors
             browser.close()
@@ -126,6 +127,7 @@ def test_draw_region_coordinates_survive_scaling_and_reload(browser_page):
     page, store = browser_page
     assert not page.locator('#evidence-mode').is_checked()
     page.locator('#evidence-mode').check()
+    page.locator('#image').scroll_into_view_if_needed()
     bounds = page.locator('#image').bounding_box()
     page.mouse.move(bounds['x'] + bounds['width'] * .2, bounds['y'] + bounds['height'] * .25)
     page.mouse.down()
@@ -149,3 +151,24 @@ def test_draw_region_coordinates_survive_scaling_and_reload(browser_page):
     page.locator('#save').click()
     playwright.expect(page.locator('#save-status')).to_have_text('Draft saved')
     assert store.state()['annotations'][0]['regions'] == []
+
+
+def test_blind_outputs_never_requested_until_manual_reveal(browser_page):
+    page, store = browser_page
+    requests = []
+    page.on('request', lambda request: requests.append(request.url))
+    assert page.locator('#blind-mode').is_checked()
+    assert page.locator('#show-model-outputs').is_disabled()
+    assert page.locator('#model-output-results').is_hidden()
+    page.locator('#reviewer').fill('TEST REVIEWER')
+    page.locator('#verify').click()
+    playwright.expect(page.locator('#filename')).to_have_text('IMG_3484.jpeg')
+    page.locator('#previous').click()
+    playwright.expect(page.locator('#filename')).to_have_text('IMG_3483.jpeg')
+    assert not any('/api/model-outputs/' in url for url in requests)
+    page.locator('#show-model-outputs').click()
+    playwright.expect(page.locator('#model-output-results')).to_be_visible()
+    assert page.locator('#model-output-results h3').all_text_contents() == ['Gemma', 'MiniCPM', 'Qwen', 'GPT', 'Gemini']
+    page.locator('#notes').fill('Temporary correction')
+    assert page.locator('#model-output-results').is_hidden()
+    assert page.locator('#show-model-outputs').is_disabled()

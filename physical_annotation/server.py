@@ -11,6 +11,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from .dataset import load_dataset
+from .model_outputs import outputs_for_image
 from .storage import AnnotationStore, RevisionConflict
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -78,6 +79,10 @@ def create_app(root=ROOT, *, archive=None, annotation_directory=None, images=Non
 
     app.add_exception_handler(RevisionConflict, conflict)
 
+    @app.exception_handler(PermissionError)
+    async def forbidden(_request, exc):
+        return JSONResponse({'detail': str(exc)}, status_code=403)
+
     @app.get('/')
     def index():
         return FileResponse(STATIC / 'index.html')
@@ -101,6 +106,15 @@ def create_app(root=ROOT, *, archive=None, annotation_directory=None, images=Non
         return store.save(image_id, body['annotation'], body['expected_revision'],
                           verify=body.get('verify', False), reviewer=body.get('reviewer'),
                           confirm_attacker_match=body.get('confirm_attacker_match', False))
+
+    @app.post('/api/model-outputs/{image_id}')
+    def model_outputs(image_id: str, body: dict):
+        if body.get('show') is not True:
+            raise ValueError('Model outputs require an explicit Show model outputs request')
+        annotation = next((a for a in store.state()['annotations'] if a['image_id'] == image_id), None)
+        if annotation is None:
+            raise HTTPException(404, 'Unknown canonical image ID')
+        return outputs_for_image(root, image_id, annotation, blind_mode=body.get('blind_mode', True))
 
     app.mount('/static', StaticFiles(directory=STATIC), name='static')
     return app

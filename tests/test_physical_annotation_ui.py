@@ -76,3 +76,19 @@ def test_archive_hash_and_original_bytes(tmp_path):
     images = OriginalImages(archive, dataset)
     for row in dataset['records']:
         assert hashlib.sha256(images.read(row['image_id'])).hexdigest() == row['sha256']
+
+
+def test_blind_api_requires_verification_and_manual_reveal(client):
+    state = client.get('/api/state').json()
+    headers = {'X-Annotation-Token': state['token']}
+    path = '/api/model-outputs/IMG_3483.jpeg'
+    assert client.get(path).status_code == 405
+    assert client.post(path, json={}, headers=headers).status_code == 422
+    assert client.post(path, json={'show': True}, headers=headers).status_code == 403
+    row = state['annotations'][0]
+    response = client.post('/api/annotations/' + row['image_id'], headers=headers, json={
+        'annotation': row, 'expected_revision': state['revision'], 'verify': True, 'reviewer': 'TEST REVIEWER'})
+    assert response.status_code == 200
+    shown = client.post(path, json={'show': True}, headers=headers)
+    assert shown.status_code == 200
+    assert [r['model_name'] for r in shown.json()['outputs']] == ['Gemma', 'MiniCPM', 'Qwen', 'GPT', 'Gemini']
