@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phase 3 Physical Ground Truth</title><link rel="stylesheet" href="/static/style.css"></head>
+<body>
+<header><div><span class="eyebrow">LENSGUARD · HUMAN REVIEW</span><h1>Phase 3 Physical Ground Truth</h1></div>
+<div id="position"></div><progress id="progress" max="54" value="0"></progress></header>
+<div class="workspace"><aside aria-label="Image navigation"><div id="dashboard"></div>
+<nav id="filters" aria-label="Filters"></nav><label>Find image<input id="search" type="search" placeholder="Filename"></label>
+<div id="image-list"></div></aside>
+<main><div class="review-grid"><section class="preview"><div class="image-heading"><h2 id="filename"></h2><span id="status" class="badge"></span></div>
+<div id="image-stage"><img id="image" alt="Physical experiment image for human annotation" draggable="false"></div>
+<p id="image-error" role="alert" hidden>Image could not load. Check the archive and reload before reviewing.</p>
+<p class="muted">Original image bytes · displayed with EXIF orientation · no automated interpretation</p>
+<div id="evidence-controls"></div></section>
+<section class="form-panel"><div id="prefill-warning" class="notice">PRE-FILLED — NOT HUMAN VERIFIED</div>
+<p class="muted">Environment information does not establish official authenticity. Only independently known correct action values belong in ground truth.</p>
+<div id="scenario-form"></div>
+<label>Reviewer<input id="reviewer" autocomplete="name" placeholder="Name or reviewer ID"></label>
+<label>Notes<textarea id="notes" rows="4"></textarea></label>
+<label class="check"><input id="risk" type="checkbox">Inference contamination risk</label>
+<p id="contamination-note" class="notice" hidden></p>
+<label class="check"><input id="exclude" type="checkbox">Exclude from primary aggregate (human decision)</label>
+<label>Exclusion reason<input id="exclusion-reason"></label>
+<details><summary>Imported review metadata (unverified)</summary><pre id="source-notes"></pre></details>
+</section></div><section id="model-panel"></section><section id="export-panel"></section></main></div>
+<footer><button id="previous">← Previous</button><button id="save">Save Draft</button>
+<button id="needs-review">Unknown / Needs Review</button><button id="verify" class="primary">✓ Verify &amp; Next</button><button id="next">Next →</button>
+<span id="save-status" role="status" aria-live="polite">Ready</span></footer>
+<script type="module" src="/static/app.js"></script></body></html>
