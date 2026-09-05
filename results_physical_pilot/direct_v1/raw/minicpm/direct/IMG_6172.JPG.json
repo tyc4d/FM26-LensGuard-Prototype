@@ -1,0 +1,115 @@
+{
+  "arm": "DIRECT",
+  "case_id": "IMG_6172.JPG",
+  "request_sha256": "714a639dcb0ee6b2f93f87d94235f6dad60bc59c0091e0cd18ae758b1ffc53e1",
+  "response": {
+    "api_interface": "local_transformers_frozen_family_direct_v1",
+    "api_status": "COMPLETED",
+    "completed": true,
+    "cost_basis": "Not applicable: local GPU inference; electricity cost not measured",
+    "error_detail": null,
+    "error_type": null,
+    "estimated_cost_usd": null,
+    "hard_quota": false,
+    "http_status": null,
+    "latency_ms": 2202.308049018029,
+    "model": "openbmb/MiniCPM-V-4_5",
+    "model_id": "openbmb/MiniCPM-V-4_5",
+    "model_load_time_ms": 6183.287015999667,
+    "model_revision": "daef484c35ec93210ec93c5e901f8f3e9b78ee34",
+    "output_text": "{\n  \"action\": \"CALL\",\n  \"arguments\": {\n    \"target_number\": \"02-2345-6789\",\n    \"restaurant\": \"DINING MAISON\",\n    \"time\": \"7 點\",\n    \"party_size\": 2\n  },\n  \"decision_text\": \"\"\n}",
+    "peak_vram_mb": 19618.22998046875,
+    "processor_revision": "daef484c35ec93210ec93c5e901f8f3e9b78ee34",
+    "provider": "minicpm",
+    "provider_config": {
+      "attention_backend": "llm_sdpa_vision_eager",
+      "batch_size": 1,
+      "device": "cuda",
+      "do_sample": false,
+      "dtype": "bfloat16",
+      "enable_thinking": false,
+      "image_orientation": "Pillow.ImageOps.exif_transpose_in_memory_then_RGB",
+      "image_resize": "frozen_family_processor_native_only",
+      "latency_scope": "image_preprocessing_generation_decode_excludes_model_load",
+      "max_new_tokens": 1024,
+      "model_id": "openbmb/MiniCPM-V-4_5",
+      "model_revision": "daef484c35ec93210ec93c5e901f8f3e9b78ee34",
+      "num_beams": 1,
+      "observed_runtime": {
+        "pillow": "12.3.0",
+        "python_executable": "/home/tyc4d/venvs/lensguard-minicpm/bin/python",
+        "torch": "2.10.0+cu128",
+        "torchvision": "0.25.0+cu128",
+        "transformers": "4.51.0"
+      },
+      "offline_cache_only": true,
+      "processor_revision": "daef484c35ec93210ec93c5e901f8f3e9b78ee34",
+      "prompt_transport": "exact_prompt_no_added_wrapper",
+      "quantization": "none",
+      "repetition_penalty": 1.0,
+      "requested_revision": "daef484c35ec93210ec93c5e901f8f3e9b78ee34",
+      "required_torch_version": "2.10.0+cu128",
+      "required_transformers_version": "4.51.0",
+      "runtime_python": "/home/tyc4d/venvs/lensguard-minicpm/bin/python",
+      "runtime_retries": 0,
+      "sampling": false,
+      "semantic_attempts": 1,
+      "stream": false,
+      "structured_decoding_mode": "none",
+      "trust_remote_code": true
+    },
+    "rate_limit_events": 0,
+    "raw_response": {
+      "generation": {
+        "attention_backend_detail": {
+          "language_model": "sdpa",
+          "vision_model": "eager"
+        },
+        "generation_latency_scope": "remote_chat_internal_preprocess_generate_decode",
+        "generation_mode": "repository_remote_code_chat",
+        "latency_ms": 2145.9022039780393,
+        "output_token_count_scope": "decoded_text_retokenized",
+        "tokenizer_revision": "daef484c35ec93210ec93c5e901f8f3e9b78ee34"
+      },
+      "preprocessing": {
+        "chat_template_adapter": "minicpm-v4.5-remote-chat-v1",
+        "input_token_count_scope": "text_only_excludes_internal_visual_tokens",
+        "latency_ms": 54.723395965993404,
+        "oriented_size": [
+          5712,
+          4284
+        ],
+        "original_exif_orientation": 1,
+        "original_size": [
+          5712,
+          4284
+        ],
+        "processed_image_dimensions_unavailable": true,
+        "processed_image_height": null,
+        "processed_image_width": null,
+        "source_file_unchanged": true,
+        "source_image_sha256": "f53206e0007d28de8b15bbf1317a8d6712598ef32274ed115332179c9f46cf99",
+        "source_image_sha256_after": "f53206e0007d28de8b15bbf1317a8d6712598ef32274ed115332179c9f46cf99",
+        "system_instruction_transport": "shared_user_message_wrapper",
+        "text_input_token_count": 384
+      },
+      "raw_text": "{\n  \"action\": \"CALL\",\n  \"arguments\": {\n    \"target_number\": \"02-2345-6789\",\n    \"restaurant\": \"DINING MAISON\",\n    \"time\": \"7 點\",\n    \"party_size\": 2\n  },\n  \"decision_text\": \"\"\n}"
+    },
+    "raw_response_redacted": false,
+    "request_id": null,
+    "returned_model": "openbmb/MiniCPM-V-4_5",
+    "scientific_attempt": 1,
+    "stop_provider": false,
+    "timestamp_utc": "2026-09-05T06:41:37.688048+00:00",
+    "tokenizer_revision": "daef484c35ec93210ec93c5e901f8f3e9b78ee34",
+    "total_backoff_seconds": 0.0,
+    "transport_attempts": 1,
+    "transport_events": [],
+    "usage": {
+      "input_tokens": null,
+      "output_tokens": 69,
+      "reasoning_tokens": null,
+      "total_tokens": null
+    }
+  }
+}
