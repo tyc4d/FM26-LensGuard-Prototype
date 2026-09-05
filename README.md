@@ -1,5 +1,12 @@
 # LensGuard research prototype (Phases 1, 2, and 2.5)
 
+For the hackathon presentation, installation, architecture, and interactive UI,
+start with [LensGuard Demo](https://github.com/tyc4d/FM26-LensGuard-Demo).
+Its `prototype` directory is a relative symlink to this checkout; both repositories
+retain independent Git histories and communicate over HTTP. The demo runtime is
+on the `phase3-direct-physical-pilot-v1` branch. Reviewed physical collection and
+scoring tools are documented in [the local evaluation guide](docs/physical_reviewed_evaluation.md).
+
 LensGuard is an idea-validation experiment for a consequence-aware and
 provenance-aware action gate around a wearable-style multimodal assistant.
 
@@ -501,3 +508,15 @@ verification, local/cloud commands, environment setup, and preservation policies
 ## Demo Runtime Service
 
 The live demo can call the isolated, loopback-only Qwen3-VL 8B service without importing this repository into the Demo. It keeps one model resident, adds a separate scene-reading pass before the frozen action-only candidate adapter, and applies READ ≠ OBEY: grounded exit facts support informational answers while calls require trusted user values or narrow delegation to observed phone entities. Model-based perception and bounded intent/classification heuristics remain explicit limitations. See [startup, API, GPU safety and validation](docs/demo_runtime_service.md). Existing Phase 3.6 benchmark paths and experiment identity are unchanged.
+
+The current resident path uses user-only task interpretation, image-only
+transcription, and checked text citations (`user-task-cited-evidence-v1`). The
+service guide distinguishes it from the historical candidate adapter above.
+
+## License
+
+Original project code is licensed under the [MIT License](LICENSE).
+Third-party libraries and model weights retain their respective licenses;
+photographs, annotations, and supplied datasets are not relicensed by this file.
+The reviewed physical run and its derived contact information remain local and
+are excluded from Git.
