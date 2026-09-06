@@ -46,9 +46,12 @@ def create_app(runtime=None):
 
     @app.get('/health')
     def health():
+        memory_reader = getattr(runtime, 'gpu_memory', None)
         return {'status': state['status'], 'model_loaded': runtime.loaded,
+                'model_id': spec['model_id'],
                 'model_profile': spec['family_alias'], 'device': 'cuda', 'phase': 'real',
                 'error': state['error'], 'provenance': 'model_perception', 'policy': 'user-task-cited-evidence-v1',
+                'gpu_memory': memory_reader() if memory_reader else None,
                 'gpu': getattr(runtime, 'gpu', None)}
 
     async def analyze(image, user_request, scenario_id, mode, guard_enabled=True):

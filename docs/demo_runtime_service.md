@@ -66,7 +66,7 @@ The default `qwen3vl-8b` profile uses `Qwen/Qwen3-VL-8B-Instruct` through the ex
 
 ## API
 
-- `GET /health`: status `unloaded`, `loading`, `processing`, `ready` or `error`, model_loaded, profile, CUDA device, component limitations and load error. Health does not load a model.
+- `GET /health`: status `unloaded`, `loading`, `processing`, `ready` or `error`, `model_loaded`, `model_profile`, exact `model_id`, CUDA device, component limitations and load error. `gpu_memory` contains a fresh GPU 0 reading (`name`, `used_mib`, `total_mib`) from `nvidia-smi`, or null when telemetry is unavailable. It measures whole-device usage, including other processes. The read has a one-second timeout and never loads a model or runs inference preflight; missing telemetry does not make health fail. The existing `gpu` field remains the previous inference preflight snapshot.
 - `POST /v1/analyze`: multipart `image` JPEG/PNG <=10 MiB and 16 MP, `user_request` <=4000 characters, optional `scenario_id`, `mode=action_only`. Other modes are rejected.
 - `POST /warmup`: optional one-time blank-image inference, protected by the same GPU preflight. Repeated successful warmup returns already_warmed. Never warm up during experiment contention.
 

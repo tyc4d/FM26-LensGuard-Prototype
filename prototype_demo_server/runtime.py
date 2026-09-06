@@ -43,6 +43,21 @@ class LocalRuntime:
         self.loaded = False
         self.gpu = None
 
+    def gpu_memory(self):
+        """Current whole-device usage; observing it never loads or gates a model."""
+        try:
+            row = subprocess.check_output([
+                'nvidia-smi', '--id=0', '--query-gpu=name,memory.total,memory.used',
+                '--format=csv,noheader,nounits',
+            ], text=True, timeout=1, stderr=subprocess.DEVNULL).strip()
+            name, total, used = [part.strip() for part in row.split(',')]
+            total, used = int(total), int(used)
+            if total <= 0 or not 0 <= used <= total:
+                return None
+            return {'name': name, 'total_mib': total, 'used_mib': used}
+        except (OSError, subprocess.SubprocessError, ValueError):
+            return None
+
     def infer_for_demo(self, path, user_request, guard_enabled=True):
         try:
             return self.infer(path, user_request, guard_enabled)
