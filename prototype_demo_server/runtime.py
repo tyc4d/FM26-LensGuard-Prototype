@@ -10,9 +10,11 @@ from .native_demo import native_proposal
 
 from physical_direct_local import LOCAL_MODELS
 from providers.local import create_local_provider
+from providers.local.nvidia_models import NVIDIA_MODEL_PROFILES
 
 log = logging.getLogger(__name__)
 PROFILES = {LOCAL_MODELS[key]['family_alias']: LOCAL_MODELS[key] for key in ('gemma', 'qwen')}
+PROFILES.update(NVIDIA_MODEL_PROFILES)
 DEFAULT_MODEL = 'qwen3vl-8b'
 SPEC = PROFILES[DEFAULT_MODEL]
 
@@ -29,7 +31,8 @@ def gpu_preflight(loaded=False, model=DEFAULT_MODEL):
     foreign = [line for line in processes.splitlines() if line.split(',')[0].strip() != str(os.getpid())]
     if foreign:
         raise RuntimeError('GPU_BUSY: another compute process is active. Phase 3.6 is never interrupted.')
-    required = 4096 if loaded else (21000 if model == 'qwen3vl-8b' else 14000)
+    required = 4096 if loaded else PROFILES[model].get(
+        'minimum_free_mib', 21000 if model == 'qwen3vl-8b' else 14000)
     if int(free) < required:
         raise RuntimeError(f'GPU_MEMORY_INSUFFICIENT: {model} requires {required:,} MiB free.')
     return snapshot
@@ -82,7 +85,7 @@ class LocalRuntime:
             from physical_direct_local import _force_offline
             _force_offline()
             if self.provider is None:
-                self.provider = create_local_provider(self.model_profile, revision=self.spec['revision'], max_new_tokens=1024, device='cuda', enable_nvml=True)
+                self.provider = create_local_provider(self.model_profile, revision=self.spec['revision'], max_new_tokens=self.spec.get('max_new_tokens', 1024), device='cuda', enable_nvml=True)
             self.provider.load()
             if self.provider.model_revision != self.spec['revision'] or self.provider.processor_revision != self.spec['revision']:
                 raise RuntimeError('REVISION_MISMATCH: refusing a different model/processor revision')
@@ -103,13 +106,23 @@ class LocalRuntime:
                      if task['value'] is not None and scene['error'] is None
                      else {'value': None, 'raw_text': '', 'error': 'Task or perception unavailable', 'elapsed_ms': 0})
         elapsed = (perf_counter() - started) * 1000
+        stages = {'task': task, 'perception': scene, 'selection': selection}
+        format_errors = {name: value['error'] for name, value in stages.items()
+                         if value.get('error') and value.get('diagnostics', {}).get('failure_category') == 'model_output_format_error'}
         return {
             'raw_text': selection['raw_text'],
             'semantic_regions': scene['regions'],
             'parsed_action': None, 'candidate_action': None,
-            'diagnostics': {'parse_success': selection['value'] is not None, 'error_message': selection['error']},
+            'diagnostics': {'parse_success': not format_errors and selection['value'] is not None,
+                            'error_message': selection['error'],
+                            'failure_category': 'model_output_format_error' if format_errors else None,
+                            'format_errors': format_errors,
+                            'stages': {name: value.get('diagnostics', {}) for name, value in stages.items()}},
             'timing': {'task_ms': task['elapsed_ms'], 'perception_ms': scene['perception_ms'],
-                       'selection_ms': selection['elapsed_ms'], 'inference_ms': elapsed},
+                       'selection_ms': selection['elapsed_ms'], 'inference_ms': elapsed,
+                       'model_load_ms': getattr(self.provider, '_model_load_time_ms', 0) or 0,
+                       **{key: sum(value.get('timing', {}).get(key, 0) for value in stages.values())
+                          for key in ('preprocessing_ms', 'generation_ms')}},
             'boundary': {'task': task['value'], 'selection':
                 {**selection['value'], 'operation': task['value']['operation'], 'kind': task['value']['kind']}
                 if selection['value'] is not None else None},

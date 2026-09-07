@@ -6,7 +6,7 @@ OCR or the benchmark AUTOMATIC_REGISTRY. Frozen benchmark prompts are unchanged.
 from time import perf_counter
 from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field
-from providers.local.base_local_vlm import extract_single_json_object
+from .model_io import generate, parse_structured
 
 
 class SceneRegion(BaseModel):
@@ -41,20 +41,15 @@ no IDs, bounding boxes, or confidence scores. If nothing is legible return
 def extract_scene(provider, path):
     started = perf_counter()
     image, _, _ = provider._read_image(path)
-    prepared = provider._prepare_input(SCENE_PROMPT, image)
-    provider._synchronize()
-    with provider._torch_module().inference_mode():
-        generation = provider._generate(prepared)
-    provider._synchronize()
+    raw, timing = generate(provider, SCENE_PROMPT, image)
     elapsed = (perf_counter() - started) * 1000
-    raw = generation.raw_text
-    try:
-        _, payload = extract_single_json_object(raw)
-        parsed = SceneOutput.model_validate(payload)
-        regions = [{'id': f'region_{index + 1:02}', **item.model_dump(exclude_none=True), 'source': 'camera', 'lineage': []}
-                   for index, item in enumerate(parsed.regions)]
-        error = None
-    except (ValueError, TypeError) as exc:
-        regions, error = [], str(exc)
+    parsed, error, diagnostics = parse_structured(raw, SceneOutput, collection_field='regions')
+    if parsed is not None:
+        for item in parsed['regions']:
+            if item.get('semantic_role') is None:
+                item.pop('semantic_role', None)
+    regions = [{'id': f'region_{index + 1:02}', **item, 'source': 'camera', 'lineage': []}
+               for index, item in enumerate(parsed['regions'])] if parsed is not None else []
     return {'regions': regions, 'raw_text': raw, 'error': error,
+            'diagnostics': diagnostics, 'timing': timing,
             'method': 'model_perception', 'perception_ms': elapsed}

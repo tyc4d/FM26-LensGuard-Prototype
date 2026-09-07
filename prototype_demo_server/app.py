@@ -15,7 +15,8 @@ from pydantic import BaseModel
 from .policy import ActionValidationError, authorize, proposal
 from .runtime import LocalRuntime, SPEC
 from .semantics import PHONE
-from .task_boundary import authorize_selection
+from .task_boundary import authorize_selection, scene_records
+from .model_io import outcome_diagnostics
 
 MAX_BYTES = 10 * 1024 * 1024
 
@@ -94,9 +95,13 @@ def create_app(runtime=None):
                 try:
                     if 'boundary' in inferred:
                         boundary = inferred['boundary']
-                        policy = authorize_selection(user_request, boundary.get('task'),
-                            inferred.get('semantic_regions'), boundary.get('selection'))
-                        action = policy['resolved_action']
+                        if inferred['diagnostics'].get('failure_category') == 'model_output_format_error':
+                            # A failed model contract is not an authorization decision.
+                            policy, action = None, None
+                        else:
+                            policy = authorize_selection(user_request, boundary.get('task'),
+                                inferred.get('semantic_regions'), boundary.get('selection'))
+                            action = policy['resolved_action']
                     elif inferred.get('unprotected'):
                         if guard_enabled and hasattr(runtime, 'infer_for_demo'):
                             raise ValueError('Protected inference returned an unprotected proposal')
@@ -115,7 +120,7 @@ def create_app(runtime=None):
                     policy = None
                     policy_error = 'Policy unavailable; automatic execution must be withheld.'
                 resolved = (policy.get('resolved_action') if policy else None) or action
-                regions = policy.get('semantic_regions', []) if policy else []
+                regions = policy.get('semantic_regions', []) if policy else scene_records(inferred.get('semantic_regions'))
                 if policy and action['action'] == 'CALL' and 'boundary' not in inferred:
                     # Inspect alternative bindings without changing the proposed
                     # call or invoking a capability. UI can show retained good
@@ -142,7 +147,7 @@ def create_app(runtime=None):
                             'proposed_output': {'kind': 'informational', **policy['final_answer']} if policy and policy.get('final_answer') else None,
                             'native_action': None if 'boundary' in inferred else action, 'candidate_action': inferred.get('candidate_action'),
                             'validation_error': validation_error, 'policy_error': policy_error,
-                            'diagnostics': inferred['diagnostics'], 'metadata': inferred.get('metadata', {})},
+                            'diagnostics': outcome_diagnostics(inferred['diagnostics'], policy), 'metadata': inferred.get('metadata', {})},
                     provenance={'kind': 'semantic_evidence' if regions else 'transport_only',
                                 'semantic_grounding': 'model_perception' if regions else 'unavailable',
                                 'semantic_regions': regions,
@@ -171,6 +176,7 @@ def create_app(runtime=None):
         image.seek(0)
         response = await analyze(UploadFile(filename='warmup.png', file=image), 'Describe no action; return NONE.', None, 'action_only')
         state['warmed'] = True
-        return {'status': 'warmed', 'parsed': response.output['parsed'], 'timing': response.timing}
+        return {'status': 'warmed', 'parsed': response.output['parsed'], 'timing': response.timing,
+                'diagnostics': response.output['diagnostics']}
 
     return app

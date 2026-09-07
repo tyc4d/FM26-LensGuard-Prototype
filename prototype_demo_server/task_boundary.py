@@ -11,9 +11,8 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 from firewall.action_normalizer import normalize_phone_number
-from providers.local.base_local_vlm import (
-    PreparedLocalInput, extract_single_json_object, input_token_count, move_inputs_to_device,
-)
+from .model_io import generate, parse_structured
+from providers.local.base_local_vlm import move_inputs_to_device
 from .semantics import PHONE, DIRECTIONS
 
 
@@ -110,25 +109,10 @@ region_id 必須存在，quote 必須逐字複製該紀錄的一段連續原文�
 def generate_json(provider, prompt, schema, image=None):
     """Stateless calls; text-only transport carries no pixels or previous messages."""
     started = perf_counter()
-    if image is not None:
-        prepared = provider._prepare_input(prompt, image)
-    else:
-        inputs = provider.processor.apply_chat_template(
-            [{'role': 'user', 'content': [{'type': 'text', 'text': prompt}]}],
-            add_generation_prompt=True, tokenize=True, return_dict=True, return_tensors='pt')
-        inputs = move_inputs_to_device(inputs, provider.device, dtype=provider._torch_module().bfloat16)
-        prepared = PreparedLocalInput(payload=inputs, input_token_count=input_token_count(inputs),
-                                      metadata={'chat_template_adapter': 'demo-text-only-v1'})
-    provider._synchronize()
-    with provider._torch_module().inference_mode():
-        raw = provider._generate(prepared).raw_text
-    provider._synchronize()
-    try:
-        _, payload = extract_single_json_object(raw)
-        value, error = schema.model_validate(payload).model_dump(), None
-    except (ValueError, TypeError) as exc:
-        value, error = None, str(exc)
+    raw, timing = generate(provider, prompt, image, move_inputs=move_inputs_to_device)
+    value, error, diagnostics = parse_structured(raw, schema)
     return {'value': value, 'raw_text': raw, 'error': error,
+            'diagnostics': diagnostics, 'timing': timing,
             'elapsed_ms': (perf_counter() - started) * 1000}
 
 
