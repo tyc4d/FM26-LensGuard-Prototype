@@ -1,8 +1,13 @@
 # NVIDIA local VLMs
 
+This is the historical provider setup report. For the subsequent semantic-contract
+fix, layered results and remaining model errors, see
+[NVIDIA semantic contract](nvidia_semantic_contract.md).
+
 Both requested models load and run on the RTX 4090 in BF16. They are experimental
-alternatives, not replacements for the Qwen demo default. Final four-case smoke:
-Nemotron **2/4**, Cosmos **0/4**. The failures below are preserved.
+alternatives, not replacements for the Qwen demo default. The original smoke
+failures below are preserved; the newer report separates perception, parsing,
+semantic binding, grounding and authorization.
 
 **No security-policy changes were required.** Normalized schema classes, task and
 scene prompts, role/authority assignment, citation checks, delegation, provenance,
