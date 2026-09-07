@@ -62,6 +62,15 @@ def test_bounded_direction_variants(monkeypatch, alias, value):
 
 
 @pytest.mark.parametrize('alias', MODELS)
+def test_entity_label_case_does_not_change_the_requested_direction_slot(monkeypatch, alias):
+    request, values = outputs()
+    values[2]['citations'][0]['value'] = 'exit'
+    result, _ = request_runtime(monkeypatch, alias, values, request)
+    assert result['policy']['final_answer']['value'] == 'right'
+    assert result['output']['metadata']['selection']['model_selection']['citations'][0]['value'] == 'exit'
+
+
+@pytest.mark.parametrize('alias', MODELS)
 @pytest.mark.parametrize('phone', [False, True])
 def test_optional_observation_names_and_broader_evidence_do_not_break_literal_binding(monkeypatch, alias, phone):
     request, values = outputs(phone=phone)

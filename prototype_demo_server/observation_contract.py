@@ -208,7 +208,7 @@ def bind_selection(task, attribute, regions, payload):
                 ref['value'] = directions[0]
             elif len(directions) > 1:
                 uncertain = True
-            elif original and original in ref['quote'] and not HEDGED.search(original):
+            elif original and original.casefold() in ref['quote'].casefold() and not HEDGED.search(original):
                 # Entity labels are context. Bind the direction emitted in the
                 # same quote, regardless of the label's spelling.
                 directions = direction_values(ref['quote'])
