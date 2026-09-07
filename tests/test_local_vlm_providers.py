@@ -253,6 +253,8 @@ def test_exact_local_model_registry_and_factory() -> None:
         "gemma3-4b": "google/gemma-3-4b-it",
         "qwen3vl-8b": "Qwen/Qwen3-VL-8B-Instruct",
         "minicpm-v4.5": "openbmb/MiniCPM-V-4_5",
+        "nemotron-nano-vl-8b": "nvidia/Llama-3.1-Nemotron-Nano-VL-8B-V1",
+        "cosmos-reason1-7b": "nvidia/Cosmos-Reason1-7B",
     }
     provider, *_ = _provider(Gemma3Provider, _action_raw())
     created = create_local_provider(

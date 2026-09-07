@@ -1,0 +1,11 @@
+# Isolated overlay on the verified lensguard-vlm environment. Never install into
+# an existing research environment. Torch/CUDA/torchvision remain unchanged.
+transformers==4.53.3
+tokenizers==0.21.4
+huggingface-hub==0.34.4
+timm==1.0.19
+einops==0.8.1
+open-clip-torch==3.1.0
+ftfy==6.3.1
+wcwidth==0.2.13
+setuptools==80.9.0

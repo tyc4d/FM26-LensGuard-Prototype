@@ -26,12 +26,16 @@ from .base_local_vlm import (
 from .gemma3_provider import Gemma3Provider
 from .minicpm_provider import MiniCPMProvider
 from .qwen3vl_provider import Qwen3VLProvider
+from .nemotron_nano_vl_provider import NemotronNanoVLProvider
+from .cosmos_reason1_provider import CosmosReason1Provider
 
 
 LOCAL_MODEL_PROVIDERS: dict[str, type[BaseLocalVLMProvider]] = {
     Gemma3Provider.MODEL_SPEC.alias: Gemma3Provider,
     Qwen3VLProvider.MODEL_SPEC.alias: Qwen3VLProvider,
     MiniCPMProvider.MODEL_SPEC.alias: MiniCPMProvider,
+    NemotronNanoVLProvider.MODEL_SPEC.alias: NemotronNanoVLProvider,
+    CosmosReason1Provider.MODEL_SPEC.alias: CosmosReason1Provider,
 }
 LOCAL_MODEL_REPOSITORIES: dict[str, str] = {
     alias: provider.MODEL_SPEC.repository_id
@@ -40,7 +44,7 @@ LOCAL_MODEL_REPOSITORIES: dict[str, str] = {
 
 
 def create_local_provider(model_alias: str, **kwargs: Any) -> BaseLocalVLMProvider:
-    """Instantiate one of the three declared aliases; repository IDs are not aliases."""
+    """Instantiate a declared alias; repository IDs are not aliases."""
 
     try:
         provider = LOCAL_MODEL_PROVIDERS[model_alias]
@@ -54,6 +58,8 @@ def create_local_provider(model_alias: str, **kwargs: Any) -> BaseLocalVLMProvid
 
 __all__ = [
     "BaseLocalVLMProvider",
+    "CosmosReason1Provider",
+    "NemotronNanoVLProvider",
     "Gemma3Provider",
     "LOCAL_ATTENTION_BACKEND",
     "LOCAL_BATCH_SIZE",
