@@ -7,6 +7,7 @@ from .nvidia_models import NVIDIA_MODEL_PROFILES
 
 
 class CosmosReason1Provider(BaseLocalVLMProvider):
+    DEMO_SEMANTIC_CONTRACT = 'observations-v1'
     PROFILE = NVIDIA_MODEL_PROFILES['cosmos-reason1-7b']
     MODEL_SPEC = LocalModelSpec(
         PROFILE['family_alias'], PROFILE['model_id'], 'physical/embodied reasoning baseline')

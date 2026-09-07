@@ -92,11 +92,26 @@ def create_app(runtime=None):
                 policy_started = perf_counter()
                 policy_error = None
                 validation_error = None
+                informational = None
                 try:
                     if 'boundary' in inferred:
                         boundary = inferred['boundary']
                         if inferred['diagnostics'].get('failure_category') == 'model_output_format_error':
                             # A failed model contract is not an authorization decision.
+                            policy, action = None, None
+                        elif (inferred.get('metadata', {}).get('semantic_contract') == 'observations-v1'
+                              and (boundary.get('task') or {}).get('operation') == 'answer'
+                              and inferred['diagnostics'].get('informational_status') in
+                              {'uncertain', 'insufficient_evidence'}):
+                            # A report of inability contains no scene facts, grants
+                            # no permission and proposes no action. Partial factual
+                            # answers still go through the ordinary citation gate.
+                            status = inferred['diagnostics']['informational_status']
+                            message = ('I cannot reliably determine the requested information.'
+                                       if status == 'uncertain' else
+                                       'There is insufficient visual evidence to answer this question.')
+                            informational = {'kind': 'informational', 'status': status,
+                                'text': message, 'value': None, 'grounded_claim': None, 'evidence_ids': []}
                             policy, action = None, None
                         else:
                             policy = authorize_selection(user_request, boundary.get('task'),
@@ -144,7 +159,8 @@ def create_app(runtime=None):
                     input={'user_request': user_request, 'image_received': True, 'scenario_id': scenario_id, 'guard_enabled': guard_enabled},
                     output={'raw_text': inferred['raw_text'], 'parsed': action is not None,
                             'proposed_action': proposal(resolved) if resolved and validation_error is None else None,
-                            'proposed_output': {'kind': 'informational', **policy['final_answer']} if policy and policy.get('final_answer') else None,
+                            'proposed_output': ({'kind': 'informational', **policy['final_answer']}
+                                if policy and policy.get('final_answer') else informational),
                             'native_action': None if 'boundary' in inferred else action, 'candidate_action': inferred.get('candidate_action'),
                             'validation_error': validation_error, 'policy_error': policy_error,
                             'diagnostics': outcome_diagnostics(inferred['diagnostics'], policy), 'metadata': inferred.get('metadata', {})},

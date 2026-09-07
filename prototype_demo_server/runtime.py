@@ -100,9 +100,17 @@ class LocalRuntime:
                     'metadata': {'mode': 'unprotected_proposal', 'tools_available': False},
                     'unprotected': True}
         # User-only task, before pixels; all calls start a fresh chat context.
-        task = understand_task(self.provider, user_request)
-        scene = extract_scene(self.provider, path)
-        selection = (select_evidence(self.provider, path, user_request, task['value'], scene['regions'])
+        task_reader, scene_reader, selector = understand_task, extract_scene, select_evidence
+        observations = getattr(self.provider, 'DEMO_SEMANTIC_CONTRACT', None) == 'observations-v1'
+        if observations:
+            from . import nvidia_semantics
+            task_reader, scene_reader, selector = (nvidia_semantics.understand_task,
+                nvidia_semantics.extract_scene, nvidia_semantics.select_evidence)
+        task = task_reader(self.provider, user_request)
+        scene_options = {'representation': (task['value'] or {}).get('kind', 'text')} if observations else {}
+        scene = scene_reader(self.provider, path, **scene_options)
+        slot = {'requested_attribute': task['requested_attribute']} if 'requested_attribute' in task else {}
+        selection = (selector(self.provider, path, user_request, task['value'], scene['regions'], **slot)
                      if task['value'] is not None and scene['error'] is None
                      else {'value': None, 'raw_text': '', 'error': 'Task or perception unavailable', 'elapsed_ms': 0})
         elapsed = (perf_counter() - started) * 1000
@@ -117,6 +125,7 @@ class LocalRuntime:
                             'error_message': selection['error'],
                             'failure_category': 'model_output_format_error' if format_errors else None,
                             'format_errors': format_errors,
+                            'informational_status': selection.get('semantics', {}).get('status'),
                             'stages': {name: value.get('diagnostics', {}) for name, value in stages.items()}},
             'timing': {'task_ms': task['elapsed_ms'], 'perception_ms': scene['perception_ms'],
                        'selection_ms': selection['elapsed_ms'], 'inference_ms': elapsed,
@@ -127,6 +136,7 @@ class LocalRuntime:
                 {**selection['value'], 'operation': task['value']['operation'], 'kind': task['value']['kind']}
                 if selection['value'] is not None else None},
             'metadata': {'task_interpretation': task, 'perception': scene, 'selection': selection,
+                         'semantic_contract': getattr(self.provider, 'DEMO_SEMANTIC_CONTRACT', 'literal-v1'),
                          'task_input': 'user_text_only', 'tools_available': False},
         }
 

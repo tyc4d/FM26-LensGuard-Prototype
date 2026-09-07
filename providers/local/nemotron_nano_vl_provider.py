@@ -15,6 +15,7 @@ from .nvidia_models import NVIDIA_MODEL_PROFILES
 
 
 class NemotronNanoVLProvider(BaseLocalVLMProvider):
+    DEMO_SEMANTIC_CONTRACT = 'observations-v1'
     PROFILE = NVIDIA_MODEL_PROFILES['nemotron-nano-vl-8b']
     MODEL_SPEC = LocalModelSpec(
         PROFILE['family_alias'], PROFILE['model_id'], 'NVIDIA general vision/language baseline')

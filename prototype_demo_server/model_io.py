@@ -112,6 +112,11 @@ def outcome_diagnostics(diagnostics, policy):
     result = {**diagnostics, 'perception_correctness': 'not_independently_verified',
               'grounding_result': 'not_evaluated', 'authorization_result': 'not_evaluated'}
     if policy is None:
+        if (not result.get('failure_category') and result.get('parse_success')
+                and result.get('informational_status') in {'uncertain', 'insufficient_evidence'}):
+            result.update(failure_category=('model_uncertainty' if result['informational_status'] == 'uncertain'
+                                           else 'evidence_unavailable'),
+                          authorization_result='not_required')
         return result
     rule = policy['rule_id']
     if policy['result'] == 'allow':
