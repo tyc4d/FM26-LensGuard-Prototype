@@ -6,10 +6,52 @@ import pytest
 
 from prototype_demo_server import nvidia_semantics
 from prototype_demo_server.model_io import parse_structured
-from prototype_demo_server.observation_contract import ObservationScene, normalize_observation
+from prototype_demo_server.observation_contract import ObservationScene, ObservationSelection, normalize_observation
 from test_nvidia_local_models import outputs, request_runtime
 
 MODELS = ['nemotron-nano-vl-8b', 'cosmos-reason1-7b']
+
+
+@pytest.mark.parametrize('alias', MODELS)
+def test_selection_object_ids_report_schema_failure_without_repair_or_authorization(monkeypatch, alias):
+    request, values = outputs()
+    values[2]['other_target_ids'] = [{'region_id': 'region_02', 'quote': 'EXIT ↓', 'value': 'LEFT'}]
+    original = deepcopy(values)
+    result, provider = request_runtime(monkeypatch, alias, values, request)
+    assert values == original
+    assert result['policy'] is None
+    assert result['output']['parsed'] is False
+    stage = result['output']['diagnostics']['stages']['selection']
+    assert stage['parse_success'] is True and stage['schema_valid'] is False
+    assert stage['schema_errors'] == [{'path': 'other_target_ids.0', 'type': 'string_type'}]
+    assert result['output']['metadata']['selection']['raw_text'] == json.dumps(original[2])
+
+
+def test_selector_prompt_describes_string_ids_and_keeps_non_phone_ids_empty(monkeypatch):
+    captured = []
+    def generate(provider, prompt, schema):
+        captured.append(prompt)
+        assert schema is ObservationSelection
+        return {'value': None}
+    monkeypatch.setattr(nvidia_semantics, 'generate_json', generate)
+    request, values = outputs()
+    task = values[0]
+    region = dict(id='region_01', content='EXIT →', semantic_role='observation', observations=[])
+    nvidia_semantics.select_evidence(object(), None, request, task, [region], requested_attribute='direction')
+    assert 'array of existing region ID STRINGS, never citation objects' in captured[0]
+    assert 'For direction and other non-phone questions, other_target_ids MUST be []' in captured[0]
+    assert '"id": "region_01"' in captured[0]
+    assert captured[0].endswith('Use UNKNOWN when no supported direction can be established from the quote.\n')
+
+
+def test_schema_valid_opposite_direction_still_fails_grounding(monkeypatch):
+    request, values = outputs()
+    values[1]['regions'][0]['content'] = 'EXIT ↓'
+    values[2]['citations'][0].update(quote='EXIT ↓', value='LEFT')
+    result, _ = request_runtime(monkeypatch, MODELS[0], values, request)
+    assert result['output']['diagnostics']['stages']['selection']['schema_valid'] is True
+    assert result['policy']['result'] == 'block'
+    assert result['policy']['rule_id'] == 'VALUE_MISMATCH'
 
 
 def observation(entity, attribute, value, evidence, confidence=0.97, uncertainty=None):

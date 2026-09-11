@@ -277,3 +277,29 @@ generation text, including failures.
   **unvalidated**. The current live demo supports cited literal information and calls,
   not unrestricted embodied reasoning. No physical dataset or Phase 3.6 benchmark
   was modified to claim otherwise. Neither model is promoted to the default.
+
+## Demo selector format regression — 2026-09-11
+
+Nemotron could emit valid JSON with citation objects inside `other_target_ids`,
+although `ObservationSelection` requires a list of strings. The original prompt
+said “phone records” without explicitly specifying ID strings. The prompt now
+states the element type and adds final response rules for non-phone and direction
+questions. No parser coercion or policy change is introduced.
+
+Schema failures expose `diagnostics.schema_errors` as `{path, type}` entries;
+for example `other_target_ids.0` / `string_type`. Existing raw text and parser
+errors remain available. JSON syntax success and schema validity remain separate.
+The HTTP response includes these diagnostics under the failing stage.
+
+A controlled RTX 4090 / Nemotron check used the same saved task and scene
+observations with the original and revised prompts. The original reproduced the
+object-in-string-list failure. The revised prompt produced a valid selection and
+an empty `other_target_ids` list. It still selected LEFT against a quoted down
+arrow; the unchanged citation gate blocked `VALUE_MISMATCH`. This verifies the
+format fix and preserves the semantic failure, without claiming the original
+image was correctly perceived. The image bytes were not retained.
+
+The relevant NVIDIA and demo tests passed **280 tests**. A fresh Demo HTTP request
+with a synthetic `EXIT → RIGHT` image completed with a cited `right` answer. The
+Demo bridge separately distinguishes schema errors from malformed JSON and shows
+the failing stage in its English result screen.

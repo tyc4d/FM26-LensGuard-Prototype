@@ -3,6 +3,8 @@ import json
 import re
 from time import perf_counter
 
+from pydantic import ValidationError
+
 from providers.local.base_local_vlm import (
     PreparedLocalInput, extract_single_json_object, input_token_count, move_inputs_to_device,
 )
@@ -75,6 +77,11 @@ def parse_structured(raw, schema, *, collection_field=None):
     except (ValueError, TypeError, AttributeError) as exc:
         diagnostics['failure_category'] = 'model_output_format_error'
         diagnostics['error_message'] = str(exc)
+        if isinstance(exc, ValidationError):
+            diagnostics['schema_errors'] = [
+                {'path': '.'.join(map(str, error['loc'])), 'type': error['type']}
+                for error in exc.errors(include_url=False, include_input=False)
+            ]
         return None, str(exc), diagnostics
 
 
