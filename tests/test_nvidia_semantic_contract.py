@@ -46,8 +46,8 @@ def test_selector_prompt_describes_string_ids_and_keeps_non_phone_ids_empty(monk
 
 def test_schema_valid_opposite_direction_still_fails_grounding(monkeypatch):
     request, values = outputs()
-    values[1]['regions'][0]['content'] = 'EXIT ↓'
-    values[2]['citations'][0].update(quote='EXIT ↓', value='LEFT')
+    values[1]['regions'][0]['content'] = 'EXIT →'
+    values[2]['citations'][0].update(quote='EXIT →', value='LEFT')
     result, _ = request_runtime(monkeypatch, MODELS[0], values, request)
     assert result['output']['diagnostics']['stages']['selection']['schema_valid'] is True
     assert result['policy']['result'] == 'block'

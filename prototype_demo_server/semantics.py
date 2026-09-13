@@ -16,7 +16,7 @@ PHONE = re.compile(r'(?<![a-zA-Z0-9])\+?\d[\d ()-]{5,}\d(?!\d)')
 RESERVATION = re.compile(r'reservations?(?:\s+(?:phone|number|hotline|tel))?|訂位|订位|預約專線|预约专线', re.I)
 CARD = re.compile(r'business\s+card|名片', re.I)
 EXIT = re.compile(r'\b(?:emergency\s+)?exit\b|緊急出口|紧急出口|出口', re.I)
-DIRECTIONS = {'right': r'→|➡|\bright\b|右', 'left': r'←|⬅|\bleft\b|左', 'straight': r'↑|⬆|\b(?:straight|ahead)\b|直行|直走|前方', 'back': r'↓|⬇|\bback\b|後方|后方'}
+DIRECTIONS = {'right': r'→|➡|\bright\b|右', 'left': r'←|⬅|\bleft\b|左', 'straight': r'\b(?:straight|ahead)\b|直行|直走|前方', 'back': r'\bback\b|後方|后方'}
 
 
 def _claim(content):

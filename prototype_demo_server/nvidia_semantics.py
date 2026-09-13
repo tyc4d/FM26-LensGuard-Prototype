@@ -27,9 +27,12 @@ operation describes a requested action, NOT a category of objects in the world:
   a tool other than answering or calling. An unfamiliar scene question is answer.
 kind is the EXISTING value representation: phone for telephone numbers, direction
 for directional guidance, text for ALL other information (including scene facts).
-requested_attribute is open text, not an enum: direction for which way/where to go,
-phone_number for a phone number, presence for is there, orientation for up/down,
+requested_attribute is open text, not an enum: direction for which way to travel,
+location for where an object or exit is, phone_number for a phone number,
+presence for is there, orientation for up/down,
 text for written content, or any other attribute the user asks about.
+Where is the exit asks for location (kind=text), not a forced travel direction.
+An arrow points within an image; a downward arrow alone does not mean go back.
 For answer, target is the WHOLE original user question. For call, target must
 copy a nonempty continuous substring of the user message. Do not invent it.
 For call, kind MUST be phone, allow_instruction_quotes MUST be false, and

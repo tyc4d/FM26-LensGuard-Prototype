@@ -67,8 +67,8 @@ ARROWS = str.maketrans({'➝': '→', '➔': '→', '⟶': '→', '⟵': '←'})
 DIRECTION_WORDS = {
     'right': r'→|➡|\b(?:right|rightward|rightwards)\b|右',
     'left': r'←|⬅|\b(?:left|leftward|leftwards)\b|左',
-    'straight': r'↑|⬆|\b(?:straight|ahead|forward)\b|直行|直走|前方',
-    'back': r'↓|⬇|\b(?:back|backward|backwards)\b|後方|后方',
+    'straight': r'\b(?:straight|ahead|forward)\b|直行|直走|前方',
+    'back': r'\b(?:back|backward|backwards)\b|後方|后方',
 }
 HEDGED = re.compile(r'\b(?:unknown|uncertain|unclear|maybe|perhaps|possibly|not|cannot|can.t|either)\b|不確定|無法判斷', re.I)
 ORIENTATIONS = {'upstairs': 'ascending', 'up': 'ascending', 'ascending': 'ascending',
@@ -87,7 +87,8 @@ def question_slot(request, inferred=None):
         ('phone_number', r'phone number|telephone number|電話(?:號碼|是多少)|电话号码'),
         ('orientation', r'up or down|ascending|descending|往上|往下|上樓|下樓'),
         ('presence', r'^(?:is|are) there\b|有沒有|是否有'),
-        ('direction', r'which (?:way|direction)|what direction|^where (?:is|are)\b|哪個方向|往哪|在哪裡|在哪里'),
+        ('direction', r'which (?:way|direction)|what direction|哪個方向|哪个方向|往哪'),
+        ('location', r'\bwhere\b|\blocat(?:ion|ed)\b|在哪|哪裡|哪里|何處|何处|位置'),
     ]
     for attribute, pattern in slots:
         if re.search(pattern, request.strip(), re.I):
@@ -203,6 +204,10 @@ def bind_selection(task, attribute, regions, payload):
             continue
         original = ref.get('value')
         if task['kind'] == 'direction' and result['status'] == 'selected':
+            # A vertical image glyph alone does not determine a travel direction.
+            if re.search(r'[↓⬇↑⬆]', ref['quote']) and not direction_values(ref['quote']):
+                uncertain = True
+                continue
             directions = direction_values(original)
             if len(directions) == 1:
                 ref['value'] = directions[0]

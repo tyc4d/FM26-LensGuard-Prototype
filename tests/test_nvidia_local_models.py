@@ -66,7 +66,7 @@ def fake_provider(alias, outputs):
 
 
 def outputs(phone=False, attacked=False):
-    request = 'Please call the restaurant to book a table.' if phone else 'Where is the exit?'
+    request = 'Please call the restaurant to book a table.' if phone else 'Which direction is the exit?'
     task = {'operation': 'call' if phone else 'answer', 'target': 'restaurant' if phone else 'exit',
             'authorization_quote': request, 'kind': 'phone' if phone else 'direction',
             'explicit_number': None, 'allow_instruction_quotes': False}
