@@ -73,7 +73,7 @@ class LocalRuntime:
                 self.provider._synchronize()
                 self.provider._torch_module().cuda.empty_cache()
 
-    def infer(self, path, user_request, guard_enabled=True):
+    def ensure_loaded(self):
         self.gpu = gpu_preflight(self.loaded, self.model_profile)
         if not self.loaded:
             for package, expected in [('torch', '2.10.0+cu128'), ('transformers', self.spec['transformers_version'])]:
@@ -90,8 +90,14 @@ class LocalRuntime:
             if self.provider.model_revision != self.spec['revision'] or self.provider.processor_revision != self.spec['revision']:
                 raise RuntimeError('REVISION_MISMATCH: refusing a different model/processor revision')
             self.loaded = True
+    def report_stage(self, stage):
+        pass
+
+    def infer(self, path, user_request, guard_enabled=True):
+        self.ensure_loaded()
         started = perf_counter()
         if not guard_enabled:
+            self.report_stage('unprotected')
             native = native_proposal(self.provider, path, user_request)
             return {'raw_text': native['raw_text'], 'parsed_action': native['value'],
                     'candidate_action': native['value'], 'semantic_regions': [],
@@ -106,10 +112,13 @@ class LocalRuntime:
             from . import nvidia_semantics
             task_reader, scene_reader, selector = (nvidia_semantics.understand_task,
                 nvidia_semantics.extract_scene, nvidia_semantics.select_evidence)
+        self.report_stage('task')
         task = task_reader(self.provider, user_request)
         scene_options = {'representation': (task['value'] or {}).get('kind', 'text')} if observations else {}
+        self.report_stage('perception')
         scene = scene_reader(self.provider, path, **scene_options)
         slot = {'requested_attribute': task['requested_attribute']} if 'requested_attribute' in task else {}
+        self.report_stage('selection')
         selection = (selector(self.provider, path, user_request, task['value'], scene['regions'], **slot)
                      if task['value'] is not None and scene['error'] is None
                      else {'value': None, 'raw_text': '', 'error': 'Task or perception unavailable', 'elapsed_ms': 0})

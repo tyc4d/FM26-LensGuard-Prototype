@@ -86,6 +86,8 @@ def parse_structured(raw, schema, *, collection_field=None):
 
 
 def generate(provider, prompt, image=None, *, move_inputs=move_inputs_to_device):
+    if callable(getattr(provider, 'generate_remote', None)):
+        return provider.generate_remote(prompt, image)
     started = perf_counter()
     if image is not None:
         prepared = provider._prepare_input(prompt, image)

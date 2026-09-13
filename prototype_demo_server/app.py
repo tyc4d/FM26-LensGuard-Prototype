@@ -50,12 +50,13 @@ def create_app(runtime=None):
         memory_reader = getattr(runtime, 'gpu_memory', None)
         return {'status': state['status'], 'model_loaded': runtime.loaded,
                 'model_id': spec['model_id'],
-                'model_profile': spec['family_alias'], 'device': 'cuda', 'phase': 'real',
+                'model_profile': spec['family_alias'], 'device': getattr(runtime, 'device', 'cuda'), 'phase': 'real',
+                **getattr(runtime, 'health_metadata', {}),
                 'error': state['error'], 'provenance': 'model_perception', 'policy': 'user-task-cited-evidence-v1',
                 'gpu_memory': memory_reader() if memory_reader else None,
                 'gpu': getattr(runtime, 'gpu', None)}
 
-    async def analyze(image, user_request, scenario_id, mode, guard_enabled=True):
+    async def analyze(image, user_request, scenario_id, mode, guard_enabled=True, client_request_id=None):
         if mode != 'action_only':
             raise HTTPException(422, 'Only the demo action_only mode is supported.')
         started = perf_counter()
@@ -73,6 +74,9 @@ def create_app(runtime=None):
         if lock.locked():
             raise HTTPException(409, 'Model loading or inference already in progress. Try again after it completes.')
         async with lock:
+            if hasattr(runtime, 'progress_request_id'):
+                runtime.progress_request_id = client_request_id
+                runtime.progress_stage = None
             state.update(status='processing' if runtime.loaded else 'loading', error=None)
             try:
                 with tempfile.NamedTemporaryFile(suffix='.image') as file:
@@ -167,7 +171,7 @@ def create_app(runtime=None):
                     provenance={'kind': 'semantic_evidence' if regions else 'transport_only',
                                 'semantic_grounding': 'model_perception' if regions else 'unavailable',
                                 'semantic_regions': regions,
-                                'lineage': ['image_upload', 'scene_perception', 'semantic_policy', 'resolved_output'] if regions else ['image_upload', 'local_vlm', 'proposed_action'],
+                                'lineage': ['image_upload', 'scene_perception', 'semantic_policy', 'resolved_output'] if regions else ['image_upload', 'cloud_vlm' if getattr(runtime, 'device', None) == 'cloud' else 'local_vlm', 'proposed_action'],
                                 'delegated': policy['delegated'] if policy else False},
                     policy=policy, timing={**inferred['timing'], 'policy_ms': policy_ms, 'total_ms': (perf_counter() - started) * 1000})
             except Exception as exc:
@@ -178,10 +182,12 @@ def create_app(runtime=None):
                 raise HTTPException(503, state['error']) from exc
 
     @app.post('/v1/analyze', response_model=AnalyzeResponse)
-    async def endpoint(image: UploadFile = File(...), user_request: str = Form(..., min_length=1, max_length=4000), scenario_id: str | None = Form(None), mode: str = Form('action_only'), guard_enabled: bool = Form(True)):
+    async def endpoint(image: UploadFile = File(...), user_request: str = Form(..., min_length=1, max_length=4000), scenario_id: str | None = Form(None), mode: str = Form('action_only'), guard_enabled: bool = Form(True), model_profile: str | None = Form(None), client_request_id: str | None = Form(None, max_length=100)):
+        if model_profile is not None and model_profile != spec['family_alias']:
+            raise HTTPException(422, 'The requested model is not configured on this service.')
         if not user_request.strip():
             raise HTTPException(422, 'User request must not be blank.')
-        return await analyze(image, user_request, scenario_id, mode, guard_enabled)
+        return await analyze(image, user_request, scenario_id, mode, guard_enabled, client_request_id)
 
     @app.post('/warmup')
     async def warmup():
