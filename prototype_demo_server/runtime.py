@@ -114,7 +114,8 @@ class LocalRuntime:
                 nvidia_semantics.extract_scene, nvidia_semantics.select_evidence)
         self.report_stage('task')
         task = task_reader(self.provider, user_request)
-        scene_options = {'representation': (task['value'] or {}).get('kind', 'text')} if observations else {}
+        scene_options = {'representation': (task['value'] or {}).get('kind', 'text'),
+                         'requested_attribute': task.get('requested_attribute')} if observations else {}
         self.report_stage('perception')
         scene = scene_reader(self.provider, path, **scene_options)
         slot = {'requested_attribute': task['requested_attribute']} if 'requested_attribute' in task else {}
@@ -135,6 +136,8 @@ class LocalRuntime:
                             'failure_category': 'model_output_format_error' if format_errors else None,
                             'format_errors': format_errors,
                             'informational_status': selection.get('semantics', {}).get('status'),
+                            'requested_attribute': task.get('requested_attribute'),
+                            'spatial_status': selection.get('semantics', {}).get('spatial_status'),
                             'stages': {name: value.get('diagnostics', {}) for name, value in stages.items()}},
             'timing': {'task_ms': task['elapsed_ms'], 'perception_ms': scene['perception_ms'],
                        'selection_ms': selection['elapsed_ms'], 'inference_ms': elapsed,

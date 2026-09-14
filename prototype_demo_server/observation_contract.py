@@ -10,7 +10,8 @@ from typing import Literal
 
 from pydantic import Field, model_validator
 
-from .task_boundary import Citation, EvidenceSelection, StrictModel, Task
+from .task_boundary import Citation, EvidenceSelection, StrictModel, Task, scene_records
+from .spatial import SpatialRelation
 
 
 class ObservationTask(Task):
@@ -40,12 +41,16 @@ class ObservationRegion(StrictModel):
     content: str = Field(min_length=1, max_length=4000)
     semantic_role: Literal['observation', 'entity', 'instruction'] | None = None
     observations: list[Observation] = Field(default_factory=list, max_length=20)
+    spatial_relations: list[SpatialRelation] = Field(default_factory=list, max_length=12)
 
     @model_validator(mode='after')
     def evidence_is_emitted_content(self):
         for item in self.observations:
             if item.evidence not in self.content:
                 raise ValueError('Observation evidence must quote this region content')
+        for item in self.spatial_relations:
+            if item.evidence not in self.content:
+                raise ValueError('Spatial evidence must quote this region content')
         return self
 
 
@@ -55,6 +60,7 @@ class ObservationScene(StrictModel):
 
 class ObservationCitation(Citation):
     observation_index: int | None = Field(default=None, ge=0, lt=20)
+    spatial_relation_index: int | None = Field(default=None, ge=0, lt=12)
 
 
 class ObservationSelection(EvidenceSelection):
@@ -160,13 +166,41 @@ def bind_selection(task, attribute, regions, payload):
     insufficient = False
     changes = []
     attribute = attribute or {'direction': 'direction', 'phone': 'phone_number'}.get(task['kind'])
+    retained = {r['id'] for r in scene_records(regions) if r['status'] == 'RETAIN'} if attribute == 'location' else set()
+    spatial_facts = [SpatialRelation.model_validate(item) for region in regions if region['id'] in retained
+                     for item in region.get('spatial_relations', [])]
     for ref in result['citations']:
         index = ref.pop('observation_index', None)
+        spatial_index = ref.pop('spatial_relation_index', None)
         region = records.get(ref['region_id'])
         if task['kind'] == 'direction' and region and region.get('semantic_role') != 'instruction':
             ref['quote'] = normalize_literal(ref['quote'])
         if not region or ref['quote'] not in region['content']:
             continue  # Do not conceal an invalid citation from the gate.
+        if attribute == 'location':
+            relations = region.get('spatial_relations', [])
+            if spatial_index is None:
+                # An omitted optional index is unambiguous only when the model's
+                # unchanged answer exactly identifies one cited relation.
+                matching = [i for i, item in enumerate(relations)
+                            if item['evidence'] == ref.get('value') and item['evidence'] in ref['quote']]
+                if len(matching) == 1:
+                    spatial_index = matching[0]
+            if spatial_index is None or spatial_index >= len(relations):
+                insufficient = True
+                continue
+            relation = SpatialRelation.model_validate(relations[spatial_index])
+            opposite = {'below': 'above', 'above': 'below', 'left_of': 'right_of', 'right_of': 'left_of'}
+            conflicting = any(other.subject.casefold() == relation.subject.casefold()
+                              and other.reference.casefold() == relation.reference.casefold()
+                              and other.relation == opposite[relation.relation] for other in spatial_facts)
+            if not relation.supported() or conflicting:
+                uncertain = True
+                continue
+            if relation.evidence not in ref['quote'] or ref.get('value') != relation.evidence:
+                # Do not silently replace an unsupported answer with a good one.
+                ref['value'] = None
+            continue
         overlapping = [(i, item) for i, item in enumerate(region.get('observations', []))
                        if item['evidence'] in ref['quote'] or ref['quote'] in item['evidence']]
         # Optional attribute spelling must not hide an emitted low-confidence
@@ -236,4 +270,6 @@ def bind_selection(task, attribute, regions, payload):
         result['status'] = 'ambiguous'  # Existing call boundary decides the outcome.
     status = ('uncertain' if uncertain or result['status'] == 'ambiguous'
               else 'insufficient_evidence' if insufficient or result['status'] == 'missing' else 'answered')
-    return result, {'status': status, 'normalizations': changes, 'requested_attribute': attribute}
+    return result, {'status': status, 'normalizations': changes, 'requested_attribute': attribute,
+                    **({'spatial_status': status, 'spatial_basis': 'model_object_boxes'}
+                       if attribute == 'location' else {})}
